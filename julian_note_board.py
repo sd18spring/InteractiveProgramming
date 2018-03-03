@@ -47,6 +47,18 @@ class NoteBoardModel(object):
                             "F" : pygame.Color(128,0,255),
                             "Gb" : pygame.Color(255,0,255),
                             "G" : pygame.Color(255,0,128)}
+        self.note_values = {"Ab" : 56,
+                            "A" : 57,
+                            "Bb" : 58,
+                            "B" : 59,
+                            "C" : 60,
+                            "Db" : 61,
+                            "D" : 62,
+                            "Eb" : 63,
+                            "E" : 64,
+                            "F" : 65,
+                            "Gb" : 66,
+                            "G" : 67}
         self.note_blocks = []
 
         self.width = size[0]
@@ -72,13 +84,14 @@ class NoteBoardModel(object):
 
 class NoteBlock(object):
 
-    def __init__(self, note, height, width, x, y, color):
+    def __init__(self, note, height, width, x, y, color, value):
         self.note = note
         self.height = height
         self.width = width
         self.x = x
         self.y = y
         self.color = color
+        self.value = value
 
     def __str__(self):
         note_block_string = 'Note Block: "' + self.note + '", '
