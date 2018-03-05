@@ -1,0 +1,7 @@
+Hurricane Cat Map Project Proposal
+
+The main idea of our project is to consolidate the hurricane information on NOAA into one interactive map where users can track specific hurricanes by location and year. Our minimum viable product will display all of the hurricane paths in the NOAA database and when the user hovers over one path, more information about the hurricane would appear. We could also add in a slider for year. Our stretch goal involves inputting more data about each hurricane in the form of pictures and other statistics (wind speed and severity). 
+
+Our collective learning goals include pair programming, exploring map visualization, and learning more about all the components that would go into a larger application. Cassandra’s goals involve using object oriented programming and the model-view-user-controller process. Libby’s goals are to learn more about the benefits of object oriented programming, and about using libraries like pygame and bokeh. We will be using the Python Bokeh library for our data visualization. We plan to create our minimum viable product by the mid-project check-in unless significant complications arise.  
+
+The biggest risks to us being successful on this project are our lack of understanding on the Bokeh library and annoying bugs that always arise while programming. For the first risk, we will be looking through a Bokeh tutorial to become more familiar with that library. 
