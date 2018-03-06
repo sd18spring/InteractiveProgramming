@@ -1,6 +1,13 @@
 import pygame
 from pygame.locals import *
 import time
+import os
+from psonic import *
+
+SAMPLES_DIR = os.path.join(os.path.dirname(__file__), "samples")
+
+SAMPLE_FILE = os.path.join(SAMPLES_DIR, "bass_D2.wav")
+SAMPLE_NOTE = D2  # the sample file plays at this pitch
 
 class PyGameWindowView(object):
 
@@ -71,7 +78,8 @@ class NoteBoardModel(object):
                              self.note_block_width,
                              i*self.note_block_width,
                              0,
-                             self.note_colors[self.notes[i]])
+                             self.note_colors[self.notes[i]],
+                             self.note_values[self.notes[i]])
             self.note_blocks.append(note)
 
     def __str__(self):
@@ -101,6 +109,34 @@ class NoteBlock(object):
                                                                   self.y)
         return note_block_string
 
+class PyGameMouseController(object):
+
+    def __init__(self,model):
+        self.model = model
+
+    def play_note(note, beats=1, bpm=60, amp=1):
+        """Play note for `beats` beats. Return when done."""
+        # `note` is this many half-steps higher than the sampled note
+        half_steps = note - SAMPLE_NOTE
+        # An octave higher is twice the frequency. There are twelve half-steps per
+        # octave. Ergo, each half step is a twelth root of 2 (in equal temperament).
+        rate = (2 ** (1 / 12)) ** half_steps
+        assert os.path.exists(SAMPLE_FILE)
+        # Turn sample into an absolute path, since Sonic Pi is executing from a
+        # different working directory.
+        sample(os.path.realpath(SAMPLE_FILE), rate=rate, amp=amp)
+        sleep(beats * 60 / bpm)
+
+    def handle_event(self,event):
+        if event.type == MOUSEBUTTONDOWN and event.button == 1:
+            x = event.pos[0]
+            note_index = int(x//(size[0]/12))
+            note = model.note_blocks[note_index]
+            print(note)
+            play_note(note.value)
+        elif event.type == MOUSEBUTTONUP and event.button == 1:
+            sleep(.01)
+
 if __name__ == '__main__':
     pygame.init()
 
@@ -109,12 +145,14 @@ if __name__ == '__main__':
     model = NoteBoardModel(size)
     print(model)
     view = PyGameWindowView(model, size)
+    controller = PyGameMouseController(model)
 
     running = True
     while running:
         for event in pygame.event.get():
             if event.type == QUIT:
                 running = False
+            controller.handle_event(event)
         view.draw()
         time.sleep(.001)
 
