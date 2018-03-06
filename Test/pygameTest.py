@@ -36,7 +36,6 @@ class PyManMain:
 
         while 1:
             for event in pygame.event.get():
-                print(event.type)
                 if event.type == pygame.QUIT:
                     sys.exit()
                 elif event.type == pygame.KEYDOWN:
