@@ -114,7 +114,7 @@ class PyGameMouseController(object):
     def __init__(self,model):
         self.model = model
 
-    def play_note(note, beats=1, bpm=60, amp=1):
+    def play_note(note, beats=1, bpm=1000, amp=1):
         """Play note for `beats` beats. Return when done."""
         # `note` is this many half-steps higher than the sampled note
         half_steps = note - SAMPLE_NOTE
@@ -125,7 +125,7 @@ class PyGameMouseController(object):
         # Turn sample into an absolute path, since Sonic Pi is executing from a
         # different working directory.
         sample(os.path.realpath(SAMPLE_FILE), rate=rate, amp=amp)
-        sleep(beats * 60 / bpm)
+        #sleep(beats * 60 / bpm)
 
     def handle_event(self,event):
         if event.type == MOUSEBUTTONDOWN and event.button == 1:
