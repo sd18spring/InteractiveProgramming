@@ -2,7 +2,7 @@
 Educational Flappy Bird
 
 * UML Diagram
-#+BEGIN_SRC plantuml :file class_diagram.png
+#+BEGIN_SRC plantuml :file class_diagram.png :exports results :results file
   Nerd <|-- GameObj
   Pipe <|-- GameObj
 
