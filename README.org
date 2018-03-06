@@ -1,0 +1,55 @@
+* FlappyNerd
+Educational Flappy Bird
+
+* UML Diagram
+#+BEGIN_SRC plantuml :file class_diagram.png
+  Nerd <|-- GameObj
+  Pipe <|-- GameObj
+
+  Model *-- Nerd
+  Model *-- Pipe
+  KeyboardController *--Model
+
+  WindowView *-- Model
+
+  class WindowView {
+  size
+  model
+  font
+  screen
+  draw()
+  }
+
+  class Model {
+  inProgress
+  nerd
+  pipe
+  update()
+  }
+
+  class GameObj {
+  x
+  y
+  update()
+  rects()
+  display()
+  }
+
+  class Nerd {
+  vy
+  gy
+  }
+
+  class Pipe {
+  prob
+  vx
+  }
+
+  class KeyboardController {
+  model
+  handleEvent()
+  }
+#+END_SRC
+
+#+RESULTS:
+[[file:class_diagram.png]]
