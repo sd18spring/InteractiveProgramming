@@ -1,0 +1,16 @@
+Our main idea is to create a two-player pong game with hand gestures as the main way of playing.
+We will explore OpenCV and try to implement gesture recognition so it can serve as the main controller
+for the game. Our minimum viable will be designing the game interface and getting the gesture recognition 
+to successfully detect gestures so the components of the game will all work individually. Our stretch goal would be 3D pong. 
+
+Anna's Learning Goal: I want to become more familiar with pygame and explore OpenCV's capabilities in depth.
+Shyheim's Learning Goal: I want to design something that is nastolgic through pygame and learn to peer program more.
+
+We plan on using Pygame library for one and the OpenCV library, we do not know how to use them yet but 
+we plan on exploring their differnt abilities. We want to use OpenCV in order to use the camera to recognize 
+hand gestures while using pygame to actually design the game.
+
+
+We want to get the layout of the game working and have it working with the mouse and/or keyboard commands.
+The biggest risk we may face is taking on too much in the amount of time we have or trying to figure out 
+OpenCV since neither of us have any experience with it
