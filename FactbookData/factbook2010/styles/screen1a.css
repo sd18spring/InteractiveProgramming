@@ -1,0 +1,134 @@
+
+
+/*
+-----------------------------------------------
+Spry Demos CSS Rules
+Version:  12 Apr 2006 (0.2b)
+----------------------------------------------- */
+body {
+	margin-top: 0;
+	margin-left: 0;
+	padding: 0;
+	font-size: x-small; /*for IE5/Win */
+	voice-family: "\"}\"";
+	voice-family: inherit;
+	font-size: small; /*for compliant browsers */	
+}
+html>body { font-size: small; } /* be nice to Opera */
+
+#img_description {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 20px;
+	letter-spacing: .05em;
+	line-height: 20px;
+	overflow: visible;
+}
+
+/* Links
+----------------------------------------------- */
+a img { border-style: none; }
+
+/* Layout Rules
+----------------------------------------------- */
+#wrap {
+	width: 975px;
+	height: 680px;
+	background-image: url(../graphics/lg_photo_bkgrnd.jpg);
+	background-repeat: repeat-x;
+	margin-top: 0px;
+}
+#thumbnail_control {
+	background-image: url(../graphics/thumbnail_bkgrnd.jpg);
+	background-repeat: no-repeat;
+	background-position: top center;
+	margin-top: 40px;
+}
+
+/* Gallery and Playback Controls
+----------------------------------------------- */
+#gallerySelect { width: 180px; }
+#controls {	margin:10px 10px 10px 10px; }
+#galleries { padding: 2px 3px 5px 2px; }
+
+/*#transport {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+#transport li {
+	float: left;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+#transport a {
+	width: 64px;
+	float: left;
+	display: block;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+}*/
+
+#previews {
+	/*border-top: solid 1px #999;
+	border-right: solid 1px #999;
+	border-bottom: solid 1px #999;
+	border-left: solid 1px #999;
+	margin : 5px 5px 15px 5px;
+	background-color: #FFFFFF;*/
+
+	width: 250px;
+	height: 350px;
+	margin-left: 20px;
+	margin-top: 20px;
+	
+}
+#thumbnails {
+	clear: both; 
+	margin-top: 10px;
+}
+#thumbnails div {
+	width: 53px;
+	height: 56px;
+	padding: 2px;
+	position:relative;
+	display:inline;
+	float: left;
+	/* Win IE */
+	_position: relative;
+	_display: inline;
+}
+#thumbnails img {
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	border-top: solid 1px white;
+	border-right: solid 1px white;
+	border-bottom: solid 1px white;
+	border-left: solid 1px white;
+	/* Win IE */
+	_position: fixed;
+}
+#picture {
+	margin-top: 0px;
+}
+#mainImageOutline {
+	margin: 0 auto;
+	padding: 0;
+	background-color: #fff;
+	border-top: solid 2px #c8c8c8;
+	border-right: solid 2px #c8c8c8;
+	border-bottom: solid 2px #c8c8c8;
+	border-left: solid 2px #c8c8c8;
+	padding: 4px 5px 5px 4px; 
+	overflow: hidden; 
+}
+#mainImage {
+	width: 100%;
+	height: 100%;
+}
+
+#picture img {	border: 1px solid #999; }
+.selectedThumbnail {  border: solid 2px white !important; }
+.inFocus {  border: solid 1px #fc0 !important; }

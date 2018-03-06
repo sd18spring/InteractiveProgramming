@@ -1,0 +1,2396 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><!-- InstanceBegin template="/Templates/wfbext_template.dwt.cfm" codeOutsideHTMLIsLocked="false" -->
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+
+<!-- <base href="/" /> -->
+<!-- factbook style sheet -->
+<!-- Code from script_head.cfm -->
+
+
+
+
+
+<script language="JavaScript" type="text/JavaScript">
+
+function MM_openBrWindow(theURL,winName,features) { //v2.0
+	  window.open(theURL,winName,features);
+	}
+
+startList = function() {
+							if (document.all&&document.getElementById) {
+								wfb_navigationRoot = document.getElementById("wfb_navigation");
+								for (x=0; x<wfb_navigationRoot.childNodes.length; x++) {
+									node = wfb_navigationRoot.childNodes[x];
+									if (node.nodeName=="LI") {
+										node.onmouseover=function() {
+																		this.className+=" over";
+																	}
+										node.onmouseout = function()	{
+																			this.className=this.className.replace(" over", "");
+																		}
+									}
+								}
+							}
+						}
+	window.onload=startList;
+
+	faq = null;
+	function collapseCountryInfo()
+	{
+		faq = new switchicon("icongroup2", "div") //Limit scanning of switch contents to just "div" elements
+		faq.setHeader('<img src="../graphics/close.jpg" alt="Close" title="Close"/>', '<img src="../graphics/open.jpg" alt="Open" title="Open" />')  //Set header HTML
+		faq.collapsePrevious(false) //Allow more than 1 content to be open simultanously
+		faq.setPersist(true, 7) //Enable persistence to remember last switch content states for 7 days
+		faq.init()
+	}
+
+function MM_jumpMenu(targ,selObj,restore){ //v3.0
+	if (selObj.selectedIndex > 0)
+	{
+		
+		eval(targ + ".location='" + "../geos/" + selObj.options[selObj.selectedIndex].value + ".html" + "'");
+		
+	}
+	if (restore) 
+		selObj.selectedIndex=0;
+}
+function onChange(dropdown)
+{
+ 	var myindex = dropdown.selectedIndex
+	var cntryCode = selObj.options[selObj.selectedIndex].value;
+	var baseURL = selObj.options[selObj.selectedIndex].value;
+	top.location.href = baseURL;
+	
+	return true;
+}
+
+var statusmsg = "";
+function hidestatus() {
+ 	window.status = statusmsg
+	return true
+}
+
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_findObj(n, d) { //v4.01
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+//-->
+</script>
+
+
+
+<script language="javascript" type="text/javascript">
+// JavaScript Document
+	var globalCntryNameSearchBuffer = '';
+	var globalTimer = null;
+	var selcon = null;
+	function FindSelectEntry(e, selectControl) /* In script_head_index.cfm */
+	{
+		var timeLimitBetweenKeyPresses = 3600; //seconds
+		var keynum, keychar, numcheck;
+		
+		
+		if (window.event) // IE
+		{
+			keynum = e.keyCode;
+		}
+		else if (e.which) // Netscape/Firefox/Opera
+		{
+			keynum = e.which;
+		} 
+		
+		keychar = String.fromCharCode(keynum);
+		if ((keynum >= 65 && keynum <= 122) || keynum == 32)  // Only accept alphanumerics A-Z and a-z
+		{
+			clearTimeout(globalTimer);
+			globalCntryNameSearchBuffer += keychar;
+			selcon = selectControl;
+			globalTimer = setTimeout('globalCntryNameSearchBuffer = ""', (timeLimitBetweenKeyPresses*1000));
+			for (var i = 0; i < selectControl.options.length; i++)
+			{
+				var selectLabel = selectControl.options[i].text.toLowerCase();
+				if (selectLabel.indexOf(globalCntryNameSearchBuffer.toLowerCase()) == 0)
+				{
+					selectControl.selectedIndex = i;
+					
+					// After this method concludes, Firefox moves the selection index one additional place.  This compensates for that
+					if (e.which)
+						--selectControl.selectedIndex;
+						
+					break;
+				}
+			}
+		}
+		return false;
+	}
+
+
+	function Clear_globalCntryNameSearchBuffer()
+	{
+		globalCntryNameSearchBuffer = "";
+	}
+
+</script>
+
+<link rel="stylesheet" type="text/css" href="../styles/pickcountryform_noscript.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../styles/flagsoftheworld.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../styles/print.css" media="print" />
+<link rel="stylesheet" type="text/css" href="../styles/ciatheme-pub-sub.css" />
+<link rel="stylesheet" type="text/css" href="../styles/worldfactbook_style.css" />
+<link rel="stylesheet" type="text/css" href="../styles/pickcountryform_noscript.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../styles/SpryCollapsiblePanel2.css"/>
+<link rel="stylesheet" type="text/css" href="../styles/factbook_1024.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../styles/style_1024.css" />
+<link rel="stylesheet" type="text/css" href="../styles/nav_style.css" />
+
+<!-- Internet Explorer CSS Fixes -->
+<!--[if lt IE 7]>
+        <style type="text/css" media="all">@import url(../styles/IEFixes.css);</style>
+    <![endif]-->
+<!-- Disable IE6 image toolbar -->
+<meta http-equiv="imagetoolbar" content="no" />
+<script language="JavaScript" type="text/javascript">
+function clearSearch(myForm) {if (myForm.defaultValue==myForm.value) myForm.value = "";}
+		function showSearch(myForm) {if (myForm.value=="") myForm.value = myForm.defaultValue;}
+function MM_openBrWindow(theURL,winName,features) { //v2.0
+  window.open(theURL,winName,features);
+}
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+</script>
+<script src="../scripts/SpryCollapsiblePanel.js" type="text/javascript"></script>
+<style type="text/css">
+body {
+	background-image: url(../graphics/1024_background_top.jpg);
+	background-repeat: repeat-x;
+	background-position: right top;
+	background-color: #f1f1f1;
+}
+#right_shadow {
+	background-image:url(../graphics/1024_right_shadow.jpg);
+	background-repeat:repeat-y;
+	background-position:top left;
+	background-color: #f1f1f1;
+}
+#right_shadow_top {
+	background-image:url(../graphics/1024_right_shadow_top.jpg);
+	background-repeat: repeat-y;
+	background-position:top left;
+	background-color: #f1f1f1;
+}
+#left_shadow {
+	background-image:url(../graphics/1024_left_shadow.jpg);
+	background-repeat:repeat-y;
+	background-position: top right;
+	background-color: #f1f1f1;
+}
+#left_shadow_top {
+	background-image:url(../graphics/1024_left_shadow_top.jpg);
+	background-repeat: repeat-y;
+	background-position: top right;
+	background-color: #f1f1f1;
+}
+.title {
+	font-size: 15px;
+	font-weight: bold;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-variant: small-caps;
+	line-height: 15px;
+	padding-left: 5px;
+}
+.header {
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 11px;
+	border-top-width: thin;
+	border-top-style: solid;
+	border-top-color: #666666;
+	margin-top: 5px;
+}
+.intro {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	padding: 10px 0px 10px 5px;
+	letter-spacing: .02em;
+	line-height: 16px;
+	text-align: left;
+}
+.whats-new-text {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	padding: 3px 5px 3px 5px;
+	letter-spacing: 0.01em;
+}
+.wf-cover-text {
+	font-size: 11px;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #666666;
+	letter-spacing: 0.01em;
+	padding: 7px 5px 10px 10px;
+}
+.classification {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+	color: #7F7F7F;
+	vertical-align: middle;
+	line-height: 22px;
+	letter-spacing: 3px;
+}
+.bottom-text1 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	letter-spacing: 0.02em;
+	line-height: 15px;
+	text-align: left;
+	color: #666666;
+	background: url(../graphics/home_footer_bkg.jpg) repeat-x;
+	text-align: right;
+	vertical-align: bottom;
+	height: 65px;
+	padding: 0px 5px 0px 0px;
+}
+-->
+</style>
+
+</head>
+<body class="section-library" dir="ltr" onload="MM_preloadImages('graphics/bandwidth_btn_on.gif','graphics/download_btn_on.gif')">
+<table border="0" align="center" cellpadding="0" cellspacing="0" style="margin-top:0px; height: 100%;">
+  <tr>
+    <td rowspan="2" valign="top" bgcolor="#fff" id="left_shadow"><table width="100%" border="0" cellspacing="0" cellpadding="0" style="height: 100%;" >
+        <tr>
+          <td align="right" valign="top" style="background-image:url(../graphics/1024_background_top.jpg); background-position: top; background-repeat: repeat-x;"><img src="../graphics/1024_lefttop_background.jpg" width="54" height="73" /></td>
+        </tr>
+      </table></td>
+    <td valign="top">
+      <p class="hiddenStructure"><a accesskey="2" href="#documentContent">Skip to content.</a> | <a accesskey="6" href="#portlet-navigation-tree">Skip
+        to navigation</a></p>
+      <table border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+        <tr>
+          
+          <td id="mnBGC" ><!-- Login/Top Margin Block --> 
+            <div id="ciaUtilityBlock" style="background-color:#FFF;">&nbsp;</div>
+            <div id="lColBG">
+              <div>
+                <table border="0" cellpadding="0" cellspacing="0" id="portal-columns">
+                  <tr>
+                    <td valign="top" id="portal-column-one" ><!-- *** Left Col Slot *** -->
+                      <div class="visualPadding">
+                        <h1 id="portal-logo"><a href="/index.html" accesskey="1">Central Intelligence Agency</a></h1>
+                        <dl class="portlet" id="portlet-navigation-tree">
+                          <dt class="portletHeader"> <span class="portletTopLeft"></span> <a href="/sitemap" class="tile">Navigation</a> <span class="portletTopRight"></span> </dt>
+                          <dd class="portletItem lastItem">
+                            <ul class="portletNavigationTree navTreeLevel0">
+                              <li class="navTreeItem">
+                                <div class="visualIcon contenttype-plone-site"><a class="visualIconPadding" href="/index.html" title="">CIA
+                                  Home</a></div>
+                              </li>
+                              <li class="navTreeItem visualNoMarker">
+                                <div class="visualIcon contenttype-folder"><a href="/about-cia/index.html" class="state-published visualIconPadding" title="About CIA">About
+                                  CIA</a></div>
+                              </li>
+                              <li class="navTreeItem visualNoMarker">
+                                <div class="visualIcon contenttype-agencyfolder"><a href="/careers/index.html" class="state-published visualIconPadding" title="Careers">Careers</a></div>
+                              </li>
+                              <li class="navTreeItem visualNoMarker">
+                                <div class="visualIcon contenttype-folder"><a href="/offices-of-cia/index.html" class="state-published visualIconPadding" title="Offices of CIA">Offices
+                                  of CIA</a></div>
+                              </li>
+                              <li class="navTreeItem visualNoMarker">
+                                <div class="visualIcon contenttype-folder"><a href="/news-information/index.html" class="state-published visualIconPadding" title="News &amp; Information">News &amp; Information</a></div>
+                              </li>
+                              <li class="navTreeItem visualNoMarker">
+                                <div class="visualIcon contenttype-folder"><a href="/library/index.html" class="state-published visualIconPadding navTreeCurrentFolder" title="Library">Library</a></div>
+                                <ul class="navTree navTreeLevel2">
+                                  <li class="navTreeItem visualNoMarker">
+                                    <div class="visualIcon contenttype-folder"><a href="/library/publications/index.html" class="state-published visualIconPadding navTreeCurrentFolder" title="Publications">Publications</a></div>
+                                    <ul class="navTree navTreeLevel3">
+                                      <li class="navTreeItem visualNoMarker">
+                                        <div class="visualIcon contenttype-agencyfolder"><a href="/library/publications/the-world-factbook/index.html" class="state-published visualIconPadding navTreeCurrentItem" title="The World Factbook">The
+                                          World Factbook</a></div>
+                                      </li>
+                                      <li class="navTreeItem visualNoMarker">
+                                        <div class="visualIcon contenttype-agencyfolder"><a href="/library/publications/world-leaders-1/index.html" class="state-published visualIconPadding" title="World Leaders">World
+                                          Leaders</a></div>
+                                      </li>
+                                      <li class="navTreeItem visualNoMarker">
+                                        <div class="visualIcon contenttype-folder"><a href="/library/publications/cia-maps-publications/index.html" class="state-published visualIconPadding" title="CIA Maps &amp; Publications">CIA
+                                          Maps &amp; Publications</a></div>
+                                      </li>
+                                      <li class="navTreeItem visualNoMarker">
+                                        <div class="visualIcon contenttype-folder"><a href="/library/publications/additional-publications/index.html" class="state-published visualIconPadding" title="Additional Publications">Additional
+                                          Publications</a></div>
+                                      </li>
+                                    </ul>
+                                  </li>
+                                  <li class="navTreeItem visualNoMarker">
+                                    <div class="visualIcon contenttype-folder"><a href="/library/center-for-the-study-of-intelligence/index.html" class="state-published visualIconPadding" title="Center for the Study of Intelligence">Center
+                                      for the Study of Intelligence</a></div>
+                                  </li>
+                                  <li class="navTreeItem visualNoMarker">
+                                    <div class="visualIcon contenttype-folder"><a href="/library/foia/index.html" class="state-published visualIconPadding" title="Freedom of Information Act Electronic Reading Room">Freedom
+                                      of Information Act Electronic Reading Room</a></div>
+                                  </li>
+                                  <li class="navTreeItem visualNoMarker">
+                                    <div class="visualIcon contenttype-folder"><a href="/library/kent-center-occasional-papers/index.html" class="state-published visualIconPadding" title="Kent Center Occasional Papers">Kent
+                                      Center Occasional Papers</a></div>
+                                  </li>
+                                  <li class="navTreeItem visualNoMarker">
+                                    <div class="visualIcon contenttype-agencyfolder"><a href="/library/intelligence-literature/index.html" class="state-published visualIconPadding" title="Intelligence Literature">Intelligence
+                                      Literature</a></div>
+                                  </li>
+                                  <li class="navTreeItem visualNoMarker">
+                                    <div class="visualIcon contenttype-folder"><a href="/library/reports/index.html" class="state-published visualIconPadding" title="Reports">Reports</a></div>
+                                  </li>
+                                  <li class="navTreeItem visualNoMarker">
+                                    <div class="visualIcon contenttype-agencypage"><a href="/library/related-links.html" class="state-published visualIconPadding" title="Related Links">Related
+                                      Links</a></div>
+                                  </li>
+                                </ul>
+                              </li>
+                              <li class="navTreeItem visualNoMarker">
+                                <div class="visualIcon contenttype-folder"><a href="/kids-page/index.html" class="state-published visualIconPadding" title="Kids' Page">Kids'
+                                  Page</a></div>
+                              </li>
+                              <li class="navTreeItem visualNoMarker">
+                                <div class="visualIcon contenttype-folder"><a href="/contact-cia/index.html" class="state-published visualIconPadding" title="Contact CIA">Contact
+                                  CIA</a></div>
+                              </li>
+                            </ul>
+                            <span class="portletBottomLeft"></span> <span class="portletBottomRight"></span> </dd>
+                        </dl>
+                        <div id="ciaMission">
+                          <h3>Mission</h3>
+                          <p>The Central Intelligence Agency (CIA) is an independent US
+                            Government agency responsible for providing national security
+                            intelligence to senior US policymakers. </p>
+                          <p>To learn more, visit <a href="https://www.cia.gov/about-cia/cia-vision-mission-values/index.html">CIA Vision, Mission &amp; Values</a>.</p>
+                        </div>
+                      </div>
+                      <!-- *** / Left Col Slot *** --></td>
+                    <td valign="top" id="contentColsA-R"  style="background-color: #FFF;"> <!-- *** Top Head and Search Area *** -->
+                      <div id="topHeadContainer" style="background-color: #FFF;">
+                        <div id="flashArea2" title="Central Intelligence Agency"  style="background-color: #FFF;"><span>Central Intelligence Agency</span></div>
+                      </div>
+                      <div id="ciaWorkSearchBar" style="width: 829px;">
+                        <div id="ciaWork">The Work of a Nation. The Center of Intelligence</div>
+                        <form id="ciaSearchForm" method="get" action="/search">
+                          <label class="hiddenStructure" for="searchBox">Search Field</label>
+                          <input id="searchBox" name="q" type="text" maxlength="2047" value="Search" onfocus="clearSearch(this);" onblur="showSearch(this)" />
+                          <label class="hiddenStructure" for="searchBtn">Search Button</label>
+                          <input id="searchBtn" type="image" alt="Search" src="../worldfactbook_shell/images/searchBtn.gif " />
+                          <input type="hidden" name="site" value="CIA" />
+                          <input type="hidden" name="output" value="xml_no_dtd" />
+                          <input type="hidden" name="client" value="CIA" />
+                          <input type="hidden" name="myAction" value="/search" />
+                          <input type="hidden" name="proxystylesheet" value="CIA" />
+                          <input type="hidden" name="submitMethod" value="get" />
+                        </form>
+                      </div>
+                     
+ 					<!-- *** / Top Head and Search Area *** -->
+                      <table id="contentColsB" cellpadding="0" cellspacing="0" border="0">
+                        <tr>
+                          <td id="portal-column-content" ><div id="region-content"> <a name="documentContent"></a>
+                              <table cellpadding="0" cellspacing="0" border="0" style="padding-left: 15px;">
+                                <tr>
+                                  <td style=" z-index:99999;"><!-- includes/pickcountryform_index.cfm starts here ... -->
+<!-- Code from script_head.cfm -->
+
+
+
+
+
+<script language="JavaScript" type="text/JavaScript">
+
+function MM_openBrWindow(theURL,winName,features) { //v2.0
+	  window.open(theURL,winName,features);
+	}
+
+startList = function() {
+							if (document.all&&document.getElementById) {
+								wfb_navigationRoot = document.getElementById("wfb_navigation");
+								for (x=0; x<wfb_navigationRoot.childNodes.length; x++) {
+									node = wfb_navigationRoot.childNodes[x];
+									if (node.nodeName=="LI") {
+										node.onmouseover=function() {
+																		this.className+=" over";
+																	}
+										node.onmouseout = function()	{
+																			this.className=this.className.replace(" over", "");
+																		}
+									}
+								}
+							}
+						}
+	window.onload=startList;
+
+	faq = null;
+	function collapseCountryInfo()
+	{
+		faq = new switchicon("icongroup2", "div") //Limit scanning of switch contents to just "div" elements
+		faq.setHeader('<img src="../graphics/close.jpg" alt="Close" title="Close"/>', '<img src="../graphics/open.jpg" alt="Open" title="Open" />')  //Set header HTML
+		faq.collapsePrevious(false) //Allow more than 1 content to be open simultanously
+		faq.setPersist(true, 7) //Enable persistence to remember last switch content states for 7 days
+		faq.init()
+	}
+
+function MM_jumpMenu(targ,selObj,restore){ //v3.0
+	if (selObj.selectedIndex > 0)
+	{
+		
+		eval(targ + ".location='" + "../geos/" + selObj.options[selObj.selectedIndex].value + ".html" + "'");
+		
+	}
+	if (restore) 
+		selObj.selectedIndex=0;
+}
+function onChange(dropdown)
+{
+ 	var myindex = dropdown.selectedIndex
+	var cntryCode = selObj.options[selObj.selectedIndex].value;
+	var baseURL = selObj.options[selObj.selectedIndex].value;
+	top.location.href = baseURL;
+	
+	return true;
+}
+
+var statusmsg = "";
+function hidestatus() {
+ 	window.status = statusmsg
+	return true
+}
+
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_findObj(n, d) { //v4.01
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+//-->
+</script>
+
+
+
+<script language="javascript" type="text/javascript">
+// JavaScript Document
+	var globalCntryNameSearchBuffer = '';
+	var globalTimer = null;
+	var selcon = null;
+	function FindSelectEntry(e, selectControl) /* In script_head_index.cfm */
+	{
+		var timeLimitBetweenKeyPresses = 3600; //seconds
+		var keynum, keychar, numcheck;
+		
+		
+		if (window.event) // IE
+		{
+			keynum = e.keyCode;
+		}
+		else if (e.which) // Netscape/Firefox/Opera
+		{
+			keynum = e.which;
+		} 
+		
+		keychar = String.fromCharCode(keynum);
+		if ((keynum >= 65 && keynum <= 122) || keynum == 32)  // Only accept alphanumerics A-Z and a-z
+		{
+			clearTimeout(globalTimer);
+			globalCntryNameSearchBuffer += keychar;
+			selcon = selectControl;
+			globalTimer = setTimeout('globalCntryNameSearchBuffer = ""', (timeLimitBetweenKeyPresses*1000));
+			for (var i = 0; i < selectControl.options.length; i++)
+			{
+				var selectLabel = selectControl.options[i].text.toLowerCase();
+				if (selectLabel.indexOf(globalCntryNameSearchBuffer.toLowerCase()) == 0)
+				{
+					selectControl.selectedIndex = i;
+					
+					// After this method concludes, Firefox moves the selection index one additional place.  This compensates for that
+					if (e.which)
+						--selectControl.selectedIndex;
+						
+					break;
+				}
+			}
+		}
+		return false;
+	}
+
+
+	function Clear_globalCntryNameSearchBuffer()
+	{
+		globalCntryNameSearchBuffer = "";
+	}
+
+</script>
+
+
+<!-- Internet Explorer CSS Fixes -->
+<!--[if lt IE 7]>
+        <style type="text/css" media="all">@import url(../stylesIEFixes.css);</style>
+    <![endif]-->
+<script language="javascript" type="text/javascript">
+	var globalCntryNameSearchBuffer = '';
+	var globalTimer = null;
+	var selcon = null;
+	
+	function FindSelectEntry(e, selectControl) /* In script_head_index.cfm */
+	{
+		var timeLimitBetweenKeyPresses = 2.5; //seconds
+		var keynum, keychar, numcheck;
+		
+		
+		if (window.event) // IE
+		{
+			keynum = e.keyCode;
+		}
+		else if (e.which) // Netscape/Firefox/Opera
+		{
+//			keynum = e.which;
+				return false;
+		}
+		
+		keychar = String.fromCharCode(keynum);
+		if ((keynum >= 65 && keynum <= 122) || keynum == 32)  // Only accept alphanumerics A-Z and a-z
+		{
+			clearTimeout(globalTimer);
+			globalCntryNameSearchBuffer += keychar;
+			selcon = selectControl;
+			globalTimer = setTimeout('globalCntryNameSearchBuffer = ""', (timeLimitBetweenKeyPresses*1000));
+			for (var i = 0; i < selcon.options.length; i++)
+			{
+				var selectLabel = selcon.options[i].text.toLowerCase();
+				if (selectLabel.indexOf(globalCntryNameSearchBuffer.toLowerCase()) == 0)
+				{
+					selcon.selectedIndex = i;
+					
+					// After this method concludes, Firefox moves the selection index one additional place.  This compensates for that
+					if (e.which)
+						--selcon.selectedIndex;
+						
+					break;
+				}
+			}
+		}
+		else if (keynum == 13) // The ENTER key
+			MM_jumpMenu('parent', selectControl, 0);
+
+		return false;
+	}
+
+
+	function Clear_globalCntryNameSearchBuffer()
+	{
+		globalCntryNameSearchBuffer = "";
+	}
+
+</script>
+
+
+<a name="top" id="top"></a>
+<table width="814"  border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<td><table border="0" align="left" cellpadding="0" cellspacing="0" style="position:relative; z-index:999;" >
+			<tr>
+				<td style="height:70px;">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" style="padding-top: 10px;height:80px;">
+		<tr>
+			
+				<td><img src="../graphics/banner.gif"  alt="World Factbook Title" width="638" height="82"  usemap="#Map" border="0" style="padding-bottom: 5px;" title="World Factbook Title"/></td>
+				
+			</td>
+		</tr>
+	</table>
+	
+
+<map name="Map" id="Map">
+	<area shape="poly" coords="478,17,624,17,615,0,490,0" href="https://www.cia.gov/library/publications/cia-maps-publications/index.html" target="_blank" />
+</map>
+</td>
+			</tr>
+			
+				<tr>
+					<td width="638"><table style="height:32px;background-image: url(../graphics/country_gradiant_back.jpg)" id="country_select2"  border="0" cellpadding="0" cellspacing="0" >
+							<tr>
+								<td width="290" align="right" valign="top"><img src="../graphics/nav_arrows.gif" style="padding-top: 6px;" alt="navigation arrows" title="navigation arrows"/></td>
+								<td width="347" align="right" valign="middle"><div id="parent" style="position: relative; left: 0px; top: 0px; z-index: 1;">
+										<table width="90%" cellspacing="0" cellpadding="0" border="0">
+											<tr>
+												<td valign="top"><form id="SelectCountry" name="SelectCountry" method="get" action="../geos/wfbext_countrydata_holder.cfm">
+														<Label for="countryCode"> </Label>
+														<select name="countryCode" id="countryCode" class="country_select" onkeypress="return FindSelectEntry(event, this)" onChange="MM_jumpMenu('parent',this,0)" >
+															<option selected value="" >--- Select a Country or Location ---</option>
+															
+																<option value="xx"> World </option>
+															
+																<option value="af"> Afghanistan </option>
+															
+																<option value="ax"> Akrotiri </option>
+															
+																<option value="al"> Albania </option>
+															
+																<option value="ag"> Algeria </option>
+															
+																<option value="aq"> American Samoa </option>
+															
+																<option value="an"> Andorra </option>
+															
+																<option value="ao"> Angola </option>
+															
+																<option value="av"> Anguilla </option>
+															
+																<option value="ay"> Antarctica </option>
+															
+																<option value="ac"> Antigua and Barbuda </option>
+															
+																<option value="xq"> Arctic Ocean </option>
+															
+																<option value="ar"> Argentina </option>
+															
+																<option value="am"> Armenia </option>
+															
+																<option value="aa"> Aruba </option>
+															
+																<option value="at"> Ashmore and Cartier Islands </option>
+															
+																<option value="zh"> Atlantic Ocean </option>
+															
+																<option value="as"> Australia </option>
+															
+																<option value="au"> Austria </option>
+															
+																<option value="aj"> Azerbaijan </option>
+															
+																<option value="bf"> Bahamas, The </option>
+															
+																<option value="ba"> Bahrain </option>
+															
+																<option value="um"> Baker Island </option>
+																
+																<option value="bg"> Bangladesh </option>
+															
+																<option value="bb"> Barbados </option>
+															
+																<option value="bo"> Belarus </option>
+															
+																<option value="be"> Belgium </option>
+															
+																<option value="bh"> Belize </option>
+															
+																<option value="bn"> Benin </option>
+															
+																<option value="bd"> Bermuda </option>
+															
+																<option value="bt"> Bhutan </option>
+															
+																<option value="bl"> Bolivia </option>
+															
+																<option value="bk"> Bosnia and Herzegovina </option>
+															
+																<option value="bc"> Botswana </option>
+															
+																<option value="bv"> Bouvet Island </option>
+															
+																<option value="br"> Brazil </option>
+															
+																<option value="io"> British Indian Ocean Territory </option>
+															
+																<option value="vi"> British Virgin Islands </option>
+															
+																<option value="bx"> Brunei </option>
+															
+																<option value="bu"> Bulgaria </option>
+															
+																<option value="uv"> Burkina Faso </option>
+															
+																<option value="bm"> Burma </option>
+															
+																<option value="by"> Burundi </option>
+															
+																<option value="cb"> Cambodia </option>
+															
+																<option value="cm"> Cameroon </option>
+															
+																<option value="ca"> Canada </option>
+															
+																<option value="cv"> Cape Verde </option>
+															
+																<option value="cj"> Cayman Islands </option>
+															
+																<option value="ct"> Central African Republic </option>
+															
+																<option value="cd"> Chad </option>
+															
+																<option value="ci"> Chile </option>
+															
+																<option value="ch"> China </option>
+															
+																<option value="kt"> Christmas Island </option>
+															
+																<option value="ip"> Clipperton Island </option>
+															
+																<option value="ck"> Cocos (Keeling) Islands </option>
+															
+																<option value="co"> Colombia </option>
+															
+																<option value="cn"> Comoros </option>
+															
+																<option value="cg"> Congo, Democratic Republic of the </option>
+															
+																<option value="cf"> Congo, Republic of the </option>
+															
+																<option value="cw"> Cook Islands </option>
+															
+																<option value="cr"> Coral Sea Islands </option>
+															
+																<option value="cs"> Costa Rica </option>
+															
+																<option value="iv"> Cote d'Ivoire </option>
+															
+																<option value="hr"> Croatia </option>
+															
+																<option value="cu"> Cuba </option>
+															
+																<option value="cc"> Curacao </option>
+															
+																<option value="cy"> Cyprus </option>
+															
+																<option value="ez"> Czech Republic </option>
+															
+																<option value="da"> Denmark </option>
+															
+																<option value="dx"> Dhekelia </option>
+															
+																<option value="dj"> Djibouti </option>
+															
+																<option value="do"> Dominica </option>
+															
+																<option value="dr"> Dominican Republic </option>
+															
+																<option value="ec"> Ecuador </option>
+															
+																<option value="eg"> Egypt </option>
+															
+																<option value="es"> El Salvador </option>
+															
+																<option value="ek"> Equatorial Guinea </option>
+															
+																<option value="er"> Eritrea </option>
+															
+																<option value="en"> Estonia </option>
+															
+																<option value="et"> Ethiopia </option>
+															
+																<option value="fk"> Falkland Islands (Islas Malvinas) </option>
+															
+																<option value="fo"> Faroe Islands </option>
+															
+																<option value="fj"> Fiji </option>
+															
+																<option value="fi"> Finland </option>
+															
+																<option value="fr"> France </option>
+															
+																<option value="fp"> French Polynesia </option>
+															
+																<option value="fs"> French Southern and Antarctic Lands </option>
+															
+																<option value="gb"> Gabon </option>
+															
+																<option value="ga"> Gambia, The </option>
+															
+																<option value="gz"> Gaza Strip </option>
+															
+																<option value="gg"> Georgia </option>
+															
+																<option value="gm"> Germany </option>
+															
+																<option value="gh"> Ghana </option>
+															
+																<option value="gi"> Gibraltar </option>
+															
+																<option value="gr"> Greece </option>
+															
+																<option value="gl"> Greenland </option>
+															
+																<option value="gj"> Grenada </option>
+															
+																<option value="gq"> Guam </option>
+															
+																<option value="gt"> Guatemala </option>
+															
+																<option value="gk"> Guernsey </option>
+															
+																<option value="gv"> Guinea </option>
+															
+																<option value="pu"> Guinea-Bissau </option>
+															
+																<option value="gy"> Guyana </option>
+															
+																<option value="ha"> Haiti </option>
+															
+																<option value="hm"> Heard Island and McDonald Islands </option>
+															
+																<option value="vt"> Holy See (Vatican City) </option>
+																
+																<option value="ho"> Honduras </option>
+															
+																<option value="hk"> Hong Kong </option>
+															
+																<option value="um"> Howland Island </option>
+																
+																<option value="hu"> Hungary </option>
+															
+																<option value="ic"> Iceland </option>
+															
+																<option value="in"> India </option>
+															
+																<option value="xo"> Indian Ocean </option>
+															
+																<option value="id"> Indonesia </option>
+															
+																<option value="ir"> Iran </option>
+															
+																<option value="iz"> Iraq </option>
+															
+																<option value="ei"> Ireland </option>
+															
+																<option value="im"> Isle of Man </option>
+															
+																<option value="is"> Israel </option>
+															
+																<option value="it"> Italy </option>
+															
+																<option value="jm"> Jamaica </option>
+															
+																<option value="jn"> Jan Mayen </option>
+															
+																<option value="ja"> Japan </option>
+															
+																<option value="um"> Jarvis Island </option>
+																
+																<option value="je"> Jersey </option>
+															
+																<option value="um"> Johnston Atoll </option>
+																
+																<option value="jo"> Jordan </option>
+															
+																<option value="kz"> Kazakhstan </option>
+															
+																<option value="ke"> Kenya </option>
+															
+																<option value="um"> Kingman Reef </option>
+																
+																<option value="kr"> Kiribati </option>
+															
+																<option value="kn"> Korea, North </option>
+															
+																<option value="ks"> Korea, South </option>
+															
+																<option value="kv"> Kosovo </option>
+															
+																<option value="ku"> Kuwait </option>
+															
+																<option value="kg"> Kyrgyzstan </option>
+															
+																<option value="la"> Laos </option>
+															
+																<option value="lg"> Latvia </option>
+															
+																<option value="le"> Lebanon </option>
+															
+																<option value="lt"> Lesotho </option>
+															
+																<option value="li"> Liberia </option>
+															
+																<option value="ly"> Libya </option>
+															
+																<option value="ls"> Liechtenstein </option>
+															
+																<option value="lh"> Lithuania </option>
+															
+																<option value="lu"> Luxembourg </option>
+															
+																<option value="mc"> Macau </option>
+															
+																<option value="mk"> Macedonia </option>
+															
+																<option value="ma"> Madagascar </option>
+															
+																<option value="mi"> Malawi </option>
+															
+																<option value="my"> Malaysia </option>
+															
+																<option value="mv"> Maldives </option>
+															
+																<option value="ml"> Mali </option>
+															
+																<option value="mt"> Malta </option>
+															
+																<option value="rm"> Marshall Islands </option>
+															
+																<option value="mr"> Mauritania </option>
+															
+																<option value="mp"> Mauritius </option>
+															
+																<option value="mx"> Mexico </option>
+															
+																<option value="fm"> Micronesia, Federated States of </option>
+															
+																<option value="um"> Midway Islands </option>
+																
+																<option value="md"> Moldova </option>
+															
+																<option value="mn"> Monaco </option>
+															
+																<option value="mg"> Mongolia </option>
+															
+																<option value="mj"> Montenegro </option>
+															
+																<option value="mh"> Montserrat </option>
+															
+																<option value="mo"> Morocco </option>
+															
+																<option value="mz"> Mozambique </option>
+															
+																<option value="wa"> Namibia </option>
+															
+																<option value="nr"> Nauru </option>
+															
+																<option value="bq"> Navassa Island </option>
+															
+																<option value="np"> Nepal </option>
+															
+																<option value="nl"> Netherlands </option>
+															
+																<option value="nc"> New Caledonia </option>
+															
+																<option value="nz"> New Zealand </option>
+															
+																<option value="nu"> Nicaragua </option>
+															
+																<option value="ng"> Niger </option>
+															
+																<option value="ni"> Nigeria </option>
+															
+																<option value="ne"> Niue </option>
+															
+																<option value="nf"> Norfolk Island </option>
+															
+																<option value="cq"> Northern Mariana Islands </option>
+															
+																<option value="no"> Norway </option>
+															
+																<option value="mu"> Oman </option>
+															
+																<option value="zn"> Pacific Ocean </option>
+															
+																<option value="pk"> Pakistan </option>
+															
+																<option value="ps"> Palau </option>
+															
+																<option value="um"> Palmyra Atoll </option>
+																
+																<option value="pm"> Panama </option>
+															
+																<option value="pp"> Papua New Guinea </option>
+															
+																<option value="pf"> Paracel Islands </option>
+															
+																<option value="pa"> Paraguay </option>
+															
+																<option value="pe"> Peru </option>
+															
+																<option value="rp"> Philippines </option>
+															
+																<option value="pc"> Pitcairn Islands </option>
+															
+																<option value="pl"> Poland </option>
+															
+																<option value="po"> Portugal </option>
+															
+																<option value="rq"> Puerto Rico </option>
+															
+																<option value="qa"> Qatar </option>
+															
+																<option value="ro"> Romania </option>
+															
+																<option value="rs"> Russia </option>
+															
+																<option value="rw"> Rwanda </option>
+															
+																<option value="tb"> Saint Barthelemy </option>
+															
+																<option value="sh"> Saint Helena, Ascension, and Tristan da Cunha </option>
+															
+																<option value="sc"> Saint Kitts and Nevis </option>
+															
+																<option value="st"> Saint Lucia </option>
+															
+																<option value="rn"> Saint Martin </option>
+															
+																<option value="sb"> Saint Pierre and Miquelon </option>
+															
+																<option value="vc"> Saint Vincent and the Grenadines </option>
+															
+																<option value="ws"> Samoa </option>
+															
+																<option value="sm"> San Marino </option>
+															
+																<option value="tp"> Sao Tome and Principe </option>
+															
+																<option value="sa"> Saudi Arabia </option>
+															
+																<option value="sg"> Senegal </option>
+															
+																<option value="ri"> Serbia </option>
+															
+																<option value="se"> Seychelles </option>
+															
+																<option value="sl"> Sierra Leone </option>
+															
+																<option value="sn"> Singapore </option>
+															
+																<option value="sk"> Sint Maarten </option>
+															
+																<option value="lo"> Slovakia </option>
+															
+																<option value="si"> Slovenia </option>
+															
+																<option value="bp"> Solomon Islands </option>
+															
+																<option value="so"> Somalia </option>
+															
+																<option value="sf"> South Africa </option>
+															
+																<option value="oo"> Southern Ocean </option>
+															
+																<option value="sx"> South Georgia and South Sandwich Islands </option>
+															
+																<option value="od"> South Sudan </option>
+															
+																<option value="sp"> Spain </option>
+															
+																<option value="pg"> Spratly Islands </option>
+															
+																<option value="ce"> Sri Lanka </option>
+															
+																<option value="su"> Sudan </option>
+															
+																<option value="ns"> Suriname </option>
+															
+																<option value="sv"> Svalbard </option>
+															
+																<option value="wz"> Swaziland </option>
+															
+																<option value="sw"> Sweden </option>
+															
+																<option value="sz"> Switzerland </option>
+															
+																<option value="sy"> Syria </option>
+															
+																<option value="tw"> Taiwan </option>
+															
+																<option value="ti"> Tajikistan </option>
+															
+																<option value="tz"> Tanzania </option>
+															
+																<option value="th"> Thailand </option>
+															
+																<option value="tt"> Timor-Leste </option>
+															
+																<option value="to"> Togo </option>
+															
+																<option value="tl"> Tokelau </option>
+															
+																<option value="tn"> Tonga </option>
+															
+																<option value="td"> Trinidad and Tobago </option>
+															
+																<option value="ts"> Tunisia </option>
+															
+																<option value="tu"> Turkey </option>
+															
+																<option value="tx"> Turkmenistan </option>
+															
+																<option value="tk"> Turks and Caicos Islands </option>
+															
+																<option value="tv"> Tuvalu </option>
+															
+																<option value="ug"> Uganda </option>
+															
+																<option value="up"> Ukraine </option>
+															
+																<option value="ae"> United Arab Emirates </option>
+															
+																<option value="uk"> United Kingdom </option>
+															
+																<option value="us"> United States </option>
+															
+																<option value="um"> United States Pacific Island Wildlife Refuges </option>
+															
+																<option value="uy"> Uruguay </option>
+															
+																<option value="uz"> Uzbekistan </option>
+															
+																<option value="nh"> Vanuatu </option>
+															
+																<option value="vt"> Vatican City </option>
+																
+																<option value="ve"> Venezuela </option>
+															
+																<option value="vm"> Vietnam </option>
+															
+																<option value="vq"> Virgin Islands </option>
+															
+																<option value="wq"> Wake Island </option>
+															
+																<option value="wf"> Wallis and Futuna </option>
+															
+																<option value="we"> West Bank </option>
+															
+																<option value="wi"> Western Sahara </option>
+															
+																<option value="ym"> Yemen </option>
+															
+																<option value="za"> Zambia </option>
+															
+																<option value="zi"> Zimbabwe </option>
+															
+																<option value="ee"> European Union </option>
+															
+														</select>
+													</form></td>
+											</tr>
+										</table>
+										<noscript>
+										<div id="flashAd" style="position: absolute; left: 0px; top: -2px; height: 0px; z-index: 2; width: 337px;">
+											<table width="90%" cellspacing="0" cellpadding="0" border="0">
+												<tr>
+													<td><div id="multi-level">
+															<ul class="menu">
+																<li style="padding-top: 3px;"><a href="##" class="top_link">select a country or location
+																	<!--[if IE 7]><!--></a><!--<![endif]-->
+																	<!--[if lte IE 6]><table><tr><td><![endif]-->
+																	<ul class="af">
+																		
+																				<li><a href="xx.html">World</a></li>
+																				
+																				<li><a href="af.html">Afghanistan</a></li>
+																				
+																				<li><a href="ax.html">Akrotiri</a></li>
+																				
+																				<li><a href="al.html">Albania</a></li>
+																				
+																				<li><a href="ag.html">Algeria</a></li>
+																				
+																				<li><a href="aq.html">American Samoa</a></li>
+																				
+																				<li><a href="an.html">Andorra</a></li>
+																				
+																				<li><a href="ao.html">Angola</a></li>
+																				
+																				<li><a href="av.html">Anguilla</a></li>
+																				
+																				<li><a href="ay.html">Antarctica</a></li>
+																				
+																				<li><a href="ac.html">Antigua and Barbuda</a></li>
+																				
+																				<li><a href="xq.html">Arctic Ocean</a></li>
+																				
+																				<li><a href="ar.html">Argentina</a></li>
+																				
+																				<li><a href="am.html">Armenia</a></li>
+																				
+																				<li><a href="aa.html">Aruba</a></li>
+																				
+																				<li><a href="at.html">Ashmore and Cartier Islands</a></li>
+																				
+																				<li><a href="zh.html">Atlantic Ocean</a></li>
+																				
+																				<li><a href="as.html">Australia</a></li>
+																				
+																				<li><a href="au.html">Austria</a></li>
+																				
+																				<li><a href="aj.html">Azerbaijan</a></li>
+																				
+																				<li><a href="bf.html">Bahamas, The</a></li>
+																				
+																				<li><a href="ba.html">Bahrain</a></li>
+																				
+																				<li><a href="um.html">Baker Island</a></li>
+																				
+																				<li><a href="bg.html">Bangladesh</a></li>
+																				
+																				<li><a href="bb.html">Barbados</a></li>
+																				
+																				<li><a href="bo.html">Belarus</a></li>
+																				
+																				<li><a href="be.html">Belgium</a></li>
+																				
+																				<li><a href="bh.html">Belize</a></li>
+																				
+																				<li><a href="bn.html">Benin</a></li>
+																				
+																				<li><a href="bd.html">Bermuda</a></li>
+																				
+																				<li><a href="bt.html">Bhutan</a></li>
+																				
+																				<li><a href="bl.html">Bolivia</a></li>
+																				
+																				<li><a href="bk.html">Bosnia and Herzegovina</a></li>
+																				
+																				<li><a href="bc.html">Botswana</a></li>
+																				
+																				<li><a href="bv.html">Bouvet Island</a></li>
+																				
+																				<li><a href="br.html">Brazil</a></li>
+																				
+																				<li><a href="io.html">British Indian Ocean Territory</a></li>
+																				
+																				<li><a href="vi.html">British Virgin Islands</a></li>
+																				
+																				<li><a href="bx.html">Brunei</a></li>
+																				
+																				<li><a href="bu.html">Bulgaria</a></li>
+																				
+																				<li><a href="uv.html">Burkina Faso</a></li>
+																				
+																				<li><a href="bm.html">Burma</a></li>
+																				
+																				<li><a href="by.html">Burundi</a></li>
+																				
+																				<li><a href="cb.html">Cambodia</a></li>
+																				
+																				<li><a href="cm.html">Cameroon</a></li>
+																				
+																				<li><a href="ca.html">Canada</a></li>
+																				
+																				<li><a href="cv.html">Cape Verde</a></li>
+																				
+																				<li><a href="cj.html">Cayman Islands</a></li>
+																				
+																				<li><a href="ct.html">Central African Republic</a></li>
+																				
+																				<li><a href="cd.html">Chad</a></li>
+																				
+																				<li><a href="ci.html">Chile</a></li>
+																				
+																				<li><a href="ch.html">China</a></li>
+																				
+																				<li><a href="kt.html">Christmas Island</a></li>
+																				
+																				<li><a href="ip.html">Clipperton Island</a></li>
+																				
+																				<li><a href="ck.html">Cocos (Keeling) Islands</a></li>
+																				
+																				<li><a href="co.html">Colombia</a></li>
+																				
+																				<li><a href="cn.html">Comoros</a></li>
+																				
+																				<li><a href="cg.html">Congo, Democratic Republic of the</a></li>
+																				
+																				<li><a href="cf.html">Congo, Republic of the</a></li>
+																				
+																				<li><a href="cw.html">Cook Islands</a></li>
+																				
+																				<li><a href="cr.html">Coral Sea Islands</a></li>
+																				
+																				<li><a href="cs.html">Costa Rica</a></li>
+																				
+																				<li><a href="iv.html">Cote d'Ivoire</a></li>
+																				
+																				<li><a href="hr.html">Croatia</a></li>
+																				
+																				<li><a href="cu.html">Cuba</a></li>
+																				
+																				<li><a href="cc.html">Curacao</a></li>
+																				
+																				<li><a href="cy.html">Cyprus</a></li>
+																				
+																				<li><a href="ez.html">Czech Republic</a></li>
+																				
+																				<li><a href="da.html">Denmark</a></li>
+																				
+																				<li><a href="dx.html">Dhekelia</a></li>
+																				
+																				<li><a href="dj.html">Djibouti</a></li>
+																				
+																				<li><a href="do.html">Dominica</a></li>
+																				
+																				<li><a href="dr.html">Dominican Republic</a></li>
+																				
+																				<li><a href="ec.html">Ecuador</a></li>
+																				
+																				<li><a href="eg.html">Egypt</a></li>
+																				
+																				<li><a href="es.html">El Salvador</a></li>
+																				
+																				<li><a href="ek.html">Equatorial Guinea</a></li>
+																				
+																				<li><a href="er.html">Eritrea</a></li>
+																				
+																				<li><a href="en.html">Estonia</a></li>
+																				
+																				<li><a href="et.html">Ethiopia</a></li>
+																				
+																				<li><a href="fk.html">Falkland Islands (Islas Malvinas)</a></li>
+																				
+																				<li><a href="fo.html">Faroe Islands</a></li>
+																				
+																				<li><a href="fj.html">Fiji</a></li>
+																				
+																				<li><a href="fi.html">Finland</a></li>
+																				
+																				<li><a href="fr.html">France</a></li>
+																				
+																				<li><a href="fp.html">French Polynesia</a></li>
+																				
+																				<li><a href="fs.html">French Southern and Antarctic Lands</a></li>
+																				
+																				<li><a href="gb.html">Gabon</a></li>
+																				
+																				<li><a href="ga.html">Gambia, The</a></li>
+																				
+																				<li><a href="gz.html">Gaza Strip</a></li>
+																				
+																				<li><a href="gg.html">Georgia</a></li>
+																				
+																				<li><a href="gm.html">Germany</a></li>
+																				
+																				<li><a href="gh.html">Ghana</a></li>
+																				
+																				<li><a href="gi.html">Gibraltar</a></li>
+																				
+																				<li><a href="gr.html">Greece</a></li>
+																				
+																				<li><a href="gl.html">Greenland</a></li>
+																				
+																				<li><a href="gj.html">Grenada</a></li>
+																				
+																				<li><a href="gq.html">Guam</a></li>
+																				
+																				<li><a href="gt.html">Guatemala</a></li>
+																				
+																				<li><a href="gk.html">Guernsey</a></li>
+																				
+																				<li><a href="gv.html">Guinea</a></li>
+																				
+																				<li><a href="pu.html">Guinea-Bissau</a></li>
+																				
+																				<li><a href="gy.html">Guyana</a></li>
+																				
+																				<li><a href="ha.html">Haiti</a></li>
+																				
+																				<li><a href="hm.html">Heard Island and McDonald Islands</a></li>
+																				
+																				<li><a href="vt.html">Holy See (Vatican City)</a></li>
+																				
+																				<li><a href="ho.html">Honduras</a></li>
+																				
+																				<li><a href="hk.html">Hong Kong</a></li>
+																				
+																				<li><a href="um.html">Howland Island</a></li>
+																				
+																				<li><a href="hu.html">Hungary</a></li>
+																				
+																				<li><a href="ic.html">Iceland</a></li>
+																				
+																				<li><a href="in.html">India</a></li>
+																				
+																				<li><a href="xo.html">Indian Ocean</a></li>
+																				
+																				<li><a href="id.html">Indonesia</a></li>
+																				
+																				<li><a href="ir.html">Iran</a></li>
+																				
+																				<li><a href="iz.html">Iraq</a></li>
+																				
+																				<li><a href="ei.html">Ireland</a></li>
+																				
+																				<li><a href="im.html">Isle of Man</a></li>
+																				
+																				<li><a href="is.html">Israel</a></li>
+																				
+																				<li><a href="it.html">Italy</a></li>
+																				
+																				<li><a href="jm.html">Jamaica</a></li>
+																				
+																				<li><a href="jn.html">Jan Mayen</a></li>
+																				
+																				<li><a href="ja.html">Japan</a></li>
+																				
+																				<li><a href="um.html">Jarvis Island</a></li>
+																				
+																				<li><a href="je.html">Jersey</a></li>
+																				
+																				<li><a href="um.html">Johnston Atoll</a></li>
+																				
+																				<li><a href="jo.html">Jordan</a></li>
+																				
+																				<li><a href="kz.html">Kazakhstan</a></li>
+																				
+																				<li><a href="ke.html">Kenya</a></li>
+																				
+																				<li><a href="um.html">Kingman Reef</a></li>
+																				
+																				<li><a href="kr.html">Kiribati</a></li>
+																				
+																				<li><a href="kn.html">Korea, North</a></li>
+																				
+																				<li><a href="ks.html">Korea, South</a></li>
+																				
+																				<li><a href="kv.html">Kosovo</a></li>
+																				
+																				<li><a href="ku.html">Kuwait</a></li>
+																				
+																				<li><a href="kg.html">Kyrgyzstan</a></li>
+																				
+																				<li><a href="la.html">Laos</a></li>
+																				
+																				<li><a href="lg.html">Latvia</a></li>
+																				
+																				<li><a href="le.html">Lebanon</a></li>
+																				
+																				<li><a href="lt.html">Lesotho</a></li>
+																				
+																				<li><a href="li.html">Liberia</a></li>
+																				
+																				<li><a href="ly.html">Libya</a></li>
+																				
+																				<li><a href="ls.html">Liechtenstein</a></li>
+																				
+																				<li><a href="lh.html">Lithuania</a></li>
+																				
+																				<li><a href="lu.html">Luxembourg</a></li>
+																				
+																				<li><a href="mc.html">Macau</a></li>
+																				
+																				<li><a href="mk.html">Macedonia</a></li>
+																				
+																				<li><a href="ma.html">Madagascar</a></li>
+																				
+																				<li><a href="mi.html">Malawi</a></li>
+																				
+																				<li><a href="my.html">Malaysia</a></li>
+																				
+																				<li><a href="mv.html">Maldives</a></li>
+																				
+																				<li><a href="ml.html">Mali</a></li>
+																				
+																				<li><a href="mt.html">Malta</a></li>
+																				
+																				<li><a href="rm.html">Marshall Islands</a></li>
+																				
+																				<li><a href="mr.html">Mauritania</a></li>
+																				
+																				<li><a href="mp.html">Mauritius</a></li>
+																				
+																				<li><a href="mx.html">Mexico</a></li>
+																				
+																				<li><a href="fm.html">Micronesia, Federated States of</a></li>
+																				
+																				<li><a href="um.html">Midway Islands</a></li>
+																				
+																				<li><a href="md.html">Moldova</a></li>
+																				
+																				<li><a href="mn.html">Monaco</a></li>
+																				
+																				<li><a href="mg.html">Mongolia</a></li>
+																				
+																				<li><a href="mj.html">Montenegro</a></li>
+																				
+																				<li><a href="mh.html">Montserrat</a></li>
+																				
+																				<li><a href="mo.html">Morocco</a></li>
+																				
+																				<li><a href="mz.html">Mozambique</a></li>
+																				
+																				<li><a href="wa.html">Namibia</a></li>
+																				
+																				<li><a href="nr.html">Nauru</a></li>
+																				
+																				<li><a href="bq.html">Navassa Island</a></li>
+																				
+																				<li><a href="np.html">Nepal</a></li>
+																				
+																				<li><a href="nl.html">Netherlands</a></li>
+																				
+																				<li><a href="nc.html">New Caledonia</a></li>
+																				
+																				<li><a href="nz.html">New Zealand</a></li>
+																				
+																				<li><a href="nu.html">Nicaragua</a></li>
+																				
+																				<li><a href="ng.html">Niger</a></li>
+																				
+																				<li><a href="ni.html">Nigeria</a></li>
+																				
+																				<li><a href="ne.html">Niue</a></li>
+																				
+																				<li><a href="nf.html">Norfolk Island</a></li>
+																				
+																				<li><a href="cq.html">Northern Mariana Islands</a></li>
+																				
+																				<li><a href="no.html">Norway</a></li>
+																				
+																				<li><a href="mu.html">Oman</a></li>
+																				
+																				<li><a href="zn.html">Pacific Ocean</a></li>
+																				
+																				<li><a href="pk.html">Pakistan</a></li>
+																				
+																				<li><a href="ps.html">Palau</a></li>
+																				
+																				<li><a href="um.html">Palmyra Atoll</a></li>
+																				
+																				<li><a href="pm.html">Panama</a></li>
+																				
+																				<li><a href="pp.html">Papua New Guinea</a></li>
+																				
+																				<li><a href="pf.html">Paracel Islands</a></li>
+																				
+																				<li><a href="pa.html">Paraguay</a></li>
+																				
+																				<li><a href="pe.html">Peru</a></li>
+																				
+																				<li><a href="rp.html">Philippines</a></li>
+																				
+																				<li><a href="pc.html">Pitcairn Islands</a></li>
+																				
+																				<li><a href="pl.html">Poland</a></li>
+																				
+																				<li><a href="po.html">Portugal</a></li>
+																				
+																				<li><a href="rq.html">Puerto Rico</a></li>
+																				
+																				<li><a href="qa.html">Qatar</a></li>
+																				
+																				<li><a href="ro.html">Romania</a></li>
+																				
+																				<li><a href="rs.html">Russia</a></li>
+																				
+																				<li><a href="rw.html">Rwanda</a></li>
+																				
+																				<li><a href="tb.html">Saint Barthelemy</a></li>
+																				
+																				<li><a href="sh.html">Saint Helena, Ascension, and Tristan da Cunha</a></li>
+																				
+																				<li><a href="sc.html">Saint Kitts and Nevis</a></li>
+																				
+																				<li><a href="st.html">Saint Lucia</a></li>
+																				
+																				<li><a href="rn.html">Saint Martin</a></li>
+																				
+																				<li><a href="sb.html">Saint Pierre and Miquelon</a></li>
+																				
+																				<li><a href="vc.html">Saint Vincent and the Grenadines</a></li>
+																				
+																				<li><a href="ws.html">Samoa</a></li>
+																				
+																				<li><a href="sm.html">San Marino</a></li>
+																				
+																				<li><a href="tp.html">Sao Tome and Principe</a></li>
+																				
+																				<li><a href="sa.html">Saudi Arabia</a></li>
+																				
+																				<li><a href="sg.html">Senegal</a></li>
+																				
+																				<li><a href="ri.html">Serbia</a></li>
+																				
+																				<li><a href="se.html">Seychelles</a></li>
+																				
+																				<li><a href="sl.html">Sierra Leone</a></li>
+																				
+																				<li><a href="sn.html">Singapore</a></li>
+																				
+																				<li><a href="sk.html">Sint Maarten</a></li>
+																				
+																				<li><a href="lo.html">Slovakia</a></li>
+																				
+																				<li><a href="si.html">Slovenia</a></li>
+																				
+																				<li><a href="bp.html">Solomon Islands</a></li>
+																				
+																				<li><a href="so.html">Somalia</a></li>
+																				
+																				<li><a href="sf.html">South Africa</a></li>
+																				
+																				<li><a href="oo.html">Southern Ocean</a></li>
+																				
+																				<li><a href="sx.html">South Georgia and South Sandwich Islands</a></li>
+																				
+																				<li><a href="od.html">South Sudan</a></li>
+																				
+																				<li><a href="sp.html">Spain</a></li>
+																				
+																				<li><a href="pg.html">Spratly Islands</a></li>
+																				
+																				<li><a href="ce.html">Sri Lanka</a></li>
+																				
+																				<li><a href="su.html">Sudan</a></li>
+																				
+																				<li><a href="ns.html">Suriname</a></li>
+																				
+																				<li><a href="sv.html">Svalbard</a></li>
+																				
+																				<li><a href="wz.html">Swaziland</a></li>
+																				
+																				<li><a href="sw.html">Sweden</a></li>
+																				
+																				<li><a href="sz.html">Switzerland</a></li>
+																				
+																				<li><a href="sy.html">Syria</a></li>
+																				
+																				<li><a href="tw.html">Taiwan</a></li>
+																				
+																				<li><a href="ti.html">Tajikistan</a></li>
+																				
+																				<li><a href="tz.html">Tanzania</a></li>
+																				
+																				<li><a href="th.html">Thailand</a></li>
+																				
+																				<li><a href="tt.html">Timor-Leste</a></li>
+																				
+																				<li><a href="to.html">Togo</a></li>
+																				
+																				<li><a href="tl.html">Tokelau</a></li>
+																				
+																				<li><a href="tn.html">Tonga</a></li>
+																				
+																				<li><a href="td.html">Trinidad and Tobago</a></li>
+																				
+																				<li><a href="ts.html">Tunisia</a></li>
+																				
+																				<li><a href="tu.html">Turkey</a></li>
+																				
+																				<li><a href="tx.html">Turkmenistan</a></li>
+																				
+																				<li><a href="tk.html">Turks and Caicos Islands</a></li>
+																				
+																				<li><a href="tv.html">Tuvalu</a></li>
+																				
+																				<li><a href="ug.html">Uganda</a></li>
+																				
+																				<li><a href="up.html">Ukraine</a></li>
+																				
+																				<li><a href="ae.html">United Arab Emirates</a></li>
+																				
+																				<li><a href="uk.html">United Kingdom</a></li>
+																				
+																				<li><a href="us.html">United States</a></li>
+																				
+																				<li><a href="um.html">United States Pacific Island Wildlife Refuges</a></li>
+																				
+																				<li><a href="uy.html">Uruguay</a></li>
+																				
+																				<li><a href="uz.html">Uzbekistan</a></li>
+																				
+																				<li><a href="nh.html">Vanuatu</a></li>
+																				
+																				<li><a href="vt.html">Vatican City</a></li>
+																				
+																				<li><a href="ve.html">Venezuela</a></li>
+																				
+																				<li><a href="vm.html">Vietnam</a></li>
+																				
+																				<li><a href="vq.html">Virgin Islands</a></li>
+																				
+																				<li><a href="wq.html">Wake Island</a></li>
+																				
+																				<li><a href="wf.html">Wallis and Futuna</a></li>
+																				
+																				<li><a href="we.html">West Bank</a></li>
+																				
+																				<li><a href="wi.html">Western Sahara</a></li>
+																				
+																				<li><a href="ym.html">Yemen</a></li>
+																				
+																				<li><a href="za.html">Zambia</a></li>
+																				
+																				<li><a href="zi.html">Zimbabwe</a></li>
+																				
+																				<li><a href="ee.html">European Union</a></li>
+																				
+																	</ul>
+																	<!--[if lte IE 6]></td></tr></table></a><![endif]-->
+																</li>
+															</ul>
+														</div></td>
+												</tr>
+											</table>
+										</div>
+										</noscript>
+									</div></td>
+							</tr>
+						</table></td>
+				</tr>
+				<tr>
+					<td><table width="638" border="0" cellpadding="0" cellspacing="0">
+							<tr>
+								<td width="450" valign="bottom" style="border-bottom: 1px solid #CCCCCC;"><ul id="wfb_navigation">
+										
+											<li class="level1" id="home" accesskey="1"><a href="../index.html" title="The World Factbook Home"  >&nbsp;&nbsp;</a> </li>
+											
+											<li class="level1" id="about" style="cursor:default;">
+											<a href="#" title="About"  style="cursor:default;width:73px;">About</a>
+										
+										<ul class="subuls">
+											
+												<li><a href="../docs/history.html" title="History ">&nbsp;&nbsp;History</a></li>
+												<li><a href="../docs/contributor_copyright.html" title="Copyright and Contributors" >&nbsp;&nbsp;Copyright and Contributors</a></li>
+												<li><a href="../docs/purchase_info.html" title="Purchasing" >&nbsp;&nbsp;Purchasing</a></li>
+												<li><a href="../docs/didyouknow.html" title="Did You Know?" >&nbsp;&nbsp;Did You Know?</a></li>
+												
+										</ul>
+										</li>
+										
+											<li class="level1_long" id="reference">
+											<a href="#" title="References"  style="cursor:default;width:80px;">References</a>
+										
+										<ul class="subuls">
+											
+												<li><a href="../docs/refmaps.html" title="Regional and World Maps" >&nbsp;&nbsp;Regional and World Maps</a></li>
+												<li><a href="../docs/flagsoftheworld.html" title="Flags of the World" >&nbsp;&nbsp;Flags of the World</a></li>
+												<li><a href="../docs/gallery.html" title="Gallery of Covers"  >&nbsp;&nbsp;Gallery of Covers</a></li>
+												<li><a href="../docs/notesanddefs.html" title="Definitions and Notes" >&nbsp;&nbsp;Definitions and Notes</a></li>
+												<li><a href="../docs/profileguide.html" title="Guide to Country Profiles" >&nbsp;&nbsp;Guide to Country Profiles</a></li>
+												<li><a href="../rankorder/rankorderguide.html" title="Guide to Country Comparisons"  >&nbsp;&nbsp;Guide to Country Comparisons</a></li>
+												<li><a href="../docs/guidetowfbook.html" title="The World Factbook Users Guide" >&nbsp;&nbsp;The World Factbook Users Guide</a></li>
+												
+												
+												
+											
+										</ul>
+										</li>
+										
+											<li class="level1_long" id="appendix">
+											<a href="#"  title="Appendices"  style="cursor:default;width:80px;">Appendices</a>
+										
+										<ul class="subuls_long">
+											
+												<li><a href="../appendix/appendix-a.html" title="Appendix A :" >&nbsp;&nbsp;A:
+														abbreviations</a></li>
+												<li><a href="../appendix/appendix-b.html" title="Appendix B :" >&nbsp;&nbsp;B:
+														international organizations and groups</a></li>
+												<li><a href="../appendix/appendix-c.html" title="Appendix C :" >&nbsp;&nbsp;C:
+														selected international environmental agreements</a></li>
+												<li><a href="../appendix/appendix-d.html" title="Appendix D :" >&nbsp;&nbsp;D:
+														cross-reference list of country data codes</a></li>
+												<li><a href="../appendix/appendix-e.html" title="Appendix E :" >&nbsp;&nbsp;E:
+														cross-reference list of hydrographic data codes</a></li>
+												<li><a href="../appendix/appendix-f.html" title="Appendix F :" >&nbsp;&nbsp;F:
+														cross-reference list of geographic names</a></li>
+												<li><a href="../appendix/appendix-g.html" title="Appendix G :" >&nbsp;&nbsp;G:
+														weights and measures</a></li>
+												
+										</ul>
+										</li>
+										
+												<li class="level1" id="faqs"><a href="../docs/faqs.html" title="Frequently Asked Questions"  style="cursor:pointer;width:73px;">FAQ<span style="text-transform:lowercase;">s</span></a></li>
+												
+												<li class="level1" id="contact"> <a href="../../../../contact-cia/index.html" title="Contact" alt="Contact" style="cursor:pointer;width:73px;"> Contact </a> </li>
+											
+									</ul></td>
+								<td class="smalltext_nav" align="right" valign="bottom" style="border-bottom: 1px solid #CCCCCC;">
+										<a href="../print/textversion.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('View Text Low Bandwidth Version','','../graphics/bandwidth_btn_on.gif',1)"><img src="../graphics/bandwidth_btn_off.gif" alt="View Text Low Bandwidth Version" title="View Text Low Bandwidth Version" width="173" height="8" border="0" style="padding: 1px;"/></a>
+										
+										<a href="https://www.cia.gov/library/publications/download/" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Download Publication','','../graphics/download_btn_on.gif',1)"><img src="../graphics/download_btn_off.gif" alt="Download Publication" title="Download Publication" width="120" height="8" border="0" id="Download Publication" style="padding: 1px;" /></a>
+									</td>
+							</tr>
+						</table></td>
+				</tr>
+				</table>
+			<td width="160" valign="top" style="background-image: url(../graphics_wfbook_shell/grey_right_gutter_angle.jpg); background-position: right bottom; background-repeat: no-repeat;"><ul style="margin-left: 25px;list-style-type: disc; width: 130px; height: 80px;" id="quicklinks">
+<li style="padding: 0px; margin-left: 0px; margin-right: 0px;"><a title="Open Government Initiative" class="internal-link" href="/open/index.html">CIA  Open Initiative</a></li>
+<li style="list-style-image: none;"><a title="World Leaders" href="/library/publications/world-leaders-1/index.html">World Leaders</a></li>
+<li style="list-style-image: none;"><a title="Today's CIA" href="/about-cia/todays-cia/index.html">Today's CIA</a></li>
+<li style="list-style-image: none;"><a title="Studies in Intelligence" href="/library/center-for-the-study-of-intelligence/csi-publications/csi-studies/index.html">Studies in Intelligence</a></li>
+<li style="list-style-image: none;"><a title="Diversity" class="internal-link" href="/careers/diversity/index.html">Diversity</a></li>
+</ul>
+
+
+</td>
+	</tr>
+</table>
+<map name="Map" id="Map">
+	
+		<area shape="rect" coords="1,33,301,72" href="../index.html"   title="The World Factbook Home"/>
+		
+</map>
+<!-- includes/pickcountryform.cfm ends here ... -->
+</td>
+                                </tr>
+                                <tr>
+                                  <td><!-- InstanceBeginEditable name="content" -->
+                      
+<link rel="stylesheet" type="text/css" href="../styles/factbook.css">
+<link rel="stylesheet" type="text/css" href="../styles/print.css">
+
+
+<script language="javascript" type="text/javascript">
+<!--
+function MM_openBrWindow(theURL,winName,features) { //v2.0
+  window.open(theURL,winName,features);
+}
+//-->
+</script>
+
+<table width="638" border="0" cellspacing="0" cellpadding="0">
+  <tr height="25">
+    <td style="background-image: url(../graphics/gold_gradiant.gif); background-repeat: repeat-x;" class="region">Field Listing<strong> :: Demographic profile</strong></span></td>
+    <td align="right" valign="middle" style="background-image: url(../graphics/gold_gradiant.gif); background-repeat: repeat-x;"> 
+<script language="javascript" type="text/javascript">
+<!--
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_findObj(n, d) { //v4.01
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+//-->
+</script>
+
+
+
+			<div id="print">
+				
+					<a href="print_2257.html" target="_blank"><img src="../graphics/print.gif" alt="Print Page" width="25" height="18" border="0" title="Print Page" style="color:#999999" /> PRINT</a>
+				
+			</div>
+		</td>
+  </tr>
+</table>
+<table id="fieldlisting"  cellpadding="6" cellspacing="2" width="638">
+  <tr>
+    <td colspan="2">
+      <span class="category_data">This entry describes a country’s key demographic features and trends and how they vary among regional, ethnic, and socioeconomic sub-populations.  Some of the topics addressed are population age structure, fertility, health, mortality, poverty, education, and migration.</span></td>
+  </tr>
+  <tr>
+    <td colspan="2">
+	
+	</td>
+  </tr>
+</table>
+<table width="638" border="0" cellspacing="2" cellpadding="2">
+  <tr bgcolor="#F8f8e7" valign="middle" height="25">
+    
+    <th scope="col"width="200" align="middle" style="padding-left: 5px;"><div class="smalltext"><strong>Country</strong></div></th>
+    
+    <th scope="col"align="middle" class="smalltext" style="padding-left: 5px;"> Demographic profile </th>
+  </tr>
+</table>
+
+        <table width="638" cellspacing="4" cellpadding="0" border="0" style="padding-bottom:4px;"  bgcolor="#FFFFFF" id="ar" >
+        
+      <tr><td colspan="2"><a name="ar"></a></td></tr>
+      <tr>
+      
+      
+      
+        <td valign="top" width="200" style="border-right:2px solid white; padding-left:4px;" class="fl_region"><a href="../geos/ar.html" style="font-weight: bold;" >Argentina</a>
+          
+      
+      <td class="category_data"  valign="top" style="padding-left:5px;">
+      Argentina's population continues to grow but at a slower rate because of its steadily declining birth rate. Argentina's fertility decline began earlier than in the rest of Latin America, occurring most rapidly between the early 20th century and the 1950s and then becoming more gradual. Life expectancy has been improving, most notably among the young and the poor. While the population under age 15 is shrinking, the youth cohort - ages 15 - 24 - is the largest in Argentina's history and will continue to bolster the working-age population. If this large working-age population is well-educated and gainfully employed, Argentina is likely to experience an economic boost and possibly higher per capita savings and investment. Although literacy and primary school enrollment are nearly universal, grade repetition is problematic and secondary school completion is low. Both of these issues vary widely by region and socioeconomic group. 
+      <br />
+      Argentina has been primarily a country of immigration for most of its history, welcoming European immigrants after its independence in the 19th century and attracting especially large numbers from Spain and Italy. European immigration diminished in the 1950s, when Argentina's military dictatorships tightened immigration rules and European economies rebounded. Regional migration, however, continued to supply low-skilled workers and today it accounts for three-quarters of Argentina's immigrant population. The first waves of highly skilled Argentine emigrant workers headed mainly to the United States and Spain in the 1960s and 1970s. The ongoing European economic crisis is driving the return migration of some Argentinean and other Latin American nationals, as well as the immigration of Europeans to South America, where Argentina is a key recipient. 
+        </td>
+        </tr>
+        </table>
+        
+
+        
+        <table width="638" cellspacing="4" cellpadding="0" border="0" style="padding-bottom:4px;"  bgcolor="#EEEEEE" id="bh" >
+      
+      <tr><td colspan="2"><a name="bh"></a></td></tr>
+      <tr>
+      
+      
+      
+        <td valign="top" width="200" style="border-right:2px solid white; padding-left:4px;" class="fl_region"><a href="../geos/bh.html" style="font-weight: bold;" >Belize</a>
+          
+      
+      <td class="category_data"  valign="top" style="padding-left:5px;">
+      Migration continues to transform Belize's population. About 16% of Belizeans live abroad, while immigrants constitute approximately 15% of Belize's population. Belizeans seeking job and educational opportunities have preferred to emigrate to the United States rather than former colonizer Great Britain because of the United States' closer proximity and stronger trade ties with Belize. Belizeans also emigrate to Canada, Mexico, and English-speaking Caribbean countries. The emigration of a large share of Creoles (Afro-Belizeans) and the influx of Central American immigrants, mainly Guatemalans, Salvadorans, and Hondurans, has changed Belize's ethnic composition. Mestizos have become the largest ethnic group, and Belize now has more native Spanish speakers than English or Creole speakers, despite English being the official language. In addition, Central American immigrants are establishing new communities in rural areas, which contrasts with the urbanization trend seen in neighboring countries. Recently, Chinese, European, and North American immigrants have become more frequent. 
+      <br />
+      Immigration accounts for an increasing share of Belize's population growth rate, which is steadily falling due to fertility decline. Belize's declining birth rate and its increased life expectancy are creating an aging population. As the elderly population grows and nuclear families replace extended households, Belize's government will be challenged to balance a rising demand for pensions, social services, and healthcare for its senior citizens with the need to reduce poverty and social inequality and to improve sanitation. 
+        </td>
+        </tr>
+        </table>
+        
+
+        
+        <table width="638" cellspacing="4" cellpadding="0" border="0" style="padding-bottom:4px;"  bgcolor="#FFFFFF" id="bl" >
+        
+      <tr><td colspan="2"><a name="bl"></a></td></tr>
+      <tr>
+      
+      
+      
+        <td valign="top" width="200" style="border-right:2px solid white; padding-left:4px;" class="fl_region"><a href="../geos/bl.html" style="font-weight: bold;" >Bolivia</a>
+          
+      
+      <td class="category_data"  valign="top" style="padding-left:5px;">
+      Bolivia ranks at or near the bottom among Latin American countries in several areas of health and development, including poverty, education, fertility, malnutrition, mortality, and life expectancy. On the positive side, more children are being vaccinated and more pregnant women are getting prenatal care and having skilled health practitioners attend their births. Bolivia's income inequality is the highest in Latin America and one of the highest in the world. Public education is of poor quality, and educational opportunities are among the most unevenly distributed in Latin America, with girls and indigenous and rural children less likely to be literate or to complete primary school. The lack of access to education and family planning services helps to sustain Bolivia's high fertility rate - approximately three children per woman. Bolivia's lack of clean water and basic sanitation, especially in rural areas, contributes to health problems. 
+      <br />
+      Almost 7% of Bolivia's population lives abroad, primarily to work in Argentina, Brazil, Spain, and the United States. In recent years, more restrictive immigration policies in Europe and the United States have increased the flow of Bolivian emigrants to neighboring Argentina and Brazil. 
+        </td>
+        </tr>
+        </table>
+        
+
+        
+        <table width="638" cellspacing="4" cellpadding="0" border="0" style="padding-bottom:4px;"  bgcolor="#EEEEEE" id="br" >
+      
+      <tr><td colspan="2"><a name="br"></a></td></tr>
+      <tr>
+      
+      
+      
+        <td valign="top" width="200" style="border-right:2px solid white; padding-left:4px;" class="fl_region"><a href="../geos/br.html" style="font-weight: bold;" >Brazil</a>
+          
+      
+      <td class="category_data"  valign="top" style="padding-left:5px;">
+      Brazil's rapid fertility decline since the 1960s is the main factor behind the country's slowing population growth rate, aging population, and fast-paced demographic transition. Brasilia has not taken full advantage of its large working-age population to develop its human capital and strengthen its social and economic institutions. The current favorable age structure will begin to shift around 2025, with the labor force shrinking and the elderly starting to compose an increasing share of the total population. Well-funded public pensions have nearly wiped out poverty among the elderly, but limited social spending on children has restricted investment in education - a primary means of escaping poverty. Brazil's poverty and income inequality levels remain high despite improvements in the 2000s and continue to disproportionately affect the Northeast, North, and Center-West, women, and black, mixed race, and indigenous populations. Disparities in opportunities foster social exclusion and contribute to Brazil's high crime rate, particularly violent crime in cities and favelas. 
+      <br />
+      Brazil has traditionally been a net recipient of immigrants, with its southeast being the prime destination. After the importation of African slaves was outlawed in the mid-19th century, Brazil sought Europeans (Italians, Portuguese, Spaniards, and Germans) and later Asians (Japanese) to work in agriculture, especially coffee cultivation. Recent immigrants come mainly from Argentina, Chile, and Andean countries (many are unskilled illegal migrants) or are returning Brazilian nationals. Since Brazil's economic downturn in the 1980s, emigration to the United States, Europe, and Japan has been rising but is negligible relative to Brazil's total population. The majority of these emigrants are well-educated and middle-class. Fewer Brazilian peasants are emigrating to neighboring countries to take up agricultural work. 
+        </td>
+        </tr>
+        </table>
+        
+
+        
+        <table width="638" cellspacing="4" cellpadding="0" border="0" style="padding-bottom:4px;"  bgcolor="#FFFFFF" id="ci" >
+        
+      <tr><td colspan="2"><a name="ci"></a></td></tr>
+      <tr>
+      
+      
+      
+        <td valign="top" width="200" style="border-right:2px solid white; padding-left:4px;" class="fl_region"><a href="../geos/ci.html" style="font-weight: bold;" >Chile</a>
+          
+      
+      <td class="category_data"  valign="top" style="padding-left:5px;">
+      Chile is in the advanced stages of demographic transition and is becoming an aging society - with fertility below replacement level, low mortality rates, and life expectancy on par with developed countries. Nevertheless, with its dependency ratio nearing its low point, Chile could benefit from its favorable age structure. It will need to keep its large working-age population productively employed, while preparing to provide for the needs of its growing proportion of elderly people, especially as women - the traditional caregivers-increasingly enter the workforce. Over the last two decades, Chile has made great strides in reducing its poverty rate, which is now lower than most Latin American countries. However, its severe income inequality ranks as the worst among members of the Organization for Economic Cooperation and Development. Unequal access to quality education perpetuates this uneven income distribution. 
+      <br />
+      Chile has historically been a country of emigration but has slowly become more attractive to immigrants since transitioning to democracy in 1990 and improving its economic stability (other regional destinations have concurrently experienced deteriorating economic and political conditions). Most of Chile's small but growing foreign-born population consists of transplants from other Latin American countries, especially Peru. 
+        </td>
+        </tr>
+        </table>
+        
+
+        
+        <table width="638" cellspacing="4" cellpadding="0" border="0" style="padding-bottom:4px;"  bgcolor="#EEEEEE" id="co" >
+      
+      <tr><td colspan="2"><a name="co"></a></td></tr>
+      <tr>
+      
+      
+      
+        <td valign="top" width="200" style="border-right:2px solid white; padding-left:4px;" class="fl_region"><a href="../geos/co.html" style="font-weight: bold;" >Colombia</a>
+          
+      
+      <td class="category_data"  valign="top" style="padding-left:5px;">
+      Colombia is in the midst of a demographic transition resulting from steady declines in its fertility, mortality, and population growth rates. The birth rate has fallen from more than 6 children per woman in the 1960s to just above replacement level today as a result of increased literacy, family planning services, and urbanization. However, income inequality is among the worst in the world, and more than a third of the population lives below the poverty line. 
+      <br />
+      Colombia experiences significant legal and illegal economic emigration and refugee flows. Large-scale labor emigration dates to the 1960s; Venezuela and the United States continue to be the main host countries. Colombia is the largest source of Latin American refugees in Latin America, nearly 400,000 of whom live primarily in Venezuela and Ecuador. Forced displacement remains prevalent because of violence among guerrillas, paramilitary groups, and Colombian security forces. Afro-Colombian and indigenous populations are disproportionately affected. A leading NGO estimates that 5.2 million people have been displaced since 1985, while the Colombian government estimates 3.6 million since 2000. These estimates undercount actual numbers because many internally displaced persons are not registered. Columbia also has one of the world's highest levels of forced disappearances. About 30,000 cases have been recorded over the last four decades - although the number is likely to be much higher - including human rights activists, trade unionists, Afro-Colombians, indigenous people, and farmers in rural conflict zones. 
+        </td>
+        </tr>
+        </table>
+        
+
+        
+        <table width="638" cellspacing="4" cellpadding="0" border="0" style="padding-bottom:4px;"  bgcolor="#FFFFFF" id="cs" >
+        
+      <tr><td colspan="2"><a name="cs"></a></td></tr>
+      <tr>
+      
+      
+      
+        <td valign="top" width="200" style="border-right:2px solid white; padding-left:4px;" class="fl_region"><a href="../geos/cs.html" style="font-weight: bold;" >Costa Rica</a>
+          
+      
+      <td class="category_data"  valign="top" style="padding-left:5px;">
+      Costa Rica's political stability, high standard of living, and well-developed social benefits system set it apart from its Central American neighbors. Through the government's sustained social spending - almost 20% of GDP annually - Costa Rica has made tremendous progress toward achieving its goal of providing universal access to education, healthcare, clean water, sanitation, and electricity. Since the 1970s, expansion of these services has led to a rapid decline in infant mortality, an increase in life expectancy at birth, and a sharp decrease in the birth rate. The average number of children born per women has fallen from about 7 in the 1960s to 3.5 in the early 1980s to below replacement level today. Costa Rica's poverty rate is lower than in most Latin American countries, but it has stalled at around 20% for almost two decades. 
+      <br />
+      Costa Rica is a popular regional immigration destination because of its job opportunities and social programs. Almost 9% of the population is foreign-born, with Nicaraguans comprising nearly three-quarters of the foreign population. Many Nicaraguans who perform unskilled seasonal labor enter Costa Rica illegally or overstay their visas, which continues to be a source of tension. Less than 3% of Costa Rica's population lives abroad. The overwhelming majority of expatriates have settled in the United States after completing a university degree or in order to work in a highly skilled field. 
+        </td>
+        </tr>
+        </table>
+        
+
+        
+        <table width="638" cellspacing="4" cellpadding="0" border="0" style="padding-bottom:4px;"  bgcolor="#EEEEEE" id="ec" >
+      
+      <tr><td colspan="2"><a name="ec"></a></td></tr>
+      <tr>
+      
+      
+      
+        <td valign="top" width="200" style="border-right:2px solid white; padding-left:4px;" class="fl_region"><a href="../geos/ec.html" style="font-weight: bold;" >Ecuador</a>
+          
+      
+      <td class="category_data"  valign="top" style="padding-left:5px;">
+      Ecuador's high poverty and income inequality most affect indigenous, mixed race, and rural populations. The government has increased its social spending to ameliorate these problems, but critics question the efficiency and implementation of its national development plan. Nevertheless, the conditional cash transfer program, which requires participants' children to attend school and have medical check-ups, has helped improve educational attainment and healthcare among poor children. Ecuador is stalled at above replacement level fertility and the population most likely will keep growing rather than stabilize. 
+      <br />
+      An estimated 2 to 3 million Ecuadorians live abroad, but increased unemployment in key receiving countries - Spain, the United States, and Italy - is slowing emigration and increasing the likelihood of returnees to Ecuador. The first large-scale emigration of Ecuadorians occurred between 1980 and 2000, when an economic crisis drove Ecuadorians from southern provinces to New York City, where they had trade contacts. A second, nationwide wave of emigration in the late 1990s was caused by another economic downturn, political instability, and a currency crisis. Spain was the logical destination because of its shared language and the wide availability of low-skilled, informal jobs at a time when increased border surveillance made illegal migration to the US difficult. Ecuador has a small but growing immigrant population and is Latin America's top recipient of refugees; 98% are neighboring Colombians fleeing violence in their country. 
+        </td>
+        </tr>
+        </table>
+        
+
+        
+        <table width="638" cellspacing="4" cellpadding="0" border="0" style="padding-bottom:4px;"  bgcolor="#FFFFFF" id="es" >
+        
+      <tr><td colspan="2"><a name="es"></a></td></tr>
+      <tr>
+      
+      
+      
+        <td valign="top" width="200" style="border-right:2px solid white; padding-left:4px;" class="fl_region"><a href="../geos/es.html" style="font-weight: bold;" >El Salvador</a>
+          
+      
+      <td class="category_data"  valign="top" style="padding-left:5px;">
+      El Salvador is the smallest and most densely populated country in Central America. It is well into its demographic transition, experiencing slower population growth, a decline in its number of youths, and the gradual aging of its population. The increased use of family planning has substantially lowered El Salvador's fertility rate, from approximately 6 children per woman in the 1970s to replacement level today. A 2008 national family planning survey showed that female sterilization remained the most common contraception method in El Salvador - its sterilization rate is among the highest in Latin America and the Caribbean - but that the use of injectable contraceptives is growing. Fertility differences between rich and poor and urban and rural women are narrowing. 
+      <br />
+      Salvadorans fled during the 1979 to 1992 civil war mainly to the United States but also to Canada and to neighboring Mexico, Guatemala, Honduras, Nicaragua, and Costa Rica. Emigration to the United States increased again in the 1990s and 2000s as a result of deteriorating economic conditions, natural disasters (Hurricane Mitch in 1998 and earthquakes in 2001), and family reunification. At least 20% of El Salvador's population lives abroad. The remittances they send home account for close to 20% of GDP, are the second largest source of external income after exports, and have helped reduce poverty. 
+        </td>
+        </tr>
+        </table>
+        
+
+        
+        <table width="638" cellspacing="4" cellpadding="0" border="0" style="padding-bottom:4px;"  bgcolor="#EEEEEE" id="gt" >
+      
+      <tr><td colspan="2"><a name="gt"></a></td></tr>
+      <tr>
+      
+      
+      
+        <td valign="top" width="200" style="border-right:2px solid white; padding-left:4px;" class="fl_region"><a href="../geos/gt.html" style="font-weight: bold;" >Guatemala</a>
+          
+      
+      <td class="category_data"  valign="top" style="padding-left:5px;">
+      Guatemala is a predominantly poor country that struggles in several areas of health and development, including infant, child, and maternal mortality, malnutrition, literacy, and contraceptive awareness and use. The large indigenous population is disproportionately affected. Guatemala is the most populous country in Central America and has the highest fertility rate in Latin America. It also has the highest population growth rate in Latin America, which is likely to continue in the long term because of its large reproductive-age population and high birth rate. Almost half of Guatemala's population is under age 19, making it the youngest population in Latin America. Guatemala's total fertility rate has slowly declined during the last few decades due in part to limited government-funded health programs. However, the birth rate is still more than three children per woman and is markedly higher among its rural and indigenous populations. 
+      <br />
+      Guatemalans have a history of emigrating legally and illegally to Mexico, the United States, and Canada because of a lack of economic opportunity, political instability, and natural disasters. Emigration, primarily to the United States, escalated during the 1960-1996 civil war and accelerated after a peace agreement was signed. Thousands of Guatemalans who fled to Mexico returned after the war, but labor migration to southern Mexico continues. 
+        </td>
+        </tr>
+        </table>
+        
+
+        
+        <table width="638" cellspacing="4" cellpadding="0" border="0" style="padding-bottom:4px;"  bgcolor="#FFFFFF" id="gy" >
+        
+      <tr><td colspan="2"><a name="gy"></a></td></tr>
+      <tr>
+      
+      
+      
+        <td valign="top" width="200" style="border-right:2px solid white; padding-left:4px;" class="fl_region"><a href="../geos/gy.html" style="font-weight: bold;" >Guyana</a>
+          
+      
+      <td class="category_data"  valign="top" style="padding-left:5px;">
+      Guyana is the only English-speaking country in South America and shares cultural and historical bonds with the Anglophone Caribbean. Guyana's two largest ethnic groups are the Afro-Guyanese (descendants of African slaves) and the Indo-Guyanese (descendants of Indian indentured laborers), which together comprise about three quarters of Guyana's population. Tensions periodically have boiled over between the two groups, which back ethnically based political parties and vote along ethnic lines. Poverty reduction has stagnated since the late 1990s. About one-third of the Guyanese population lives below the poverty line; indigenous people are disproportionately affected. Although Guyana's literacy rate is reported to be among the highest in the Western Hemisphere, the level of functional literacy is considerably lower, which has been attributed to poor education quality, teacher training, and infrastructure. 
+      <br />
+      Guyana's emigration rate is among the highest in the world - more than 55% of its citizens reside abroad - and it is one of the largest recipients of remittances relative to GDP among Latin American and Caribbean counties. Although remittances are a vital source of income for most citizens, the pervasive emigration of skilled workers deprives Guyana of professionals in healthcare and other key sectors. More than 80% of Guyanese nationals with tertiary level educations have emigrated. Brain drain and the concentration of limited medical resources in Georgetown hamper Guyana's ability to meet the health needs of its predominantly rural population. Guyana has one of the highest HIV prevalence rates in the region and continues to rely on international support for its HIV treatment and prevention programs. 
+        </td>
+        </tr>
+        </table>
+        
+
+        
+        <table width="638" cellspacing="4" cellpadding="0" border="0" style="padding-bottom:4px;"  bgcolor="#EEEEEE" id="ho" >
+      
+      <tr><td colspan="2"><a name="ho"></a></td></tr>
+      <tr>
+      
+      
+      
+        <td valign="top" width="200" style="border-right:2px solid white; padding-left:4px;" class="fl_region"><a href="../geos/ho.html" style="font-weight: bold;" >Honduras</a>
+          
+      
+      <td class="category_data"  valign="top" style="padding-left:5px;">
+      Honduras is one of the poorest countries in Latin America and has the world's highest murder rate. More than half of the population lives in poverty and per capita income is one of the lowest in the region. Poverty rates are higher among rural and indigenous people and in the south, west, and along the eastern border than in the north and central areas where most of Honduras' industries and infrastructure are concentrated. The increased productivity needed to break Honduras' persistent high poverty rate depends, in part, on further improvements in educational attainment. Although primary-school enrollment is near 100%, educational quality is poor, the drop-out rate and grade repetition remain high, and teacher and school accountability is low. 
+      <br />
+      Honduras' population growth rate has slowed since the 1990s, but it remains high at nearly 2% annually because the birth rate averages approximately three children per woman and more among rural, indigenous, and poor women. Consequently, Honduras' young adult population - ages 15 to 29 - is projected to continue growing rapidly for the next three decades and then stabilize or slowly shrink. Population growth and limited job prospects outside of agriculture will continue to drive emigration. Remittances represent about a fifth of GDP. 
+        </td>
+        </tr>
+        </table>
+        
+
+        
+        <table width="638" cellspacing="4" cellpadding="0" border="0" style="padding-bottom:4px;"  bgcolor="#FFFFFF" id="nu" >
+        
+      <tr><td colspan="2"><a name="nu"></a></td></tr>
+      <tr>
+      
+      
+      
+        <td valign="top" width="200" style="border-right:2px solid white; padding-left:4px;" class="fl_region"><a href="../geos/nu.html" style="font-weight: bold;" >Nicaragua</a>
+          
+      
+      <td class="category_data"  valign="top" style="padding-left:5px;">
+      Despite being one of the poorest countries in Latin America, Nicaragua has improved its access to potable water and sanitation and has ameliorated its life expectancy, infant and child mortality, and immunization rates. However, income distribution is very uneven, and the poor, agriculturalists, and indigenous people continue to have less access to healthcare services. Nicaragua's total fertility rate has fallen from around 6 children per woman in 1980 to just above replacement level today, but the high birth rate among adolescents perpetuates a cycle of poverty and low educational attainment. 
+      <br />
+      Nicaraguans emigrate primarily to Costa Rica and to a lesser extent the United States. Nicaraguan men have been migrating seasonally to Costa Rica to harvest bananas and coffee since the early 20th century. Political turmoil, civil war, and natural disasters from the 1970s through the 1990s dramatically increased the flow of refugees and permanent migrants seeking jobs, higher wages, and better social and healthcare benefits. Since 2000, Nicaraguan emigration to Costa Rica has slowed and stabilized. Today roughly 300,000 Nicaraguans are permanent residents of Costa Rica - about 75% of the foreign population - and thousands more migrate seasonally for work, many illegally. 
+        </td>
+        </tr>
+        </table>
+        
+
+        
+        <table width="638" cellspacing="4" cellpadding="0" border="0" style="padding-bottom:4px;"  bgcolor="#EEEEEE" id="pm" >
+      
+      <tr><td colspan="2"><a name="pm"></a></td></tr>
+      <tr>
+      
+      
+      
+        <td valign="top" width="200" style="border-right:2px solid white; padding-left:4px;" class="fl_region"><a href="../geos/pm.html" style="font-weight: bold;" >Panama</a>
+          
+      
+      <td class="category_data"  valign="top" style="padding-left:5px;">
+      Panama is a country of demographic and economic contrasts. It is in the midst of a demographic transition, characterized by steadily declining rates of fertility, mortality, and population growth, but disparities persist based on wealth, geography, and ethnicity. Panama has one of the fastest growing economies in Latin America and dedicates substantial funding to social programs, yet poverty and inequality remain prevalent. The indigenous population accounts for a growing share of Panama's poor and extreme poor, while the non-indigenous rural poor have been more successful at rising out of poverty through rural-to-urban labor migration. The government's large expenditures on untargeted, indirect subsidies for water, electricity, and fuel have been ineffective, but its conditional cash transfer program has shown some promise in helping to decrease extreme poverty among the indigenous population. 
+      <br />
+      Panama has expanded access to education and clean water, but the availability of sanitation and, to a lesser extent, electricity remains poor. The increase in secondary schooling - led by female enrollment - is spreading to rural and indigenous areas, which probably will help to alleviate poverty if educational quality and the availability of skilled jobs improve. Inadequate access to sanitation contributes to a high incidence of diarrhea in Panama's children, which is one of the main causes of Panama's elevated chronic malnutrition rate, especially among indigenous communities. 
+        </td>
+        </tr>
+        </table>
+        
+
+        
+        <table width="638" cellspacing="4" cellpadding="0" border="0" style="padding-bottom:4px;"  bgcolor="#FFFFFF" id="pa" >
+        
+      <tr><td colspan="2"><a name="pa"></a></td></tr>
+      <tr>
+      
+      
+      
+        <td valign="top" width="200" style="border-right:2px solid white; padding-left:4px;" class="fl_region"><a href="../geos/pa.html" style="font-weight: bold;" >Paraguay</a>
+          
+      
+      <td class="category_data"  valign="top" style="padding-left:5px;">
+      Paraguay falls below the Latin American average in several socioeconomic categories, including immunization rates, potable water, sanitation, and secondary school enrollment, and has greater rates of income inequality and child and maternal mortality. Paraguay's poverty rate has declined in recent years but remains high, especially in rural areas, with more than a third of the population below the poverty line. However, the well being of the poor in many regions has improved in terms of housing quality and access to clean water, telephone service, and electricity. The fertility rate continues to drop, declining sharply from an average 4.3 births per woman in the late 1990s to 2.5 in 2008, as a result of the greater educational attainment of women, increased use of contraception, and a desire for smaller families among young women. 
+      <br />
+      Paraguay is a country of emigration; it has not attracted large numbers of immigrants because of political instability, civil wars, years of dictatorship, and the greater appeal of neighboring countries. Paraguay first tried to encourage immigration in 1870 in order to rebound from the heavy death toll it suffered during the War of the Triple Alliance, but it received few European and Middle Eastern immigrants. In the 20th century, limited numbers of immigrants arrived from Lebanon, Japan, South Korea, and China, as well as Mennonites from Canada, Russia, and Mexico. Large flows of Brazilian immigrants have been arriving since the 1960s, mainly to work in agriculture. Paraguayans continue to emigrate to Argentina, Brazil, Uruguay, the United States, Italy, Spain, and France. 
+        </td>
+        </tr>
+        </table>
+        
+
+        
+        <table width="638" cellspacing="4" cellpadding="0" border="0" style="padding-bottom:4px;"  bgcolor="#EEEEEE" id="pe" >
+      
+      <tr><td colspan="2"><a name="pe"></a></td></tr>
+      <tr>
+      
+      
+      
+        <td valign="top" width="200" style="border-right:2px solid white; padding-left:4px;" class="fl_region"><a href="../geos/pe.html" style="font-weight: bold;" >Peru</a>
+          
+      
+      <td class="category_data"  valign="top" style="padding-left:5px;">
+      Peru's urban and coastal communities have benefited much more from recent economic growth than rural, Afro-Peruvian, indigenous, and poor populations of the Amazon and mountain regions. The poverty rate has dropped substantially during the last decade but remains stubbornly high at about 30% (more than 55% in rural areas). After remaining almost static for about a decade, Peru's malnutrition rate began falling in 2005, when the government introduced a coordinated strategy focusing on hygiene, sanitation, and clean water. School enrollment has improved, but achievement scores reflect ongoing problems with educational quality. Many poor children temporarily or permanently drop out of school to help support their families. About a quarter to a third of Peruvian children aged 6 to 14 work, often putting in long hours at hazardous mining or construction sites. 
+      <br />
+      Peru was a country of immigration in the 19th and early 20th centuries, but has become a country of emigration in the last few decades. Beginning in the 19th century, Peru brought in Asian contract laborers mainly to work on coastal plantations. Populations of Chinese and Japanese descent - among the largest in Latin America - are economically and culturally influential in Peru today. Peruvian emigration began rising in the 1980s due to an economic crisis and a violent internal conflict, but outflows have stabilized in the last few years as economic conditions have improved. Nonetheless, more than 2 million Peruvians have emigrated in the last decade, principally to the US, Spain, and Argentina. 
+        </td>
+        </tr>
+        </table>
+        
+
+        
+        <table width="638" cellspacing="4" cellpadding="0" border="0" style="padding-bottom:4px;"  bgcolor="#FFFFFF" id="ns" >
+        
+      <tr><td colspan="2"><a name="ns"></a></td></tr>
+      <tr>
+      
+      
+      
+        <td valign="top" width="200" style="border-right:2px solid white; padding-left:4px;" class="fl_region"><a href="../geos/ns.html" style="font-weight: bold;" >Suriname</a>
+          
+      
+      <td class="category_data"  valign="top" style="padding-left:5px;">
+      Suriname is a pluralistic society consisting primarily of Creoles (persons of mixed African and European heritage), the descendants of escaped African slaves known as Maroons, and the descendants of Indian and Javanese contract workers. The country overall is in full, post-industrial demographic transition, with a low fertility rate, a moderate mortality rate, and a rising life expectancy. However, the Maroon population of the rural interior lags behind because of lower educational attainment and contraceptive use, higher malnutrition, and significantly less access to electricity, potable water, sanitation, infrastructure, and health care. 
+      <br />
+      Some 350,000 people of Surinamese descent live in the Netherlands, Suriname's former colonial ruler. In the 19th century, better-educated, largely Dutch-speaking Surinamese began emigrating to the Netherlands. World War II interrupted the outflow, but it resumed after the war when Dutch labor demands grew - emigrants included all segments of the Creole population. Suriname still is strongly influenced by the Netherlands because most Surinamese have relatives living there and it is the largest supplier of development aid. Other emigration destinations include French Guiana and the United States. Suriname's immigration rules are flexible, and the country is easy to enter illegally because rainforests obscure its borders. Since the mid-1980s, Brazilians have settled in Suriname's capital, Paramaribo, or eastern Suriname, where they mine gold. This immigration is likely to slowly re-orient Suriname toward its Latin American roots. 
+        </td>
+        </tr>
+        </table>
+        
+
+        
+        <table width="638" cellspacing="4" cellpadding="0" border="0" style="padding-bottom:4px;"  bgcolor="#EEEEEE" id="uy" >
+      
+      <tr><td colspan="2"><a name="uy"></a></td></tr>
+      <tr>
+      
+      
+      
+        <td valign="top" width="200" style="border-right:2px solid white; padding-left:4px;" class="fl_region"><a href="../geos/uy.html" style="font-weight: bold;" >Uruguay</a>
+          
+      
+      <td class="category_data"  valign="top" style="padding-left:5px;">
+      Uruguay rates high for most development indicators and is known for its secularism, liberal social laws, and well-developed social security, health, and educational systems. It is one of the few countries in Latin America and the Caribbean where the entire population has access to clean water. Uruguay's provision of free primary through university education has contributed to the country's high levels of literacy and educational attainment. However, the emigration of human capital has diminished the state's return on its investment in education. Remittances from the roughly 18% of Uruguayans abroad amount to less than 1 percent of national GDP. The emigration of young adults and a low birth rate are causing Uruguay's population to age rapidly. 
+      <br />
+      In the 1960s, Uruguayans for the first time emigrated en masse - primarily to Argentina and Brazil - because of economic decline and the onset of more than a decade of military dictatorship. Economic crises in the early 1980s and 2002 also triggered waves of emigration, but since 2002 more than 70% of Uruguayan emigrants have selected the US and Spain as destinations because of better job prospects. Uruguay had a tiny population upon its independence in 1828 and welcomed thousands of predominantly Italian and Spanish immigrants, but the country has not experienced large influxes of new arrivals since the aftermath of World War II. More recent immigrants include Peruvians and Arabs. 
+        </td>
+        </tr>
+        </table>
+        
+
+        
+        <table width="638" cellspacing="4" cellpadding="0" border="0" style="padding-bottom:4px;"  bgcolor="#FFFFFF" id="ve" >
+        
+      <tr><td colspan="2"><a name="ve"></a></td></tr>
+      <tr>
+      
+      
+      
+        <td valign="top" width="200" style="border-right:2px solid white; padding-left:4px;" class="fl_region"><a href="../geos/ve.html" style="font-weight: bold;" >Venezuela</a>
+          
+      
+      <td class="category_data"  valign="top" style="padding-left:5px;">
+      Although poverty in Venezuela has declined during the CHAVEZ administration, dropping from nearly 50% in 1999 to about 27% in 2011, it remains high and some experts question how much of a role social expenditures have played in this poverty reduction. Progress in lowering poverty, income inequality, and unemployment may in fact be more closely linked to the rise and fall of prices for oil, Venezuela's dominant export. In the long-run, education and healthcare spending may increase economic growth and reduce income inequality, but rising costs and the staffing of new healthcare jobs with foreigners are slowing development. In the meantime, social investment has led to better living standards, including increased school enrollment, a substantial reduction in infant and child mortality, and greater access to potable water and sanitation. 
+      <br />
+      Since CHAVEZ came to power in 1999, more than a million predominantly middle- and upper-class Venezuelans are estimated to have emigrated. The brain drain is attributed to a repressive political system, lack of economic opportunities, steep inflation, a high crime rate, and corruption. Thousands of oil engineers emigrated to Canada, Colombia, and the United States following Chavez's firing of over 20,000 employees of the state-owned petroleum company during a 2002-2003 oil strike. Additionally, thousands of Venezuelans of European descent have taken up residence in their ancestral homelands. Nevertheless, Venezuela continues to attract immigrants from South America and southern Europe because of its lenient migration policy and the availability of education and healthcare. Venezuela also has been a fairly accommodating host to more than 200,000 Colombian refugees. 
+</td>
+</tr>
+</table>
+
+        <table border="0" cellspacing="0" cellpadding="0" width="638">
+          <tr>
+
+            <td style="height:18px;" class="dashed_top_grey_line"><div align="right"><a href="#top"><img src="../graphics/backtotop_icon.gif" alt="Back to Top" width="16" height="16" border="0" style="padding:2px; cursor: pointer;" title="Back to Top"/></a></td>  
+          </tr>
+        </table>
+
+	<script src="../scripts/findDOM.js" type="text/javascript"></script>
+	<script src="../scripts/DataEntryLibrary.js"	type="text/javascript"></script>
+	<script src="../scripts/processAnchors.js"	type="text/javascript"></script>
+	<script language="javascript" type="text/javascript">
+		highlightSelectedFieldKey( );
+	</script>
+  
+ 
+                      
+											<!-- InstanceEndEditable --></td>
+                                </tr>
+                              </table>
+                            </div></td>
+                        </tr>
+                      </table>
+                      <div class="floatClear"></div></td>
+                  </tr>
+                  <tr>
+                    <td align="right"></td>
+                    <td align="left" style="background-image: url(../graphics_wfbook_shell/grey_right_gutter.gif); background-position: 675px; background-repeat: repeat-y; background-color: #ffffff;"><table width="650" border="0" cellpadding="0" cellspacing="0">
+                        <tr  bgcolor="#FFFFFF">
+                          <td width="15">&nbsp;</td>
+                          <td align="right" class="bottom-text" style="border-bottom: 1px solid #CCCCCC; margin-right: 0px; width: 650px;">The online Factbook is updated weekly. ISSN 1553-8133<br />
+                            For additional information on government leaders in selected foreign countries, go to World Leaders.</td>
+                        </tr>
+                      </table></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <!-- *** Footer *** -->
+
+            <!-- *** / Footer *** -->
+           <div id="footerBlock" align="left" style=" margin-left: 0px; padding-left: 0px;">
+           
+			<table width="100%" border="0" align="left" cellpadding="0" cellspacing="0">
+            	<tr>
+                  <td style=" width:auto; font-size: 9px;"><ul id="footerLinks-L" style="padding-left: 70px; vertical-align:top; font-size: 9px; width: 638px; padding-right: 0px; padding-top: 5px; padding-bottom: 5px;">
+                  	<li><a title="Site Policies" href="/about-cia/site-policies/index.html#privacy-notice" style="font-size: 9px;">Privacy</a></li>
+                  	<li><a title="Site Policies" href="/about-cia/site-policies/index.html#copy" style="font-size: 9px;">Copyright</a></li>
+                  	<li><a title="Site Policies" href="/about-cia/site-policies/index.html" style="font-size: 9px;">Site Policies</a></li>
+                  	<li><a title="NoFEAR Act" href="/about-cia/no-fear-act/index.html" style="font-size: 9px;">NoFEAR Act</a></li>
+                  	<li><a href="http://www.foia.cia.gov/" style="font-size: 9px;">FOIA</a></li>
+                  	<li><a href="http://www.usa.gov/" style="font-size: 9px;">USA.gov</a></li>
+                  	<li><a href="http://www.dni.gov/" style="font-size: 9px;">DNI.gov</a></li>
+					<li>&nbsp;</li>
+					<li>&nbsp;</li>
+                  	
+					<li><img src="../graphics/5_spacer.jpg" width="160" height="5" />&nbsp;</li>
+                  	<li><a href="/contact-cia" accesskey="9" title="Contact CIA" style="font-size: 9px;">Contact CIA</a></li>
+					<li style="margin-right: 0px;"><a href="/sitemap.html" accesskey="3" title="Site Map" style="font-size: 9px;">Site Map</a></li>
+                  	</ul></td>
+                  <td align="right" width="160" valign="top" style="background-image:url(graphics_wfbook_shell/grey_right_gutter_a.gif); background-position: top right; background-repeat: no-repeat;"><img src="../graphics_wfbook_shell/lnav_greybarBot1.gif" width="155" height="11"  style="margin-top: 0px;"/></td>
+                </tr>
+             </table> </div>
+            <div id="portal-footer">
+          <div id="colR" style="background-color: ##fff;"></div>    
+            </div>
+            <!-- *** / Footer *** -->
+        </tr>
+      </table></td>
+    <td valign="top" id="right_shadow" rowspan="2" ><table width="100%" border="0" cellspacing="0" cellpadding="0" style="height: 100%;">
+        <tr>
+          <td align="left" valign="top" style="background-image:url(../graphics/1024_background_top.jpg); background-position: top; background-repeat: repeat-x;"><img src="../graphics/1024_righttop_background.jpg" width="54" height="73" /></td>
+        </tr>
+      </table></td>
+  </tr>
+  <tr>
+    <td class="bottom-text1" valign="top" width="638"></td>
+  </tr>
+
+</table>
+</body>
+<!-- InstanceEnd --></html>
+

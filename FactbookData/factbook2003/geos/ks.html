@@ -1,0 +1,2889 @@
+<!-- FileName="Connection_cf_dsn.htm" "" -->
+<!-- Type="CFDSN" -->
+<!-- Catalog="" -->
+<!-- Schema="" -->
+<!-- HTTP="true" -->
+
+
+<html>
+<head>
+<title>CIA - The World Factbook -- Korea, South</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+
+<link rel="stylesheet" href="../Factbook.css" type="text/css">
+
+<script language="JavaScript">
+<!--
+function MM_jumpMenu(targ,selObj,restore){ //v3.0
+  eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
+  if (restore) selObj.selectedIndex=0;
+}
+//-->
+</script>
+<link rel="stylesheet" href="../Factbook.css" type="text/css">
+</head>
+
+<body background="../graphics/tilehdark.jpg" link="#FFFFFF" vlink="#FFFFFF" alink="#CCCCCC" bgcolor="#666666">
+<a href="#top"></a>
+
+
+<div align="center">&nbsp; </div>
+<div align="center">
+  <table width="596" border="0" height="400" cellpadding="0" cellspacing="0"  align="center">
+    <tr align="center"> 
+      <td height="85" colspan="4" valign="bottom"> 
+        <p><a href="../index.html"><img src="../graphics/topbanner.jpg" width="713" height="23" border="0" alt="Top banner"><br>
+          <img src="../graphics/banner.jpg" width="712" height="66" border="0" alt="The World Factbook Banner"></a></p>
+      </td>
+    </tr>
+    <tr align="left" valign="middle"> 
+      <td height="41" colspan="4" background="../graphics/metalpullnav.jpg" bgcolor="#000000"> 
+	  
+	        <form name="SelectCountry">
+	   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+        <select name="CountrySelect" onChange="MM_jumpMenu('parent', this, 0)">
+		        <option>Select a Country</option>
+                <option value="af.html"   >Afghanistan</option>
+                <option value="al.html"   >Albania</option>
+                <option value="ag.html"   >Algeria</option>
+                <option value="aq.html"   >American Samoa</option>
+                <option value="an.html"   >Andorra</option>
+                <option value="ao.html"   >Angola</option>
+                <option value="av.html"   >Anguilla</option>
+                <option value="ay.html"   >Antarctica</option>
+                <option value="ac.html"   >Antigua and Barbuda</option>
+                <option value="xq.html"   >Arctic Ocean</option>
+                <option value="ar.html"   >Argentina</option>
+                <option value="am.html"   >Armenia</option>
+                <option value="aa.html"   >Aruba</option>
+                <option value="at.html"   >Ashmore and Cartier Islands</option>
+                <option value="zh.html"   >Atlantic Ocean</option>
+                <option value="as.html"   >Australia</option>
+                <option value="au.html"   >Austria</option>
+                <option value="aj.html"   >Azerbaijan</option>
+                <option value="bf.html"   >Bahamas, The</option>
+                <option value="ba.html"   >Bahrain</option>
+                <option value="fq.html"   >Baker Island</option>
+                <option value="bg.html"   >Bangladesh</option>
+                <option value="bb.html"   >Barbados</option>
+                <option value="bs.html"   >Bassas da India</option>
+                <option value="bo.html"   >Belarus</option>
+                <option value="be.html"   >Belgium</option>
+                <option value="bh.html"   >Belize</option>
+                <option value="bn.html"   >Benin</option>
+                <option value="bd.html"   >Bermuda</option>
+                <option value="bt.html"   >Bhutan</option>
+                <option value="bl.html"   >Bolivia</option>
+                <option value="bk.html"   >Bosnia and Herzegovina</option>
+                <option value="bc.html"   >Botswana</option>
+                <option value="bv.html"   >Bouvet Island</option>
+                <option value="br.html"   >Brazil</option>
+                <option value="io.html"   >British Indian Ocean Territory</option>
+                <option value="vi.html"   >British Virgin Islands</option>
+                <option value="bx.html"   >Brunei</option>
+                <option value="bu.html"   >Bulgaria</option>
+                <option value="uv.html"   >Burkina Faso</option>
+                <option value="bm.html"   >Burma</option>
+                <option value="by.html"   >Burundi</option>
+                <option value="cb.html"   >Cambodia</option>
+                <option value="cm.html"   >Cameroon</option>
+                <option value="ca.html"   >Canada</option>
+                <option value="cv.html"   >Cape Verde</option>
+                <option value="cj.html"   >Cayman Islands</option>
+                <option value="ct.html"   >Central African Republic</option>
+                <option value="cd.html"   >Chad</option>
+                <option value="ci.html"   >Chile</option>
+                <option value="ch.html"   >China</option>
+                <option value="kt.html"   >Christmas Island</option>
+                <option value="ip.html"   >Clipperton Island</option>
+                <option value="ck.html"   >Cocos (Keeling) Islands</option>
+                <option value="co.html"   >Colombia</option>
+                <option value="cn.html"   >Comoros</option>
+                <option value="cg.html"   >Congo, Democratic Republic of the</option>
+                <option value="cf.html"   >Congo, Republic of the</option>
+                <option value="cw.html"   >Cook Islands</option>
+                <option value="cr.html"   >Coral Sea Islands</option>
+                <option value="cs.html"   >Costa Rica</option>
+                <option value="iv.html"   >Cote d'Ivoire</option>
+                <option value="hr.html"   >Croatia</option>
+                <option value="cu.html"   >Cuba</option>
+                <option value="cy.html"   >Cyprus</option>
+                <option value="ez.html"   >Czech Republic</option>
+                <option value="da.html"   >Denmark</option>
+                <option value="dj.html"   >Djibouti</option>
+                <option value="do.html"   >Dominica</option>
+                <option value="dr.html"   >Dominican Republic</option>
+                <option value="tt.html"   >East Timor</option>
+                <option value="ec.html"   >Ecuador</option>
+                <option value="eg.html"   >Egypt</option>
+                <option value="es.html"   >El Salvador</option>
+                <option value="ek.html"   >Equatorial Guinea</option>
+                <option value="er.html"   >Eritrea</option>
+                <option value="en.html"   >Estonia</option>
+                <option value="et.html"   >Ethiopia</option>
+                <option value="eu.html"   >Europa Island</option>
+                <option value="fk.html"   >Falkland Islands (Islas Malvinas)</option>
+                <option value="fo.html"   >Faroe Islands</option>
+                <option value="fj.html"   >Fiji</option>
+                <option value="fi.html"   >Finland</option>
+                <option value="fr.html"   >France</option>
+                <option value="fg.html"   >French Guiana</option>
+                <option value="fp.html"   >French Polynesia</option>
+                <option value="fs.html"   >French Southern and Antarctic Lands</option>
+                <option value="gb.html"   >Gabon</option>
+                <option value="ga.html"   >Gambia, The</option>
+                <option value="gz.html"   >Gaza Strip</option>
+                <option value="gg.html"   >Georgia</option>
+                <option value="gm.html"   >Germany</option>
+                <option value="gh.html"   >Ghana</option>
+                <option value="gi.html"   >Gibraltar</option>
+                <option value="go.html"   >Glorioso Islands</option>
+                <option value="gr.html"   >Greece</option>
+                <option value="gl.html"   >Greenland</option>
+                <option value="gj.html"   >Grenada</option>
+                <option value="gp.html"   >Guadeloupe</option>
+                <option value="gq.html"   >Guam</option>
+                <option value="gt.html"   >Guatemala</option>
+                <option value="gk.html"   >Guernsey</option>
+                <option value="gv.html"   >Guinea</option>
+                <option value="pu.html"   >Guinea-Bissau</option>
+                <option value="gy.html"   >Guyana</option>
+                <option value="ha.html"   >Haiti</option>
+                <option value="hm.html"   >Heard Island and McDonald Islands</option>
+                <option value="vt.html"   >Holy See (Vatican City)</option>
+                <option value="ho.html"   >Honduras</option>
+                <option value="hk.html"   >Hong Kong</option>
+                <option value="hq.html"   >Howland Island</option>
+                <option value="hu.html"   >Hungary</option>
+                <option value="ic.html"   >Iceland</option>
+                <option value="in.html"   >India</option>
+                <option value="xo.html"   >Indian Ocean</option>
+                <option value="id.html"   >Indonesia</option>
+                <option value="ir.html"   >Iran</option>
+                <option value="iz.html"   >Iraq</option>
+                <option value="ei.html"   >Ireland</option>
+                <option value="is.html"   >Israel</option>
+                <option value="it.html"   >Italy</option>
+                <option value="jm.html"   >Jamaica</option>
+                <option value="jn.html"   >Jan Mayen</option>
+                <option value="ja.html"   >Japan</option>
+                <option value="dq.html"   >Jarvis Island</option>
+                <option value="je.html"   >Jersey</option>
+                <option value="jq.html"   >Johnston Atoll</option>
+                <option value="jo.html"   >Jordan</option>
+                <option value="ju.html"   >Juan de Nova Island</option>
+                <option value="kz.html"   >Kazakhstan</option>
+                <option value="ke.html"   >Kenya</option>
+                <option value="kq.html"   >Kingman Reef</option>
+                <option value="kr.html"   >Kiribati</option>
+                <option value="kn.html"   >Korea, North</option>
+                <option value="ks.html"   >Korea, South</option>
+                <option value="ku.html"   >Kuwait</option>
+                <option value="kg.html"   >Kyrgyzstan</option>
+                <option value="la.html"   >Laos</option>
+                <option value="lg.html"   >Latvia</option>
+                <option value="le.html"   >Lebanon</option>
+                <option value="lt.html"   >Lesotho</option>
+                <option value="li.html"   >Liberia</option>
+                <option value="ly.html"   >Libya</option>
+                <option value="ls.html"   >Liechtenstein</option>
+                <option value="lh.html"   >Lithuania</option>
+                <option value="lu.html"   >Luxembourg</option>
+                <option value="mc.html"   >Macau</option>
+                <option value="mk.html"   >Macedonia, The Former Yugoslav Republic of</option>
+                <option value="ma.html"   >Madagascar</option>
+                <option value="mi.html"   >Malawi</option>
+                <option value="my.html"   >Malaysia</option>
+                <option value="mv.html"   >Maldives</option>
+                <option value="ml.html"   >Mali</option>
+                <option value="mt.html"   >Malta</option>
+                <option value="im.html"   >Man, Isle of</option>
+                <option value="rm.html"   >Marshall Islands</option>
+                <option value="mb.html"   >Martinique</option>
+                <option value="mr.html"   >Mauritania</option>
+                <option value="mp.html"   >Mauritius</option>
+                <option value="mf.html"   >Mayotte</option>
+                <option value="mx.html"   >Mexico</option>
+                <option value="fm.html"   >Micronesia, Federated States of</option>
+                <option value="mq.html"   >Midway Islands</option>
+                <option value="md.html"   >Moldova</option>
+                <option value="mn.html"   >Monaco</option>
+                <option value="mg.html"   >Mongolia</option>
+                <option value="mh.html"   >Montserrat</option>
+                <option value="mo.html"   >Morocco</option>
+                <option value="mz.html"   >Mozambique</option>
+                <option value="wa.html"   >Namibia</option>
+                <option value="nr.html"   >Nauru</option>
+                <option value="bq.html"   >Navassa Island</option>
+                <option value="np.html"   >Nepal</option>
+                <option value="nl.html"   >Netherlands</option>
+                <option value="nt.html"   >Netherlands Antilles</option>
+                <option value="nc.html"   >New Caledonia</option>
+                <option value="nz.html"   >New Zealand</option>
+                <option value="nu.html"   >Nicaragua</option>
+                <option value="ng.html"   >Niger</option>
+                <option value="ni.html"   >Nigeria</option>
+                <option value="ne.html"   >Niue</option>
+                <option value="nf.html"   >Norfolk Island</option>
+                <option value="cq.html"   >Northern Mariana Islands</option>
+                <option value="no.html"   >Norway</option>
+                <option value="mu.html"   >Oman</option>
+                <option value="zn.html"   >Pacific Ocean</option>
+                <option value="pk.html"   >Pakistan</option>
+                <option value="ps.html"   >Palau</option>
+                <option value="lq.html"   >Palmyra Atoll</option>
+                <option value="pm.html"   >Panama</option>
+                <option value="pp.html"   >Papua New Guinea</option>
+                <option value="pf.html"   >Paracel Islands</option>
+                <option value="pa.html"   >Paraguay</option>
+                <option value="pe.html"   >Peru</option>
+                <option value="rp.html"   >Philippines</option>
+                <option value="pc.html"   >Pitcairn Islands</option>
+                <option value="pl.html"   >Poland</option>
+                <option value="po.html"   >Portugal</option>
+                <option value="rq.html"   >Puerto Rico</option>
+                <option value="qa.html"   >Qatar</option>
+                <option value="re.html"   >Reunion</option>
+                <option value="ro.html"   >Romania</option>
+                <option value="rs.html"   >Russia</option>
+                <option value="rw.html"   >Rwanda</option>
+                <option value="sh.html"   >Saint Helena</option>
+                <option value="sc.html"   >Saint Kitts and Nevis</option>
+                <option value="st.html"   >Saint Lucia</option>
+                <option value="sb.html"   >Saint Pierre and Miquelon</option>
+                <option value="vc.html"   >Saint Vincent and the Grenadines</option>
+                <option value="ws.html"   >Samoa</option>
+                <option value="sm.html"   >San Marino</option>
+                <option value="tp.html"   >Sao Tome and Principe</option>
+                <option value="sa.html"   >Saudi Arabia</option>
+                <option value="sg.html"   >Senegal</option>
+				<option value="yi.html"   >Serbia and Montenegro</option>	
+                <option value="se.html"   >Seychelles</option>
+                <option value="sl.html"   >Sierra Leone</option>
+                <option value="sn.html"   >Singapore</option>
+                <option value="lo.html"   >Slovakia</option>
+                <option value="si.html"   >Slovenia</option>
+                <option value="bp.html"   >Solomon Islands</option>
+                <option value="so.html"   >Somalia</option>
+                <option value="sf.html"   >South Africa</option>
+                <option value="sx.html"   >South Georgia and the South Sandwich Islands</option>
+                <option value="oo.html"   >Southern Ocean</option>
+                <option value="sp.html"   >Spain</option>
+                <option value="pg.html"   >Spratly Islands</option>
+                <option value="ce.html"   >Sri Lanka</option>
+                <option value="su.html"   >Sudan</option>
+                <option value="ns.html"   >Suriname</option>
+                <option value="sv.html"   >Svalbard</option>
+                <option value="wz.html"   >Swaziland</option>
+                <option value="sw.html"   >Sweden</option>
+                <option value="sz.html"   >Switzerland</option>
+                <option value="sy.html"   >Syria</option>
+                <option value="ti.html"   >Tajikistan</option>
+                <option value="tz.html"   >Tanzania</option>
+                <option value="th.html"   >Thailand</option>
+                <option value="to.html"   >Togo</option>
+                <option value="tl.html"   >Tokelau</option>
+                <option value="tn.html"   >Tonga</option>
+                <option value="td.html"   >Trinidad and Tobago</option>
+                <option value="te.html"   >Tromelin Island</option>
+                <option value="ts.html"   >Tunisia</option>
+                <option value="tu.html"   >Turkey</option>
+                <option value="tx.html"   >Turkmenistan</option>
+                <option value="tk.html"   >Turks and Caicos Islands</option>
+                <option value="tv.html"   >Tuvalu</option>
+                <option value="ug.html"   >Uganda</option>
+                <option value="up.html"   >Ukraine</option>
+                <option value="tc.html"   >United Arab Emirates</option>
+                <option value="uk.html"   >United Kingdom</option>
+                <option value="us.html"   >United States</option>
+                <option value="uy.html"   >Uruguay</option>
+                <option value="uz.html"   >Uzbekistan</option>
+                <option value="nh.html"   >Vanuatu</option>
+                <option value="ve.html"   >Venezuela</option>
+                <option value="vm.html"   >Vietnam</option>
+                <option value="vq.html"   >Virgin Islands</option>
+                <option value="wq.html"   >Wake Island</option>
+                <option value="wf.html"   >Wallis and Futuna</option>
+                <option value="we.html"   >West Bank</option>
+                <option value="wi.html"   >Western Sahara</option>
+                <option value="xx.html"   >World</option>
+                <option value="ym.html"   >Yemen</option>
+                <option value="za.html"   >Zambia</option>
+                <option value="zi.html"   >Zimbabwe</option>
+                <option value="tw.html"   >Taiwan</option>
+            </select>
+      </form>
+      </td>
+    </tr>
+    <tr> 
+      <td valign="top" align="center" height="760" bgcolor="#666666" rowspan="4" background="../graphics/bg_left.jpg" width="19"><img src="../graphics/trans19.gif" alt="" width="19" height="1"></td>
+      <td valign="top" align="center" height="84" bgcolor="#666666" background="../graphics/bg_1frame.jpg" width="504"> 
+        <div align="left"> 
+          
+		  <table width="63" border="0" cellpadding="0" cellspacing="0">
+            <tr> 
+              <td rowspan="3" width="13"><img src="../graphics/flaginterface/flagpanel_r1_c1.jpg" alt="" width="13" height="102" border="0"></td>
+              <td colspan="2" height="9"><img src="../graphics/flaginterface/flagpanel_r1_c2.jpg" alt="" width="479" height="13" border="0"></td>
+              <td rowspan="3" width="12"><img src="../graphics/flaginterface/flagpanel_r1_c3.jpg" alt="" width="12" height="102" border="0"></td>
+            </tr>
+            <tr> 
+              <td height="75" colspan="2" bgcolor="#000000" background="../graphics/bg_1.jpg"> 
+                <table width="459" border="0">
+                  <tr>
+				  	<td width="4">&nbsp;</td>  
+                    <td width="324" class="CountryName">Korea, South</td>
+                    <td width="28">&nbsp;</td>
+                    <td width="89">
+						
+						 
+                          <div align="center">
+							<a href="../flags/ks-flag.html">
+							<img border="0"  src="../flags/ks-flag.gif" alt="Flag of Korea, South"></a><br>
+	                        <span class="FinePrint">Click to enlarge</span></div>
+						
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr> 
+              <td colspan="2" height="2"><img src="../graphics/flaginterface/flagpanel_r3_c2.jpg" alt="" width="479" height="14" border="0"></td>
+            </tr>
+          </table>
+          
+        </div>
+        </td>
+      <td valign="top" bgcolor="#666666" height="153" width="173" rowspan="2"><img src="../graphics/categories.jpg" width="170" height="14" border="0" alt="Categories Banner"><br>
+        <span class="Categories"> &nbsp;&nbsp;<a href="#Intro">Introduction</a><br>
+&nbsp;&nbsp;<a href="#Geo">Geography</a><br>
+&nbsp;&nbsp;<a href="#People">People</a><br>
+&nbsp;&nbsp;<a href="#Govt">Government</a><br>
+&nbsp;&nbsp;<a href="#Econ">Economy</a><br>
+&nbsp;&nbsp;<a href="#Comm">Communications</a><br>
+&nbsp;&nbsp;<a href="#Trans">Transportation</a><br>
+&nbsp;&nbsp;<a href="#Military">Military</a><br>
+&nbsp;&nbsp;<a href="#Issues">Transnational Issues</a><br>
+        </span>        <img src="../graphics/trans174.gif" alt="" width="170" height="1"></td>
+      <td rowspan="4" valign="top" bgcolor="#666666" height="548" width="19" background="../graphics/bg_2.jpg"><img src="../graphics/trans19.gif" alt="" width="19" height="1"></td>
+    </tr>
+    <tr>
+		
+      <td valign="middle" align="center" height="71" bgcolor="#666666" background="../graphics/secondsetbuttons.jpg" width="504"> 
+        <div align="center" > 
+				<a href="../index.html" class="MainLinks">Home</a> 
+          &nbsp;<a href="../docs/refmaps.html" class="MainLinks">Reference Maps</a> 
+			&nbsp;<a href="../appendix/appendix-a.html" class="MainLinks">Appendixes</a>
+		  &nbsp;<a href="../print/ks.html" class="MainLinks">Print-Friendly Page</a>
+		</div>
+      </td>
+    </tr>
+    <tr> 
+		
+      <td valign="top" align="center" height="449" bgcolor="#000000" colspan="2"> 
+        <br>
+        <p class="LastUpdate">
+          In general, information available as of 1 January 2003<br>
+          was used in the preparation of The World Factbook 2003.<br>
+		<br><br>
+		<p class="LastUpdate">This page was last updated on 18 December, 2003</p><br>
+          <img src="../maps/ks-map.gif" alt="Map of Korea, South">
+		</p>
+        </td>
+    </tr>
+    <tr>
+		 
+      <td valign="top" align="center" height="884" bgcolor="#FFFFFF" colspan="2">
+	<span class="Normal">	  <strong>Legend:</strong>	  
+	  <img width="25" height="18" src="../graphics/dictionary.jpg" alt="Definition">Definition
+	  <img width="25" height="18" src="../graphics/listing.jpg" alt="Field Listing">Field Listing
+	  <img width="25" height="18" src="../graphics/rankorder.jpg" alt="Rank Order">Rank Order
+	</span>
+
+
+        <table cellspacing="0" cellpadding="0" border="0" bgcolor="#CCCCCC" width="100%">
+          <tr bgcolor="#CCCCCC"> 
+            <td align="left" valign="middle" width="2%" height="31">&nbsp;&nbsp;</td>
+			<td align="left" valign="middle" width="20%" height="31"><font face="arial"><b><a name="Intro">Introduction</a></b></font></td>
+            <td align="left" valign="middle" width="59%" height="31"><font face="arial"><b>&nbsp;&nbsp;&nbsp;Korea, South</b></font></td>           
+			<td align="right" valign="middle" width="21%" bgcolor="#666666" height="16"> 
+              <div align="left" class="TopofPage"> <img src="../graphics/cornertab.jpg" alt="" width="37" height="34" border="0" align="middle"> 
+                <a href="#top">Top of Page</a> </div>
+            </td>
+          </tr>
+        </table>
+
+
+<table width="100%" cellspacing="6" cellpadding="6">
+	<tr> 
+		<td width="20%" valign="top" class="FieldLabel"> 
+			<div align="right">Background:</div>
+		</td>
+		<td width="80%" valign="top" bgcolor="#FFFFFF"> 
+			<a href="../docs/notesanddefs.html#2028"><img src="../graphics/dictionary.jpg" width="25" height="18" alt="Definition"></a> 
+			<a href="../fields/2028.html"><img src="../graphics/listing.jpg" width="25" height="18" alt="Field Listing"></a> 
+			<br>  	
+			After World War II, a republic was set up in the southern half of the Korean Peninsula while a Communist-style government was installed in the north. During the Korean War (1950-1953), US and other UN forces intervened to defend South Korea from North Korean attacks supported by the Chinese. An armistice was signed in 1953, splitting the Peninsula along a demilitarized zone at about the 38th parallel. Thereafter, South Korea achieved rapid economic growth with per capita income rising to roughly 20 times the level of North Korea. South Korea has maintained its commitment to democratize its political processes. In June 2000, a historic first North-South summit took place between the South's President KIM Dae-jung and the North's leader KIM Chong-il.
+		</td>
+	</tr>
+</table>
+
+		
+
+<!-- FileName="Connection_cf_dsn.htm" "" -->
+<!-- Type="CFDSN" -->
+<!-- Catalog="" -->
+<!-- Schema="" -->
+<!-- HTTP="true" -->
+
+
+
+        <table cellspacing="0" cellpadding="0" border="0" bgcolor="#CCCCCC" width="100%">
+          <tr bgcolor="#CCCCCC"> 
+            <td align="left" valign="middle" width="2%" height="31">&nbsp;&nbsp;</td>
+			<td align="left" valign="middle" width="20%" height="31"><font face="arial"><b><a name="Geo">Geography</a></b></font></td>
+            <td align="left" valign="middle" width="59%" height="31"><font face="arial"><b>&nbsp;&nbsp;&nbsp;Korea, South</b></font></td>
+            <td align="right" valign="middle" width="19%" bgcolor="#666666" height="31"> 
+              <div align="left" class="TopofPage"> <img src="../graphics/cornertab.jpg" alt="" width="37" height="34" border="0" align="middle"> 
+        <a href="#top">Top of Page</a> </div>
+            </td>
+          </tr>
+        </table>
+
+
+<table width="100%" cellspacing="6">
+
+
+ 
+	<tr>
+		
+		<td width="20%" valign="top" class="FieldLabel">
+			<div align="right">Location:</div>
+		</td>
+		<td valign="top" bgcolor="#FFFFFF" width="80%">
+			
+	  		<a href="../docs/notesanddefs.html#2144"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+			
+	  		<a href="../fields/2144.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>
+			
+			
+			<br> 
+			
+			Eastern Asia, southern half of the Korean Peninsula bordering the Sea of Japan and the Yellow Sea 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Geographic coordinates:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2011"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2011.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				37 00 N, 127 30 E 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Map references:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2145"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2145.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				
+		<a href="../reference_maps/asia.html" class="Normal">Asia</a>
+	
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Area:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2147"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2147.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+        			<a href="../rankorder/2147rank.html"><img src="../graphics/rankorder.jpg" alt="Rank Order"></a> 
+      			
+				<br>  
+				
+				
+					<i>total:</i> 98,480 sq km 
+			<br><i>land:</i> 98,190 sq km 
+			<br><i>water:</i> 290 sq km 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Area - comparative:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2023"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2023.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				slightly larger than Indiana 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Land boundaries:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2096"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2096.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				
+					<i>total:</i> 238 km 
+			<br><i>border countries:</i> North Korea 238 km 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Coastline:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2060"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2060.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				2,413 km 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Maritime claims:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2106"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2106.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				
+					<i>contiguous zone:</i> 24 NM 
+			<br><i>territorial sea:</i> 12 NM; between 3 NM and 12 NM in the Korea Strait 
+			<br><i>continental shelf:</i> not specified 
+			<br><i>exclusive economic zone:</i> 200 NM 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Climate:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2059"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2059.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				temperate, with rainfall heavier in summer than winter 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Terrain:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2125"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2125.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				mostly hills and mountains; wide coastal plains in west and south 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Elevation extremes:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2020"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2020.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				
+					<i>lowest point:</i> Sea of Japan 0 m 
+			<br><i>highest point:</i> Halla-san 1,950 m 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Natural resources:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2111"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2111.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				coal, tungsten, graphite, molybdenum, lead, hydropower potential 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Land use:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2097"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2097.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				
+					<i>arable land:</i> 17.44% 
+			<br><i>permanent crops:</i> 2.05% 
+			<br><i>other:</i> 80.51% (1998 est.) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Irrigated land:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2146"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2146.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				11,590 sq km (1998 est.) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Natural hazards:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2021"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2021.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				occasional typhoons bring high winds and floods; low-level seismic activity common in southwest 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Environment - current issues:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2032"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2032.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				air pollution in large cities; acid rain; water pollution from the discharge of sewage and industrial effluents; drift net fishing 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Environment - international agreements:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2033"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2033.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				
+					<i>party to:</i> Antarctic-Environmental Protocol, Antarctic-Marine Living Resources, Antarctic Treaty, Biodiversity, Climate Change, Desertification, Endangered Species, Environmental Modification, Hazardous Wastes, Law of the Sea, Marine Dumping, Nuclear Test Ban, Ozone Layer Protection, Ship Pollution, Tropical Timber 83, Tropical Timber 94, Wetlands, Whaling 
+			<br><i>signed, but not ratified:</i> Climate Change-Kyoto Protocol 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Geography - note:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2113"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2113.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				strategic location on Korea Strait   
+
+</table>
+<!-- FileName="Connection_cf_dsn.htm" "" -->
+<!-- Type="CFDSN" -->
+<!-- Catalog="" -->
+<!-- Schema="" -->
+<!-- HTTP="true" -->
+
+
+
+        <table cellspacing="0" cellpadding="0" border="0" bgcolor="#CCCCCC" width="100%">
+          <tr bgcolor="#CCCCCC"> 
+            <td align="left" valign="middle" width="2%" height="31">&nbsp;&nbsp;</td>
+			<td align="left" valign="middle" width="20%" height="31"><font face="arial"><b><a name="People">People</a></b></font></td>
+            <td align="left" valign="middle" width="59%" height="31"><font face="arial"><b>&nbsp;&nbsp;&nbsp;Korea, South</b></font></td>
+            <td align="right" valign="middle" width="19%" bgcolor="#666666" height="31"> 
+              <div align="left" class="TopofPage"> <img src="../graphics/cornertab.jpg" alt="" width="37" height="34" border="0" align="middle"> 
+        <a href="#top">Top of Page</a> </div>
+            </td>
+          </tr>
+        </table>
+
+
+<table width="100%" cellspacing="6">
+
+
+ 
+	<tr>
+		
+		<td width="20%" valign="top" class="FieldLabel">
+			<div align="right">Population:</div>
+		</td>
+		<td valign="top" bgcolor="#FFFFFF" width="80%">
+			
+	  		<a href="../docs/notesanddefs.html#2119"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+			
+	  		<a href="../fields/2119.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>
+			
+			
+       			<a href="../rankorder/2119rank.html"><img src="../graphics/rankorder.jpg" alt="Rank Order"></a> 
+   			
+			<br> 
+			
+			48,289,037 (July 2003 est.) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Age structure:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2010"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2010.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				
+					<i>0-14 years:</i> 20.6% (male 5,256,451; female 4,703,853) 
+			<br><i>15-64 years:</i> 71.5% (male 17,527,407; female 16,991,229) 
+			<br><i>65 years and over:</i> 7.9% (male 1,512,157; female 2,297,940) (2003 est.) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Median age:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2177"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2177.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				
+					<i>total:</i> 33.2 years 
+			<br><i>male:</i> 32.2 years 
+			<br><i>female:</i> 34.2 years (2002) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Population growth rate:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2002"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2002.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				0.66% (2003 est.) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Birth rate:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2054"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2054.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+        			<a href="../rankorder/2054rank.html"><img src="../graphics/rankorder.jpg" alt="Rank Order"></a> 
+      			
+				<br>  
+				
+				12.6 births/1,000 population (2003 est.) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Death rate:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2066"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2066.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+        			<a href="../rankorder/2066rank.html"><img src="../graphics/rankorder.jpg" alt="Rank Order"></a> 
+      			
+				<br>  
+				
+				6.03 deaths/1,000 population (2003 est.) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Net migration rate:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2112"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2112.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				0 migrant(s)/1,000 population (2003 est.) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Sex ratio:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2018"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2018.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				
+					<i>at birth:</i> 1.1 male(s)/female 
+			<br><i>under 15 years:</i> 1.12 male(s)/female 
+			<br><i>15-64 years:</i> 1.03 male(s)/female 
+			<br><i>65 years and over:</i> 0.66 male(s)/female 
+			<br><i>total population:</i> 1.01 male(s)/female (2003 est.) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Infant mortality rate:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2091"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2091.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+        			<a href="../rankorder/2091rank.html"><img src="../graphics/rankorder.jpg" alt="Rank Order"></a> 
+      			
+				<br>  
+				
+				
+					<i>total:</i> 7.31 deaths/1,000 live births 
+			<br><i>female:</i> 6.8 deaths/1,000 live births (2003 est.) 
+			<br><i>male:</i> 7.77 deaths/1,000 live births 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Life expectancy at birth:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2102"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2102.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+        			<a href="../rankorder/2102rank.html"><img src="../graphics/rankorder.jpg" alt="Rank Order"></a> 
+      			
+				<br>  
+				
+				
+					<i>total population:</i> 75.36 years 
+			<br><i>male:</i> 71.73 years 
+			<br><i>female:</i> 79.32 years (2003 est.) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Total fertility rate:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2127"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2127.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+        			<a href="../rankorder/2127rank.html"><img src="../graphics/rankorder.jpg" alt="Rank Order"></a> 
+      			
+				<br>  
+				
+				1.56 children born/woman (2003 est.) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">HIV/AIDS - adult prevalence rate:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2155"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2155.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+        			<a href="../rankorder/2155rank.html"><img src="../graphics/rankorder.jpg" alt="Rank Order"></a> 
+      			
+				<br>  
+				
+				less than 0.1% (2001 est.) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">HIV/AIDS - people living with HIV/AIDS:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2156"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2156.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+        			<a href="../rankorder/2156rank.html"><img src="../graphics/rankorder.jpg" alt="Rank Order"></a> 
+      			
+				<br>  
+				
+				4,000 (2001 est.) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">HIV/AIDS - deaths:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2157"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2157.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+        			<a href="../rankorder/2157rank.html"><img src="../graphics/rankorder.jpg" alt="Rank Order"></a> 
+      			
+				<br>  
+				
+				220 (2001 est.) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Nationality:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2110"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2110.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				
+					<i>noun:</i> Korean(s) 
+			<br><i>adjective:</i> Korean 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Ethnic groups:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2075"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2075.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				homogeneous (except for about 20,000 Chinese) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Religions:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2122"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2122.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				Christian 49%, Buddhist 47%, Confucianist 3%, Shamanist, Chondogyo (Religion of the Heavenly Way), and other 1% 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Languages:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2098"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2098.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				Korean, English widely taught in junior high and high school 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Literacy:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2103"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2103.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				
+					<i>definition:</i> age 15 and over can read and write 
+			<br><i>total population:</i> 98.1% 
+			<br><i>male:</i> 99.3% 
+			<br><i>female:</i> 97% (2003 est.)   
+
+</table>
+<!-- FileName="Connection_cf_dsn.htm" "" -->
+<!-- Type="CFDSN" -->
+<!-- Catalog="" -->
+<!-- Schema="" -->
+<!-- HTTP="true" -->
+
+
+
+        <table cellspacing="0" cellpadding="0" border="0" bgcolor="#CCCCCC" width="100%">
+          <tr bgcolor="#CCCCCC"> 
+            <td align="left" valign="middle" width="2%" height="31">&nbsp;&nbsp;</td>
+			<td align="left" valign="middle" width="20%" height="31"><font face="arial"><b><a name="Govt">Government</a></b></font></td>
+            <td align="left" valign="middle" width="59%" height="31"><font face="arial"><b>&nbsp;&nbsp;&nbsp;Korea, South</b></font></td>
+            <td align="right" valign="middle" width="19%" bgcolor="#666666" height="31"> 
+              <div align="left" class="TopofPage"> <img src="../graphics/cornertab.jpg" alt="" width="37" height="34" border="0" align="middle"> 
+        <a href="#top">Top of Page</a> </div>
+            </td>
+          </tr>
+        </table>
+
+
+<table width="100%" cellspacing="6">
+
+
+ 
+	<tr>
+		
+		<td width="20%" valign="top" class="FieldLabel">
+			<div align="right">Country name:</div>
+		</td>
+		<td valign="top" bgcolor="#FFFFFF" width="80%">
+			
+	  		<a href="../docs/notesanddefs.html#2142"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+			
+	  		<a href="../fields/2142.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>
+			
+			
+			<br> 
+			
+			
+				<i>conventional long form:</i> Republic of Korea 
+			<br><i>conventional short form:</i> South Korea 
+			<br><i>local short form:</i> none 
+			<br><i>note:</i> the South Koreans generally use the term "Han'guk" to refer to their country 
+			<br><i>local long form:</i> Taehan-min'guk 
+			<br><i>abbreviation:</i> ROK 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Government type:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2128"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2128.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				republic 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Capital:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2057"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2057.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				Seoul 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Administrative divisions:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2051"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2051.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				9 provinces (do, singular and plural) and 7 metropolitan cities* (gwangyoksi, singular and plural); Cheju-do, Cholla-bukto, Cholla-namdo, Ch'ungch'ong-bukto, Ch'ungch'ong-namdo, Inch'on-gwangyoksi*, Kangwon-do, Kwangju-gwangyoksi*, Kyonggi-do, Kyongsang-bukto, Kyongsang-namdo, Pusan-gwangyoksi*, Soul-t'ukpyolsi*, Taegu-gwangyoksi*, Taejon-gwangyoksi*, Ulsan-gwangyoksi* 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Independence:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2088"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2088.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				15 August 1945 (from Japan) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">National holiday:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2109"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2109.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				Liberation Day, 15 August (1945) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Constitution:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2063"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2063.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				17 July 1948 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Legal system:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2100"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2100.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				combines elements of continental European civil law systems, Anglo-American law, and Chinese classical thought 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Suffrage:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2123"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2123.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				20 years of age; universal 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Executive branch:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2077"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2077.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				
+					<i>chief of state:</i> President NO Mu-hyun (ROH Moo-hyun) (since 25 February 2003) 
+			<br><i>head of government:</i> Prime Minister KO Kun (KOH Kun) (since 27 February 2003); Deputy Prime Ministers KIM Chin-p'yo (KIM Jin-pyo) (since 27 February 2003) and YUN Tok-hong (since 6 March 2003) 
+			<br><i>cabinet:</i> State Council appointed by the president on the prime minister's recommendation 
+			<br><i>elections:</i> president elected by popular vote for a single five-year term; election last held 19 December 2002 (next to be held NA December 2007); prime minister appointed by the president; deputy prime ministers appointed by the president on the prime minister's recommendation 
+			<br><i>election results:</i> results of the 19 December 2002 election - NO Muh-hyun elected president, took office 25 February 2003; percent of vote - NO Muh-hyun (MDP) 48.9%; YI Hoe-ch'ang (GNP) 46.6%; other 4.5% 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Legislative branch:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2101"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2101.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				unicameral National Assembly or Kukhoe (273 seats total - 227 elected by direct, popular vote; members serve four-year terms); note - beginning in 2004, all members will be directly elected; possible redistricting before 2004 may affect the number of seats in the National Assembly 
+			<br><i>elections:</i> last held 13 April 2000 (next to be held NA April 2004) 
+			<br><i>election results:</i> percent of vote by party - NA%; seats by party - GNP 133, MDP 115, ULD 17, other 8; note - the distribution of seats as of April 2003 was: GNP 153, MDP 101, ULD 11, DPP 1, PPR 1, independents 5; one seat vacant 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Judicial branch:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2094"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2094.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				Supreme Court (justices are appointed by the president with the consent of the National Assembly) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Political parties and leaders:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2118"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2118.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				Democratic People's Party or DPP [leader NA]; Grand National Party or GNP [CH'OE Pyong-ryol, chairman]; Millennium Democratic Party or MDP [CHO Sun-hyong, chairman]; United Liberal Democrats or ULD [KIM Chong-p'il, president]; Uri Party [KIM Kun-t'ae, chairman] 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Political pressure groups and leaders:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2115"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2115.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				Federation of Korean Industries; Federation of Korean Trade Unions; Korean Confederation of Trade Unions; Korean National Council of Churches; Korean Traders Association; Korean Veterans' Association; National Council of Labor Unions; National Democratic Alliance of Korea; National Federation of Farmers' Associations; National Federation of Student Associations 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">International organization participation:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2107"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2107.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				AfDB, APEC, ARF (dialogue partner), AsDB, ASEAN (dialogue partner), Australia Group, BIS, CP, EBRD, ESCAP, FAO, IAEA, IBRD, ICAO, ICC, ICCt, ICFTU, ICRM, IDA, IEA, IEA (observer), IFAD, IFC, IFRCS, IHO, ILO, IMF, IMO, Interpol, IOC, IOM, ISO, ITU, MINURSO, NAM (guest), NEA, NSG, OAS (observer), OECD, OPCW, OSCE (partner), PCA, UN, UNCTAD, UNESCO, UNFICYP, UNHCR, UNIDO, UNMISET, UNMOGIP, UNOMIG, UNU, UPU, WCL, WCO, WHO, WIPO, WMO, WToO, WTrO, ZC 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Diplomatic representation in the US:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2149"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2149.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				
+					<i>chief of mission:</i> Ambassador HAN Sung-chu (HAN Sung-joo) 
+			<br><i>consulate(s):</i> New York, Tamuning (Guam) 
+			<br><i>consulate(s) general:</i> Atlanta, Boston, Chicago, Honolulu, Houston, Los Angeles, New York, San Francisco, and Seattle 
+			<br><i>FAX:</i> [1] (202) 387-0205 
+			<br><i>telephone:</i> [1] (202) 939-5600 
+			<br><i>chancery:</i> 2450 Massachusetts Avenue NW, Washington, DC 20008 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Diplomatic representation from the US:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2007"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2007.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				
+					<i>chief of mission:</i> Ambassador Thomas C. HUBBARD 
+			<br><i>embassy:</i> 82 Sejong-no, Jongno-gu, Seoul 110-710 
+			<br><i>mailing address:</i> American Embassy, Unit 15550, APO AP 96205-5550 
+			<br><i>telephone:</i> [82] (2) 397-4114 
+			<br><i>FAX:</i> [82] (2) 738-8845 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Flag description:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2081"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2081.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				white with a red (top) and blue yin-yang symbol in the center; there is a different black trigram from the ancient I Ching (Book of Changes) in each corner of the white field   
+
+</table>
+<!-- FileName="Connection_cf_dsn.htm" "" -->
+<!-- Type="CFDSN" -->
+<!-- Catalog="" -->
+<!-- Schema="" -->
+<!-- HTTP="true" -->
+
+
+
+        <table cellspacing="0" cellpadding="0" border="0" bgcolor="#CCCCCC" width="100%">
+          <tr bgcolor="#CCCCCC"> 
+            <td align="left" valign="middle" width="2%" height="31">&nbsp;&nbsp;</td>
+			<td align="left" valign="middle" width="20%" height="31"><font face="arial"><b><a name="Econ">Economy</a></b></font></td>
+            <td align="left" valign="middle" width="59%" height="31"><font face="arial"><b>&nbsp;&nbsp;&nbsp;Korea, South</b></font></td>
+            <td align="right" valign="middle" width="19%" bgcolor="#666666" height="31"> 
+              <div align="left" class="TopofPage"> <img src="../graphics/cornertab.jpg" alt="" width="37" height="34" border="0" align="middle"> 
+        <a href="#top">Top of Page</a> </div>
+            </td>
+          </tr>
+        </table>
+
+
+<table width="100%" cellspacing="6">
+
+
+ 
+	<tr>
+		
+		<td width="20%" valign="top" class="FieldLabel">
+			<div align="right">Economy - overview:</div>
+		</td>
+		<td valign="top" bgcolor="#FFFFFF" width="80%">
+			
+	  		<a href="../docs/notesanddefs.html#2116"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+			
+	  		<a href="../fields/2116.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>
+			
+			
+			<br> 
+			
+			As one of the Four Tigers of East Asia, South Korea has achieved an incredible record of growth and integration into the high-tech modern world economy. Three decades ago GDP per capita was comparable with levels in the poorer countries of Africa and Asia. Today its GDP per capita is 18 times North Korea's and equal to the lesser economies of the European Union. This success through the late 1980s was achieved by a system of close government/business ties, including directed credit, import restrictions, sponsorship of specific industries, and a strong labor effort. The government promoted the import of raw materials and technology at the expense of consumer goods and encouraged savings and investment over consumption. The Asian financial crisis of 1997-99 exposed longstanding weaknesses in South Korea's development model, including high debt/equity ratios, massive foreign borrowing, and an undisciplined financial sector. Growth plunged to a negative 6.6% in 1998, then strongly recovered to 10.8% in 1999 and 9.2% in 2000. Growth fell back to 3.3% in 2001 because of the slowing global economy, falling exports, and the perception that much-needed corporate and financial reforms had stalled. Led by consumer spending and exports, growth in 2002 was an impressive 6.2%, despite anemic global growth, followed by moderate 2.8% growth in 2003. In 2003 the six-day work week was reduced to five days. 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">GDP:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2001"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2001.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+        			<a href="../rankorder/2001rank.html"><img src="../graphics/rankorder.jpg" alt="Rank Order"></a> 
+      			
+				<br>  
+				
+				purchasing power parity - $941.5 billion (2002 est.) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">GDP - real growth rate:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2003"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2003.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+        			<a href="../rankorder/2003rank.html"><img src="../graphics/rankorder.jpg" alt="Rank Order"></a> 
+      			
+				<br>  
+				
+				6.3% (2002 est.) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">GDP - per capita:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2004"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2004.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+        			<a href="../rankorder/2004rank.html"><img src="../graphics/rankorder.jpg" alt="Rank Order"></a> 
+      			
+				<br>  
+				
+				purchasing power parity - $19,600 (2002 est.) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">GDP - composition by sector:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2012"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2012.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				
+					<i>agriculture:</i> 4.4% 
+			<br><i>industry:</i> 41.6% 
+			<br><i>services:</i> 54% (2001 est.) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Population below poverty line:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2046"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2046.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				4% (2001 est.) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Household income or consumption by percentage share:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2047"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2047.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				
+					<i>lowest 10%:</i> 2.6% 
+			<br><i>highest 10%:</i> 24.8% (1998 est.) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Distribution of family income - Gini index:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2172"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2172.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				31.6 (1993) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Inflation rate (consumer prices):</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2092"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2092.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+        			<a href="../rankorder/2092rank.html"><img src="../graphics/rankorder.jpg" alt="Rank Order"></a> 
+      			
+				<br>  
+				
+				2.8% (2002 est.) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Labor force:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2095"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2095.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+        			<a href="../rankorder/2095rank.html"><img src="../graphics/rankorder.jpg" alt="Rank Order"></a> 
+      			
+				<br>  
+				
+				22 million (2001) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Labor force - by occupation:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2048"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2048.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				services 69%, industry 21.5%, agriculture 9.5% (2001) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Unemployment rate:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2129"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2129.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+        			<a href="../rankorder/2129rank.html"><img src="../graphics/rankorder.jpg" alt="Rank Order"></a> 
+      			
+				<br>  
+				
+				3.1% (2002 est.) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Budget:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2056"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2056.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				
+					<i>revenues:</i> $118.1 billion 
+			<br><i>expenditures:</i> $95.7 billion, including capital expenditures of $22.6 billion (2000) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Industries:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2090"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2090.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				electronics, automobile production, chemicals, shipbuilding, steel, textiles, clothing, footwear, food processing 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Industrial production growth rate:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2089"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2089.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+        			<a href="../rankorder/2089rank.html"><img src="../graphics/rankorder.jpg" alt="Rank Order"></a> 
+      			
+				<br>  
+				
+				6.5% (2002 est.) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Electricity - production:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2038"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2038.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+        			<a href="../rankorder/2038rank.html"><img src="../graphics/rankorder.jpg" alt="Rank Order"></a> 
+      			
+				<br>  
+				
+				290.7 billion kWh (2001) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Electricity - production by source:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2045"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2045.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				
+					<i>fossil fuel:</i> 62.4% 
+			<br><i>hydro:</i> 0.8% 
+			<br><i>other:</i> 0.2% (2001) 
+			<br><i>nuclear:</i> 36.6% 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Electricity - consumption:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2042"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2042.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+        			<a href="../rankorder/2042rank.html"><img src="../graphics/rankorder.jpg" alt="Rank Order"></a> 
+      			
+				<br>  
+				
+				270.3 billion kWh (2001) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Electricity - exports:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2044"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2044.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				0 kWh (2001) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Electricity - imports:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2043"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2043.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				0 kWh (2001) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Oil - production:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2173"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2173.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+        			<a href="../rankorder/2173rank.html"><img src="../graphics/rankorder.jpg" alt="Rank Order"></a> 
+      			
+				<br>  
+				
+				0 bbl/day (2001 est.) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Oil - consumption:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2174"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2174.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+        			<a href="../rankorder/2174rank.html"><img src="../graphics/rankorder.jpg" alt="Rank Order"></a> 
+      			
+				<br>  
+				
+				2.14 million bbl/day (2001 est.) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Oil - exports:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2176"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2176.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+        			<a href="../rankorder/2176rank.html"><img src="../graphics/rankorder.jpg" alt="Rank Order"></a> 
+      			
+				<br>  
+				
+				804,700 bbl/day (2001) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Oil - imports:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2175"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2175.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+        			<a href="../rankorder/2175rank.html"><img src="../graphics/rankorder.jpg" alt="Rank Order"></a> 
+      			
+				<br>  
+				
+				2.965 million bbl/day (2001) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Natural gas - production:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2180"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2180.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				0 cu m (2001 est.) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Natural gas - consumption:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2181"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2181.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				20.92 billion cu m (2001 est.) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Natural gas - exports:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2183"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2183.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				0 cu m (2001 est.) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Natural gas - imports:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2182"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2182.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				21.11 billion cu m (2001 est.) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Agriculture - products:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2052"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2052.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				rice, root crops, barley, vegetables, fruit; cattle, pigs, chickens, milk, eggs; fish 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Exports:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2078"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2078.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+        			<a href="../rankorder/2078rank.html"><img src="../graphics/rankorder.jpg" alt="Rank Order"></a> 
+      			
+				<br>  
+				
+				$162.6 billion f.o.b. (2002 est.) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Exports - commodities:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2049"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2049.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				electronic products, machinery and equipment, motor vehicles, steel, ships; textiles, clothing, footwear; fish 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Exports - partners:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2050"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2050.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				US 20.4%, China 14.7%, Japan 9.4%, Hong Kong 6.3% (2002) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Imports:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2087"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2087.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+        			<a href="../rankorder/2087rank.html"><img src="../graphics/rankorder.jpg" alt="Rank Order"></a> 
+      			
+				<br>  
+				
+				$148.4 billion f.o.b. (2002 est.) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Imports - commodities:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2058"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2058.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				machinery, electronics and electronic equipment, oil, steel, transport equipment, textiles, organic chemicals, grains 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Imports - partners:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2061"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2061.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				Japan 19.6%, US 15.2%, China 11.4%, Saudi Arabia 5% (2002) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Debt - external:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2079"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2079.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+        			<a href="../rankorder/2079rank.html"><img src="../graphics/rankorder.jpg" alt="Rank Order"></a> 
+      			
+				<br>  
+				
+				$135.2 billion (yearend 2002 est.) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Economic aid - donor:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2062"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2062.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				ODA $200 million 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Currency:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2065"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2065.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				South Korean won (KRW) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Currency code:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2158"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2158.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				KRW 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Exchange rates:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2076"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2076.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				South Korean won per US dollar - 1,251.09 (2002), 1,290.99 (2001), 1,130.96 (2000), 1,188.82 (1999), 1,401.44 (1998) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Fiscal year:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2080"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2080.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				calendar year   
+
+</table>
+<!-- FileName="Connection_cf_dsn.htm" "" -->
+<!-- Type="CFDSN" -->
+<!-- Catalog="" -->
+<!-- Schema="" -->
+<!-- HTTP="true" -->
+
+
+
+        <table cellspacing="0" cellpadding="0" border="0" bgcolor="#CCCCCC" width="100%">
+          <tr bgcolor="#CCCCCC"> 
+            <td align="left" valign="middle" width="2%" height="31">&nbsp;&nbsp;</td>
+			<td align="left" valign="middle" width="20%" height="31"><font face="arial"><b><a name="Comm">Communications</a></b></font></td>
+            <td align="left" valign="middle" width="59%" height="31"><font face="arial"><b>&nbsp;&nbsp;&nbsp;Korea, South</b></font></td>
+            <td align="right" valign="middle" width="19%" bgcolor="#666666" height="31"> 
+              <div align="left" class="TopofPage"> <img src="../graphics/cornertab.jpg" alt="" width="37" height="34" border="0" align="middle"> 
+        <a href="#top">Top of Page</a> </div>
+            </td>
+          </tr>
+        </table>
+
+
+<table width="100%" cellspacing="6">
+
+
+ 
+	<tr>
+		
+		<td width="20%" valign="top" class="FieldLabel">
+			<div align="right">Telephones - main lines in use:</div>
+		</td>
+		<td valign="top" bgcolor="#FFFFFF" width="80%">
+			
+	  		<a href="../docs/notesanddefs.html#2150"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+			
+	  		<a href="../fields/2150.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>
+			
+			
+       			<a href="../rankorder/2150rank.html"><img src="../graphics/rankorder.jpg" alt="Rank Order"></a> 
+   			
+			<br> 
+			
+			24 million (2000) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Telephones - mobile cellular:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2151"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2151.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+        			<a href="../rankorder/2151rank.html"><img src="../graphics/rankorder.jpg" alt="Rank Order"></a> 
+      			
+				<br>  
+				
+				28 million (September 2000) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Telephone system:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2124"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2124.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				
+					<i>general assessment:</i> excellent domestic and international services 
+			<br><i>domestic:</i> NA 
+			<br><i>international:</i> fiber-optic submarine cable to China; the Russia-Korea-Japan submarine cable; satellite earth stations - 3 Intelsat (2 Pacific Ocean and 1 Indian Ocean) and 1 Inmarsat (Pacific Ocean region) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Radio broadcast stations:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2013"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2013.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				AM 104, FM 136, shortwave 5 (2001) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Television broadcast stations:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2015"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2015.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				121 (plus 850 repeater stations and the eight-channel American Forces Korea Network) (1999) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Internet country code:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2154"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2154.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				.kr 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Internet Service Providers (ISPs):</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2152"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2152.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				11 (2000) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Internet users:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2153"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2153.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+        			<a href="../rankorder/2153rank.html"><img src="../graphics/rankorder.jpg" alt="Rank Order"></a> 
+      			
+				<br>  
+				
+				25.6 million (2002)   
+
+</table>
+<!-- FileName="Connection_cf_dsn.htm" "" -->
+<!-- Type="CFDSN" -->
+<!-- Catalog="" -->
+<!-- Schema="" -->
+<!-- HTTP="true" -->
+
+
+
+        <table cellspacing="0" cellpadding="0" border="0" bgcolor="#CCCCCC" width="100%">
+          <tr bgcolor="#CCCCCC"> 
+            <td align="left" valign="middle" width="2%" height="31">&nbsp;&nbsp;</td>
+			<td align="left" valign="middle" width="20%" height="31"><font face="arial"><b><a name="Trans">Transportation</a></b></font></td>
+            <td align="left" valign="middle" width="59%" height="31"><font face="arial"><b>&nbsp;&nbsp;&nbsp;Korea, South</b></font></td>
+            <td align="right" valign="middle" width="19%" bgcolor="#666666" height="31"> 
+              <div align="left" class="TopofPage"> <img src="../graphics/cornertab.jpg" alt="" width="37" height="34" border="0" align="middle"> 
+        <a href="#top">Top of Page</a> </div>
+            </td>
+          </tr>
+        </table>
+
+
+<table width="100%" cellspacing="6">
+
+
+ 
+	<tr>
+		
+		<td width="20%" valign="top" class="FieldLabel">
+			<div align="right">Railways:</div>
+		</td>
+		<td valign="top" bgcolor="#FFFFFF" width="80%">
+			
+	  		<a href="../docs/notesanddefs.html#2121"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+			
+	  		<a href="../fields/2121.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>
+			
+			
+       			<a href="../rankorder/2121rank.html"><img src="../graphics/rankorder.jpg" alt="Rank Order"></a> 
+   			
+			<br> 
+			
+			
+				<i>total:</i> 3,125 km 
+			<br><i>standard gauge:</i> 3,125 km 1.435-m gauge (661 km electrified) (2002) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Highways:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2085"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2085.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+        			<a href="../rankorder/2085rank.html"><img src="../graphics/rankorder.jpg" alt="Rank Order"></a> 
+      			
+				<br>  
+				
+				
+					<i>total:</i> 86,990 km 
+			<br><i>paved:</i> 64,808 km (including 1,996 km of expressways) 
+			<br><i>unpaved:</i> 22,182 km (1999 est.) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Waterways:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2093"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2093.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				1,609 km 
+			<br><i>note:</i> restricted to small native craft 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Pipelines:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2117"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2117.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				gas 1,433 km; refined products 827 km (2003) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Ports and harbors:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2120"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2120.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				Chinhae, Inch'on, Kunsan, Masan, Mokp'o, P'ohang, Pusan, Tonghae-hang, Ulsan, Yosu 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Merchant marine:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2108"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2108.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				
+					<i>total:</i> 541 ships (1,000 GRT or over) 6,490,521 GRT/10,602,751 DWT 
+			<br><i>note:</i> includes some foreign-owned ships registered here as a flag of convenience: Australia 1, Bulgaria 1, China 1, Greece 1, Japan 1, Malaysia 1, Norway 1, Panama 1, Saint Vincent and the Grenadines 1, UK 1 (2002 est.) 
+			<br><i>ships by type:</i> bulk 114, cargo 174, chemical tanker 63, combination bulk 9, container 52, liquefied gas 17, passenger 3, petroleum tanker 69, refrigerated cargo 21, roll on/roll off 6, short-sea passenger 2, specialized tanker 6, vehicle carrier 5 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Airports:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2053"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2053.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				102 (2002) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Airports - with paved runways:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2030"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2030.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				
+					<i>total:</i> 69 
+			<br><i>over 3,047 m:</i> 3 
+			<br><i>2,438 to 3,047 m:</i> 18 
+			<br><i>914 to 1,523 m:</i> 11 
+			<br><i>under 914 m:</i> 21 (2002) 
+			<br><i>1,524 to 2,437 m:</i> 16 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Airports - with unpaved runways:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2031"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2031.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				
+					<i>total:</i> 33 
+			<br><i>914 to 1,523 m:</i> 2 
+			<br><i>under 914 m:</i> 31 (2002) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Heliports:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2019"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2019.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				204 (2002)   
+
+</table>
+<!-- FileName="Connection_cf_dsn.htm" "" -->
+<!-- Type="CFDSN" -->
+<!-- Catalog="" -->
+<!-- Schema="" -->
+<!-- HTTP="true" -->
+
+
+
+        <table cellspacing="0" cellpadding="0" border="0" bgcolor="#CCCCCC" width="100%">
+          <tr bgcolor="#CCCCCC"> 
+            <td align="left" valign="middle" width="2%" height="31">&nbsp;&nbsp;</td>
+			<td align="left" valign="middle" width="20%" height="31"><font face="arial"><b><a name="Military">Military</a></b></font></td>
+            <td align="left" valign="middle" width="59%" height="31"><font face="arial"><b>&nbsp;&nbsp;&nbsp;Korea, South</b></font></td>
+            <td align="right" valign="middle" width="19%" bgcolor="#666666" height="31"> 
+              <div align="left" class="TopofPage"> <img src="../graphics/cornertab.jpg" alt="" width="37" height="34" border="0" align="middle"> 
+        <a href="#top">Top of Page</a> </div>
+            </td>
+          </tr>
+        </table>
+
+
+<table width="100%" cellspacing="6">
+
+
+ 
+	<tr>
+		
+		<td width="20%" valign="top" class="FieldLabel">
+			<div align="right">Military branches:</div>
+		</td>
+		<td valign="top" bgcolor="#FFFFFF" width="80%">
+			
+	  		<a href="../docs/notesanddefs.html#2055"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+			
+	  		<a href="../fields/2055.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>
+			
+			
+			<br> 
+			
+			Army, Navy, Air Force, Marine Corps, National Maritime Police (Coast Guard) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Military manpower - military age:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2024"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2024.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				18 years of age (2003 est.) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Military manpower - availability:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2105"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2105.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				
+					<i>males age 15-49:</i> 14,252,851 (2003 est.) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Military manpower - fit for military service:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2025"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2025.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				
+					<i>males age 15-49:</i> 8,994,941 (2003 est.) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Military manpower - reaching military age annually:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2026"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2026.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+				<br>  
+				
+				
+					<i>males:</i> 345,331 (2003 est.) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Military expenditures - dollar figure:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2067"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2067.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+        			<a href="../rankorder/2067rank.html"><img src="../graphics/rankorder.jpg" alt="Rank Order"></a> 
+      			
+				<br>  
+				
+				$13,094.3 million (FY02) 
+			</td>
+			</tr>
+			<tr>
+			
+			<td width="20%" valign="top" class="FieldLabel">
+				<div align="right">Military expenditures - percent of GDP:</div>
+			</td>
+			<td valign="top" bgcolor="#FFFFFF" width="80%">
+				
+				<a href="../docs/notesanddefs.html#2034"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+				
+				<a href="../fields/2034.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>	  
+				
+				
+        			<a href="../rankorder/2034rank.html"><img src="../graphics/rankorder.jpg" alt="Rank Order"></a> 
+      			
+				<br>  
+				
+				2.8% (FY02)   
+
+</table>
+<!-- FileName="Connection_cf_dsn.htm" "" -->
+<!-- Type="CFDSN" -->
+<!-- Catalog="" -->
+<!-- Schema="" -->
+<!-- HTTP="true" -->
+
+
+
+        <table cellspacing="0" cellpadding="0" border="0" bgcolor="#CCCCCC" width="100%">
+          <tr bgcolor="#CCCCCC"> 
+            <td align="left" valign="middle" width="2%" height="31">&nbsp;&nbsp;</td>
+			<td align="left" valign="middle" width="20%" height="31"><font face="arial"><b><a name="Issues">Transnational Issues</a></b></font></td>
+            <td align="left" valign="middle" width="59%" height="31"><font face="arial"><b>&nbsp;&nbsp;&nbsp;Korea, South</b></font></td>
+            <td align="right" valign="middle" width="19%" bgcolor="#666666" height="31"> 
+              <div align="left" class="TopofPage"> <img src="../graphics/cornertab.jpg" alt="" width="37" height="34" border="0" align="middle"> 
+        <a href="#top">Top of Page</a> </div>
+            </td>
+          </tr>
+        </table>
+
+
+<table width="100%" cellspacing="6">
+
+
+ 
+	<tr>
+		
+		<td width="20%" valign="top" class="FieldLabel">
+			<div align="right">Disputes - international:</div>
+		</td>
+		<td valign="top" bgcolor="#FFFFFF" width="80%">
+			
+	  		<a href="../docs/notesanddefs.html#2070"><img src="../graphics/dictionary.jpg" alt="Definition"></a>
+			
+	  		<a href="../fields/2070.html"><img src="../graphics/listing.jpg" alt="Field Listing"></a>
+			
+			
+			<br> 
+			
+			Military Demarcation Line within the 4-km wide Demilitarized Zone has separated North from South Korea since 1953; Liancourt Rocks (Take-shima/Tok-do) are disputed with Japan   
+
+</table>
+
+
+			<p class="LastUpdatePrint">	This page was last updated on 18 December, 2003</p><br>
+      </td>
+    </tr>
+    <tr> 
+      <td valign="top" align="center" height="2" bgcolor="#666666" colspan="4"><img src="../graphics/bottombanner.jpg" width="712" height="23" border="0" alt="Bottom Banner"></td>
+    </tr>
+  </table>
+<div align="center">&nbsp; </div>
+
+
+<p></p>
+</div>
+</body>
+</html>
+
