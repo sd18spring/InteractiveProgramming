@@ -1,0 +1,18 @@
+* Main idea
+The main idea is to create flappy bird, but more educational by having the target be the answer to a multiplication problem rather than a gap in the pipes.
+Topics explored will be modeling a game using OOP and MVC, as well as overall structure on handling gravity, distance from viewport (if we add, say, the moon in the distance), etc.
+The minimum viable product is a rectangle flying through a stack of boxed numbers with the score and problem displayed.
+The stretch goal is moving scenery, complete with a flapping bird and a moon in the distance.
+
+* Learning Goals
+- Kawin :: Get comfortable with creating games, or anything which requires animation and user input.
+- Daena :: Learn how to break down problems in a programmer-esque way.
+           
+* Libraries
+- pygame :: render graphics scene, work with rects, etc.
+            
+* Mid-project check-in
+We'd like to have an MVP ready which is structured well enough that future addition is trivial.
+
+* Risks
+- Making the game visually appealing is the hardest part.
