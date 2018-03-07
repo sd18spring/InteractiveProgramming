@@ -20,13 +20,19 @@ class Viewer(object):
         self.screen = pygame.display.set_mode(self.model.size)
 
     def draw(self):
-        self.screen.fill = pygame.Color(0,0,0)
+        self.screen.fill(pygame.Color(0,0,255))
+        print('hi')
         for node in self.model.nodes:
-            pygame.draw.circle(self.screen,pygame.Color(127,127,63),(int(node.x),int(node.y)),node.node_size,10)
+            print(node)
+            #pygame.draw.rect(self.screen,pygame.Color(255, 255, 255),pygame.Rect(int(node.x),int(node.y),20,20))
+            pygame.draw.circle(self.screen, pygame.Color(127,127,63),
+                            (int(node.x), int(node.y)), Node.node_size,0)
+
+            pygame.display.update()
 
 class Node(object):
 
-    node_size = 10
+    node_size = 100
 
     def __init__(self,title,x,y):
         self.x = x
@@ -56,6 +62,7 @@ class ConnectionLine(object):
 
 
 if __name__ == '__main__':
+
     pygame.init()
 
     node1 = Node('Node1',1,2)
@@ -63,13 +70,15 @@ if __name__ == '__main__':
 
     running = True
 
-    view = Viewer(Model((600,400)))
-    view.draw()
+    view = Viewer(Model((1000,400)))
+    #view.draw()
     k=0
-    while k<10 and running == True:
+    while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+                break
             view.draw()
             time.sleep(.001)
-            k=k+1
+    print("quitting")
+    pygame.quit()
