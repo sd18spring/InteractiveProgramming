@@ -66,7 +66,11 @@ def is_in_polygon(x, y, points):
     return inside
 
 pygame.init()
-screen = pygame.display.set_mode((1500, 1500))
+size = (1500, 1500)
+screen = pygame.display.set_mode(size)
+background = pygame.image.load('USflag.png')
+background = pygame.transform.scale(background, size)
+#pygame.display.flip()
 red = (255,0,0)
 green = (0,255,0)
 blue = (0,0,255)
@@ -107,7 +111,14 @@ while (True):
             for state in state_borders:
                 if is_in_polygon(x, y, state_borders[state]):
                     # print("You pressed the left mouse button at (%d, %d)" % event.pos)
+                    myfont = pygame.font.SysFont("monospace", 50)
+                    pygame.draw.polygon(screen, red, state_borders[state])
+                    label = myfont.render(state, 1, blue)
+                    screen.blit(label, random.choice(state_borders[state]))
+                    #print(random.choice(state_borders[state]))
                     print("You pressed the left mouse button in " + state)
+                    pygame.display.update()
+                    pygame.time.wait(1000)
         elif event.type == pygame.MOUSEBUTTONUP and event.button == LEFT:
             x, y = event.pos
             for state in state_borders:
@@ -116,9 +127,10 @@ while (True):
                     print("You released the left mouse button in " + state)
 
    # erase the screen
-   screen.fill(white)
-   pygame.draw.line(screen, red, (x, 0), (x, 1499))
-   pygame.draw.line(screen, red, (0, y), (1499, y))
+   #screen.fill(white)
+   screen.blit(background, (0, 0))
+   #pygame.draw.line(screen, red, (x, 0), (x, 1499))
+   #pygame.draw.line(screen, red, (0, y), (1499, y))
    # blueval += bluedir
    # if blueval == 255 or blueval == 0:
    #     bluedir *= -1
@@ -128,6 +140,7 @@ while (True):
    #updatePoints(points)  # changes the location of the points
    for state in state_borders:
        #subscreen = pygame.display.set_mode((100, 100))
+       pygame.draw.polygon(screen,white,state_borders[state])
        pygame.draw.polygon(screen,black,state_borders[state], 1)  # redraw the points
        #subscreen.fill(red)
 
