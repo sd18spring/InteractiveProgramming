@@ -2,6 +2,7 @@ import json
 import pygame, sys
 from pygame.locals import *
 import math
+import random
 
 '''Takes the latitude and longitudes of the state borders and stores them in point objects.'''
 
@@ -43,28 +44,92 @@ for state in datastore:
         #all_points_list.append((coord['lat']*7+200, coord['lng']*7+1300))
     state_borders[state] = points_list
 #print(state_borders)
-print(all_points_list)
+# for state in state_borders:
+    # print(state_borders[state])
+#print(all_points_list)
+
+#credit for following function to: http://www.ariel.com.au/a/python-point-int-poly.html
+def is_in_polygon(x, y, points):
+    n = len(points)
+    inside = False
+    px1, py1 = points[0]
+    for i in range(1, n + 1):
+        px2, py2 = points[i % n]
+        if y > min(py1, py2):
+            if y <= max(py1, py2):
+                if x <= max(px1, px2):
+                    if py1 != py2:
+                        xinters = (y-py1)*(px2-px1)/(py2-py1)+px1
+                    if px1 == px2 or x <= xinters:
+                        inside = not inside
+        px1, py1 = px2, py2
+    return inside
 
 pygame.init()
 screen = pygame.display.set_mode((1500, 1500))
+red = (255,0,0)
+green = (0,255,0)
+blue = (0,0,255)
+darkBlue = (0,0,128)
 white = (255,255,255)
-black = (0, 0, 0)
+black = (0,0,0)
+pink = (255,200,200)
 
+colors = {(255,0,0): 'red', (0,255,0): 'green', (0,0,255): 'blue', (0,0,128): 'darkBlue', (255,255,255): 'white', (0,0,0): 'black', (255,200,200): 'pink'}
+
+# state_colors = []
+# for i in range(50):
+#     state_colors.append(random.choice(list(colors)))
+#
+# i = 0
+
+# for event in pygame.event.get():
+#     if event.type == MOUSEBUTTONDOWN:  #Better to seperate to a new if statement aswell, since there's more buttons that can be clicked and makes for cleaner code.
+#         if event.button == 1:
+#             for object in clickableObjectsList:
+#                 object.clickCheck(event.pos)
+
+# blueval = 0
+# bluedir  = 1
+LEFT = 1
+x = y = 0
 while (True):
 
    # check for quit events
    for event in pygame.event.get():
         if event.type == pygame.QUIT:
              pygame.quit(); sys.exit();
+        elif event.type == pygame.MOUSEMOTION:
+            # print("mouse at (%d, %d)" % event.pos)
+            x, y = event.pos
+        elif event.type == pygame.MOUSEBUTTONDOWN and event.button == LEFT:
+            x, y = event.pos
+            for state in state_borders:
+                if is_in_polygon(x, y, state_borders[state]):
+                    # print("You pressed the left mouse button at (%d, %d)" % event.pos)
+                    print("You pressed the left mouse button in " + state)
+        elif event.type == pygame.MOUSEBUTTONUP and event.button == LEFT:
+            x, y = event.pos
+            for state in state_borders:
+                if is_in_polygon(x, y, state_borders[state]):
+                    # print("You released the left mouse button at (%d, %d)" % event.pos)
+                    print("You released the left mouse button in " + state)
 
    # erase the screen
    screen.fill(white)
+   pygame.draw.line(screen, red, (x, 0), (x, 1499))
+   pygame.draw.line(screen, red, (0, y), (1499, y))
+   # blueval += bluedir
+   # if blueval == 255 or blueval == 0:
+   #     bluedir *= -1
 
    # draw the updated picture
 
    #updatePoints(points)  # changes the location of the points
    for state in state_borders:
-       pygame.draw.polygon(screen,black,state_borders[state],1)  # redraw the points
+       #subscreen = pygame.display.set_mode((100, 100))
+       pygame.draw.polygon(screen,black,state_borders[state], 1)  # redraw the points
+       #subscreen.fill(red)
 
    # update the screen
    pygame.display.update()
