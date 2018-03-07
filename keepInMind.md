@@ -10,6 +10,7 @@
 3. HUD
    * High score and # of lives left
 4. Projectile
+   * Limited to short burst
 5. Asteroid
    * Small, Medium, and Large
 6. UFO
