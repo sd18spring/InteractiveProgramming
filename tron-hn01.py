@@ -52,14 +52,26 @@ class Cell(object):
 
 
 
-class Grid(object):
-    """Defines a grid of cell objects"""
-    def __init__(self, screen_height, screen_width):
+
+
+
+
+class TronModel(object):
+     """ Encodes a model of the game state, defines a grid of cell objects"""
+    def __init__(self, size):
         self.cells = []
         n=30
-        dx = screen_width/ n
-        stack_height = screen_height// dx
+        self.cell_size = screen_width/ n
+        self.width = size[0]
+        self.stack_height = size[1]//self.cell_size
         for i in range(n):
             for j in range(stack_height):
                 cell = Cell(dx,(i*dx),(j*dx))
                 self.cells.append(cell)
+
+
+
+
+
+if __name__ == "__main__":
+    import doctest
