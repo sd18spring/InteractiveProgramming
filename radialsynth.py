@@ -81,6 +81,10 @@ class Grid():
         block = Block(coord, self, shape, color)
         self.blocks[coord] = block
 
+    def _remove_block(self, mouse_pos):
+        coord = (mouse_pos[0]//36, mouse_pos[1]//36)
+        self.blocks.pop(coord, None)
+
     def main_loop(self):
         """ Updates graphics and checks for pygame events """
         running = True
@@ -92,7 +96,10 @@ class Grid():
                 if event.type is pygame.QUIT:
                     running = False
                 elif event.type is pygame.MOUSEBUTTONDOWN:
-                    self._add_block(event.pos, shape, color)
+                    if event.button == 1 or event.button == 4:
+                        self._add_block(event.pos, shape, color)
+                    elif event.button == 3 or event.button == 5:
+                        self._remove_block(event.pos)
                 elif event.type is pygame.KEYDOWN:
                     if event.key == pygame.K_r:
                         color = RED
