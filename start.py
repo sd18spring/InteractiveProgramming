@@ -12,6 +12,7 @@ and modular code.
 """
 
 import pygame
+
 from pygame.locals import *
 import time
 
@@ -40,6 +41,7 @@ class PyGameWindowView(object):
                                      self.model.paddle2.y,
                                      self.model.paddle2.width,
                                      self.model.paddle2.height))
+        pygame.draw.circle(self.screen,pygame.Color(0,0,255),(int(self.model.puck.x),int(self.model.puck.y)),self.model.puck.r)
         pygame.display.update()
 
 class Model(object):
@@ -47,10 +49,12 @@ class Model(object):
     def __init__(self, size):
         self.paddle = Paddle(50,10,0,240)
         self.paddle2=Paddle(50,10,630,240)
+        self.puck=Puck(10,10,320,240)
     def update(self):
         """ Update the game state (currently only tracking the paddle) """
         self.paddle.update()
-        self.paddle.update()
+        self.paddle2.update()
+        self.puck.update()
     def __str__(self):
         output_lines = []
         # convert each brick to a string for outputting
@@ -77,7 +81,26 @@ class Paddle(object):
                                                         self.width,
                                                            self.x,
                                                           self.y)
+class Puck(object):
+    """ Encodes the state of the paddle in the game """
+    def __init__(self, r, width, x, y):
+        """ Initialize a paddle with the specified height, width,
+            and position (x,y) """
+        self.x = x
+        self.y = y
+        self.r=r
+        self.w=width
+        self.vx = 0.0
 
+    def update(self):
+        """ update the state of the paddle """
+        self.x += self.vx
+
+    def __str__(self):
+        return "Puck x coordinate=%f, y coordinate=%f, radius=%f, width=%f" % (self.x,
+                                                        self.y,
+                                                           self.r,
+                                                          self.w)
 
 if __name__ == '__main__':
     pygame.init()
