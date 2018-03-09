@@ -39,11 +39,11 @@ class Hurricane(object):
         return y
 
 # TESTING
-df = pd.read_csv("CSVFiles.csv", low_memory=False)
-url = df.values[0]
-url = "ftp://eclipse.ncdc.noaa.gov" + url[0]
-data = pd.read_csv(url)
-data.to_csv("hurricane.csv", header=None)
-df2 = pd.read_csv("hurricane.csv", low_memory=False)
-b = Hurricane(df2)
-print(b)
+# df = pd.read_csv("CSVFiles.csv", low_memory=False)
+# url = df.values[0]
+# url = "ftp://eclipse.ncdc.noaa.gov" + url[0]
+# data = pd.read_csv(url)
+# data.to_csv("hurricane.csv", header=None)
+# df2 = pd.read_csv("hurricane.csv", low_memory=False)
+# b = Hurricane(df2)
+# print(b)
