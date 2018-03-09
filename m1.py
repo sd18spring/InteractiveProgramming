@@ -83,7 +83,7 @@ def main():
     pygame.display.set_caption('Sling')
 
     # Fill background
-    background = pygame.Surface(screen.get_size())
+    background = pygame.image.load('data/back1.png')
     background = background.convert()
     background.fill((0, 0, 0))
 
@@ -116,6 +116,11 @@ def main():
         #screen.blit(background, player1.rect, player1.rect)
 
         ballsprite.update()
+
+        if ball.rect.collidepoint(pygame.mouse.get_pos()):
+        	all_sprites_list.remove(ballsprite)
+
+        	
         #playersprites.update()
         ballsprite.draw(screen)
         #playersprites.draw(screen)
