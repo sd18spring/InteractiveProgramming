@@ -1,7 +1,6 @@
 "Naomi's Working Space"
 import pygame
-from pygame.locals import *
-import time
+from pygame.locals import*
 
 class TronWorld():
     def __init__(self,cell_length=10,width=640,height=480):
@@ -44,11 +43,11 @@ class TronWorld():
                     running = False
 
 class Cell(object):
-    def __init__(self, draw_screen, coordinates, side_length):
+    def __init__(self, draw_screen, coordinates, side_length, color=(0,0,0)):
         self.draw_screen = draw_screen
         self.coordinates = coordinates
         self.side_length = side_length
-        self.color = (0, 0, 0)
+        self.color = color
 
     def draw(self):
         line_width = 1
@@ -57,7 +56,5 @@ class Cell(object):
 
 
 if __name__ == '__main__':
-    pygame.init()
-
     world = TronWorld()
     world.main_loop()
