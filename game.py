@@ -1,34 +1,74 @@
 import pygame
+from pygame.locals import *
+from pygame.font import *
+import time
+import numpy
+
 pygame.init()
-screen = pygame.display.set_mode([300,200])
 
 
-
-class Model():
-    def __init__(self, environment, road, player):
-        self.environment = environment
+class Model(object):
+    """keeps track of the game state"""
+    def __init__(self, environmentobjs, road, player):
+        #initialize array that road will cycle through
+        self.arena_array = numpy.zeros(3,3,3)
+        #environment objects will be tethered to a position on the road below
         self.road = road
-        self.play = player
+        self.player = Player()
 
-class Environment():
-    def __init__(self, road):
-        self.road = road
+class EnvironmentObjects(object):
+    """base class for objects"""
+    def __init__(self):
+        pass
+
+class Gastanks(EnvironmentObjects):
+    """describing type of EnvironmentObject"""
+    pass
+
+class Pedestrians(EnvironmentObjects):
+    """describing type of EnvironmentObject"""
+    pass
+
+class Obstacles(EnvironmentObjects):
+    """describing type of EnvironmentObject"""
+    pass
 
 class Road():
-    def __init__(self, pedestrians = [], gastanks = []):
-        self.pedestrians = pedestrians
-        self.gastanks = gastanks
+    """describing the surface that will bring objects to the player"""
+    def __init__(self, pedestrians, gastanks, obstacles):
+        self.pedestrians = Pedestrians
+        self.gastanks = Gastanks
+        self.obstacles = Obstacles
 
-class Player(:)
+class Player():
+    """user controlled player"""
     def __init__(self, position=(0,0)):
         self.position = position
 
-#class UserInterface
+class View():
+    """drawing what is in the model"""
+    def __init__(self, model):
+        self.model = model
 
 class Controllers():
+    """keyboard controls"""
+    def __init__(self, model):
+        self.model = model
     #def __init__(self, )
     #def move_right
     #def move_left
     #def move_up
-class View(Model):
-    def __init__(self)
+
+
+if __name__ == "__main__":
+    size = (640, 480)
+    screen = pygame.display.set_mode(size)
+
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                running = False
+        time.sleep(.001)
+
+    pygame.quit()
