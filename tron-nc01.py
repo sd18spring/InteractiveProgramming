@@ -1,8 +1,28 @@
 "Naomi's Working Space"
 import pygame
 from pygame.locals import*
+import time
 
-class TronWorld():
+class PyGameWindowView(object):
+    def __init__(self,model,width=640,height=480):
+        self.model = model
+        size = (width,height)
+        self.model.screen = pygame.display.set_mode(size)
+    def draw(self):
+        self.model.screen.fill((105,105,105))
+        self.model.cells = {}
+        cell_size = (self.model.cell_length, self.model.cell_length)
+        for i in range(self.model.height):
+            for j in range(self.model.width):
+                cell_coord = (i*self.model.cell_length,j*self.model.cell_length)
+                self.model.cells[(i,j)] = Cell(self.model.screen,cell_coord,cell_size)
+        all_cells = self.model.cells.values()
+        for cell in all_cells:
+            cell.draw()
+        self.model._draw_players()
+        pygame.display.update()
+
+class TronModelView(object):
     def __init__(self,cell_length=10,width=640,height=480):
         pygame.init()
         size = (width,height)
@@ -10,47 +30,16 @@ class TronWorld():
         self.width = width
         self.height = height
         self.cell_length = cell_length
-        self._init_cells()
+        self.player1 = Player(self.screen,10,380,240,"r",(255,140,0))
+        self.player2 = Player(self.screen,10,260,240,"l",(0,255,0))
 
-    def _init_cells(self):
-        self.cells = {}
-        cell_size = (self.cell_length, self.cell_length)
-        for i in range(self.height):
-            for j in range(self.width):
-                cell_coord = (i * self.cell_length, j*self.cell_length)
-                self.cells[(i,j)] = Cell(self.screen, cell_coord, cell_size)
+    def _draw_players(self):
+        self.player1.draw()
+        self.player2.draw()
 
-    def _draw_background(self):
-        gray = (105, 105, 105)
-        self.screen.fill(gray)
-
-    def _draw_cells(self):
-        all_cells = self.cells.values()
-        for cell in all_cells:
-            cell.draw()
-
-    def _display_players(self):
-        self.player1 = Player(self.screen,10,350,240,(255,140,0))
-        self.player2 = Player(self.screen,10,290,240,(255,140,0))
-        self.player1.draw
-        self.player2.draw
-
-    def _redraw(self):
-        self._draw_background()
-        self._draw_cells()
-        self._display_players()
-        pygame.display.update()
-
-    def main_loop(self):
-        running = True
-        while running:
-            self._redraw()
-            for event in pygame.event.get():
-                if event.type == QUIT:
-                    running = False
-                elif event.type == KEYDOWN:
-                    controller = KeyControl(self.player1,self.player2)
-                    controller.handle_event
+    def update(self):
+        self.player1.update()
+        self.player2.update()
 
 class Cell(object):
     def __init__(self, draw_screen, coordinates, side_length):
@@ -65,14 +54,15 @@ class Cell(object):
         pygame.draw.rect(self.draw_screen, self.color, rect, line_width)
 
 class Player(object):
-    def __init__(self, draw_screen, dimension, start_posx, start_posy, color=(255,255,255)):
+    def __init__(self, draw_screen, dimension, start_posx, start_posy, direction, color=(255,255,255)):
         self.draw_screen = draw_screen
         self.width = dimension
         self.height = dimension
         self.x = start_posx
         self.y = start_posy
-        self.dir = "r"
-        self.vx = .2
+        self.dir = direction
+        self.vx = 0
+        self.vy = 0
         self.color = color
 
     def draw(self):
@@ -81,55 +71,79 @@ class Player(object):
 
     def update(self):
         if self.dir == "r":
-            self.x += self.vx
+            self.vx = 10
+            self.vy = 0
         elif self.dir == "l":
-            self.x += -self.x
+            self.vx = -10
+            self.vy = 0
         elif self.dir == "u":
-            self.y += self.vx
+            self.vx = 0
+            self.vy = -10
         elif self.dir == "d":
-            self.y += -self.vx
+            self.vx = 0
+            self.vy = 10
+        self.x += self.vx
+        self.y += self.vy
+
+class PlayerPath(object):
+    def __init__(self,model):
+        self.model = model
 
 class KeyControl(object):
-    def __init__(self, player1, player2):
-        self.player1 = player1
-        self.player2 = player2
+    def __init__(self, model):
+        self.model = model
 
     def handle_event(self, event):
-        if event == K_LEFT:
-            if self.player1.dir == "r":
+        if event.type != KEYDOWN:
+            return
+        if event.key == pygame.K_LEFT:
+            if self.model.player1.dir == "r":
                 return
-            self.player1.dir = "l"
-        if event == K_RIGHT:
-            if self.player1.dir == "l":
+            self.model.player1.dir = "l"
+        if event.key == pygame.K_RIGHT:
+            if self.model.player1.dir == "l":
                 return
-            self.player1.dir = "r"
-        if event == K_DOWN:
-            if self.player1.dir == "u":
+            self.model.player1.dir = "r"
+        if event.key == pygame.K_DOWN:
+            if self.model.player1.dir == "u":
                 return
-            self.player1.dir = "d"
-        if event == K_UP:
-            if self.player1.dir == "d":
+            self.model.player1.dir = "d"
+        if event.key == pygame.K_UP:
+            if self.model.player1.dir == "d":
                 return
-            self.player1.dir = "u"
+            self.model.player1.dir = "u"
 
-        if event == K_a:
-            if self.player2.dir == "r":
+        if event.key ==pygame.K_a:
+            if self.model.player2.dir == "r":
                 return
-            self.player2.dir = "l"
-        if event == K_d:
-            if self.player2.dir == "l":
+            self.model.player2.dir = "l"
+        if event.key == pygame.K_d:
+            if self.model.player2.dir == "l":
                 return
-            self.player2.dir = "r"
-        if event == K_s:
-            if self.player2.dir == "u":
+            self.model.player2.dir = "r"
+        if event.key == pygame.K_s:
+            if self.model.player2.dir == "u":
                 return
-            self.player2.dir = "d"
-        if event == K_w:
-            if self.player2.dir == "d":
+            self.model.player2.dir = "d"
+        if event.key == pygame.K_w:
+            if self.model.player2.dir == "d":
                 return
-            self.player2.dir = "u"
+            self.model.player2.dir = "u"
 
 
 if __name__ == '__main__':
-    world = TronWorld()
-    world.main_loop()
+    pygame.init()
+    model = TronModelView()
+    view = PyGameWindowView(model)
+    controller = KeyControl(model)
+
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                running = False
+            controller.handle_event(event)
+        model.update()
+        view.draw()
+        time.sleep(.001)
+    pygame.quit()
