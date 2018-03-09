@@ -9,6 +9,7 @@ frame_num = 0
 cx = 0
 cy = 0
 path = []
+clearpath = []
 
 while(True):
     #capture frame by frame
@@ -24,7 +25,7 @@ while(True):
     upper_red = np.array([180,255,150])
 
 
-    mask1 = cv2.inRange(hsv, np.array([0, 150, 100]), np.array([2, 255, 255]));
+    mask1 = cv2.inRange(hsv, np.array([0, 150, 100]), np.array([1, 255, 255]));
     mask2 = cv2.inRange(hsv, np.array([178, 150, 100]), np.array([180, 255, 255]));
     mask = mask1 | mask2
 
@@ -39,12 +40,14 @@ while(True):
     # Getting a contour and the center of the contour
     im2,contours,hierarchy = cv2.findContours(mask, 1, 2)
     try:
-        if frame_num > 3 or frame_num == 0:
+        if frame_num > 0 or frame_num == 0:
             cnt = contours[0]
             M = cv2.moments(cnt)
-            print(M['m10']/M['m00'])
+            # print(M['m10']/M['m00'])
             cx = int(M['m10']/M['m00'])
+            # print(cx)
             cy = int(M['m01']/M['m00'])
+            # print(cy)
             frame_num = 0
             path.append((cx, cy))
             # if diffx > 100 or diffy > 100:
@@ -54,23 +57,30 @@ while(True):
     except IndexError:
         """"""
 
-    for i in range(len(path)):
-        # TODO: Add if statements to make sure that any outliers
-        # would be removed from the list or ignored when drawing
-        # the linewidth
+    # TODO: Add if statements to make sure that any outliers
+    # would be removed from the list or ignored when drawing
+    # the linewidth
+    if len(path) == 1:
+        clearpath.append(path[0])
+    elif len(path) > 2:
+        pair = path[-2]
+        # print(pair, pair[0], cx, pair[1], cy)
+        diffx = abs(cx-pair[0])
+        diffy = abs(cy-pair[1])
+        distance = math.sqrt(diffx**2+diffy**2)
+        if distance<10:
+            clearpath.append(pair)
 
-        diffx = math.fabs(cx-path[-1][0])
-        print(diffx)
-        diffy = math.fabs(cy-path[-1][1])
-        print(diffy)
-        if len(path) == 1:
+    for i in range(len(clearpath)):
+        if len(clearpath) < 1:
             break
         # elif math.sqrt(diffx**2+diffy**2) > 30:
-            break
-        elif i < (len(path)-1):
-            cv2.line(res, path[i], path[i+1], (255,0,0), 3)
+            # break
+        elif i < (len(clearpath)-1):
+            cv2.line(res, clearpath[i], clearpath[i+1], (255,0,0), 3)
 
-
+    print(path)
+    print(clearpath)
     frame_num += 1
     # cnts = cv2.findContours(res, cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
     #display the resulting frame
