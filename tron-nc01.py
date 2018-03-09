@@ -18,9 +18,9 @@ class PyGameWindowView(object):
                 cell_coord = (i*self.model.cell_length,j*self.model.cell_length)
                 self.model.cells[(i,j)] = Cell(self.model.screen,cell_coord,cell_size)
         all_cells = self.model.cells.values()
-        
         for cell in all_cells:
             cell.draw()
+            
     def draw(self):
         self.model._draw_players()
         pygame.display.update()
@@ -151,11 +151,11 @@ if __name__ == '__main__':
     pygame.init()
     model = TronModelView()
     view = PyGameWindowView(model)
+    view._init_draw()
     controller = KeyControl(model)
 
     running = True
     while running:
-        view._init_draw
         for event in pygame.event.get():
             if event.type == QUIT:
                 running = False
