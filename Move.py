@@ -11,7 +11,7 @@ class PyGameWindowView(object):
         self.model = model
         self.screen = pygame.display.set_mode(size)
 
-    def draw(self,screen):
+    def draw(self):
         """ Draw the current game state to the screen """
         self.screen.fill(pygame.Color(0,0,0))
         # for brick in self.model.bricks:
@@ -87,13 +87,13 @@ class PyGameKeyboardController(object):
         if event.type != KEYDOWN:
             return
         if event.key == pygame.K_LEFT:
-            self.model.paddle.x += -1
+            self.model.paddle.vx += -1
         if event.key == pygame.K_RIGHT:
-            self.model.paddle.x += 1
+            self.model.paddle.vx += 1
         if event.key == pygame.K_UP:
-            self.model.paddle.y += -1
+            self.model.paddle.vy += -1
         if event.key == pygame.K_DOWN:
-            self.model.paddle.y += 1
+            self.model.paddle.vy += 1
 
 if __name__ == '__main__':
     pygame.init()
