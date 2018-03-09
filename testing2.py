@@ -37,6 +37,9 @@ while( cap.isOpened() ) :
                defects = cv2.convexityDefects(cnt,hull)
                mind=0
                maxd=0
+               shape = 0
+               if type(defects) != 'NoneType':
+                  shape = defects.shape[0]
                for i in range(defects.shape[0]):
                     s,e,f,d = defects[i,0]
                     start = tuple(cnt[s][0])
