@@ -12,6 +12,7 @@ while not done:
             done = True
         elif event.type == pygame.KEYDOWN:
             done = True
-screen.blit(background_image, [0, 0])
+        screen.blit(background_image,[0,0])
+        pygame.display.flip()
 clock.tick(60)
 pygame.quit()
