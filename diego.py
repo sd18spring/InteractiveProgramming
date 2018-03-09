@@ -13,7 +13,7 @@ class Penguin(pygame.sprite.Sprite): # code is from pygame documenta
 
        # Create an image of the block, and fill it with a color.
        self.image = pygame.Surface([width, height])
-       self.image.fill(color)
+       self.image.fill('BLACK')
        # self.image = pygame.image.load("/path/to/image_file.png") -- use to import image
 
        # Fetch the rectangle object that has the dimensions of the image
@@ -27,22 +27,14 @@ class Cell():
         self.coordinates = coordinates
         self.dimensions = dimensions
         self.color = (0, 0, 0)
-        self.g_cost = None
-        self.h_cost = None
-
-    @property
-    def f_cost(self):
-        if self.g_cost is None or self.h_cost is None:
-            return None
-        return self.g_cost + self.h_cost
 
     def draw(self):
-        line_width = 2
+        line_width = 1  # SPACE BETWEEN CELLS
         rect = pygame.Rect(self.coordinates, self.dimensions)
         pygame.draw.rect(self.draw_screen, self.color, rect, line_width)
 
 class Track_View(object): # code taken from AI toolbox, naomi used it too
-    def __init__(self, width=10, height=10, cell_size=50):
+    def __init__(self, width=15, height=10, cell_size=30):          # width and height are number of cells and are switched
         pygame.init()
         screen_size = (height * cell_size, width * cell_size)
         self.screen = pygame.display.set_mode(screen_size)
