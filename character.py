@@ -1,11 +1,14 @@
+import pygame
+from pygame.locals import *
+
 class Character:
     def __init__(self, pos_x = 0, pos_y = 0, label = "blank",
                      attack = 10,
                      defense = 10,
                      weight = 10,
                      jump_vel = -100,
-                     acceleration = 3,
-                     speed = 15,
+                     acceleration = 5,
+                     speed = 20,
                      width = 75,
                      height = 150,
                      max_health = 100,
@@ -20,6 +23,10 @@ class Character:
         self.width = width
         self.height = height
         self.health = max_health
+        self.left = False
+        self.right = False
+        self.attacking = False
+        self.damaged = False
         self.vel_x = 0
         self.vel_y = 0
         self.acc_x = acceleration
@@ -28,6 +35,7 @@ class Character:
         self.lives = 3
         self.max_jumps = max_jumps
         self.jumps = max_jumps
+        self.rect = pygame.Rect(self.pos_x, self.pos_y, self.width, self.height)
 
     def __str__(self):
         output = self.label + ':\n'
@@ -68,17 +76,18 @@ class Character:
         """
         #NOTE: this is a pretty jank way of doing what I want, but i didn't
         #want to overhaul your code
-        if self.acc_direction != 0:
-            self.vel_x += self.acc_x * self.acc_direction
-            if self.vel_x > self.speed:
-                self.vel_x = self.speed
-            if self.vel_x < -self.speed:
-                self.vel_x = -self.speed
-        else:
-            if self.vel_x > 0:
-                self.vel_x -= self.acc_x
-            elif self.vel_x < 0:
-                self.vel_x += self.acc_x
+        self.vel_x += self.acc_x * self.acc_direction
+        if self.vel_x > self.speed:
+            self.vel_x = self.speed
+        if self.vel_x < -self.speed:
+            self.vel_x = -self.speed
+
+        #Decelerates the object when there are no inputs.
+        # if self.vel_x > 0:
+        #     self.vel_x -= self.acc_x
+        # elif self.vel_x < 0:
+        #     self.vel_x += self.acc_x
+
     def move(self):
         """
         updates the position of the character laterally.
@@ -86,3 +95,4 @@ class Character:
         """
         self.pos_x += self.vel_x
         self.pos_y += self.vel_y
+        self.rect = pygame.Rect(self.pos_x, self.pos_y, self.width, self.height)

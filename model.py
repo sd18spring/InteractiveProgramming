@@ -28,31 +28,31 @@ class Model:
         Toggles the different modes of acceleration depending on key up
         events and key down events.
         """
-        if not (event.type == KEYDOWN or event.type == KEYUP) or not (event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT):
+        if (not (event.type == KEYDOWN or event.type == KEYUP) or
+            not (event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT)):
            return
-        left = False
-        right = False
+
         #KEYDOWN events toggle movement on
         if event.type == KEYDOWN:
             if event.key == pygame.K_LEFT:
-                left = True
+                game_object.left = True
             if event.key == pygame.K_RIGHT:
-                right = True
+                game_object.right = True
         #KEYUP events toggles movement off
         if event.type == KEYUP:
             if event.key == pygame.K_LEFT:
-                left = False
+                game_object.left = False
             if event.key == pygame.K_RIGHT:
-                right = False
+                game_object.right = False
         #If left XOR right
-        if left != right:
-            if left:
-                game_object.acc_direction = -1
-            if right:
-                game_object.acc_direction = 1
+        if game_object.left or game_object.right:
+            if game_object.left:
+                game_object.vel_x = -game_object.speed
+            if game_object.right:
+                game_object.vel_x = game_object.speed
         #Slow character down when there's conflicting input or no input
         else:
-            game_object.acc_direction = 0
+            game_object.vel_x = 0
 
     def y_movement(self, event, game_object):
         """
@@ -64,6 +64,9 @@ class Model:
                 game_object.vel_y = game_object.jump_vel
                 game_object.jumps -= 1
                 print("up", game_object.vel_y)
+    def attack(self, event):
+        if event.type == KEYDOWN:
+            if event.key ==
 
     def update_motion(self):
         """
