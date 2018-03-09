@@ -16,7 +16,7 @@ class Model(object):
         self.road = Road
         self.player = Player()
 
-class EnvironmentObjects(object):
+class EnvironmentObjects():
     """base class for objects"""
     def __init__(self):
         pass
