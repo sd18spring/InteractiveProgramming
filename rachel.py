@@ -2,130 +2,115 @@
 import pygame
 from pygame.locals import *
 import time
-
-
+clock = pygame.time.Clock()
+"""
+THINGS TO DO:
+1. figure out how to generalize obstacle class w/ images
+    a. add slow down and speed up functions
+2. figure out how to generate more Obstacles
+    a. create random tracks... if possible
+3. Collisions
+    a. somehow display that penguino has crashed
+4. Extensions
+    a. 2 player
+    b. easy, medium, hard mode (single player)
+    x. rotate screen
+"""
 class Penguin(pygame.sprite.Sprite): # code is from pygame documenta
     # Constructor. Pass in the color of the block,
     # and its x and y position
     def __init__(self):
-       # Call the parent class (Sprite) constructor
-       super().__init__()
+        # Call the parent class (Sprite) constructor
+        super().__init__()
 
-       # Create an image of the block, and fill it with a color.
-    #   self.image = pygame.Surface([width, height])
-     #  self.image.fill('BLACK')
-       # self.image = pygame.image.load("/path/to/image_file.png") -- use to import image
+        # Create an image of the block, and fill it with a color
+        self.image = pygame.image.load("penguin_smol.png")
+        self.rect = self.image.get_rect()
+    def moveUp(self, pixels):
+        if self.rect.y <= 0:
+            self.rect.y = 0
+        else:
+            self.rect.y -= pixels
 
-       # Fetch the rectangle object that has the dimensions of the image
-       # Update the position of this object by setting the values of rect.x and rect.y
-       self.image = pygame.image.load("penguin_smol.png").convert()
-       self.rect = self.image.get_rect()
-    pass
+    def moveDown(self, pixels):
+        if self.rect.y >= 340:
+            self.rect.y = 340
+        else:
+            self.rect.y += pixels
 
-class Cell():
-    def __init__(self, draw_screen, coordinates, dimensions):
-        self.draw_screen = draw_screen
-        self.coordinates = coordinates
-        self.dimensions = dimensions
-        self.color = (0, 0, 0)
 
-    def draw(self):
-        line_width = 1  # SPACE BETWEEN CELLS
-        rect = pygame.Rect(self.coordinates, self.dimensions)
-        pygame.draw.rect(self.draw_screen, self.color, rect, line_width)
 
-class Track_View(object): # code taken from AI toolbox, naomi used it too
-    def __init__(self, width=15, height=10, cell_size=30):          # width and height are number of cells and are switched
+class Obstacles(pygame.sprite.Sprite):
+    def __init__(self, rect = None):
+        super().__init__()
+        self.image = pygame.image.load("rock.png")
+        self.rect = self.image.get_rect()
+        if rect != None:
+            self.rect = rect
+
+    def moveLeft(self, pixels):
+        self.rect.x -= pixels
+# class Model:
+#     def __init__(self):
+#         self.all_penguins = pygame.sprite.Group()
+#         penguin = Penguin()
+
+
+class Sled_Main:
+    def __init__(self):
         pygame.init()
-        screen_size = (height * cell_size, width * cell_size)
-        self.screen = pygame.display.set_mode(screen_size)
-        pygame.display.set_caption = ('Paul World')
-        #self.actors = {}
-        self.width = width
-        self.height = height
-        self.cell_size = cell_size
-        self._init_cells()
+        size = (500, 400)
+        self.WHITE = pygame.Color(255, 255, 255)
+        self.screen = pygame.display.set_mode(size)
 
-    def _draw_background(self):
-        WHITE = (255, 255, 255)
-        self.screen.fill(WHITE)
+    def loadSprites(self):
+        self.penguin = Penguin()
+    #    self.penguin.image = pygame.transform.rotate(self.penguin.image, -30)
+        self.all_penguins = pygame.sprite.RenderPlain(self.penguin)
 
-    def _init_cells(self):
-        self.cells = {}
-        cell_size = (self.cell_size, self.cell_size)
-        for i in range(self.height):
-            for j in range(self.width):
-                cell_coord = (i * self.cell_size, j * self.cell_size)
-                self.cells[(i, j)] = Cell(self.screen, cell_coord, cell_size)
+        self.boulders = pygame.sprite.RenderPlain()
+        self.boulders.add(Obstacles(pygame.Rect(100, 100, 60, 60)))
 
-    def _draw_cells(self):
-        all_cells = self.cells.values()
-        for cell in all_cells:
-            cell.draw()
-
-    def _redraw(self):
-        self._draw_background()
-        #self._draw_actors()
-        self._draw_cells()
-        pygame.display.update()
-    pass
-
-    def main_loop(self): #lots of extra functions, have to clean up but we can use the keydown stuff
-        """Update graphics and check for pygame events."""
+    def main_loop(self):
+        self.loadSprites()
         running = True
-        SCREENWIDTH= 400
-        SCREENHEIGHT=500
-        WHITE = (255, 0, 0)
-        size = (SCREENWIDTH, SCREENHEIGHT)
-        screen = pygame.display.set_mode(size)
-        all_penguins = pygame.sprite.Group()
-        penguin = Penguin()
-        penguin.rect.x = 15
-        penguin.rect.y = 15
-        all_penguins.add(penguin)
+        pygame.display.set_caption("Club Penguing Sledding Game")
         while running:
             #self._redraw()
             for event in pygame.event.get():
                 if event.type is pygame.QUIT:
                     running = False
+            keys = pygame.key.get_pressed()
+            if keys[pygame.K_LEFT]:
+                self.penguin.moveUp(15)
+            if keys[pygame.K_RIGHT]:
+                self.penguin.moveDown(15)
+            self.all_penguins.update()
 
-            all_penguins.update()
-            screen.fill(WHITE)
-            all_penguins.draw(screen)
-
-                # elif event.type is pygame.MOUSEBUTTONDOWN:
-                #     pass
-                #     # if self.add_tile_type == 'lava':
-                #     #     self._add_lava(event.pos)
-                #     # insert swamp code here
-                # elif event.type is pygame.KEYDOWN:
-                #     pass
-                #     # if event.key == pygame.K_SPACE:
-                #     #     self.paul.run_astar(self.cake.cell_coordinates, self)
-                #     #     self.paul.get_path()
+            list_of_boulders = self.boulders.sprites()
 
 
+            if self.penguin.rect.colliderect(list_of_boulders[0].rect):
+                list_of_boulders[0].moveLeft(0)
+            else:
+                list_of_boulders[0].moveLeft(1)
+            self.boulders.update()
+
+            self.screen.fill(self.WHITE)
+            self.boulders.draw(self.screen)
+            self.all_penguins.draw(self.screen)
+            pygame.display.update()
+            clock.tick(60)
         pygame.quit()
-class Obstacles(object):
-    pass
 
 
-class Sled_model(object):
-    pass
 
-
-class CPSled_main:
-    pass
 
 if __name__ == '__main__':
-    world = Track_View()
-    world.main_loop()
-    pygame.quit()
-    # pygame.init()
-    #
-    # size = (1024, 768)
-    # screen = pygame.display.set_mode(size)
-    #
+    game = Sled_Main()
+    game.main_loop()
+
+
     # running = True
     # while running:
     #     for event in pygame.event.get():
