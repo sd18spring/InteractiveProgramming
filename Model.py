@@ -13,8 +13,9 @@ class Model(object):
             start = 0
         if end is None:
             end = Model.MAXNUM
+
+        df = pd.read_csv("CSVFiles.csv", low_memory=False)
         for i in range(start, end):
-            df = pd.read_csv("CSVFiles.csv", low_memory=False)
             url = df.values[i]
             url = "ftp://eclipse.ncdc.noaa.gov" + url[0]
             data = pd.read_csv(url)

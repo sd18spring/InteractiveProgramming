@@ -10,7 +10,7 @@ class Hurricane(object):
         self.season = df['Season'][1]
         self.name = df['Name'][1]
         self.times = df['ISO_time'][1:]
-        self.nature = df['Nature'][1]
+        self.natures = df['Nature'][1:]
         self.winds = df['Wind(WMO)'][1:]
 
     def __str__(self):
