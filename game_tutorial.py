@@ -1,12 +1,12 @@
 """
 List of things we used so far: Brian Wilkinson (Youtube video about...sprites and stuff)
 """
-import pygame
+import pygame, sys
 from pygame.locals import *
 import random
 
 SCREENWIDTH = 1500
-SCREENHEIGHT = 900
+SCREENHEIGHT = 1000
 
 def main():
     pygame.init()
@@ -15,6 +15,7 @@ def main():
     pygame.display.set_caption("Yes I do.")
     blocksGroup = pygame.sprite.Group()
     player_group = pygame.sprite.Group()
+    score = 0
 
     for i in range(10):
         height = random.randint(30, 150)
@@ -34,18 +35,20 @@ def main():
     while True:
         for event in pygame.event.get():
             if event.type == QUIT:
+                print(score)
                 pygame.quit()
                 sys.exit()
 
             player.on_event(event)
         mainSurface.fill((0, 0, 0))
 
-        player.collide(blocksGroup)
+        player.collide(blocksGroup, score)
 
         player_group.draw(mainSurface)
         blocksGroup.update()
         blocksGroup.draw(mainSurface)
         pygame.display.update()
+        score += .01
 
 
 class Block(pygame.sprite.Sprite):
@@ -75,13 +78,23 @@ class Player(pygame.sprite.Sprite):
 
     def on_event(self, event):
         if event.type == KEYDOWN:
-            self.rect.y += 20
+
+            if self.rect.y > SCREENHEIGHT-75:
+                self.rect.y = SCREENHEIGHT - 50
+            elif self.rect.y < SCREENHEIGHT- 50:
+                self.rect.y += 20
+
+
 
         elif event.type == MOUSEBUTTONDOWN:
-            self.rect.y -= 20
+            if self.rect.y < 25:
+                self.rect.y = 0
+            elif self.rect.y > 0:
+                self.rect.y -= 20
 
-    def collide(self, obstacles):
+    def collide(self, obstacles, score):
         if pygame.sprite.spritecollide(self, obstacles, False):
+            print(int(score))
             pygame.quit()
             sys.exit()
 
