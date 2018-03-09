@@ -23,8 +23,8 @@ class Model(object):
         center: tuple containing the center about which the screen will
         be dilated"""
         for node in self.nodes:
-            node.x = (node.x - center[0]/2)*1.05 + center[0]/2
-            node.y = (node.y - center[1]/2)*1.05 + center[1]/2
+            node.x = (node.x - center[0])*1.05 + center[0]
+            node.y = (node.y - center[1])*1.05 + center[1]
         for cline in self.clines:
             cline.update()
 
@@ -33,8 +33,8 @@ class Model(object):
         center: tuple containing the center about which the screen will
         be dilated"""
         for node in self.nodes:
-            node.x = (node.x - center[0]/2)*0.95 + center[0]/2
-            node.y = (node.y - center[1]/2)*0.95 + center[1]/2
+            node.x = (node.x - center[0])*0.95 + center[0]
+            node.y = (node.y - center[1])*0.95 + center[1]
         for cline in self.clines:
             cline.update()
 
