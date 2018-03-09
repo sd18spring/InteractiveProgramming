@@ -1,3 +1,4 @@
+import pygame
 class Character:
     def __init__(self, pos_x = 0, pos_y = 0, label = "blank",
                      attack = 10,
@@ -9,7 +10,7 @@ class Character:
                      width = 75,
                      height = 150,
                      max_health = 100,
-                     max_jumps = 3):
+                     max_jumps = 3, keys = {"left": pygame.K_LEFT, "right": pygame.K_RIGHT, "up" : pygame.K_UP, "down": pygame.K_DOWN, "attack": pygame.K_SLASH}):
         self.label = label
         self.attack = attack
         self.defense = defense
@@ -28,6 +29,7 @@ class Character:
         self.lives = 3
         self.max_jumps = max_jumps
         self.jumps = max_jumps
+        self.keys = keys
 
     def __str__(self):
         output = self.label + ':\n'

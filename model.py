@@ -14,35 +14,31 @@ class Model:
         for char in args:
             self.characters.append(char)
 
-        #NOTE: Why is this a double for loop? We should just have one terrain
-        #object for the ground, not 30.
-        for i in range(10):
-            for j in range(3):
-                self.terrains.append(terrain.Terrain((i * 100,1000 - j * 100)))
+        self.terrains.append(terrain.Terrain((0,600), (1000,400)))
         #for i in range(10):
         #    if(random.randint(1,2) == 2):
-        #        self.terrains.append(terrain.Terrain((i * 100,1000 - 3 * 100)))
+        #        self.terrains.append(terrain.Terrain((i * 100,1000 - 3 * 100)))s
 
     def x_movement(self, event, game_object):
         """
         Toggles the different modes of acceleration depending on key up
         events and key down events.
         """
-        if not (event.type == KEYDOWN or event.type == KEYUP) or not (event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT):
+        if not (event.type == KEYDOWN or event.type == KEYUP) or not (event.key == game_object.keys["left"] or event.key == game_object.keys["right"]):
            return
         left = False
         right = False
         #KEYDOWN events toggle movement on
         if event.type == KEYDOWN:
-            if event.key == pygame.K_LEFT:
+            if event.key == game_object.keys["left"]:
                 left = True
-            if event.key == pygame.K_RIGHT:
+            if event.key == game_object.keys["right"]:
                 right = True
         #KEYUP events toggles movement off
         if event.type == KEYUP:
-            if event.key == pygame.K_LEFT:
+            if event.key == game_object.keys["left"]:
                 left = False
-            if event.key == pygame.K_RIGHT:
+            if event.key == game_object.keys["right"]:
                 right = False
         #If left XOR right
         if left != right:
@@ -60,7 +56,7 @@ class Model:
         """
         #KEYUP events toggles movement off
         if event.type == KEYDOWN:
-            if event.key == pygame.K_UP and game_object.jumps > 0:
+            if event.key == game_object.keys["up"] and game_object.jumps > 0:
                 game_object.vel_y = game_object.jump_vel
                 game_object.jumps -= 1
                 print("up", game_object.vel_y)

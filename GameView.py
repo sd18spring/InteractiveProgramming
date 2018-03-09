@@ -26,7 +26,8 @@ if __name__ == "__main__":
     FPS = 30
 
     char1 = Character(pos_x = 500, pos_y = 500, label = 'char1')
-    char2 = Character(label = 'char2')
+    char2 = Character(label = 'char2', keys = {"left": pygame.K_a, "right": pygame.K_d, "up" : pygame.K_w, "down":
+                                                pygame.K_s, "attack" : pygame.K_SLASH})
     model = Model(char1, char2)
     view = GameView(model, (1000, 1000))
     while model.game_running:
