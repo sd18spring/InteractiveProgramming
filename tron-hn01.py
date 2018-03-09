@@ -36,6 +36,16 @@ class TronModelView(object):
         self.player1 = Player(self.screen,10,(self.width/2+100),(self.height/2),"r",(255,140,0))
         self.player2 = Player(self.screen,10,(self.width/2-100),(self.height/2),"l",(0,255,0))
 
+    def path_init(self):
+        self.cells_loc = {}
+        for i in range(self.height):
+            for j in range(self.width):
+                cell_coords = (i*self.cell_length,j*self.cell_length)
+                self.cells_loc[(i,j)] = Cell(self.screen,cell_coords,cell_size)
+
+        self.hit_cells = [(self.player1.x, self.player1.y), (self.player2.x, self.player2.y)]
+        
+
     def _draw_players(self):
         self.player1.draw()
         self.player2.draw()
@@ -61,6 +71,11 @@ class Cell(object):
         self.coordinates = coordinates
         self.side_length = side_length
         self.color = (0, 0, 0)
+        self.area_pix = []
+        for i in range(self.coordinates[0], self.coordinates[0]+self.side_length):
+            for j in range(self.coordinates[1], self.coordinates[1]+self.side_length):
+                self.area_pix.append((i,j))
+
 
     def draw(self):
         line_width = 1
@@ -112,6 +127,22 @@ class Player(object):
 class PlayerPath(object):
     def __init__(self,model):
         self.model = model
+        self.model.cells_loc = {}
+        for i in range(self.model.height):
+            for j in range(self.model.width):
+                cell_coords = (i*self.model.cell_length,j*self.model.cell_length)
+                self.model.cells_loc[(i,j)] = Cell(self.model.screen,cell_coords,cell_size)
+
+        self.model.hit_cells = [(self.model.player1.x, self.model.player1.y), (self.model.player2.x, self.model.player2.y)]
+
+    def update(self):
+        if (self.model.player1.x, self.model.player1.y) not in self.hit_cells:
+            self.hit_cells.append((player1.x, player1.y))
+        if (self.model.player2.x, self.model.player2.y) not in self.hit_cells:
+            self.hit_cells.append
+
+
+
 
 class KeyControl(object):
     def __init__(self, model):
