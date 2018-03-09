@@ -10,8 +10,15 @@ class PyGameWindowView(object):
 
         self.screen = pygame.display.set_mode(size)
         self.model = model
+
+        self.background = pygame.Surface(self.screen.get_size())
+        self.background.fill((255, 255, 255))
+
+        self.lineStart = (0, 240)
+        self.drawColor = (0, 0, 0)
+        self.lineWidth = 10
+
     def draw(self):
-        self.screen.fill(pygame.Color(255, 255, 255))
 
         pygame.draw.rect(self.screen,
                          pygame.Color(0, 0, 0),
@@ -54,10 +61,18 @@ if __name__ == '__main__':
         for event in pygame.event.get():
             if event.type == QUIT:
                 running = False
-        position = pygame.mouse.get_pos()
+        #view.lineStart = pygame.mouse.get_pos()
+        lineEnd = pygame.mouse.get_pos()
+        if pygame.mouse.get_pressed() == (1, 0, 0):
+            pygame.draw.line(view.background, view.drawColor, view.lineStart, lineEnd, view.lineWidth)
+            view.lineStart = lineEnd
+        view.screen.blit(view.background, (0, 0))
+        pygame.display.flip()
+        #position = pygame.mouse.get_pos()
+
         view.draw()
-        print(position[0], position[1])
-        model.update(position[0], position[1])
+        #print(lineEnd[0]-5, view.lineEnd[1]-5)
+        model.update(lineEnd[0]-150, lineEnd[1]-20)
         print(model.x, model.y)
         pygame.display.update() #this is the line of code I added to update the screen
         time.sleep(.001)
