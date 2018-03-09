@@ -63,7 +63,7 @@ while running:
     #drawing the rectangle to the screen, and updating the screen
     pygame.draw.rect(screen, [255, 255 ,255], danny)
     pygame.display.update()
-    #clock for consistent for loop timing. 
+    #clock for consistent for loop timing.
     clock.tick(FPS)
 
 pygame.quit()
