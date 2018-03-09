@@ -11,12 +11,11 @@ if __name__ == '__main__':
 
     while running:
         for event in pygame.event.get():
-            if event.button == 1
-                if event.type == pygame.MOUSEMOTION:
-                    print(event.pos)
-                if event.type == pygame.QUIT:
-                    running = False
-                    break
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                print(event.pos)
+            if event.type == pygame.QUIT:
+                running = False
+                break
             screen.fill(pygame.Color(28, 172, 229))
         pygame.display.update()
 

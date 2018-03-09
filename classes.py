@@ -93,18 +93,20 @@ class Controler(object):
 
             elif event.button == 1:
                 rect = self.model.rectangle
-                self.model.mouse_pos = pygame.mouse.get_pos()
+                m_pos = pygame.mouse.get_pos()
+                if rect[0] < m_pos[0] < rect[0]+rect[2] and rect[1] < m_pos[1] < rect[1]+rect[3]:
+                    print('yay!')
                 print(self.model.mouse_pos)
 
-            elif pygame.mouse.get_pressed()[0]:
-                rect = self.model.rectangle
-                m_pos = pygame.mouse.get_pos()
-                if not (rect[0] < m_pos[0] < rect[0]+rect[2] and rect[1] < m_pos[1] < rect[1]+rect[3]):
-                    self.model.panning = True
-                    self.model.mouse_pos = pygame.mouse.get_pos()
+        if pygame.mouse.get_pressed()[0]:
+            rect = self.model.rectangle
+            m_pos = pygame.mouse.get_pos()
+            if not (rect[0] < m_pos[0] < rect[0]+rect[2] and rect[1] < m_pos[1] < rect[1]+rect[3]):
+                self.model.panning = True
+                self.model.mouse_pos = pygame.mouse.get_pos()
 
-            elif pygame.mouse.get_pressed()[0] == False:
-                self.model.panning = False
+        elif pygame.mouse.get_pressed()[0] == False:
+            self.model.panning = False
 
 
         if event.type == pygame.KEYDOWN:
