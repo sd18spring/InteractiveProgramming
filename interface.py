@@ -20,7 +20,7 @@ black = (0,0,0)
 white = (255,255,255)
 
 clock = pygame.time.Clock()
-crashed = False
+running = True
 shipImg = pygame.image.load('spa.png')
 
 class Ship():
@@ -31,17 +31,42 @@ class Ship():
         self.x = x
         self.y = y
         self.image = img
+        self.w,self.h = img.get_size()
     def move(self):
-        self.x_speed += math.cos(math.radians(self.angle))*2
-        self.y_speed += math.sin(math.radians(self.angle))*2
+        if math.sqrt(self.x_speed**2+self.y_speed**2) < 8:
+            self.x_speed += math.cos(math.radians(self.angle))*2
+            self.y_speed += math.sin(math.radians(self.angle))*2
+
+    def drift(self):
+        """
+        Drifts the ship to a stop. Doesn't work yet
+        """
+        if math.sqrt(self.x_speed**2+self.y_speed**2) > 0:
+            self.x_speed = -self.x_speed/10
+            self.y_speed = -self.y_speed/10
+        else:
+            self.x_speed = 0
+            self.y_speed = 0
 
     def rotate(self,posNeg):
         self.image = pygame.transform.rotate(self.image,5*posNeg)
         self.angle += posNeg*5
 
     def update(self):
+        width,height = gameDisplay.get_size()
+
         self.x += self.x_speed
         self.y += self.y_speed
+
+        if(self.x >= width):
+            self.x = 0 - self.w
+        elif(self.x <= 0 - self.w):
+            self.x = width
+        if(self.y >= height):
+            self.y = 0 - self.h
+        elif(self.y <= 0 - self.h):
+            self.y = height
+
         gameDisplay.blit(self.image,(self.x,self.y))
 
 
@@ -50,11 +75,11 @@ shipY = (display_height * .5)
 
 ship = Ship(shipX,shipY,315,shipImg)
 
-while not crashed:
+while running:
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            crashed = True
+            running = False
         #print(event)
 
         if event.type == pygame.KEYDOWN:
@@ -62,6 +87,11 @@ while not crashed:
                 ship.move()
             if event.key == pygame.K_LEFT:
                 ship.rotate(1)
+            if event.key == pygame.K_RIGHT:
+                ship.rotate(-1)
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_UP:
+                ship.drift()
 
     gameDisplay.fill(white)
 
