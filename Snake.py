@@ -95,8 +95,10 @@ class SnakeController(object):
         if event.type != KEYDOWN:
             return
         if event.key == pygame.K_DOWN:
-            if abs(self.model.Snake[-1].vy) == .1:
+            if abs(self.model.Snake[-1].vy) == -.1:
                 return
+            if self.model.Snake[-1].vx == -.1:
+                self.model.Snake.reverse()
             while self.model.Snake[0].x != self.model.Snake[-1].x:
                 for i in range(len(self.model.Snake)-1):
                     self.model.Snake[i].x += self.model.Snake[i+1].x - self.model.Snake[i].x
@@ -111,8 +113,10 @@ class SnakeController(object):
 
 
         if event.key == pygame.K_LEFT:
-            if abs(self.model.Snake[-1].vx) == .1:
+            if abs(self.model.Snake[-1].vx) == -.1:
                 return
+            if self.model.Snake[-1].vy == .1:
+                self.model.Snake.reverse()
             while self.model.Snake[0].y != self.model.Snake[-1].y:
                 for i in range(len(self.model.Snake)-1):
                     self.model.Snake[i].x += self.model.Snake[i+1].x - self.model.Snake[i].x
@@ -126,8 +130,10 @@ class SnakeController(object):
                     part.vx = -.1
 
         if event.key == pygame.K_RIGHT:
-            if abs(self.model.Snake[-1].vx) == .1:
+            if abs(self.model.Snake[-1].vx) == -.1:
                 return
+            if self.model.Snake[-1].vy == -.1:
+                self.model.Snake.reverse()
             while self.model.Snake[0].y != self.model.Snake[-1].y:
                 for i in range(len(self.model.Snake)-1):
                     self.model.Snake[i].x += self.model.Snake[i+1].x - self.model.Snake[i].x
@@ -141,8 +147,10 @@ class SnakeController(object):
                     part.vx = .1
 
         if event.key == pygame.K_UP:
-            if abs(self.model.Snake[-1].vy) == .1:
+            if abs(self.model.Snake[-1].vy) == -.1:
                 return
+            if self.model.Snake[-1].vx == -.1:
+                self.model.Snake.reverse()
             while self.model.Snake[0].x != self.model.Snake[-1].x:
                 for i in range(len(self.model.Snake)-1):
                     self.model.Snake[i].x += self.model.Snake[i+1].x - self.model.Snake[i].x
