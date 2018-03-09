@@ -18,6 +18,7 @@ LTGRAY = (100, 100, 100)
 BLUE = (50, 100, 200)
 RED = (200, 50, 100)
 GREEN = (100, 200, 50)
+YELLOW = (200, 200, 50)
 
 class Grid():
     """ A grid full of cells, where note blocks can be placed by the user
@@ -50,8 +51,6 @@ class Grid():
     def _add_coords(self, a, b):
         x = (a[0]+b[0])
         y = (a[1]+b[1])
-        # Need to make it so that coords out of range translate to
-        # other side of grid, probaly using %.
         return (x, y)
 
     def _init_buttons(self):
@@ -81,18 +80,31 @@ class Grid():
         block = Block(coord, self, shape, color)
         self.blocks[coord] = block
 
+    def _remove_block(self, mouse_pos):
+        coord = (mouse_pos[0]//36, mouse_pos[1]//36)
+        self.blocks.pop(coord, None)
+
     def main_loop(self):
         """ Updates graphics and checks for pygame events """
         running = True
         shape = 'square'
         color = LTGRAY
+        mode = 1
         while running:
             self._redraw()
             for event in pygame.event.get():
                 if event.type is pygame.QUIT:
-                    running = False
+                    running = 0
                 elif event.type is pygame.MOUSEBUTTONDOWN:
-                    self._add_block(event.pos, shape, color)
+                    if mode > 0:
+                        if mouse
+                        self._add_block(event.pos, shape, color)
+                    else:
+                        mode *= -1
+                        print("Processing...")
+                        s.make_rings(event.pos)
+                        s.draw_rings()
+                        print("Done.")
                 elif event.type is pygame.KEYDOWN:
                     if event.key == pygame.K_r:
                         color = RED
@@ -108,6 +120,9 @@ class Grid():
                         print(self.blocks)
                     elif event.key == pygame.K_DELETE:
                         self.blocks = {}
+                    elif event.key == pygame.K_SPACE:
+                        mode *= -1
+                        print(mode)
             time.sleep(.01)
 
 class Block(object):
@@ -153,7 +168,12 @@ class Sweeper():
     in one 'ring' at a time."""
     def __init__(self, world):
         self.world = world
-        self.rings = self.plan_rings(8)
+        self.rings = self.plan_rings(12)
+
+    def overflow(self, a, b):
+        x = (a[0]+b[0]) % 24
+        y = (a[1]+b[1]) % 24
+        return (x, y)
 
     def plan_rings(self, number):
         rings = {}
@@ -168,13 +188,13 @@ class Sweeper():
         return rings
 
     def make_rings(self, start):
-        start_coord = (start[0]//36, start[1]//36)
+        center = (start[0]//36, start[1]//36)
         new_rings = {}
         number = len(self.rings)
         for n in range(number):
             new_cells = []
             for coord in self.rings[n]:
-                new_coord = self.world._add_coords(start_coord, coord)
+                new_coord = self.overflow(center, coord)
                 new_cells.append(new_coord)
             new_rings[n] = new_cells
         self.new_rings = new_rings
@@ -183,16 +203,19 @@ class Sweeper():
         cells = self.world.cells
         screen = self.world.screen
         for ring in self.new_rings.values():
-            print(ring)
             for coord in ring:
                 cell = cells[coord]
                 coords = self.world._add_coords(cell.coordinates, (3, 3))
+                print(coords)
                 rect_dim = (30, 30)
                 image_rect = pygame.Rect(coords, rect_dim)
                 pygame.draw.rect(screen, GRAY, image_rect, 0)
-            time.sleep(.5)
+            pygame.display.update()
+            time.sleep(.33)
             self.world._redraw()
+            print("Redrawn.")
 
 if __name__ == "__main__":
     g = Grid()
+    s = Sweeper(g)
     g.main_loop()
