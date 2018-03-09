@@ -41,7 +41,13 @@ class PyGameWindowView(object):
                                      self.model.paddle2.y,
                                      self.model.paddle2.width,
                                      self.model.paddle2.height))
-        pygame.draw.circle(self.screen,pygame.Color(0,0,255),(int(self.model.puck.x),int(self.model.puck.y)),self.model.puck.r)
+        pygame.draw.rect(self.screen,
+                        pygame.Color(255, 255, 255),
+                        pygame.Rect(self.model.puck.height,
+                                    self.model.puck.w,
+                                    self.model.puck.x,
+                                    self.model.puck.y))
+
         pygame.display.update()
 
 class Model(object):
@@ -49,7 +55,7 @@ class Model(object):
     def __init__(self, size):
         self.paddle = Paddle(50,10,0,240)
         self.paddle2=Paddle(50,10,630,240)
-        self.puck=Puck(10,10,320,240)
+        self.puck=Puck(10,10,10,10)
     def update(self):
         """ Update the game state (currently only tracking the paddle) """
         self.paddle.update()
@@ -83,12 +89,12 @@ class Paddle(object):
                                                           self.y)
 class Puck(object):
     """ Encodes the state of the paddle in the game """
-    def __init__(self, r, width, x, y):
+    def __init__(self, height, width, x, y):
         """ Initialize a paddle with the specified height, width,
             and position (x,y) """
-        self.x = x
-        self.y = y
-        self.r=r
+        self.height=height
+        self.x=x
+        self.y=y
         self.w=width
         self.vx = 0.0
 
@@ -99,7 +105,7 @@ class Puck(object):
     def __str__(self):
         return "Puck x coordinate=%f, y coordinate=%f, radius=%f, width=%f" % (self.x,
                                                         self.y,
-                                                           self.r,
+                                                           self.height,
                                                           self.w)
 
 if __name__ == '__main__':
