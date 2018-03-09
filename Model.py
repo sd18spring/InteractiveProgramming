@@ -37,5 +37,5 @@ class Model(object):
 
 
 # TESTING
-test = Model(0, 5)
-print(test)
+# test = Model(0, 5)
+# print(test)
