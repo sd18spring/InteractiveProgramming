@@ -81,7 +81,7 @@ class Nerd:
     def update(self):
         if self.y < 0:
             self.y = 0
-        elif self.y >= self.floor:
+        elif self.y >= self.floor - self.height:
             self.y = self.floor - self.height
         else:
             self.y += self.vy
