@@ -20,6 +20,7 @@ We will most likely use pygame and OpenCV for our project.
 By Friday:
 + Get started with OpenCV and be able to detect user input
 + Have a general minimum viable concept version of our game with mouse input
+
 Next week:
 + Refine OpenCV object/hand detection
 + Refine game UI
