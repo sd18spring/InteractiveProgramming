@@ -46,6 +46,10 @@ for name in ['Ace','Two','Three','Four','Five','Six','Seven','Eight',
         if key == ord("p"):
             image = frame
             break
+        if key == ord("q"):
+            cam_quit = 1
+            cap.release
+            break
 
     # Pre-process image
     gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
@@ -113,4 +117,4 @@ for name in ['Ace','Two','Three','Four','Five','Six','Seven','Eight',
     i = i + 1
 
 cv2.destroyAllWindows()
-camera.close()
+cap.release()
