@@ -59,8 +59,12 @@ class finger_track():
             # TODO: Add if statements to make sure that any outliers
             # would be removed from the list or ignored when drawing
             # the linewidth
-            # if len(self.clearpath) < 1:
-            #     break
+            diffx = math.abs(self.cx-self.path[-1][0])
+            print(diffx)
+            diffy = math.abs(cy-path[-1][1])
+            print(diffy)
+            if len(self.path) == 1:
+                break
             # elif math.sqrt(diffx**2+diffy**2) > 30:
                 # break
             if i < (len(self.clearpath)-1):
