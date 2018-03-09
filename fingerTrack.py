@@ -55,17 +55,26 @@ class finger_track():
             distance = math.sqrt(diffx**2+diffy**2)
             if distance<10:
                 self.clearpath.append(pair)
-        for i in range(len(self.path)):
-            # TODO: Add if statements to make sure that any outliers
-            # would be removed from the list or ignored when drawing
-            # the linewidth
-            diffx = math.abs(self.cx-self.path[-1][0])
-            print(diffx)
-            diffy = math.abs(cy-path[-1][1])
-            print(diffy)
-            if len(self.path) == 1:
+        for i in range(len(self.clearpath)):
+            if len(self.clearpath) < 1:
                 break
-            # elif math.sqrt(diffx**2+diffy**2) > 30:
-                # break
-            if i < (len(self.clearpath)-1):
-                cv2.line(target, self.clearpath[i], self.path[i+1], (255, 0, 0), 3)
+            elif i<(len(self.clearpath)-1)<21:
+                cv2.line(res, self.clearpath[i], self.clearpath[i+1], (255,0,0), 3)
+            elif 20 < i < (len(self.clearpath)-1):
+                cv2.rectangle(res, (0,0), (600, 400), (0,0,0))
+                for j in range(20):
+                    cv2.line(res, self.clearpath[-(j+1)], self.clearpath[-(j+2)], (255,0,0), 3)
+        # for i in range(len(self.path)):
+        #     # TODO: Add if statements to make sure that any outliers
+        #     # would be removed from the list or ignored when drawing
+        #     # the linewidth
+        #     diffx = math.abs(self.cx-self.path[-1][0])
+        #     print(diffx)
+        #     diffy = math.abs(cy-path[-1][1])
+        #     print(diffy)
+        #     if len(self.path) == 1:
+        #         break
+        #     # elif math.sqrt(diffx**2+diffy**2) > 30:
+        #         # break
+        #     if i < (len(self.clearpath)-1):
+        #         cv2.line(target, self.clearpath[i], self.path[i+1], (255, 0, 0), 3)

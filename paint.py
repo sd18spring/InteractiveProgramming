@@ -74,13 +74,13 @@ while(True):
     for i in range(len(clearpath)):
         if len(clearpath) < 1:
             break
-        # elif math.sqrt(diffx**2+diffy**2) > 30:
-            # break
-        elif i < (len(clearpath)-1):
+        elif i<(len(clearpath)-1)<21:
             cv2.line(res, clearpath[i], clearpath[i+1], (255,0,0), 3)
+        elif 20 < i < (len(clearpath)-1):
+            cv2.rectangle(res, (0,0), (600, 400), (0,0,0))
+            for j in range(20):
+                cv2.line(res, clearpath[-(j+1)], clearpath[-(j+2)], (255,0,0), 3)
 
-    print(path)
-    print(clearpath)
     frame_num += 1
     # cnts = cv2.findContours(res, cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
     #display the resulting frame
