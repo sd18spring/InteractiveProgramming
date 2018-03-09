@@ -14,35 +14,72 @@ class PyGameWindowView(object):
         self.screen.fill(pygame.Color(135, 206, 250))
         pygame.draw.rect(self.screen,
                         pygame.Color(255, 127, 80),
-                        pygame.Rect(self.model.paddle.x,
-                                    self.model.paddle.y,
-                                    self.model.paddle.width,
-                                    self.model.paddle.height))
+                        pygame.Rect(self.model.paddle1.x,
+                                    self.model.paddle1.y,
+                                    self.model.paddle1.width,
+                                    self.model.paddle1.height))
+        pygame.draw.rect(self.screen,
+                        pygame.Color(255, 127, 80),
+                        pygame.Rect(self.model.paddle2.x,
+                                    self.model.paddle2.y,
+                                    self.model.paddle2.width,
+                                    self.model.paddle2.height))
+
+        pygame.draw.circle(self.screen,
+                           pygame.Color(255,255,102),
+                           (self.model.ball.x,
+                           self.model.ball.y),
+                           self.model.ball.radius)
+
         pygame.display.update()
 
 
 class PongModel(object):
     """Encodes a model of the game state"""
 
-    def ___init(self,size):
+    def __init__(self,size):
         self.width = size[0]
         self.height = size[1]
-        self.paddle = Paddle(100, 20, self.width, self.height / 2)
+        self.paddle1 = Paddle(100, 20, 10, self.height)
+        self.paddle2 = Paddle(100, 20, self.width - 30, self.height / 2)
+        self.ball = Ball(self.width/2, self.height/2, 10)
 
 
     def update(self):
 
-        self.paddle.update()
-
+        self.paddle1.update()
+        self.paddle2.update()
 
     def __str__(self):
         output_lines = []
 
-        output_lines.append(str(self.paddle))
+        output_lines.append(str(self.paddle1))
+        output_lines.append(str(self.paddle2))
+
 
         return "\n".join(output_lines)
 
+class Ball(object):
 
+    def __init__(self, x, y, radius):
+
+        self.x = x
+        self.y = y
+        self.radius = radius
+        self.vy = 0.0
+        self.vx = 0.0
+
+
+    def update(self):
+
+        self.y += self.vy
+        self.x += self.vx
+
+
+
+
+    def __str__(self):
+        return "Ball x=%f, y=%f, radius=%f" % (self.x, self.y, self.radius)
 
 
 
@@ -72,31 +109,49 @@ class PyGameMouseController(object):
     def __init__(self, model):
         self.model = model
 
-    def handle_envent(self, event):
+    def handle_event(self, event):
+        if event.type == MOUSEMOTION:
+            self.model.paddle1.y = event.pos[1] - self.model.paddle1.height/2.0
 
-        if event.key == MOUSEMOTION:
-            self.model.paddle.x = event.pos(0) - self.model.paddle.width/2.0
+
+class PyGameKeyboardController(object):
+
+    def __init__(self,event):
+        self.model = model
+
+    def handle_event(self,event):
+
+        if event.type != KEYDOWN:
+            return
+        if event.key == pygame.K_UP:
+            self.model.paddle2.vy += -1.0
+        if event.key == pygame.K_DOWN:
+            self.model.paddle2.vy += 1.0
 
 
 
 if __name__ == '__main__':
     pygame.init()
 
-    size = (1800, 1000)
+    size = (1800, 800)
     model = PongModel(size)
 
     view = PyGameWindowView(model, size)
 
-    controller = PyGameMouseController(model)
+    controller1 = PyGameMouseController(model)
+    controller2 = PyGameKeyboardController(model)
+
 
     running = True
     while running:
         for event in pygame.event.get():
             if event.type == QUIT:
                  running = False
-            controller.handle_event(event)
+            controller1.handle_event(event)
+            controller2.handle_event(event)
+
         model.update()
-        view.draw
+        view.draw()
         time.sleep(.001)
 
     pygame.quit()
