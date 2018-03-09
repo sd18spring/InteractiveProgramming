@@ -7,7 +7,7 @@ pygame.display.set_caption("Smash Clone")
 
 
 clock = pygame.time.Clock()
-FPS = 30
+FPS = 120
 
 #Variable to keep the game running
 running = True
