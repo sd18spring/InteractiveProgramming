@@ -54,6 +54,6 @@ while( cap.isOpened() ) :
     cv2.imshow('output',drawing)
     cv2.imshow('input',img)
 
-    k = cv2.waitKey(10)
-    if k == 27:
-        break
+    q = cv2.waitKey(10)
+    if q == 27:
+        cv2.destroyAllWindows()
