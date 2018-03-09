@@ -1,0 +1,62 @@
+import pygame
+import constants
+
+class SpriteSheet(object):
+    """Class used to grab images out of a sprite sheet"""
+
+    def __init__(self, file_name):
+        self.sprite_sheet = pygame.image.load(file_name).convert()
+
+    def get_image(self, x, y, width, height):
+        """Grab image out of a sprite sheet.
+        x,y: x,y location of sprite
+        width, height: width/height of sprite"""
+
+        #create new blank image
+        image = pygame.Surface([width, height]).convert()
+
+        #copy the sprite from large sheet onto small image
+        image.blit(self.sprite_sheet, (0,0), (x,y, width, height))
+
+        #assuming black works as the transparent color
+        image.set_colorkey(constants.BLACK)
+
+        #Return the image
+        return image
+
+class Cloud(pygame.sprite.Sprite):
+    #needs to keep track of how far the image has scrolled
+    #needs to use sprites like platforms to create the clouds.
+    def __init__(self, sprite_sheet_data):
+        super().__init__()
+
+        sprite_sheet = SpriteSheet("tiles_spritesheet.png")
+        self.image = sprite_sheet.get_image(sprite_sheet_data[0], sprite_sheet_data[1], sprite_sheet_data[2], sprite_sheet_data[3])
+
+        self.rect = self.image_get_rect()
+
+class MovingPlatform(Cloud):
+    """Creates a moving cloud"""
+    def __init__(self, sprite_sheet_data):
+        super().__init__(sprite_sheet_data)
+
+        self.change_x = 0
+        self.change_y = 0
+
+        self.boundary_top = 0
+        self.boundary_bottom = 0
+        self.boundary_left = 0
+        self.boundary_right = 0
+
+        #probably won't need these two
+        self.level = None
+        self.player = None
+
+        def update(self):
+            """Move the cloud"""
+            #move left/right
+            self.rect.x += self.change_x
+
+            #move up/down
+            self.rect.y += self.change_y
+#needs to generate sprites with a specific flow of animations when mouse is clicked
