@@ -109,23 +109,55 @@ class NoteBlock(object):
                                                                   self.y)
         return note_block_string
 
-class PyGameMouseController(object):
+class PyGameKeyboardController(object):
 
     def __init__(self,model):
         self.model = model
 
-    def play_note(note, beats=1, bpm=1000, amp=1):
-        """Play note for `beats` beats. Return when done."""
-        # `note` is this many half-steps higher than the sampled note
-        half_steps = note - SAMPLE_NOTE
-        # An octave higher is twice the frequency. There are twelve half-steps per
-        # octave. Ergo, each half step is a twelth root of 2 (in equal temperament).
-        rate = (2 ** (1 / 12)) ** half_steps
-        assert os.path.exists(SAMPLE_FILE)
-        # Turn sample into an absolute path, since Sonic Pi is executing from a
-        # different working directory.
-        sample(os.path.realpath(SAMPLE_FILE), rate=rate, amp=amp)
-        #sleep(beats * 60 / bpm)
+    def handle_event(self,event):
+        if event.type != KEYDOWN:
+            return
+        if event.key == pygame.K_q:
+            play_note(self.model.note_values.get("Ab",0))
+            return
+        if event.key == pygame.K_w:
+            play_note(self.model.note_values.get("A",0))
+            return
+        if event.key == pygame.K_e:
+            play_note(self.model.note_values.get("Bb",0))
+            return
+        if event.key == pygame.K_r:
+            play_note(self.model.note_values.get("B",0))
+            return
+        if event.key == pygame.K_t:
+            play_note(self.model.note_values.get("C",0))
+            return
+        if event.key == pygame.K_y:
+            play_note(self.model.note_values.get("Db",0))
+            return
+        if event.key == pygame.K_u:
+            play_note(self.model.note_values.get("D",0))
+            return
+        if event.key == pygame.K_i:
+            play_note(self.model.note_values.get("Eb",0))
+            return
+        if event.key == pygame.K_o:
+            play_note(self.model.note_values.get("E",0))
+            return
+        if event.key == pygame.K_p:
+            play_note(self.model.note_values.get("F",0))
+            return
+        if event.key == pygame.K_LEFTBRACKET:
+            play_note(self.model.note_values.get("Gb",0))
+            return
+        if event.key == pygame.K_RIGHTBRACKET:
+            play_note(self.model.note_values.get("G",0))
+            return
+
+class PyGameMouseController(object):
+
+    def __init__(self,model):
+        self.model = model
 
     def handle_event(self,event):
         if event.type == MOUSEBUTTONDOWN and event.button == 1:
@@ -134,8 +166,20 @@ class PyGameMouseController(object):
             note = model.note_blocks[note_index]
             print(note)
             play_note(note.value)
-        elif event.type == MOUSEBUTTONUP and event.button == 1:
-            sleep(.01)
+            return
+
+
+def play_note(val, beats=1, bpm=10000, amp=1):
+    """Play note for `beats` beats. Return when done."""
+    # `note` is this many half-steps higher than the sampled note
+    half_steps = val - SAMPLE_NOTE
+    # An octave higher is twice the frequency. There are twelve half-steps per
+    # octave. Ergo, each half step is a twelth root of 2 (in equal temperament).
+    rate = (2 ** (1 / 12)) ** half_steps
+    # Turn sample into an absolute path, since Sonic Pi is executing from a
+    # different working directory.
+    sample(os.path.realpath(SAMPLE_FILE), rate=rate, amp=amp)
+
 
 if __name__ == '__main__':
     pygame.init()
@@ -145,7 +189,8 @@ if __name__ == '__main__':
     model = NoteBoardModel(size)
     print(model)
     view = PyGameWindowView(model, size)
-    controller = PyGameMouseController(model)
+    #controller = PyGameMouseController(model)
+    controller = PyGameKeyboardController(model)
 
     running = True
     while running:
