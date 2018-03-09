@@ -1,4 +1,9 @@
-"Naomi's Working Space"
+"""
+Master Copy
+Tron Remake
+
+@author: Naomi Chiu and Hadleigh Nunes
+"""
 import pygame
 from pygame.locals import*
 import time
@@ -20,7 +25,7 @@ class PyGameWindowView(object):
         all_cells = self.model.cells.values()
         for cell in all_cells:
             cell.draw()
-            
+
     def draw(self):
         self.model._draw_players()
         pygame.display.update()
