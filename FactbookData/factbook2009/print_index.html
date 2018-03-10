@@ -1,0 +1,1015 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><!-- InstanceBegin template="/Templates/wfbook_template_index.dwt.cfm" codeOutsideHTMLIsLocked="false" -->
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<title>CIA - The World Factbook</title>
+
+<!-- <base href="/" /> --> 
+<!-- factbook style sheet -->
+<!-- Code from script_head.cfm -->
+
+<!-- FileName="Connection_cf_dsn.htm" "" -->
+<!-- Type="CFDSN" -->
+<!-- Catalog="" -->
+<!-- Schema="" -->
+<!-- HTTP="true" -->
+
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<title>CIA - The World Factbook</title>
+	<!-- <base href="https://www.cia.gov/" /> -->
+
+<META NAME="IL.secur.classif" CONTENT="UNCLASSIFIED" />
+<META NAME="IL.secur.ctrl" CONTENT="" />
+<META NAME="IL.secur.dissem" CONTENT="" />
+<META NAME="IL.secur.relto" CONTENT="" />
+<META NAME="IL.secur.declasson" CONTENT="" />
+<META NAME="IL.title" CONTENT="(U) CIA The World Factbook" />
+<META NAME="IL.docid" CONTENT="" />
+<META NAME="IL.summary" CONTENT="CIA - The World Factbook" />
+<META NAME="IL.keyword" CONTENT="World Factbook, Oceania" />
+<META NAME="IL.country" CONTENT="" />
+<META NAME="IL.agency" CONTENT="Central Intelligence Agency" />
+<META NAME="IL.poc" CONTENT="World Factbook Staff" />
+<META NAME="IL.pubdate" CONTENT="20040101" />
+<META NAME="IL.postdate" CONTENT="20040501" />
+<META NAME="IL.cutdate" CONTENT="20040101" /> <!-- FileName="Connection_cf_dsn.htm" "" -->
+<!-- Type="CFDSN" -->
+<!-- Catalog="" -->
+<!-- Schema="" -->
+<!-- HTTP="true" -->
+
+
+
+<link rel="stylesheet" type="text/css" href="../styles/nav_style.css">
+
+
+
+
+<script src="../scripts/SpryCollapsiblePanel.js" type="text/javascript"></script>
+<script language="JavaScript1.2" src="../scripts/mm_menu.js"></script>
+<script language="javascript" src="../scripts/AJAXLibrary.js"		type="text/javascript"></script>
+<script language="javascript" src="../scripts/DataEntryLibrary.js" type="text/javascript"></script>
+<script language="javascript" src="../scripts/findDOM.js" 			type="text/javascript"></script>
+<script language="JavaScript" type="text/JavaScript">
+
+function MM_openBrWindow(theURL,winName,features) { //v2.0
+	  window.open(theURL,winName,features);
+	}
+
+startList = function() {
+							if (document.all&&document.getElementById) {
+								wfb_navigationRoot = document.getElementById("wfb_navigation");
+								for (x=0; x<wfb_navigationRoot.childNodes.length; x++) {
+									node = wfb_navigationRoot.childNodes[x];
+									if (node.nodeName=="LI") {
+										node.onmouseover=function() {
+																		this.className+=" over";
+																	}
+										node.onmouseout = function()	{
+																			this.className=this.className.replace(" over", "");
+																		}
+									}
+								}
+							}
+						}
+	window.onload=startList;
+
+	faq = null;
+	function collapseCountryInfo()
+	{
+		faq = new switchicon("icongroup2", "div") //Limit scanning of switch contents to just "div" elements
+		faq.setHeader('<img src="../graphics/close.jpg" alt="Close" title="Close"/>', '<img src="../graphics/open.jpg" alt="Open" title="Open" />')  //Set header HTML
+		faq.collapsePrevious(false) //Allow more than 1 content to be open simultanously
+		faq.setPersist(true, 7) //Enable persistence to remember last switch content states for 7 days
+		faq.init()
+	}
+
+function MM_jumpMenu(targ,selObj,restore){ //v3.0
+	if (selObj.selectedIndex > 0)
+	{
+		
+		eval(targ + ".location='" + "../geos/" + selObj.options[selObj.selectedIndex].value + ".html" + "'");
+		
+	}
+	if (restore) 
+		selObj.selectedIndex=0;
+}
+function onChange(dropdown)
+{
+ 	var myindex = dropdown.selectedIndex
+	var cntryCode = selObj.options[selObj.selectedIndex].value;
+	var baseURL = selObj.options[selObj.selectedIndex].value;
+	top.location.href = baseURL;
+	
+	return true;
+}
+
+var statusmsg = "";
+function hidestatus() {
+ 	window.status = statusmsg
+	return true
+}
+
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_findObj(n, d) { //v4.01
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+//-->
+</script>
+
+
+
+<script language="javascript">
+// JavaScript Document
+	var globalCntryNameSearchBuffer = '';
+	var globalTimer = null;
+	var selcon = null;
+	function FindSelectEntry(e, selectControl) /* In script_head_index.cfm */
+	{
+		var timeLimitBetweenKeyPresses = 3600; //seconds
+		var keynum, keychar, numcheck;
+		
+		
+		if (window.event) // IE
+		{
+			keynum = e.keyCode;
+		}
+		else if (e.which) // Netscape/Firefox/Opera
+		{
+			keynum = e.which;
+		} 
+		
+		keychar = String.fromCharCode(keynum);
+		if ((keynum >= 65 && keynum <= 122) || keynum == 32)  // Only accept alphanumerics A-Z and a-z
+		{
+			clearTimeout(globalTimer);
+			globalCntryNameSearchBuffer += keychar;
+			selcon = selectControl;
+			globalTimer = setTimeout('globalCntryNameSearchBuffer = ""', (timeLimitBetweenKeyPresses*1000));
+			for (var i = 0; i < selectControl.options.length; i++)
+			{
+				var selectLabel = selectControl.options[i].text.toLowerCase();
+				if (selectLabel.indexOf(globalCntryNameSearchBuffer.toLowerCase()) == 0)
+				{
+					selectControl.selectedIndex = i;
+					
+					// After this method concludes, Firefox moves the selection index one additional place.  This compensates for that
+					if (e.which)
+						--selectControl.selectedIndex;
+						
+					break;
+				}
+			}
+		}
+		return false;
+	}
+
+
+	function Clear_globalCntryNameSearchBuffer()
+	{
+		globalCntryNameSearchBuffer = "";
+	}
+
+</script>
+
+
+<link rel="stylesheet" type="text/css" href="styles/factbook.css" media="screen">
+<link rel="stylesheet" type="text/css" href="styles/pickcountryform_noscript.css" media="screen">
+
+<link rel="stylesheet" type="text/css" href="styles/style.css" />
+
+<!-- Internet Explorer CSS Fixes -->
+<!--[if lt IE 7]>
+        <style type="text/css" media="all">@import url(../styles/IEFixes.css);</style>
+    <![endif]-->
+<!-- Disable IE6 image toolbar -->
+<meta http-equiv="imagetoolbar" content="no" />
+<script language="JavaScript" type="text/javascript">
+		function clearSearch(myForm) {if (myForm.defaultValue==myForm.value) myForm.value = "";}
+		function showSearch(myForm) {if (myForm.value=="") myForm.value = myForm.defaultValue;}
+	</script>
+
+<!-- InstanceBeginEditable name="head" --><!-- InstanceEndEditable -->
+ 
+</head>
+<body class="section-library dir="ltr">
+<p class="hiddenStructure"><a accesskey="2" href="#documentContent">Skip to content.</a> | <a accesskey="6" href="#portlet-navigation-tree">Skip
+  to navigation</a></p>
+<table id="mnBG">
+  <tr>
+    <td id="mnBGL"><div id="mnBGLStripe"></div></td>
+    <td id="mnBGC"><!-- Login/Top Margin Block -->
+      <div id="ciaUtilityBlock">&nbsp;</div>
+      <div id="lColBG">
+        <div id="rColBG">
+          <table id="portal-columns">
+            <tr>
+              <td id="portal-column-one"><!-- *** Left Col Slot *** -->
+                <div class="visualPadding">
+                  <h1 id="portal-logo"><a href="/index.html" accesskey="1">Central
+                    Intelligence Agency</a></h1>
+                  <dl class="portlet" id="portlet-navigation-tree">
+                    <dt class="portletHeader"> <span class="portletTopLeft"></span> <a href="/sitemap" class="tile">Navigation</a> <span class="portletTopRight"></span> </dt>
+                    <dd class="portletItem lastItem">
+                      <ul class="portletNavigationTree navTreeLevel0">
+                        <li class="navTreeItem">
+                          <div class="visualIcon contenttype-plone-site"><a class="visualIconPadding" href="/index.html" title="">CIA
+                            Home</a></div>
+                        </li>
+                        <li class="navTreeItem visualNoMarker">
+                          <div class="visualIcon contenttype-folder"><a href="/about-cia/index.html" class="state-published visualIconPadding" title="About CIA">About
+                            CIA</a></div>
+                        </li>
+                        <li class="navTreeItem visualNoMarker">
+                          <div class="visualIcon contenttype-agencyfolder"><a href="/careers/index.html" class="state-published visualIconPadding" title="Careers">Careers</a></div>
+                        </li>
+                        <li class="navTreeItem visualNoMarker">
+                          <div class="visualIcon contenttype-folder"><a href="/offices-of-cia/index.html" class="state-published visualIconPadding" title="Offices of CIA">Offices
+                            of CIA</a></div>
+                        </li>
+                        <li class="navTreeItem visualNoMarker">
+                          <div class="visualIcon contenttype-folder"><a href="/news-information/index.html" class="state-published visualIconPadding" title="News &amp; Information">News &amp; Information</a></div>
+                        </li>
+                        <li class="navTreeItem visualNoMarker">
+                          <div class="visualIcon contenttype-folder"><a href="/library/index.html" class="state-published visualIconPadding navTreeCurrentFolder" title="Library">Library</a></div>
+                          <ul class="navTree navTreeLevel2">
+                            <li class="navTreeItem visualNoMarker">
+                              <div class="visualIcon contenttype-folder"><a href="/library/publications/index.html" class="state-published visualIconPadding navTreeCurrentFolder" title="Publications">Publications</a></div>
+                              <ul class="navTree navTreeLevel3">
+                                <li class="navTreeItem visualNoMarker">
+                                  <div class="visualIcon contenttype-agencyfolder"><a href="/library/publications/the-world-factbook/index.html" class="state-published visualIconPadding navTreeCurrentItem" title="The World Factbook">The
+                                    World Factbook</a></div>
+                                </li>
+                                <li class="navTreeItem visualNoMarker">
+                                  <div class="visualIcon contenttype-agencyfolder"><a href="/library/publications/world-leaders-1/index.html" class="state-published visualIconPadding" title="World Leaders">World
+                                    Leaders</a></div>
+                                </li>
+                                <li class="navTreeItem visualNoMarker">
+                                  <div class="visualIcon contenttype-folder"><a href="/library/publications/cia-maps-publications/index.html" class="state-published visualIconPadding" title="CIA Maps &amp; Publications">CIA
+                                    Maps &amp; Publications</a></div>
+                                </li>
+                                <li class="navTreeItem visualNoMarker">
+                                  <div class="visualIcon contenttype-folder"><a href="/library/publications/additional-publications/index.html" class="state-published visualIconPadding" title="Additional Publications">Additional
+                                    Publications</a></div>
+                                </li>
+                              </ul>
+                            </li>
+                            <li class="navTreeItem visualNoMarker">
+                              <div class="visualIcon contenttype-folder"><a href="/library/center-for-the-study-of-intelligence/index.html" class="state-published visualIconPadding" title="Center for the Study of Intelligence">Center
+                                for the Study of Intelligence</a></div>
+                            </li>
+                            <li class="navTreeItem visualNoMarker">
+                              <div class="visualIcon contenttype-folder"><a href="/library/foia/index.html" class="state-published visualIconPadding" title="Freedom of Information Act Electronic Reading Room">Freedom
+                                of Information Act Electronic Reading Room</a></div>
+                            </li>
+                            <li class="navTreeItem visualNoMarker">
+                              <div class="visualIcon contenttype-folder"><a href="/library/kent-center-occasional-papers/index.html" class="state-published visualIconPadding" title="Kent Center Occasional Papers">Kent
+                                Center Occasional Papers</a></div>
+                            </li>
+                            <li class="navTreeItem visualNoMarker">
+                              <div class="visualIcon contenttype-agencyfolder"><a href="/library/intelligence-literature/index.html" class="state-published visualIconPadding" title="Intelligence Literature">Intelligence
+                                Literature</a></div>
+                            </li>
+                            <li class="navTreeItem visualNoMarker">
+                              <div class="visualIcon contenttype-folder"><a href="/library/reports/index.html" class="state-published visualIconPadding" title="Reports">Reports</a></div>
+                            </li>
+                            <li class="navTreeItem visualNoMarker">
+                              <div class="visualIcon contenttype-agencypage"><a href="/library/related-links.html" class="state-published visualIconPadding" title="Related Links">Related
+                                Links</a></div>
+                            </li>
+                          </ul>
+                        </li>
+                        <li class="navTreeItem visualNoMarker">
+                          <div class="visualIcon contenttype-folder"><a href="/kids-page/index.html" class="state-published visualIconPadding" title="Kids' Page">Kids'
+                            Page</a></div>
+                        </li>
+                        <li class="navTreeItem visualNoMarker">
+                          <div class="visualIcon contenttype-folder"><a href="/contact-cia/index.html" class="state-published visualIconPadding" title="Contact CIA">Contact
+                            CIA</a></div>
+                        </li>
+                      </ul>
+                      <span class="portletBottomLeft"></span> <span class="portletBottomRight"></span> </dd>
+                  </dl>
+                  <div id="ciaMission">
+                    <h3>Mission</h3>
+                    <p>The Central Intelligence Agency (CIA) is an independent US
+                      Government agency responsible for providing national security
+                      intelligence to senior US policymakers. </p>
+                    <p>For more on the Agency's mission, visit our <a href="/about-cia/strategic-intent-2007-2011.html">Strategic Intent</a>.</p>
+                  </div>
+                </div>
+                <!-- *** / Left Col Slot *** -->
+              </td>
+              <td id="contentColsA-R" style="background-color:#FFFFFF;"><!-- *** Top Head and Search Area *** -->
+                <div id="topHeadContainer">
+                  <div id="flashArea2" title="Central Intelligence Agency"><span>Central Intelligence Agency</span></div>
+                </div>
+                <div id="ciaWorkSearchBar">
+                  <div id="ciaWork">The Work of a Nation. The Center of Intelligence</div>
+
+                  <form id="ciaSearchForm" method="get" action="/search">
+                   	 <label class="hiddenStructure" for="searchBox">Search Field</label>
+                     <input id="searchBox" name="q" type="text" maxlength="2047" value="Search" onfocus="clearSearch(this);" onblur="showSearch(this)" />
+                     <label class="hiddenStructure" for="searchBtn">Search Button</label>
+                     <input id="searchBtn" type="image" alt="Search" src="worldfactbook_shell/images/searchBtn.gif " />  
+                     <input type="hidden" name="site" value="CIA" />
+                     <input type="hidden" name="output" value="xml_no_dtd" />
+                     <input type="hidden" name="client" value="CIA" />
+                     <input type="hidden" name="myAction" value="/search" />
+                     <input type="hidden" name="proxystylesheet" value="CIA" />
+                     <input type="hidden" name="submitMethod" value="get" />
+                  </form>                  
+                </div>
+                <!-- 
+							*** / Top Head and Search Area *** -->
+                <table id="contentColsB" cellpadding="0" cellspacing="0" border="0" style="margin-top:0px; width:609px;">
+                  <tr>
+                    <td id="portal-column-content" ><div id="content" class="">
+                        <div id="region-content" style="margin-left:9px;margin-right:4px;"> <a name="documentContent"></a>
+                          <table width="600" cellpadding="0" cellspacing="0" border="0">
+                            <tr>
+                              <td style=" z-index:99999;"><!-- includes/pickcountryform_index.cfm starts here ... -->
+
+
+
+<!-- FileName="Connection_cf_dsn.htm" "" -->
+<!-- Type="CFDSN" -->
+<!-- Catalog="" -->
+<!-- Schema="" -->
+<!-- HTTP="true" -->
+
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<title>CIA - The World Factbook</title>
+	<!-- <base href="https://www.cia.gov/" /> -->
+
+<META NAME="IL.secur.classif" CONTENT="UNCLASSIFIED" />
+<META NAME="IL.secur.ctrl" CONTENT="" />
+<META NAME="IL.secur.dissem" CONTENT="" />
+<META NAME="IL.secur.relto" CONTENT="" />
+<META NAME="IL.secur.declasson" CONTENT="" />
+<META NAME="IL.title" CONTENT="(U) CIA The World Factbook" />
+<META NAME="IL.docid" CONTENT="" />
+<META NAME="IL.summary" CONTENT="CIA - The World Factbook" />
+<META NAME="IL.keyword" CONTENT="World Factbook, Oceania" />
+<META NAME="IL.country" CONTENT="" />
+<META NAME="IL.agency" CONTENT="Central Intelligence Agency" />
+<META NAME="IL.poc" CONTENT="World Factbook Staff" />
+<META NAME="IL.pubdate" CONTENT="20040101" />
+<META NAME="IL.postdate" CONTENT="20040501" />
+<META NAME="IL.cutdate" CONTENT="20040101" /> <!-- FileName="Connection_cf_dsn.htm" "" -->
+<!-- Type="CFDSN" -->
+<!-- Catalog="" -->
+<!-- Schema="" -->
+<!-- HTTP="true" -->
+
+
+<link rel="stylesheet" type="text/css" href="styles/nav_style.css">
+<link rel="stylesheet" type="text/css" href="styles/factbook.css" media="screen">
+<link rel="stylesheet" type="text/css" href="styles/pickcountryform_noscript.css" media="screen">
+<link rel="stylesheet" type="text/css" href="styles/SpryCollapsiblePanel2.css" media="screen"/>
+<link rel="stylesheet" type="text/css" href="styles/flagsoftheworld.css" media="screen">
+<link rel="stylesheet" type="text/css" href="styles/print.css" media="print">
+
+<script language="javascript">
+// JavaScript Document
+	var globalCntryNameSearchBuffer = '';
+	var globalTimer = null;
+	var selcon = null;
+	function FindSelectEntry(e, selectControl) /* In script_head_index.cfm */
+	{
+		var timeLimitBetweenKeyPresses = 3600; //seconds
+		var keynum, keychar, numcheck;
+		
+		
+		if (window.event) // IE
+		{
+			keynum = e.keyCode;
+		}
+		else if (e.which) // Netscape/Firefox/Opera
+		{
+			keynum = e.which;
+		}
+		
+		keychar = String.fromCharCode(keynum);
+		if ((keynum >= 65 && keynum <= 122) || keynum == 32)  // Only accept alphanumerics A-Z and a-z
+		{
+			clearTimeout(globalTimer);
+			globalCntryNameSearchBuffer += keychar;
+			selcon = selectControl;
+			globalTimer = setTimeout('globalCntryNameSearchBuffer = ""', (timeLimitBetweenKeyPresses*1000));
+			for (var i = 0; i < selectControl.options.length; i++)
+			{
+				var selectLabel = selectControl.options[i].text.toLowerCase();
+				if (selectLabel.indexOf(globalCntryNameSearchBuffer.toLowerCase()) == 0)
+				{
+					selectControl.selectedIndex = i;
+					
+					// After this method concludes, Firefox moves the selection index one additional place.  This compensates for that
+					if (e.which)
+						--selectControl.selectedIndex;
+						
+					break;
+				}
+			}
+		}
+		return false;
+	}
+
+
+	function Clear_globalCntryNameSearchBuffer()
+	{
+		globalCntryNameSearchBuffer = "";
+	}
+
+</script>
+
+
+
+
+
+
+
+
+
+<script language="JavaScript" type="text/JavaScript">
+
+function MM_openBrWindow(theURL,winName,features) { //v2.0
+	  window.open(theURL,winName,features);
+	}
+
+startList = function() {
+							if (document.all&&document.getElementById) {
+								wfb_navigationRoot = document.getElementById("wfb_navigation");
+								for (x=0; x<wfb_navigationRoot.childNodes.length; x++) {
+									node = wfb_navigationRoot.childNodes[x];
+									if (node.nodeName=="LI") {
+										node.onmouseover=function() {
+																		this.className+=" over";
+																	}
+										node.onmouseout = function()	{
+																			this.className=this.className.replace(" over", "");
+																		}
+									}
+								}
+							}
+						}
+	window.onload=startList;
+
+
+	faq = null;
+	function collapseCountryInfo()
+	{
+		faq = new switchicon("icongroup2", "div") //Limit scanning of switch contents to just "div" elements
+		faq.setHeader('<img src="graphics/close.gif" alt="Close" title="Close"/>', '<img src="graphics/open.gif" alt="Open" title="Open" />')  //Set header HTML
+		faq.collapsePrevious(false) //Allow more than 1 content to be open simultanously
+		faq.setPersist(true, 7) //Enable persistence to remember last switch content states for 7 days
+		faq.init()
+	}
+
+function MM_jumpMenu(targ,selObj,restore){ //v3.0
+	if (selObj.selectedIndex > 0)
+	{
+		
+		eval(targ+".location='" + "geos/" + selObj.options[selObj.selectedIndex].value + ".html" + "'");
+		
+	}
+	if (restore) selObj.selectedIndex=0;
+}
+function onChange(dropdown)
+{
+ 	var myindex = dropdown.selectedIndex
+	var cntryCode = selObj.options[selObj.selectedIndex].value;
+	var baseURL = selObj.options[selObj.selectedIndex].value;
+	top.location.href = baseURL;
+	
+	return true;
+}
+
+var statusmsg = "";
+function hidestatus() {
+ 	window.status = statusmsg
+	return true
+}
+
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_findObj(n, d) { //v4.01
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+//-->
+</script>
+
+
+
+<link rel="stylesheet" type="text/css" href="../styles/nav_style.css">
+
+
+<!-- Internet Explorer CSS Fixes -->
+<!--[if lt IE 7]>
+        <style type="text/css" media="all">@import url(../stylesIEFixes.css);</style>
+    <![endif]-->
+
+
+
+
+
+
+<script language="javascript">
+	var globalCntryNameSearchBuffer = '';
+	var globalTimer = null;
+	var selcon = null;
+	
+	function FindSelectEntry(e, selectControl) /* In script_head_index.cfm */
+	{
+		var timeLimitBetweenKeyPresses = 2.5; //seconds
+		var keynum, keychar, numcheck;
+		
+		
+		if (window.event) // IE
+		{
+			keynum = e.keyCode;
+		}
+		else if (e.which) // Netscape/Firefox/Opera
+		{
+//			keynum = e.which;
+				return false;
+		}
+		
+		keychar = String.fromCharCode(keynum);
+		if ((keynum >= 65 && keynum <= 122) || keynum == 32)  // Only accept alphanumerics A-Z and a-z
+		{
+			clearTimeout(globalTimer);
+			globalCntryNameSearchBuffer += keychar;
+			selcon = selectControl;
+			globalTimer = setTimeout('globalCntryNameSearchBuffer = ""', (timeLimitBetweenKeyPresses*1000));
+			for (var i = 0; i < selcon.options.length; i++)
+			{
+				var selectLabel = selcon.options[i].text.toLowerCase();
+				if (selectLabel.indexOf(globalCntryNameSearchBuffer.toLowerCase()) == 0)
+				{
+					selcon.selectedIndex = i;
+					
+					// After this method concludes, Firefox moves the selection index one additional place.  This compensates for that
+					if (e.which)
+						--selcon.selectedIndex;
+						
+					break;
+				}
+			}
+		}
+		else if (keynum == 13) // The ENTER key
+			MM_jumpMenu('parent', selectControl, 0);
+
+		return false;
+	}
+
+
+	function Clear_globalCntryNameSearchBuffer()
+	{
+		globalCntryNameSearchBuffer = "";
+	}
+
+</script>
+
+<style type="text/css">
+form1 { 
+	border: 0px;
+	padding: 0px; 
+	font-size: 16px;
+	}
+</style>
+
+
+<a name="top" id="top"></a>
+<table  width="600" border="0" cellpadding="0" cellspacing="0" id="navigation">
+  <tr>
+    <td><table width="600" border="0" align="left" cellpadding="0" cellspacing="0" style="position:relative; z-index:999;">
+      <tr>
+        <td height="80">
+        
+        <table width="600" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td>        
+</td>
+  </tr>
+</table>
+        </td>
+      </tr>
+      
+    </td>
+  </tr>
+</table>
+<!-- includes/pickcountryform_index.cfm ends here ... -->
+
+</td>
+                            </tr>
+                            <tr>
+                              <td><!-- InstanceBeginEditable name="content" -->
+                              
+
+<style type="text/css">
+<!--
+body {
+	margin: 0px;
+	}
+.title {
+	height: 25px;
+	background: url(graphics/home_title_bkg.jpg) repeat-x;
+	}
+.header {
+	height: 23px;
+	background: url(graphics/home_header_bkg.jpg) repeat-x;
+	}
+.home-date {
+	font: 10px normal Verdana, Arial, Helvetica, sans-serif;
+	color: #0E5783; /*blue*/
+	/*padding-bottom: 50px;*/
+	}
+.header img {
+	font: 9px normal Verdana, Arial, Helvetica, sans-serif;
+	color: #0B4075;
+	vertical-align:text-bottom;
+	}
+.intro {
+	font: 11px/18px Arial, Helvetica, sans-serif;
+	color: #666;
+	letter-spacing: .02em;
+	text-align: left;
+	padding: 8px 35px 10px 10px;
+	background: url(graphics/home_intro_bkg.jpg) no-repeat;
+	}
+.whats-new-text {
+	font: 10px Verdana, Arial, Helvetica, sans-serif;
+	letter-spacing: 0.01em;
+	padding: 3px 5px 3px 5px;
+	background: url(graphics/home_whatsnew_bkg.jpg) repeat-x;
+	}
+.cover-text {
+	font-size: 11px;
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+	color: #666666;
+	letter-spacing: 0.01em;
+	padding: 7px 5px 10px 10px;
+	background-image: url(graphics/whatsnew_gradiant.jpg);
+  background-repeat: repeat-x;
+  background-position: top;
+	}
+.map {
+	background: url(graphics/home_title_map_bkg.jpg) repeat-x;
+	text-align: right;
+	padding: 4px 0px;
+	}
+#buttons td {
+	padding-bottom: 5px;
+	}
+.bottom-text {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	letter-spacing: 0.02em;
+	line-height: 15px;
+	text-align: left;
+	color: #666666;
+	background: url(graphics/home_footer_bkg.jpg) repeat-x;
+	text-align: right;
+	vertical-align: bottom;
+	height: 65px;
+	padding: 0px 5px 3px 0px;
+	}
+iframe { 
+	overflow-x: hidden;
+	overflow-y: auto;
+	margin-top: 3px;
+	border-bottom: 1px dotted #CCC;
+	}
+/*----- VIEW-ALL -----*/
+.view-all {
+	font: 10px Verdana, Arial, Helvetica, sans-serif;
+	color:#0055AA;
+	padding-left: 5px;
+	}
+.view-all a:link, .view-all a:visited {
+	color: #0055AA;
+	text-decoration: underline;
+	}
+.view-all a:hover {
+	text-decoration: none;
+	}
+/*----- RSS-TEXT -----*/
+.rss-text {
+	font: bold 11px/16px Arial, Helvetica, sans-serif;
+	letter-spacing: .02em; 
+	text-align: right;
+	padding-right: 5px;
+	}
+.rss-text a:link, .rss-text a:visited {
+	color:#996600;
+	text-decoration: none;
+	}
+.rss-text a:hover {
+	color:#CC6600;
+	text-decoration: none; 
+	}
+.rss-text img {
+	vertical-align:text-bottom; 
+	padding-right: 2px;
+	}
+-->
+</style>
+
+<script type="text/javascript" src="scripts/embedFlash.js"></script>
+
+<script type="text/javascript">
+<!--
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_findObj(n, d) { //v4.01
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+//-->
+</script>
+<body onLoad="MM_preloadImages('graphics/home_bttn_maps_hover.jpg','graphics/view_updates_btn_on.gif')">
+<table width="600" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td>
+    <table width="600" cellpadding="0" cellspacing="0" class="title">
+	
+	<tr>
+		<td><img src="graphics/home_title.jpg" alt="Welcome to The World Factbook" width="320" height="21"></td>
+	  <td width="60" align="center" class="rss-text"><a href="https://www.cia.gov/news-information/your-news/index.html"><img src="graphics/icon_rss.jpg" alt="RSS" title="RSS" width="14" height="14" border="0" /> RSS</a></td>
+	</tr>
+</table>
+
+<table width="600" height="452" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td width="215" valign="top" class="intro"><strong>The World Factbook</strong> provides information on the history, people, government, economy, geography, communications, transportation, military, and  transnational issues for 266 world entities. Our Reference tab includes: maps of the major world  regions, as well as Flags of the World, a Physical Map of the World, a Political Map of the World, and a Standard Time Zones of the World map.</td>
+		<td height="220" align="center" valign="middle" class="map">
+						<!-- Begin Flash Detection -->
+						<script language=JavaScript1.1>
+						<!--
+						var MM_contentVersion = +8;
+						var plugin = (navigator.mimeTypes && navigator.mimeTypes["application/x-shockwave-flash"]) ? navigator.mimeTypes["application/x-shockwave-flash"].enabledPlugin : 0;
+						if ( plugin ) {
+						var words = navigator.plugins["Shockwave Flash"].description.split(" ");
+						for (var i = 0; i < words.length; ++i)
+						{
+						if (isNaN(parseInt(words[i])))
+						continue;
+						var MM_PluginVersion = words[i]; 
+						}
+						var MM_FlashCanPlay = MM_PluginVersion >= MM_contentVersion;
+						}
+						else if (navigator.userAgent && navigator.userAgent.indexOf("MSIE")>=0 
+							&& (navigator.appVersion.indexOf("Win") != -1)) {
+							document.write('<SCR' + 'IPT LANGUAGE=VBScript\> \n'); //FS hide this from IE4.5 Mac by splitting the tag
+							document.write('on error resume next \n');
+							document.write('MM_FlashCanPlay = ( IsObject(CreateObject("ShockwaveFlash.ShockwaveFlash." & MM_contentVersion)))\n');
+							document.write('</SCR' + 'IPT\> \n');
+						}
+						if ( MM_FlashCanPlay ) {
+						
+						embedFlash("flash/wfb_map_home_static.swf", 380, 250);
+						
+						} else{
+							document.write('<img src="flash/map_noFlash.jpg" width="380" height="250" border=0 usemap="#noflash">');
+							document.write('<br /><a href="https://get.adobe.com/flashplayer/" target="_blank"><img src="graphics/get_adobe_flash.gif" alt="Get Adobe Flash Player" width="121" height="17"></a>');
+						}
+						//-->
+						</SCRIPT>
+					  <!-- End Flash Detection -->
+
+					  <!-- Begin NoScript -->
+					  <noscript>
+						  <span class="map"><img src="flash/map_noFlash.jpg" width="380" height="250" border=0 usemap="#noflash" />
+						  </span>
+						  
+					  <div align="center" style="padding-bottom:3px;">JavaScript is not currently enabled<br />
+	        on your browser. 
+					     </div>
+					  </noscript>
+					  <!-- End NoScript -->		</td>
+	</tr>
+	<tr>
+		<td valign="top">
+			<div id="buttons">
+				<table border="0" cellpadding="0" cellspacing="0">
+					
+                    <tr>
+					  <td><a href="docs/refmaps.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('maps','','graphics/home_bttn_maps_hover.jpg',1)"><img src="graphics/home_bttn_maps.jpg" alt="Regional Maps" name="maps" width="208" height="47" border="0" id="maps" /></a></td>
+					</tr>
+					<tr>
+						<td><a href="docs/flagsoftheworld.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('flags','','graphics/home_bttn_flags_hover.jpg',1)"><img src="graphics/home_bttn_flags.jpg" alt="Flags of the World" name="flags" width="208" height="47" border="0" id="flags" /></a></td>
+					</tr>
+					<tr>
+						<td><a href="rankorder/rankorderguide.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('comparisons','','graphics/home_bttn_comparison_hover.jpg',1)"><img src="graphics/home_bttn_comparison.jpg" alt="Guide To Country Comparisons" name="comparisons" width="208" height="47" border="0" id="comparisons" /></a></td>
+					</tr>
+					<tr>
+						<td><a href="docs/didyouknow.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('questions','','graphics/home_bttn_questions_hover.jpg',1)"><img src="graphics/home_bttn_questions.jpg" alt="Did You Know?" name="questions" width="208" height="47" border="0" id="questions" /></a></td>
+					</tr>
+					
+					<tr>
+						<td style="text-align:center; padding-top:3px; "><img src="graphics/home_ornament.jpg" /></td>
+					</tr>
+				</table>
+			</div>		
+		</td>
+		<td>
+			<!-- Begin WHAT'S NEW AREA -->
+			<table border="0" cellpadding="0" cellspacing="0" class="header">
+				<tr>
+					<td height="23">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td valign="middle" align="left" width="107" style="background-image:url(graphics/home_header_bkg.jpg); background-repeat: repeat-x; background-color:#DBE4ED"><img src="graphics/home_header_whats_new.jpg" alt="What's New" width="107" height="19" vspace="3"></td>
+              <td valign="middle" align="left" style="padding-top: 3px; background-image:url(graphics/home_header_bkg.jpg); background-repeat: repeat-x; background-color:#DBE4ED"><span class="home-date"><span style="font-size:9px; color:#666;">&nbsp;Today is:</span>
+              <script>
+							var mydate=new Date()
+							var year=mydate.getYear()
+							if (year < 1000)
+							year+=1900
+							var day=mydate.getDay()
+							var month=mydate.getMonth()
+							var daym=mydate.getDate()
+							//if (daym<10)
+							//daym="0"+daym
+							var dayarray=new Array("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday")
+							var montharray=new Array("January","February","March","April","May","June","July","August","September","October","November","December")
+							document.write(" "+dayarray[day]+", "+montharray[month]+" "+daym+" ")
+							</script>
+							</span>
+				</td>
+            </tr>
+          </table>
+					</td>
+				</tr>
+				<tr>
+					<td height="175" valign="top" class="whats-new-text"><iframe src="docs/whatsnew_index.html" width=370 height=215 frameborder=0 scrolling="yes" style="padding-bottom: 10px;" allowtransparency="true" class="iframe" title="Whats New"></iframe></td>
+				</tr>
+				<tr>
+                
+					<td valign="top" class="view-all"><a href="docs/whatsnew.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('View Updates','','graphics/view_updates_btn_on.gif',1)"><img src="graphics/view_updates_btn_off.gif" alt="View All Updates" title="View All Updates" name="View Updates" width="103" height="15" border="0"></a></td>
+                    
+				</tr>
+			</table>
+			<!-- End WHAT'S NEW AREA -->		</td>
+	</tr>
+
+</table>
+
+
+<map name="noflash">
+  <!--North America-->
+  <area shape="poly" coords="61,116,49,107,44,89,41,75,45,67,44,60,36,59,15,64,22,55,35,42,57,35,74,35,96,27,113,27,133,25,169,24,161,35,149,44,139,55,124,54,127,70,112,75,97,84,88,98,75,101,61,115" href="region/region_noa.html" alt="North America" title="North America" />
+  <area shape="poly" coords="9,103,18,101,20,111,10,114" href="region/region_noa.html" alt="North America" title="North America" />
+  <!--South America-->
+  <area shape="poly" coords="82,127,79,140,84,153,91,163,94,191,105,214,118,212,119,201,116,188,124,170,133,153,134,138,116,124,97,116" href="region/region_soa.html" alt="South America" title="South America" />
+  <!--Central America-->
+  <area shape="poly" coords="63,116,75,104,90,100,105,107,107,117,98,112,77,129" href="region/region_cam.html" alt="Central America" title="Central America" />
+  <!--Antartica-->
+  <area shape="poly" coords="57,247,57,234,84,229,108,227,122,219,134,225,160,228,199,224,219,218,236,223,271,219,307,226,306,239,299,246" href="region/region_ant.html" alt="Antartica" title="Antartica" />
+  <!--Africa-->
+  <area shape="poly" coords="155,89,145,104,156,132,173,129,176,146,179,167,189,185,206,179,223,173,227,152,217,139,227,122,214,119,203,92,184,88,176,83" href="region/region_afr.html" alt="Africa" title="Africa" />
+  <!--Europe-->
+  <area shape="poly" coords="155,80,162,68,150,47,159,40,174,49,186,28,192,27,193,39,195,49,208,67,198,75,192,86,175,80,160,85" href="region/region_eur.html" alt="Europe" title="Europe" />
+  <!--Central Asia-->
+  <area shape="poly" coords="198,34,206,27,238,26,265,32,283,29,308,38,334,43,319,69,306,73,287,57,277,64,258,62,248,72,242,81,233,84,226,78,218,75,209,71,206,60,196,51" href="region/region_cas.html" alt="Central Asia" title="Central Asia" />
+  <!--Middle East-->
+  <area shape="poly" coords="227,116,237,103,235,85,220,77,206,72,194,84,205,90,216,117" href="region/region_mde.html" alt="Middle East" title="Middle East" />
+  <!--South Asia-->
+  <area shape="poly" coords="239,105,255,131,263,122,263,111,271,95,259,96,247,85,242,81,236,85" href="region/region_sas.html" alt="South Asia" title="South Asia" />
+  <!--East Southeast Asia-->
+  <area shape="poly" coords="320,128,342,138,334,150,318,147,296,149,269,130,270,109,268,104,272,94,259,96,244,80,258,62,278,66,287,58,304,72,317,72,317,88,304,101" href="region/region_eas.html" alt="East Southeast Asia" title="East Southeast Asia" />
+  <!--Australia/Oceania-->
+  <area shape="poly" coords="288,164,287,185,307,183,313,198,334,203,356,189,352,173,365,158,342,142,331,152,310,148" href="region/region_aus.html" alt="Australia-Oceania" title="Australia-Oceania" />
+  <!--Pacific Ocean-->
+  <area shape="circle" coords="32,133,13" href="geos/ZN.html" alt="Pacific Ocean"  title="Pacific Ocean" />
+  <area shape="circle" coords="351,110,13" href="geos/ZN.html" alt="Pacific Ocean"  title="Pacific Ocean" />
+  <!--Southern Ocean-->
+  <area shape="circle" coords="170,216,13" href="geos/OO.html" alt="Southern Ocean" title="Southern Ocean" />
+  <!--Atlantic Ocean-->
+  <area shape="circle" coords="125,104,13" href="geos/ZH.html" alt="Atlantic Ocean" title="Atlantic Ocean" />
+  <!--Indian Ocean-->
+  <area shape="circle" coords="252,174,13" href="geos/ZH.html" alt="Indian Ocean" title="Indian Ocean" />
+  <!--Arctic Ocean-->
+  <area shape="circle" coords="174,38,11" href="geos/XQ.html" alt="Arctic Ocean" title="Arctic Ocean" />
+  <!--World-->
+  <area shape="rect" coords="3,215,31,244" href="geos/XX.html" alt="World" title="World" />
+</map>
+
+    </td>
+  </tr>
+</table>
+                              <!-- InstanceEndEditable --> </td>
+                            </tr>
+                          </table>
+                        </div>
+                      </div></td>
+                  </tr>
+                </table>
+                <div class="floatClear"></div></td>
+            </tr>
+            <tr>
+              <td align="right"></td>
+              <td align="right" bgcolor="#FFFFFF">
+              	<table width="602" border="0" cellpadding="0" cellspacing="0" bordercolor="#FFFFFF" style="margin-right:8px;">
+                  <tr>
+                    <td class="bottom-text"  style="border-bottom: 1px solid #CCCCCC;">The online Factbook is updated bi-weekly. ISSN 1553-8133<br />
+                      For additional information on government leaders in selected foreign countries, go to World Leaders.</td>
+                  </tr>
+              </table></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <!-- *** Footer *** -->
+      <hr class="netscape4" />
+      <div id="footerBlockContainer" align="right">
+        <div id="footerBlock" align="right" style="margin-top:-2px;">
+          <div class="footerBlockBGR" align="right">
+            <div class="footerBlockBGC" align="right" style="margin-right:10px; width:600px; border:none;">
+              
+              <ul id="footerLinks-L" align="right" style="margin:0px; float: right; padding-right: 0px;">
+                <li><a title="Site Policies" href="/about-cia/site-policies/index.html#privacy-notice">Privacy</a></li>
+                <li><a title="Site Policies" href="/about-cia/site-policies/index.html#copy">Copyright</a></li>
+                <li><a title="Site Policies" href="/about-cia/site-policies/index.html">Site Policies</a></li>
+                <li><a href="http://www.usa.gov/">USA.gov</a></li>
+                <li><a href="http://www.foia.cia.gov/">FOIA</a></li>
+                <li><a href="http://www.dni.gov/">DNI.gov</a></li>
+                <li><a title="NoFEAR Act" href="/about-cia/no-fear-act/index.html">NoFEAR Act</a></li>
+                <li style="margin-left: 6px;"><a href="/sitemap.html" accesskey="3" title="Site Map">Site Map</a></li>
+                <li style="margin-right: 0px;"><a href="/contact-cia" accesskey="9" title="Contact CIA">Contact CIA</a></li>
+              </ul>
+              
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+      <div id="portal-footer">
+        <div id="colL"></div>
+        <div id="colR"></div>
+      </div>
+      <!-- *** / Footer *** -->
+    </td>
+    <td id="mnBGR"><div id="mnBGRStripe"></div></td>
+  </tr>
+</table>
+</body>
+<!-- InstanceEnd --></html>
+

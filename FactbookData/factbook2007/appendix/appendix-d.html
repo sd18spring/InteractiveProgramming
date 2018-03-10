@@ -1,0 +1,5920 @@
+<!-- FileName="Connection_cf_dsn.htm" "" -->
+<!-- Type="CFDSN" -->
+<!-- Catalog="" -->
+<!-- Schema="" -->
+<!-- HTTP="true" -->
+
+
+<html>
+<head>
+<title>CIA - The World Factbook - Appendix D</title>
+
+
+
+
+<link rel="stylesheet" href="../Factbook.css" type="text/css">
+<script language="JavaScript">
+<!--
+function MM_jumpMenu(targ,selObj,restore){ //v3.0
+  eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
+  if (restore) selObj.selectedIndex=0;
+}
+//-->
+</script>
+</head>
+
+	<body link="#FFFFFF" vlink="#FFFFFF">
+
+<div align="center">&nbsp; </div>
+<div align="center"> 
+
+<table width="699" border="0" cellpadding="0" cellspacing="0"  align="center">
+    <tr align="center"> 
+      <td height="62" colspan="4" valign="bottom"> 
+        <p>
+			<a href="../index.html">
+				
+					<img name="wfbTopBanner" src="../graphics/wfbTopBanner.gif" width="712" height="92" border="0" usemap="#m_wfbTopBanner" alt="The World Factbook">
+					<map name="m_wfbTopBanner">
+						<area shape="rect" coords="0,0,124,92" href="https://www.cia.gov/" alt="CIA Home" >
+						<area shape="rect" coords="124,76,196,92" href="https://www.cia.gov/" alt="CIA Home" >
+						<area shape="rect" coords="195,76,263,92" href="https://www.cia.gov/about-cia/index.html" alt="About CIA" >
+						<area shape="rect" coords="262,76,323,92" href="https://www.cia.gov/careers/index.html" alt="Careers" >
+						<area shape="rect" coords="322,76,404,92" href="https://www.cia.gov/offices-of-cia/index.html" alt="Offices of CIA" >
+						<area shape="rect" coords="403,76,512,92" href="https://www.cia.gov/news-information/index.html" alt="News &amp; Information" >
+						<area shape="rect" coords="511,76,566,92" href="https://www.cia.gov/library/index.html" alt="Library" >
+						<area shape="rect" coords="565,76,636,92" href="https://www.cia.gov/kids-page/index.html" alt="Kid&#8217;s Page" >
+						<area shape="rect" coords="635,76,711,92" href="https://www.cia.gov/contact-cia/index.html" alt="Contact CIA" >
+						<area shape="rect" coords="124,0,446,25" alt="CENTRAL INTELLIGENCE AGENCY" >
+					</map>
+								
+		 	</a>
+	    </p>
+      </td>
+    </tr>
+    <tr> 
+      <td height="43" colspan="4" align="left" valign="middle" background="../graphics/metalpullnav.jpg" bgcolor="#000000"> 
+	  
+	  
+
+
+
+
+
+      <form name="SelectCountry">
+	   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+        <select name="CountrySelect" onChange="MM_jumpMenu('parent', this, 0)">
+		        <option>Select a Country or Location</option>
+                <option value="../geos/xx.html">World</option>
+                <option value="../geos/af.html">Afghanistan</option>
+                <option value="../geos/ax.html">Akrotiri</option>
+                <option value="../geos/al.html">Albania</option>
+                <option value="../geos/ag.html">Algeria</option>
+                <option value="../geos/aq.html">American Samoa</option>
+                <option value="../geos/an.html">Andorra</option>
+                <option value="../geos/ao.html">Angola</option>
+                <option value="../geos/av.html">Anguilla</option>
+                <option value="../geos/ay.html">Antarctica</option>
+                <option value="../geos/ac.html">Antigua and Barbuda</option>
+                <option value="../geos/xq.html">Arctic Ocean</option>
+                <option value="../geos/ar.html">Argentina</option>
+                <option value="../geos/am.html">Armenia</option>
+                <option value="../geos/aa.html">Aruba</option>
+                <option value="../geos/at.html">Ashmore and Cartier Islands</option>
+                <option value="../geos/zh.html">Atlantic Ocean</option>
+                <option value="../geos/as.html">Australia</option>
+                <option value="../geos/au.html">Austria</option>
+                <option value="../geos/aj.html">Azerbaijan</option>
+                <option value="../geos/bf.html">Bahamas, The</option>
+                <option value="../geos/ba.html">Bahrain</option>
+                <option value="../geos/fq.html">Baker Island</option>
+                <option value="../geos/bg.html">Bangladesh</option>
+                <option value="../geos/bb.html">Barbados</option>
+                <option value="../geos/bo.html">Belarus</option>
+                <option value="../geos/be.html">Belgium</option>
+                <option value="../geos/bh.html">Belize</option>
+                <option value="../geos/bn.html">Benin</option>
+                <option value="../geos/bd.html">Bermuda</option>
+                <option value="../geos/bt.html">Bhutan</option>
+                <option value="../geos/bl.html">Bolivia</option>
+                <option value="../geos/bk.html">Bosnia and Herzegovina</option>
+                <option value="../geos/bc.html">Botswana</option>
+                <option value="../geos/bv.html">Bouvet Island</option>
+                <option value="../geos/br.html">Brazil</option>
+                <option value="../geos/io.html">British Indian Ocean Territory</option>
+                <option value="../geos/vi.html">British Virgin Islands</option>
+                <option value="../geos/bx.html">Brunei</option>
+                <option value="../geos/bu.html">Bulgaria</option>
+                <option value="../geos/uv.html">Burkina Faso</option>
+                <option value="../geos/bm.html">Burma</option>
+                <option value="../geos/by.html">Burundi</option>
+                <option value="../geos/cb.html">Cambodia</option>
+                <option value="../geos/cm.html">Cameroon</option>
+                <option value="../geos/ca.html">Canada</option>
+                <option value="../geos/cv.html">Cape Verde</option>
+                <option value="../geos/cj.html">Cayman Islands</option>
+                <option value="../geos/ct.html">Central African Republic</option>
+                <option value="../geos/cd.html">Chad</option>
+                <option value="../geos/ci.html">Chile</option>
+                <option value="../geos/ch.html">China</option>
+                <option value="../geos/kt.html">Christmas Island</option>
+                <option value="../geos/ip.html">Clipperton Island</option>
+                <option value="../geos/ck.html">Cocos (Keeling) Islands</option>
+                <option value="../geos/co.html">Colombia</option>
+                <option value="../geos/cn.html">Comoros</option>
+                <option value="../geos/cg.html">Congo, Democratic Republic of the</option>
+                <option value="../geos/cf.html">Congo, Republic of the</option>
+                <option value="../geos/cw.html">Cook Islands</option>
+                <option value="../geos/cr.html">Coral Sea Islands</option>
+                <option value="../geos/cs.html">Costa Rica</option>
+                <option value="../geos/iv.html">Cote d'Ivoire</option>
+                <option value="../geos/hr.html">Croatia</option>
+                <option value="../geos/cu.html">Cuba</option>
+                <option value="../geos/cy.html">Cyprus</option>
+                <option value="../geos/ez.html">Czech Republic</option>
+                <option value="../geos/da.html">Denmark</option>
+                <option value="../geos/dx.html">Dhekelia</option>
+                <option value="../geos/dj.html">Djibouti</option>
+                <option value="../geos/do.html">Dominica</option>
+                <option value="../geos/dr.html">Dominican Republic</option>
+                <option value="../geos/ec.html">Ecuador</option>
+                <option value="../geos/eg.html">Egypt</option>
+                <option value="../geos/es.html">El Salvador</option>
+                <option value="../geos/ek.html">Equatorial Guinea</option>
+                <option value="../geos/er.html">Eritrea</option>
+                <option value="../geos/en.html">Estonia</option>
+                <option value="../geos/et.html">Ethiopia</option>
+                <option value="../geos/fk.html">Falkland Islands (Islas Malvinas)</option>
+                <option value="../geos/fo.html">Faroe Islands</option>
+                <option value="../geos/fj.html">Fiji</option>
+                <option value="../geos/fi.html">Finland</option>
+                <option value="../geos/fr.html">France</option>
+                <option value="../geos/fp.html">French Polynesia</option>
+                <option value="../geos/fs.html">French Southern and Antarctic Lands</option>
+                <option value="../geos/gb.html">Gabon</option>
+                <option value="../geos/ga.html">Gambia, The</option>
+                <option value="../geos/gz.html">Gaza Strip</option>
+                <option value="../geos/gg.html">Georgia</option>
+                <option value="../geos/gm.html">Germany</option>
+                <option value="../geos/gh.html">Ghana</option>
+                <option value="../geos/gi.html">Gibraltar</option>
+                <option value="../geos/gr.html">Greece</option>
+                <option value="../geos/gl.html">Greenland</option>
+                <option value="../geos/gj.html">Grenada</option>
+                <option value="../geos/gq.html">Guam</option>
+                <option value="../geos/gt.html">Guatemala</option>
+                <option value="../geos/gk.html">Guernsey</option>
+                <option value="../geos/gv.html">Guinea</option>
+                <option value="../geos/pu.html">Guinea-Bissau</option>
+                <option value="../geos/gy.html">Guyana</option>
+                <option value="../geos/ha.html">Haiti</option>
+                <option value="../geos/hm.html">Heard Island and McDonald Islands</option>
+                <option value="../geos/vt.html">Holy See (Vatican City)</option>
+                <option value="../geos/ho.html">Honduras</option>
+                <option value="../geos/hk.html">Hong Kong</option>
+                <option value="../geos/hq.html">Howland Island</option>
+                <option value="../geos/hu.html">Hungary</option>
+                <option value="../geos/ic.html">Iceland</option>
+                <option value="../geos/in.html">India</option>
+                <option value="../geos/xo.html">Indian Ocean</option>
+                <option value="../geos/id.html">Indonesia</option>
+                <option value="../geos/ir.html">Iran</option>
+                <option value="../geos/iz.html">Iraq</option>
+                <option value="../geos/ei.html">Ireland</option>
+                <option value="../geos/im.html">Isle of Man</option>				
+                <option value="../geos/is.html">Israel</option>
+                <option value="../geos/it.html">Italy</option>
+                <option value="../geos/jm.html">Jamaica</option>
+                <option value="../geos/jn.html">Jan Mayen</option>
+                <option value="../geos/ja.html">Japan</option>
+                <option value="../geos/dq.html">Jarvis Island</option>
+                <option value="../geos/je.html">Jersey</option>
+                <option value="../geos/jq.html">Johnston Atoll</option>
+                <option value="../geos/jo.html">Jordan</option>
+                <option value="../geos/kz.html">Kazakhstan</option>
+                <option value="../geos/ke.html">Kenya</option>
+                <option value="../geos/kq.html">Kingman Reef</option>
+                <option value="../geos/kr.html">Kiribati</option>
+                <option value="../geos/kn.html">Korea, North</option>
+                <option value="../geos/ks.html">Korea, South</option>
+                <option value="../geos/ku.html">Kuwait</option>
+                <option value="../geos/kg.html">Kyrgyzstan</option>
+                <option value="../geos/la.html">Laos</option>
+                <option value="../geos/lg.html">Latvia</option>
+                <option value="../geos/le.html">Lebanon</option>
+                <option value="../geos/lt.html">Lesotho</option>
+                <option value="../geos/li.html">Liberia</option>
+                <option value="../geos/ly.html">Libya</option>
+                <option value="../geos/ls.html">Liechtenstein</option>
+                <option value="../geos/lh.html">Lithuania</option>
+                <option value="../geos/lu.html">Luxembourg</option>
+                <option value="../geos/mc.html">Macau</option>
+                <option value="../geos/mk.html">Macedonia</option>
+                <option value="../geos/ma.html">Madagascar</option>
+                <option value="../geos/mi.html">Malawi</option>
+                <option value="../geos/my.html">Malaysia</option>
+                <option value="../geos/mv.html">Maldives</option>
+                <option value="../geos/ml.html">Mali</option>
+                <option value="../geos/mt.html">Malta</option>
+                <option value="../geos/rm.html">Marshall Islands</option>
+                <option value="../geos/mr.html">Mauritania</option>
+                <option value="../geos/mp.html">Mauritius</option>
+                <option value="../geos/mf.html">Mayotte</option>
+                <option value="../geos/mx.html">Mexico</option>
+                <option value="../geos/fm.html">Micronesia, Federated States of</option>
+                <option value="../geos/mq.html">Midway Islands</option>
+                <option value="../geos/md.html">Moldova</option>
+                <option value="../geos/mn.html">Monaco</option>
+                <option value="../geos/mg.html">Mongolia</option>
+				<option value="../geos/mj.html">Montenegro</option>	
+                <option value="../geos/mh.html">Montserrat</option>
+                <option value="../geos/mo.html">Morocco</option>
+                <option value="../geos/mz.html">Mozambique</option>
+                <option value="../geos/wa.html">Namibia</option>
+                <option value="../geos/nr.html">Nauru</option>
+                <option value="../geos/bq.html">Navassa Island</option>
+                <option value="../geos/np.html">Nepal</option>
+                <option value="../geos/nl.html">Netherlands</option>
+                <option value="../geos/nt.html">Netherlands Antilles</option>
+                <option value="../geos/nc.html">New Caledonia</option>
+                <option value="../geos/nz.html">New Zealand</option>
+                <option value="../geos/nu.html">Nicaragua</option>
+                <option value="../geos/ng.html">Niger</option>
+                <option value="../geos/ni.html">Nigeria</option>
+                <option value="../geos/ne.html">Niue</option>
+                <option value="../geos/nf.html">Norfolk Island</option>
+                <option value="../geos/cq.html">Northern Mariana Islands</option>
+                <option value="../geos/no.html">Norway</option>
+                <option value="../geos/mu.html">Oman</option>
+                <option value="../geos/zn.html">Pacific Ocean</option>
+                <option value="../geos/pk.html">Pakistan</option>
+                <option value="../geos/ps.html">Palau</option>
+                <option value="../geos/lq.html">Palmyra Atoll</option>
+                <option value="../geos/pm.html">Panama</option>
+                <option value="../geos/pp.html">Papua New Guinea</option>
+                <option value="../geos/pf.html">Paracel Islands</option>
+                <option value="../geos/pa.html">Paraguay</option>
+                <option value="../geos/pe.html">Peru</option>
+                <option value="../geos/rp.html">Philippines</option>
+                <option value="../geos/pc.html">Pitcairn Islands</option>
+                <option value="../geos/pl.html">Poland</option>
+                <option value="../geos/po.html">Portugal</option>
+                <option value="../geos/rq.html">Puerto Rico</option>
+                <option value="../geos/qa.html">Qatar</option>
+                <option value="../geos/ro.html">Romania</option>
+                <option value="../geos/rs.html">Russia</option>
+                <option value="../geos/rw.html">Rwanda</option>
+                <option value="../geos/tb.html">Saint Barthelemy</option>
+                <option value="../geos/sh.html">Saint Helena</option>
+                <option value="../geos/sc.html">Saint Kitts and Nevis</option>
+                <option value="../geos/st.html">Saint Lucia</option>
+                <option value="../geos/rn.html">Saint Martin</option>
+                <option value="../geos/sb.html">Saint Pierre and Miquelon</option>
+                <option value="../geos/vc.html">Saint Vincent and the Grenadines</option>
+                <option value="../geos/ws.html">Samoa</option>
+                <option value="../geos/sm.html">San Marino</option>
+                <option value="../geos/tp.html">Sao Tome and Principe</option>
+                <option value="../geos/sa.html">Saudi Arabia</option>
+                <option value="../geos/sg.html">Senegal</option>
+				<option value="../geos/rb.html">Serbia</option>
+                <option value="../geos/se.html">Seychelles</option>
+                <option value="../geos/sl.html">Sierra Leone</option>
+                <option value="../geos/sn.html">Singapore</option>
+                <option value="../geos/lo.html">Slovakia</option>
+                <option value="../geos/si.html">Slovenia</option>
+                <option value="../geos/bp.html">Solomon Islands</option>
+                <option value="../geos/so.html">Somalia</option>
+                <option value="../geos/sf.html">South Africa</option>
+                <option value="../geos/sx.html">South Georgia and the South Sandwich Islands</option>
+                <option value="../geos/oo.html">Southern Ocean</option>
+                <option value="../geos/sp.html">Spain</option>
+                <option value="../geos/pg.html">Spratly Islands</option>
+                <option value="../geos/ce.html">Sri Lanka</option>
+                <option value="../geos/su.html">Sudan</option>
+                <option value="../geos/ns.html">Suriname</option>
+                <option value="../geos/sv.html">Svalbard</option>
+                <option value="../geos/wz.html">Swaziland</option>
+                <option value="../geos/sw.html">Sweden</option>
+                <option value="../geos/sz.html">Switzerland</option>
+                <option value="../geos/sy.html">Syria</option>
+                <option value="../geos/ti.html">Tajikistan</option>
+                <option value="../geos/tz.html">Tanzania</option>
+                <option value="../geos/th.html">Thailand</option>
+                <option value="../geos/tt.html">Timor-Leste</option>				
+                <option value="../geos/to.html">Togo</option>
+                <option value="../geos/tl.html">Tokelau</option>
+                <option value="../geos/tn.html">Tonga</option>
+                <option value="../geos/td.html">Trinidad and Tobago</option>
+                <option value="../geos/ts.html">Tunisia</option>
+                <option value="../geos/tu.html">Turkey</option>
+                <option value="../geos/tx.html">Turkmenistan</option>
+                <option value="../geos/tk.html">Turks and Caicos Islands</option>
+                <option value="../geos/tv.html">Tuvalu</option>
+                <option value="../geos/ug.html">Uganda</option>
+                <option value="../geos/up.html">Ukraine</option>
+                <option value="../geos/ae.html">United Arab Emirates</option>
+                <option value="../geos/uk.html">United Kingdom</option>
+                <option value="../geos/us.html">United States</option>
+				<option value="../geos/um.html">United States Pacific Island Wildlife Refuges</option>				
+                <option value="../geos/uy.html">Uruguay</option>
+                <option value="../geos/uz.html">Uzbekistan</option>
+                <option value="../geos/nh.html">Vanuatu</option>
+                <option value="../geos/ve.html">Venezuela</option>
+                <option value="../geos/vm.html">Vietnam</option>
+                <option value="../geos/vq.html">Virgin Islands</option>
+                <option value="../geos/wq.html">Wake Island</option>
+                <option value="../geos/wf.html">Wallis and Futuna</option>
+                <option value="../geos/we.html">West Bank</option>
+                <option value="../geos/wi.html">Western Sahara</option>
+                <option value="../geos/ym.html">Yemen</option>
+                <option value="../geos/za.html">Zambia</option>
+                <option value="../geos/zi.html">Zimbabwe</option>
+                <option value="../geos/tw.html">Taiwan</option>
+                <option value="../geos/ee.html">European Union</option>
+            </select>
+      </form>
+      </td>
+    </tr>
+    <tr> 
+      <td valign="top" align="center" height="760" bgcolor="#666666" rowspan="3" background="../graphics/bg_left.jpg" width="20"><img src="../graphics/trans19.gif" alt="" width="19" height="1"></td>
+      <td valign="top" align="center" height="96" bgcolor="#666666" background="../graphics/bg_1frame.jpg"> 
+        <div align="left"> 
+          <table width="63" border="0" cellpadding="0" cellspacing="0">
+            <tr> 
+              <td rowspan="3" width="13"><img src="../graphics/flaginterface/flagpanel_r1_c1.jpg" alt="" width="13" height="102" border="0"></td>
+              <td height="9" colspan="2"><img src="../graphics/flaginterface/flagpanel_r1_c2.jpg" alt="" width="479" height="13" border="0"></td>
+              <td rowspan="3" width="12"><img src="../graphics/flaginterface/flagpanel_r1_c3.jpg" alt="" width="12" height="102" border="0"></td>
+            </tr>
+            <tr class="CountryName"> 
+              <td height="75" bgcolor="#000000" background="../graphics/bg_1.jpg" width="129" class="CountryName"> 
+                &nbsp;&nbsp;Appendix D -</td>
+              <td height="75" bgcolor="#000000" background="../graphics/bg_1.jpg" width="350" class="CountryName">
+			  Cross-Reference List of Country Data Codes</td>
+            </tr>
+            <tr> 
+              <td height="2" colspan="2"><img src="../graphics/flaginterface/flagpanel_r3_c2.jpg" alt="" width="479" height="14" border="0"></td>
+            </tr>
+          </table>
+          <div align="center"></div>
+        </div>
+      </td>
+      <td valign="top" bgcolor="#666666" height="140" width="170" rowspan="2" background="../graphics/window.jpg">&nbsp;&nbsp;&nbsp;&nbsp;<img src="../graphics/trans174.gif" alt="" width="170" height="1"></td>
+      <td rowspan="3" valign="top" bgcolor="#666666" height="548" width="19" background="../graphics/bg_2.jpg"><img src="../graphics/trans19.gif" alt="" width="19" height="1"> </td>
+    </tr>
+    <tr>
+      <td valign="middle" align="center" height="68" bgcolor="#666666" background="../graphics/secondsetbuttons.jpg"><a href="../index.html" class="MainLinks">Home</a> 
+        &nbsp;<a href="../docs/refmaps.html" class="MainLinks">Reference Maps</a>&nbsp;<a href="appendix-a.html" class="MainLinks">Appendixes</a></td>
+    </tr>
+    <tr> 
+      <td valign="top" align="center" width="674" bgcolor="#000000" colspan="2" class="Definition"><br> 
+        <table width="90%" border="1" cellspacing="0" cellpadding="4" >
+          <tr bgcolor="#333333" valign="middle"> 
+            <td colspan="7" class="Normal" height="36"> 
+              <div align="center"><font color="#FFFFFF" size="2"><b>Appendixes</b></font></div>
+            </td>
+          </tr>
+          <tr bgcolor="#666666"> 
+            <td width="14%" valign=top class="Normal" height="52" align="center"> 
+            	<font color="#FFCC99">A</font> <br>
+            	<a href="appendix-a.html">Abbreviations</a>
+			</td>
+            <td valign=top class="Normal" height="52" width="18%" align="center"> 
+            	<font color="#FFCC99">B</font><br>
+                <a href="appendix-b.html">International<br>Organizations and Groups</a>
+			</td>
+            <td valign=top class="Normal" height="52" width="17%" align="center"> 
+            	<font color="#FFCC99">C</font><br>
+                <a href="appendix-c.html">Selected International<br>Environmental Agreements</a>
+			</td>
+            <td valign=top class="Normal" height="52" width="15%" align="center"> 
+            	<font color="#FFCC99">D</font><br>
+                <font color="#FFFFFF">Cross-Reference List of Country Data Codes</font>
+			</td>
+            <td valign=top class="Normal" height="52" width="16%" align="center"> 
+            	<font color="#FFCC99">E</font><br>
+                <a href="appendix-e.html">Cross-Reference List of Hydrographic Data Codes</a>			</td>
+            <td valign=top class="Normal" height="52" width="20%" align="center"> 
+            	<font color="#FFCC99">F</font><br>
+                <a href="appendix-f.html">Cross-Reference List of Geographic Names</a>
+			</td>
+            <td valign=top class="Normal" width="20%" align="center">
+				<font color="#FFCC99">G</font><br>
+                <a href="appendix-g.html">Weights and Measures</a>			</td>
+          </tr>
+        </table>
+<br>
+<table width="90%" border="1" cellspacing="0" cellpadding="4" bgcolor="#FFFFFF">
+	<tr>
+		<td width="100%" class="Normal">
+              <p><b>FIPS 10:</b> <i>Countries, Dependencies, 
+                Areas of Special Sovereignty, and Their Principal Administrative 
+                Divisions (FIPS  10)</i> is maintained by the Office of Targeting and Transnational Issues, National Geospatial-Intelligence Agency,  and published 
+                by the National Institute of Standards and Technology (Department 
+                of Commerce). FIPS 10 codes are intended for general use throughout 
+                the US Government, especially in activities associated with the 
+                mission of the Department of State and national defense programs.</p>
+              <p><b>ISO 3166:</b><i>Codes for the Representation of Names of Countries 
+                (ISO 3166)</i> is prepared by the International Organization for 
+                Standardization. ISO 3166 includes two- and three-character alphabetic 
+                codes and three-digit numeric codes that may be needed for activities 
+                involving exchange of data with international organizations that 
+                have adopted that standard. Except for the numeric codes, ISO 
+                3166 codes have been adopted in the US as FIPS 104-1:<i> American 
+                National Standard Codes for the Representation of Names of Countries, 
+                Dependencies, and Areas of Special Sovereignty for Information 
+                Interchange.</i></p>
+              <p> <strong>STANAG 1059: </strong><em>Letter Codes for Geographical Entities </em><em>(8th edition, 2004) </em> is a Standardization Agreement (STANAG) established and maintained by the North Atlantic Treaty Organization (NATO/OTAN) for the purpose of providing a common set of geo-spatial identifiers for countries, territories, and possessions. The 8th edition established trigraph codes for each country based upon the ISO 3166-1 alpha-3 character sets. These codes are used throughout NATO. </p>
+              <p><b>Internet:  </b>The Internet country code is 
+                the two-letter digraph maintained by the International Organization 
+                for Standardization (ISO) in <i>the ISO 3166 Alpha-2 list</i> 
+                and used by the Internet Assigned Numbers Authority (IANA) to 
+                establish country-coded top-level domains (ccTLDs).</p>
+		</td>
+	</tr>
+</table>
+<br>
+        <table border=1 cellspacing=0 cellpadding=4 width="90%">
+          <tr align="center" bgcolor="#CCCCCC">
+            <td width="15%" valign=top class="Normal"><b>Entity</b></td>
+            <td width="10%" valign=top class="Normal"><b>FIPS 10</b></td>
+            <td width="30%" colspan=3 valign=top class="Normal"><b>ISO 3166</b></td>
+			<td width="10%" valign=top class="Normal"><b>STANAG-1059</b></td>
+			<td width="10%" valign=top class="Normal"><b>Internet</b></td>
+            <td width="25%" valign=top class="Normal"><b>Comment</b></td>
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Afghanistan</b></td>
+            <td width="10%" valign=top class="Normal">AF</td>
+            
+				<td width="10%" valign=top class="Normal">AF</td>
+			
+				<td width="10%" valign=top class="Normal">AFG</td>
+			
+				<td width="10%" valign=top class="Normal">004</td>
+			
+				<td width="10%" valign=top class="Normal">AFG</td>
+			
+				<td width="10%" valign=top class="Normal">.af</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Albania</b></td>
+            <td width="10%" valign=top class="Normal">AL</td>
+            
+				<td width="10%" valign=top class="Normal">AL</td>
+			
+				<td width="10%" valign=top class="Normal">ALB</td>
+			
+				<td width="10%" valign=top class="Normal">008</td>
+			
+				<td width="10%" valign=top class="Normal">ALB</td>
+			
+				<td width="10%" valign=top class="Normal">.al</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Algeria</b></td>
+            <td width="10%" valign=top class="Normal">AG</td>
+            
+				<td width="10%" valign=top class="Normal">DZ</td>
+			
+				<td width="10%" valign=top class="Normal">DZA</td>
+			
+				<td width="10%" valign=top class="Normal">012</td>
+			
+				<td width="10%" valign=top class="Normal">DZA</td>
+			
+				<td width="10%" valign=top class="Normal">.dz</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>American Samoa</b></td>
+            <td width="10%" valign=top class="Normal">AQ</td>
+            
+				<td width="10%" valign=top class="Normal">AS</td>
+			
+				<td width="10%" valign=top class="Normal">ASM</td>
+			
+				<td width="10%" valign=top class="Normal">016</td>
+			
+				<td width="10%" valign=top class="Normal">ASM</td>
+			
+				<td width="10%" valign=top class="Normal">.as</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Andorra</b></td>
+            <td width="10%" valign=top class="Normal">AN</td>
+            
+				<td width="10%" valign=top class="Normal">AD</td>
+			
+				<td width="10%" valign=top class="Normal">AND</td>
+			
+				<td width="10%" valign=top class="Normal">020</td>
+			
+				<td width="10%" valign=top class="Normal">AND</td>
+			
+				<td width="10%" valign=top class="Normal">.ad</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Angola</b></td>
+            <td width="10%" valign=top class="Normal">AO</td>
+            
+				<td width="10%" valign=top class="Normal">AO</td>
+			
+				<td width="10%" valign=top class="Normal">AGO</td>
+			
+				<td width="10%" valign=top class="Normal">024</td>
+			
+				<td width="10%" valign=top class="Normal">AGO</td>
+			
+				<td width="10%" valign=top class="Normal">.ao</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Anguilla</b></td>
+            <td width="10%" valign=top class="Normal">AV</td>
+            
+				<td width="10%" valign=top class="Normal">AI</td>
+			
+				<td width="10%" valign=top class="Normal">AIA</td>
+			
+				<td width="10%" valign=top class="Normal">660</td>
+			
+				<td width="10%" valign=top class="Normal">AIA</td>
+			
+				<td width="10%" valign=top class="Normal">.ai</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Antarctica</b></td>
+            <td width="10%" valign=top class="Normal">AY</td>
+            
+				<td width="10%" valign=top class="Normal">AQ</td>
+			
+				<td width="10%" valign=top class="Normal">ATA</td>
+			
+				<td width="10%" valign=top class="Normal">010</td>
+			
+				<td width="10%" valign=top class="Normal">ATA</td>
+			
+				<td width="10%" valign=top class="Normal">.aq</td>
+			
+				<td width="25%" valign=top class="Normal">ISO defines as the territory south of 60 degrees south latitude</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Antigua and Barbuda</b></td>
+            <td width="10%" valign=top class="Normal">AC</td>
+            
+				<td width="10%" valign=top class="Normal">AG</td>
+			
+				<td width="10%" valign=top class="Normal">ATG</td>
+			
+				<td width="10%" valign=top class="Normal">028</td>
+			
+				<td width="10%" valign=top class="Normal">ATG</td>
+			
+				<td width="10%" valign=top class="Normal">.ag</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Argentina</b></td>
+            <td width="10%" valign=top class="Normal">AR</td>
+            
+				<td width="10%" valign=top class="Normal">AR</td>
+			
+				<td width="10%" valign=top class="Normal">ARG</td>
+			
+				<td width="10%" valign=top class="Normal">032</td>
+			
+				<td width="10%" valign=top class="Normal">ARG</td>
+			
+				<td width="10%" valign=top class="Normal">.ar</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Armenia</b></td>
+            <td width="10%" valign=top class="Normal">AM</td>
+            
+				<td width="10%" valign=top class="Normal">AM</td>
+			
+				<td width="10%" valign=top class="Normal">ARM</td>
+			
+				<td width="10%" valign=top class="Normal">051</td>
+			
+				<td width="10%" valign=top class="Normal">ARM</td>
+			
+				<td width="10%" valign=top class="Normal">.am</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Aruba</b></td>
+            <td width="10%" valign=top class="Normal">AA</td>
+            
+				<td width="10%" valign=top class="Normal">AW</td>
+			
+				<td width="10%" valign=top class="Normal">ABW</td>
+			
+				<td width="10%" valign=top class="Normal">533</td>
+			
+				<td width="10%" valign=top class="Normal">ABW</td>
+			
+				<td width="10%" valign=top class="Normal">.aw</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Ashmore and Cartier Islands</b></td>
+            <td width="10%" valign=top class="Normal">AT</td>
+            
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">AUS</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="25%" valign=top class="Normal">ISO includes with Australia</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Australia</b></td>
+            <td width="10%" valign=top class="Normal">AS</td>
+            
+				<td width="10%" valign=top class="Normal">AU</td>
+			
+				<td width="10%" valign=top class="Normal">AUS</td>
+			
+				<td width="10%" valign=top class="Normal">036</td>
+			
+				<td width="10%" valign=top class="Normal">AUS</td>
+			
+				<td width="10%" valign=top class="Normal">.au</td>
+			
+				<td width="25%" valign=top class="Normal">ISO includes Ashmore and Cartier Islands, Coral Sea Islands</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Austria</b></td>
+            <td width="10%" valign=top class="Normal">AU</td>
+            
+				<td width="10%" valign=top class="Normal">AT</td>
+			
+				<td width="10%" valign=top class="Normal">AUT</td>
+			
+				<td width="10%" valign=top class="Normal">040</td>
+			
+				<td width="10%" valign=top class="Normal">AUT</td>
+			
+				<td width="10%" valign=top class="Normal">.at</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Azerbaijan</b></td>
+            <td width="10%" valign=top class="Normal">AJ</td>
+            
+				<td width="10%" valign=top class="Normal">AZ</td>
+			
+				<td width="10%" valign=top class="Normal">AZE</td>
+			
+				<td width="10%" valign=top class="Normal">031</td>
+			
+				<td width="10%" valign=top class="Normal">AZE</td>
+			
+				<td width="10%" valign=top class="Normal">.az</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Bahamas, The</b></td>
+            <td width="10%" valign=top class="Normal">BF</td>
+            
+				<td width="10%" valign=top class="Normal">BS</td>
+			
+				<td width="10%" valign=top class="Normal">BHS</td>
+			
+				<td width="10%" valign=top class="Normal">044</td>
+			
+				<td width="10%" valign=top class="Normal">BHS</td>
+			
+				<td width="10%" valign=top class="Normal">.bs</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Bahrain</b></td>
+            <td width="10%" valign=top class="Normal">BA</td>
+            
+				<td width="10%" valign=top class="Normal">BH</td>
+			
+				<td width="10%" valign=top class="Normal">BHR</td>
+			
+				<td width="10%" valign=top class="Normal">048</td>
+			
+				<td width="10%" valign=top class="Normal">BHR</td>
+			
+				<td width="10%" valign=top class="Normal">.bh</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Baker Island</b></td>
+            <td width="10%" valign=top class="Normal">FQ</td>
+            
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">UMI</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="25%" valign=top class="Normal">ISO includes with the US Minor Outlying Islands</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Bangladesh</b></td>
+            <td width="10%" valign=top class="Normal">BG</td>
+            
+				<td width="10%" valign=top class="Normal">BD</td>
+			
+				<td width="10%" valign=top class="Normal">BGD</td>
+			
+				<td width="10%" valign=top class="Normal">050</td>
+			
+				<td width="10%" valign=top class="Normal">BGD</td>
+			
+				<td width="10%" valign=top class="Normal">.bd</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Barbados</b></td>
+            <td width="10%" valign=top class="Normal">BB</td>
+            
+				<td width="10%" valign=top class="Normal">BB</td>
+			
+				<td width="10%" valign=top class="Normal">BRB</td>
+			
+				<td width="10%" valign=top class="Normal">052</td>
+			
+				<td width="10%" valign=top class="Normal">BRB</td>
+			
+				<td width="10%" valign=top class="Normal">.bb</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Bassas da India</b></td>
+            <td width="10%" valign=top class="Normal">BS</td>
+            
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="25%" valign=top class="Normal">administered as part of French Southern and Antarctic Lands; no ISO codes assigned</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Belarus</b></td>
+            <td width="10%" valign=top class="Normal">BO</td>
+            
+				<td width="10%" valign=top class="Normal">BY</td>
+			
+				<td width="10%" valign=top class="Normal">BLR</td>
+			
+				<td width="10%" valign=top class="Normal">112</td>
+			
+				<td width="10%" valign=top class="Normal">BLR</td>
+			
+				<td width="10%" valign=top class="Normal">.by</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Belgium</b></td>
+            <td width="10%" valign=top class="Normal">BE</td>
+            
+				<td width="10%" valign=top class="Normal">BE</td>
+			
+				<td width="10%" valign=top class="Normal">BEL</td>
+			
+				<td width="10%" valign=top class="Normal">056</td>
+			
+				<td width="10%" valign=top class="Normal">BEL</td>
+			
+				<td width="10%" valign=top class="Normal">.be</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Belize</b></td>
+            <td width="10%" valign=top class="Normal">BH</td>
+            
+				<td width="10%" valign=top class="Normal">BZ</td>
+			
+				<td width="10%" valign=top class="Normal">BLZ</td>
+			
+				<td width="10%" valign=top class="Normal">084</td>
+			
+				<td width="10%" valign=top class="Normal">BLZ</td>
+			
+				<td width="10%" valign=top class="Normal">.bz</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Benin</b></td>
+            <td width="10%" valign=top class="Normal">BN</td>
+            
+				<td width="10%" valign=top class="Normal">BJ</td>
+			
+				<td width="10%" valign=top class="Normal">BEN</td>
+			
+				<td width="10%" valign=top class="Normal">204</td>
+			
+				<td width="10%" valign=top class="Normal">BEN</td>
+			
+				<td width="10%" valign=top class="Normal">.bj</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Bermuda</b></td>
+            <td width="10%" valign=top class="Normal">BD</td>
+            
+				<td width="10%" valign=top class="Normal">BM</td>
+			
+				<td width="10%" valign=top class="Normal">BMU</td>
+			
+				<td width="10%" valign=top class="Normal">060</td>
+			
+				<td width="10%" valign=top class="Normal">BMU</td>
+			
+				<td width="10%" valign=top class="Normal">.bm</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Bhutan</b></td>
+            <td width="10%" valign=top class="Normal">BT</td>
+            
+				<td width="10%" valign=top class="Normal">BT</td>
+			
+				<td width="10%" valign=top class="Normal">BTN</td>
+			
+				<td width="10%" valign=top class="Normal">064</td>
+			
+				<td width="10%" valign=top class="Normal">BTN</td>
+			
+				<td width="10%" valign=top class="Normal">.bt</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Bolivia</b></td>
+            <td width="10%" valign=top class="Normal">BL</td>
+            
+				<td width="10%" valign=top class="Normal">BO</td>
+			
+				<td width="10%" valign=top class="Normal">BOL</td>
+			
+				<td width="10%" valign=top class="Normal">068</td>
+			
+				<td width="10%" valign=top class="Normal">BOL</td>
+			
+				<td width="10%" valign=top class="Normal">.bo</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Bosnia and Herzegovina</b></td>
+            <td width="10%" valign=top class="Normal">BK</td>
+            
+				<td width="10%" valign=top class="Normal">BA</td>
+			
+				<td width="10%" valign=top class="Normal">BIH</td>
+			
+				<td width="10%" valign=top class="Normal">070</td>
+			
+				<td width="10%" valign=top class="Normal">BIH</td>
+			
+				<td width="10%" valign=top class="Normal">.ba</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Botswana</b></td>
+            <td width="10%" valign=top class="Normal">BC</td>
+            
+				<td width="10%" valign=top class="Normal">BW</td>
+			
+				<td width="10%" valign=top class="Normal">BWA</td>
+			
+				<td width="10%" valign=top class="Normal">072</td>
+			
+				<td width="10%" valign=top class="Normal">BWA</td>
+			
+				<td width="10%" valign=top class="Normal">.bw</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Bouvet Island</b></td>
+            <td width="10%" valign=top class="Normal">BV</td>
+            
+				<td width="10%" valign=top class="Normal">BV</td>
+			
+				<td width="10%" valign=top class="Normal">BVT</td>
+			
+				<td width="10%" valign=top class="Normal">074</td>
+			
+				<td width="10%" valign=top class="Normal">BVT</td>
+			
+				<td width="10%" valign=top class="Normal">.bv</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Brazil</b></td>
+            <td width="10%" valign=top class="Normal">BR</td>
+            
+				<td width="10%" valign=top class="Normal">BR</td>
+			
+				<td width="10%" valign=top class="Normal">BRA</td>
+			
+				<td width="10%" valign=top class="Normal">076</td>
+			
+				<td width="10%" valign=top class="Normal">BRA</td>
+			
+				<td width="10%" valign=top class="Normal">.br</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>British Indian Ocean Territory</b></td>
+            <td width="10%" valign=top class="Normal">IO</td>
+            
+				<td width="10%" valign=top class="Normal">IO</td>
+			
+				<td width="10%" valign=top class="Normal">IOT</td>
+			
+				<td width="10%" valign=top class="Normal">086</td>
+			
+				<td width="10%" valign=top class="Normal">IOT</td>
+			
+				<td width="10%" valign=top class="Normal">.io</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>British Virgin Islands</b></td>
+            <td width="10%" valign=top class="Normal">VI</td>
+            
+				<td width="10%" valign=top class="Normal">VG</td>
+			
+				<td width="10%" valign=top class="Normal">VGB</td>
+			
+				<td width="10%" valign=top class="Normal">092</td>
+			
+				<td width="10%" valign=top class="Normal">VGB</td>
+			
+				<td width="10%" valign=top class="Normal">.vg</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Brunei</b></td>
+            <td width="10%" valign=top class="Normal">BX</td>
+            
+				<td width="10%" valign=top class="Normal">BN</td>
+			
+				<td width="10%" valign=top class="Normal">BRN</td>
+			
+				<td width="10%" valign=top class="Normal">096</td>
+			
+				<td width="10%" valign=top class="Normal">BRN</td>
+			
+				<td width="10%" valign=top class="Normal">.bn</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Bulgaria</b></td>
+            <td width="10%" valign=top class="Normal">BU</td>
+            
+				<td width="10%" valign=top class="Normal">BG</td>
+			
+				<td width="10%" valign=top class="Normal">BGR</td>
+			
+				<td width="10%" valign=top class="Normal">100</td>
+			
+				<td width="10%" valign=top class="Normal">BGR</td>
+			
+				<td width="10%" valign=top class="Normal">.bg</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Burkina Faso</b></td>
+            <td width="10%" valign=top class="Normal">UV</td>
+            
+				<td width="10%" valign=top class="Normal">BF</td>
+			
+				<td width="10%" valign=top class="Normal">BFA</td>
+			
+				<td width="10%" valign=top class="Normal">854</td>
+			
+				<td width="10%" valign=top class="Normal">BFA</td>
+			
+				<td width="10%" valign=top class="Normal">.bf</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Burma</b></td>
+            <td width="10%" valign=top class="Normal">BM</td>
+            
+				<td width="10%" valign=top class="Normal">MM</td>
+			
+				<td width="10%" valign=top class="Normal">MMR</td>
+			
+				<td width="10%" valign=top class="Normal">104</td>
+			
+				<td width="10%" valign=top class="Normal">MMR</td>
+			
+				<td width="10%" valign=top class="Normal">.mm</td>
+			
+				<td width="25%" valign=top class="Normal">ISO uses the name Myanmar</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Burundi</b></td>
+            <td width="10%" valign=top class="Normal">BY</td>
+            
+				<td width="10%" valign=top class="Normal">BI</td>
+			
+				<td width="10%" valign=top class="Normal">BDI</td>
+			
+				<td width="10%" valign=top class="Normal">108</td>
+			
+				<td width="10%" valign=top class="Normal">BDI</td>
+			
+				<td width="10%" valign=top class="Normal">.bi</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Cambodia</b></td>
+            <td width="10%" valign=top class="Normal">CB</td>
+            
+				<td width="10%" valign=top class="Normal">KH</td>
+			
+				<td width="10%" valign=top class="Normal">KHM</td>
+			
+				<td width="10%" valign=top class="Normal">116</td>
+			
+				<td width="10%" valign=top class="Normal">KHM</td>
+			
+				<td width="10%" valign=top class="Normal">.kh</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Cameroon</b></td>
+            <td width="10%" valign=top class="Normal">CM</td>
+            
+				<td width="10%" valign=top class="Normal">CM</td>
+			
+				<td width="10%" valign=top class="Normal">CMR</td>
+			
+				<td width="10%" valign=top class="Normal">120</td>
+			
+				<td width="10%" valign=top class="Normal">CMR</td>
+			
+				<td width="10%" valign=top class="Normal">.cm</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Canada</b></td>
+            <td width="10%" valign=top class="Normal">CA</td>
+            
+				<td width="10%" valign=top class="Normal">CA</td>
+			
+				<td width="10%" valign=top class="Normal">CAN</td>
+			
+				<td width="10%" valign=top class="Normal">124</td>
+			
+				<td width="10%" valign=top class="Normal">CAN</td>
+			
+				<td width="10%" valign=top class="Normal">.ca</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Cape Verde</b></td>
+            <td width="10%" valign=top class="Normal">CV</td>
+            
+				<td width="10%" valign=top class="Normal">CV</td>
+			
+				<td width="10%" valign=top class="Normal">CPV</td>
+			
+				<td width="10%" valign=top class="Normal">132</td>
+			
+				<td width="10%" valign=top class="Normal">CPV</td>
+			
+				<td width="10%" valign=top class="Normal">.cv</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Cayman Islands</b></td>
+            <td width="10%" valign=top class="Normal">CJ</td>
+            
+				<td width="10%" valign=top class="Normal">KY</td>
+			
+				<td width="10%" valign=top class="Normal">CYM</td>
+			
+				<td width="10%" valign=top class="Normal">136</td>
+			
+				<td width="10%" valign=top class="Normal">CYM</td>
+			
+				<td width="10%" valign=top class="Normal">.ky</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Central African Republic</b></td>
+            <td width="10%" valign=top class="Normal">CT</td>
+            
+				<td width="10%" valign=top class="Normal">CF</td>
+			
+				<td width="10%" valign=top class="Normal">CAF</td>
+			
+				<td width="10%" valign=top class="Normal">140</td>
+			
+				<td width="10%" valign=top class="Normal">CAF</td>
+			
+				<td width="10%" valign=top class="Normal">.cf</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Chad</b></td>
+            <td width="10%" valign=top class="Normal">CD</td>
+            
+				<td width="10%" valign=top class="Normal">TD</td>
+			
+				<td width="10%" valign=top class="Normal">TCD</td>
+			
+				<td width="10%" valign=top class="Normal">148</td>
+			
+				<td width="10%" valign=top class="Normal">TCD</td>
+			
+				<td width="10%" valign=top class="Normal">.td</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Chile</b></td>
+            <td width="10%" valign=top class="Normal">CI</td>
+            
+				<td width="10%" valign=top class="Normal">CL</td>
+			
+				<td width="10%" valign=top class="Normal">CHL</td>
+			
+				<td width="10%" valign=top class="Normal">152</td>
+			
+				<td width="10%" valign=top class="Normal">CHL</td>
+			
+				<td width="10%" valign=top class="Normal">.cl</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>China</b></td>
+            <td width="10%" valign=top class="Normal">CH</td>
+            
+				<td width="10%" valign=top class="Normal">CN</td>
+			
+				<td width="10%" valign=top class="Normal">CHN</td>
+			
+				<td width="10%" valign=top class="Normal">156</td>
+			
+				<td width="10%" valign=top class="Normal">CHN</td>
+			
+				<td width="10%" valign=top class="Normal">.cn</td>
+			
+				<td width="25%" valign=top class="Normal">see also Taiwan</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Christmas Island</b></td>
+            <td width="10%" valign=top class="Normal">KT</td>
+            
+				<td width="10%" valign=top class="Normal">CX</td>
+			
+				<td width="10%" valign=top class="Normal">CXR</td>
+			
+				<td width="10%" valign=top class="Normal">162</td>
+			
+				<td width="10%" valign=top class="Normal">CXR</td>
+			
+				<td width="10%" valign=top class="Normal">.cx</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Clipperton Island</b></td>
+            <td width="10%" valign=top class="Normal">IP</td>
+            
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">FYP</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="25%" valign=top class="Normal">ISO includes with French Polynesia</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Cocos (Keeling) Islands</b></td>
+            <td width="10%" valign=top class="Normal">CK</td>
+            
+				<td width="10%" valign=top class="Normal">CC</td>
+			
+				<td width="10%" valign=top class="Normal">CCK</td>
+			
+				<td width="10%" valign=top class="Normal">166</td>
+			
+				<td width="10%" valign=top class="Normal">AUS</td>
+			
+				<td width="10%" valign=top class="Normal">.cc</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Colombia</b></td>
+            <td width="10%" valign=top class="Normal">CO</td>
+            
+				<td width="10%" valign=top class="Normal">CO</td>
+			
+				<td width="10%" valign=top class="Normal">COL</td>
+			
+				<td width="10%" valign=top class="Normal">170</td>
+			
+				<td width="10%" valign=top class="Normal">COL</td>
+			
+				<td width="10%" valign=top class="Normal">.co</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Comoros</b></td>
+            <td width="10%" valign=top class="Normal">CN</td>
+            
+				<td width="10%" valign=top class="Normal">KM</td>
+			
+				<td width="10%" valign=top class="Normal">COM</td>
+			
+				<td width="10%" valign=top class="Normal">174</td>
+			
+				<td width="10%" valign=top class="Normal">COM</td>
+			
+				<td width="10%" valign=top class="Normal">.km</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Congo, Democratic Republic of the</b></td>
+            <td width="10%" valign=top class="Normal">CG</td>
+            
+				<td width="10%" valign=top class="Normal">CD</td>
+			
+				<td width="10%" valign=top class="Normal">COD</td>
+			
+				<td width="10%" valign=top class="Normal">180</td>
+			
+				<td width="10%" valign=top class="Normal">COD</td>
+			
+				<td width="10%" valign=top class="Normal">.cd</td>
+			
+				<td width="25%" valign=top class="Normal">formerly Zaire</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Congo, Republic of the</b></td>
+            <td width="10%" valign=top class="Normal">CF</td>
+            
+				<td width="10%" valign=top class="Normal">CG</td>
+			
+				<td width="10%" valign=top class="Normal">COG</td>
+			
+				<td width="10%" valign=top class="Normal">178</td>
+			
+				<td width="10%" valign=top class="Normal">COG</td>
+			
+				<td width="10%" valign=top class="Normal">.cg</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Cook Islands</b></td>
+            <td width="10%" valign=top class="Normal">CW</td>
+            
+				<td width="10%" valign=top class="Normal">CK</td>
+			
+				<td width="10%" valign=top class="Normal">COK</td>
+			
+				<td width="10%" valign=top class="Normal">184</td>
+			
+				<td width="10%" valign=top class="Normal">COK</td>
+			
+				<td width="10%" valign=top class="Normal">.ck</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Coral Sea Islands</b></td>
+            <td width="10%" valign=top class="Normal">CR</td>
+            
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">AUS</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="25%" valign=top class="Normal">ISO includes with Australia</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Costa Rica</b></td>
+            <td width="10%" valign=top class="Normal">CS</td>
+            
+				<td width="10%" valign=top class="Normal">CR</td>
+			
+				<td width="10%" valign=top class="Normal">CRI</td>
+			
+				<td width="10%" valign=top class="Normal">188</td>
+			
+				<td width="10%" valign=top class="Normal">CRI</td>
+			
+				<td width="10%" valign=top class="Normal">.cr</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Cote d'Ivoire</b></td>
+            <td width="10%" valign=top class="Normal">IV</td>
+            
+				<td width="10%" valign=top class="Normal">CI</td>
+			
+				<td width="10%" valign=top class="Normal">CIV</td>
+			
+				<td width="10%" valign=top class="Normal">384</td>
+			
+				<td width="10%" valign=top class="Normal">CIV</td>
+			
+				<td width="10%" valign=top class="Normal">.ci</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Croatia</b></td>
+            <td width="10%" valign=top class="Normal">HR</td>
+            
+				<td width="10%" valign=top class="Normal">HR</td>
+			
+				<td width="10%" valign=top class="Normal">HRV</td>
+			
+				<td width="10%" valign=top class="Normal">191</td>
+			
+				<td width="10%" valign=top class="Normal">HRV</td>
+			
+				<td width="10%" valign=top class="Normal">.hr</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Cuba</b></td>
+            <td width="10%" valign=top class="Normal">CU</td>
+            
+				<td width="10%" valign=top class="Normal">CU</td>
+			
+				<td width="10%" valign=top class="Normal">CUB</td>
+			
+				<td width="10%" valign=top class="Normal">192</td>
+			
+				<td width="10%" valign=top class="Normal">CUB</td>
+			
+				<td width="10%" valign=top class="Normal">.cu</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Cyprus</b></td>
+            <td width="10%" valign=top class="Normal">CY</td>
+            
+				<td width="10%" valign=top class="Normal">CY</td>
+			
+				<td width="10%" valign=top class="Normal">CYP</td>
+			
+				<td width="10%" valign=top class="Normal">196</td>
+			
+				<td width="10%" valign=top class="Normal">CYP</td>
+			
+				<td width="10%" valign=top class="Normal">.cy</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Czech Republic</b></td>
+            <td width="10%" valign=top class="Normal">EZ</td>
+            
+				<td width="10%" valign=top class="Normal">CZ</td>
+			
+				<td width="10%" valign=top class="Normal">CZE</td>
+			
+				<td width="10%" valign=top class="Normal">203</td>
+			
+				<td width="10%" valign=top class="Normal">CZE</td>
+			
+				<td width="10%" valign=top class="Normal">.cz</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Denmark</b></td>
+            <td width="10%" valign=top class="Normal">DA</td>
+            
+				<td width="10%" valign=top class="Normal">DK</td>
+			
+				<td width="10%" valign=top class="Normal">DNK</td>
+			
+				<td width="10%" valign=top class="Normal">208</td>
+			
+				<td width="10%" valign=top class="Normal">DNK</td>
+			
+				<td width="10%" valign=top class="Normal">.dk</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Djibouti</b></td>
+            <td width="10%" valign=top class="Normal">DJ</td>
+            
+				<td width="10%" valign=top class="Normal">DJ</td>
+			
+				<td width="10%" valign=top class="Normal">DJI</td>
+			
+				<td width="10%" valign=top class="Normal">262</td>
+			
+				<td width="10%" valign=top class="Normal">DJI</td>
+			
+				<td width="10%" valign=top class="Normal">.dj</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Dominica</b></td>
+            <td width="10%" valign=top class="Normal">DO</td>
+            
+				<td width="10%" valign=top class="Normal">DM</td>
+			
+				<td width="10%" valign=top class="Normal">DMA</td>
+			
+				<td width="10%" valign=top class="Normal">212</td>
+			
+				<td width="10%" valign=top class="Normal">DMA</td>
+			
+				<td width="10%" valign=top class="Normal">.dm</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Dominican Republic</b></td>
+            <td width="10%" valign=top class="Normal">DR</td>
+            
+				<td width="10%" valign=top class="Normal">DO</td>
+			
+				<td width="10%" valign=top class="Normal">DOM</td>
+			
+				<td width="10%" valign=top class="Normal">214</td>
+			
+				<td width="10%" valign=top class="Normal">DOM</td>
+			
+				<td width="10%" valign=top class="Normal">.do</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Ecuador</b></td>
+            <td width="10%" valign=top class="Normal">EC</td>
+            
+				<td width="10%" valign=top class="Normal">EC</td>
+			
+				<td width="10%" valign=top class="Normal">ECU</td>
+			
+				<td width="10%" valign=top class="Normal">218</td>
+			
+				<td width="10%" valign=top class="Normal">ECU</td>
+			
+				<td width="10%" valign=top class="Normal">.ec</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Egypt</b></td>
+            <td width="10%" valign=top class="Normal">EG</td>
+            
+				<td width="10%" valign=top class="Normal">EG</td>
+			
+				<td width="10%" valign=top class="Normal">EGY</td>
+			
+				<td width="10%" valign=top class="Normal">818</td>
+			
+				<td width="10%" valign=top class="Normal">EGY</td>
+			
+				<td width="10%" valign=top class="Normal">.eg</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>El Salvador</b></td>
+            <td width="10%" valign=top class="Normal">ES</td>
+            
+				<td width="10%" valign=top class="Normal">SV</td>
+			
+				<td width="10%" valign=top class="Normal">SLV</td>
+			
+				<td width="10%" valign=top class="Normal">222</td>
+			
+				<td width="10%" valign=top class="Normal">SLV</td>
+			
+				<td width="10%" valign=top class="Normal">.sv</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Equatorial Guinea</b></td>
+            <td width="10%" valign=top class="Normal">EK</td>
+            
+				<td width="10%" valign=top class="Normal">GQ</td>
+			
+				<td width="10%" valign=top class="Normal">GNQ</td>
+			
+				<td width="10%" valign=top class="Normal">226</td>
+			
+				<td width="10%" valign=top class="Normal">GNQ</td>
+			
+				<td width="10%" valign=top class="Normal">.gq</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Eritrea</b></td>
+            <td width="10%" valign=top class="Normal">ER</td>
+            
+				<td width="10%" valign=top class="Normal">ER</td>
+			
+				<td width="10%" valign=top class="Normal">ERI</td>
+			
+				<td width="10%" valign=top class="Normal">232</td>
+			
+				<td width="10%" valign=top class="Normal">ERI</td>
+			
+				<td width="10%" valign=top class="Normal">.er</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Estonia</b></td>
+            <td width="10%" valign=top class="Normal">EN</td>
+            
+				<td width="10%" valign=top class="Normal">EE</td>
+			
+				<td width="10%" valign=top class="Normal">EST</td>
+			
+				<td width="10%" valign=top class="Normal">233</td>
+			
+				<td width="10%" valign=top class="Normal">EST</td>
+			
+				<td width="10%" valign=top class="Normal">.ee</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Ethiopia</b></td>
+            <td width="10%" valign=top class="Normal">ET</td>
+            
+				<td width="10%" valign=top class="Normal">ET</td>
+			
+				<td width="10%" valign=top class="Normal">ETH</td>
+			
+				<td width="10%" valign=top class="Normal">231</td>
+			
+				<td width="10%" valign=top class="Normal">ETH</td>
+			
+				<td width="10%" valign=top class="Normal">.et</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Europa Island</b></td>
+            <td width="10%" valign=top class="Normal">EU</td>
+            
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="25%" valign=top class="Normal">administered as part of French Southern and Antarctic Lands; no ISO codes assigned</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Falkland Islands (Islas Malvinas)</b></td>
+            <td width="10%" valign=top class="Normal">FK</td>
+            
+				<td width="10%" valign=top class="Normal">FK</td>
+			
+				<td width="10%" valign=top class="Normal">FLK</td>
+			
+				<td width="10%" valign=top class="Normal">238</td>
+			
+				<td width="10%" valign=top class="Normal">FLK</td>
+			
+				<td width="10%" valign=top class="Normal">.fk</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Faroe Islands</b></td>
+            <td width="10%" valign=top class="Normal">FO</td>
+            
+				<td width="10%" valign=top class="Normal">FO</td>
+			
+				<td width="10%" valign=top class="Normal">FRO</td>
+			
+				<td width="10%" valign=top class="Normal">234</td>
+			
+				<td width="10%" valign=top class="Normal">FRO</td>
+			
+				<td width="10%" valign=top class="Normal">.fo</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Fiji</b></td>
+            <td width="10%" valign=top class="Normal">FJ</td>
+            
+				<td width="10%" valign=top class="Normal">FJ</td>
+			
+				<td width="10%" valign=top class="Normal">FJI</td>
+			
+				<td width="10%" valign=top class="Normal">242</td>
+			
+				<td width="10%" valign=top class="Normal">FJI</td>
+			
+				<td width="10%" valign=top class="Normal">.fj</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Finland</b></td>
+            <td width="10%" valign=top class="Normal">FI</td>
+            
+				<td width="10%" valign=top class="Normal">FI</td>
+			
+				<td width="10%" valign=top class="Normal">FIN</td>
+			
+				<td width="10%" valign=top class="Normal">246</td>
+			
+				<td width="10%" valign=top class="Normal">FIN</td>
+			
+				<td width="10%" valign=top class="Normal">.fi</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>France</b></td>
+            <td width="10%" valign=top class="Normal">FR</td>
+            
+				<td width="10%" valign=top class="Normal">FR</td>
+			
+				<td width="10%" valign=top class="Normal">FRA</td>
+			
+				<td width="10%" valign=top class="Normal">250</td>
+			
+				<td width="10%" valign=top class="Normal">FRA</td>
+			
+				<td width="10%" valign=top class="Normal">.fr</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>France, Metropolitan</b></td>
+            <td width="10%" valign=top class="Normal">-</td>
+            
+				<td width="10%" valign=top class="Normal">FX</td>
+			
+				<td width="10%" valign=top class="Normal">FXX</td>
+			
+				<td width="10%" valign=top class="Normal">249</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">.fx</td>
+			
+				<td width="25%" valign=top class="Normal">ISO limits to the European part of France, excluding French Guiana, French Polynesia, French Southern and Antarctic Lands, Guadeloupe, Martinique, Mayotte, New Caledonia, Reunion, Saint Pierre and Miquelon, Wallis and Futuna</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>French Guiana</b></td>
+            <td width="10%" valign=top class="Normal">FG</td>
+            
+				<td width="10%" valign=top class="Normal">GF</td>
+			
+				<td width="10%" valign=top class="Normal">GUF</td>
+			
+				<td width="10%" valign=top class="Normal">254</td>
+			
+				<td width="10%" valign=top class="Normal">GUF</td>
+			
+				<td width="10%" valign=top class="Normal">.gf</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>French Polynesia</b></td>
+            <td width="10%" valign=top class="Normal">FP</td>
+            
+				<td width="10%" valign=top class="Normal">PF</td>
+			
+				<td width="10%" valign=top class="Normal">PYF</td>
+			
+				<td width="10%" valign=top class="Normal">258</td>
+			
+				<td width="10%" valign=top class="Normal">PYF</td>
+			
+				<td width="10%" valign=top class="Normal">.pf</td>
+			
+				<td width="25%" valign=top class="Normal">ISO includes Clipperton Island</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>French Southern and Antarctic Lands</b></td>
+            <td width="10%" valign=top class="Normal">FS</td>
+            
+				<td width="10%" valign=top class="Normal">TF</td>
+			
+				<td width="10%" valign=top class="Normal">ATF</td>
+			
+				<td width="10%" valign=top class="Normal">260</td>
+			
+				<td width="10%" valign=top class="Normal">ATF</td>
+			
+				<td width="10%" valign=top class="Normal">.tf</td>
+			
+				<td width="25%" valign=top class="Normal">FIPS 10-4 does not include the French-claimed portion of Antarctica (Terre Adelie)</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Gabon</b></td>
+            <td width="10%" valign=top class="Normal">GB</td>
+            
+				<td width="10%" valign=top class="Normal">GA</td>
+			
+				<td width="10%" valign=top class="Normal">GAB</td>
+			
+				<td width="10%" valign=top class="Normal">266</td>
+			
+				<td width="10%" valign=top class="Normal">GAB</td>
+			
+				<td width="10%" valign=top class="Normal">.ga</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Gambia, The</b></td>
+            <td width="10%" valign=top class="Normal">GA</td>
+            
+				<td width="10%" valign=top class="Normal">GM</td>
+			
+				<td width="10%" valign=top class="Normal">GMB</td>
+			
+				<td width="10%" valign=top class="Normal">270</td>
+			
+				<td width="10%" valign=top class="Normal">GMB</td>
+			
+				<td width="10%" valign=top class="Normal">.gm</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Gaza Strip</b></td>
+            <td width="10%" valign=top class="Normal">GZ</td>
+            
+				<td width="10%" valign=top class="Normal">PS</td>
+			
+				<td width="10%" valign=top class="Normal">PSE</td>
+			
+				<td width="10%" valign=top class="Normal">275</td>
+			
+				<td width="10%" valign=top class="Normal">PSE</td>
+			
+				<td width="10%" valign=top class="Normal">.ps</td>
+			
+				<td width="25%" valign=top class="Normal">ISO identifies as Occupied Palestinian Territory</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Georgia</b></td>
+            <td width="10%" valign=top class="Normal">GG</td>
+            
+				<td width="10%" valign=top class="Normal">GE</td>
+			
+				<td width="10%" valign=top class="Normal">GEO</td>
+			
+				<td width="10%" valign=top class="Normal">268</td>
+			
+				<td width="10%" valign=top class="Normal">GEO</td>
+			
+				<td width="10%" valign=top class="Normal">.ge</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Germany</b></td>
+            <td width="10%" valign=top class="Normal">GM</td>
+            
+				<td width="10%" valign=top class="Normal">DE</td>
+			
+				<td width="10%" valign=top class="Normal">DEU</td>
+			
+				<td width="10%" valign=top class="Normal">276</td>
+			
+				<td width="10%" valign=top class="Normal">DEU</td>
+			
+				<td width="10%" valign=top class="Normal">.de</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Ghana</b></td>
+            <td width="10%" valign=top class="Normal">GH</td>
+            
+				<td width="10%" valign=top class="Normal">GH</td>
+			
+				<td width="10%" valign=top class="Normal">GHA</td>
+			
+				<td width="10%" valign=top class="Normal">288</td>
+			
+				<td width="10%" valign=top class="Normal">GHA</td>
+			
+				<td width="10%" valign=top class="Normal">.gh</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Gibraltar</b></td>
+            <td width="10%" valign=top class="Normal">GI</td>
+            
+				<td width="10%" valign=top class="Normal">GI</td>
+			
+				<td width="10%" valign=top class="Normal">GIB</td>
+			
+				<td width="10%" valign=top class="Normal">292</td>
+			
+				<td width="10%" valign=top class="Normal">GIB</td>
+			
+				<td width="10%" valign=top class="Normal">.gi</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Glorioso Islands</b></td>
+            <td width="10%" valign=top class="Normal">GO</td>
+            
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="25%" valign=top class="Normal">administered as part of French Southern and Antarctic Lands; no ISO codes assigned</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Greece</b></td>
+            <td width="10%" valign=top class="Normal">GR</td>
+            
+				<td width="10%" valign=top class="Normal">GR</td>
+			
+				<td width="10%" valign=top class="Normal">GRC</td>
+			
+				<td width="10%" valign=top class="Normal">300</td>
+			
+				<td width="10%" valign=top class="Normal">GRC</td>
+			
+				<td width="10%" valign=top class="Normal">.gr</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Greenland</b></td>
+            <td width="10%" valign=top class="Normal">GL</td>
+            
+				<td width="10%" valign=top class="Normal">GL</td>
+			
+				<td width="10%" valign=top class="Normal">GRL</td>
+			
+				<td width="10%" valign=top class="Normal">304</td>
+			
+				<td width="10%" valign=top class="Normal">GRL</td>
+			
+				<td width="10%" valign=top class="Normal">.gl</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Grenada</b></td>
+            <td width="10%" valign=top class="Normal">GJ</td>
+            
+				<td width="10%" valign=top class="Normal">GD</td>
+			
+				<td width="10%" valign=top class="Normal">GRD</td>
+			
+				<td width="10%" valign=top class="Normal">308</td>
+			
+				<td width="10%" valign=top class="Normal">GRD</td>
+			
+				<td width="10%" valign=top class="Normal">.gd</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Guadeloupe</b></td>
+            <td width="10%" valign=top class="Normal">GP</td>
+            
+				<td width="10%" valign=top class="Normal">GP</td>
+			
+				<td width="10%" valign=top class="Normal">GLP</td>
+			
+				<td width="10%" valign=top class="Normal">312</td>
+			
+				<td width="10%" valign=top class="Normal">GLP</td>
+			
+				<td width="10%" valign=top class="Normal">.gp</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Guam</b></td>
+            <td width="10%" valign=top class="Normal">GQ</td>
+            
+				<td width="10%" valign=top class="Normal">GU</td>
+			
+				<td width="10%" valign=top class="Normal">GUM</td>
+			
+				<td width="10%" valign=top class="Normal">316</td>
+			
+				<td width="10%" valign=top class="Normal">GUM</td>
+			
+				<td width="10%" valign=top class="Normal">.gu</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Guatemala</b></td>
+            <td width="10%" valign=top class="Normal">GT</td>
+            
+				<td width="10%" valign=top class="Normal">GT</td>
+			
+				<td width="10%" valign=top class="Normal">GTM</td>
+			
+				<td width="10%" valign=top class="Normal">320</td>
+			
+				<td width="10%" valign=top class="Normal">GTM</td>
+			
+				<td width="10%" valign=top class="Normal">.gt</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Guernsey</b></td>
+            <td width="10%" valign=top class="Normal">GK</td>
+            
+				<td width="10%" valign=top class="Normal">GG</td>
+			
+				<td width="10%" valign=top class="Normal">GGY</td>
+			
+				<td width="10%" valign=top class="Normal">831</td>
+			
+				<td width="10%" valign=top class="Normal">UK</td>
+			
+				<td width="10%" valign=top class="Normal">.gg</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Guinea</b></td>
+            <td width="10%" valign=top class="Normal">GV</td>
+            
+				<td width="10%" valign=top class="Normal">GN</td>
+			
+				<td width="10%" valign=top class="Normal">GIN</td>
+			
+				<td width="10%" valign=top class="Normal">324</td>
+			
+				<td width="10%" valign=top class="Normal">GIN</td>
+			
+				<td width="10%" valign=top class="Normal">.gn</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Guinea-Bissau</b></td>
+            <td width="10%" valign=top class="Normal">PU</td>
+            
+				<td width="10%" valign=top class="Normal">GW</td>
+			
+				<td width="10%" valign=top class="Normal">GNB</td>
+			
+				<td width="10%" valign=top class="Normal">624</td>
+			
+				<td width="10%" valign=top class="Normal">GNB</td>
+			
+				<td width="10%" valign=top class="Normal">.gw</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Guyana</b></td>
+            <td width="10%" valign=top class="Normal">GY</td>
+            
+				<td width="10%" valign=top class="Normal">GY</td>
+			
+				<td width="10%" valign=top class="Normal">GUY</td>
+			
+				<td width="10%" valign=top class="Normal">328</td>
+			
+				<td width="10%" valign=top class="Normal">GUY</td>
+			
+				<td width="10%" valign=top class="Normal">.gy</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Haiti</b></td>
+            <td width="10%" valign=top class="Normal">HA</td>
+            
+				<td width="10%" valign=top class="Normal">HT</td>
+			
+				<td width="10%" valign=top class="Normal">HTI</td>
+			
+				<td width="10%" valign=top class="Normal">332</td>
+			
+				<td width="10%" valign=top class="Normal">HTI</td>
+			
+				<td width="10%" valign=top class="Normal">.ht</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Heard Island and McDonald Islands</b></td>
+            <td width="10%" valign=top class="Normal">HM</td>
+            
+				<td width="10%" valign=top class="Normal">HM</td>
+			
+				<td width="10%" valign=top class="Normal">HMD</td>
+			
+				<td width="10%" valign=top class="Normal">334</td>
+			
+				<td width="10%" valign=top class="Normal">HMD</td>
+			
+				<td width="10%" valign=top class="Normal">.hm</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Holy See (Vatican City)</b></td>
+            <td width="10%" valign=top class="Normal">VT</td>
+            
+				<td width="10%" valign=top class="Normal">VA</td>
+			
+				<td width="10%" valign=top class="Normal">VAT</td>
+			
+				<td width="10%" valign=top class="Normal">336</td>
+			
+				<td width="10%" valign=top class="Normal">VAT</td>
+			
+				<td width="10%" valign=top class="Normal">.va</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Honduras</b></td>
+            <td width="10%" valign=top class="Normal">HO</td>
+            
+				<td width="10%" valign=top class="Normal">HN</td>
+			
+				<td width="10%" valign=top class="Normal">HND</td>
+			
+				<td width="10%" valign=top class="Normal">340</td>
+			
+				<td width="10%" valign=top class="Normal">HND</td>
+			
+				<td width="10%" valign=top class="Normal">.hn</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Hong Kong</b></td>
+            <td width="10%" valign=top class="Normal">HK</td>
+            
+				<td width="10%" valign=top class="Normal">HK</td>
+			
+				<td width="10%" valign=top class="Normal">HKG</td>
+			
+				<td width="10%" valign=top class="Normal">344</td>
+			
+				<td width="10%" valign=top class="Normal">HKG</td>
+			
+				<td width="10%" valign=top class="Normal">.hk</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Howland Island</b></td>
+            <td width="10%" valign=top class="Normal">HQ</td>
+            
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">UMI</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="25%" valign=top class="Normal">ISO includes with the US Minor Outlying Islands</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Hungary</b></td>
+            <td width="10%" valign=top class="Normal">HU</td>
+            
+				<td width="10%" valign=top class="Normal">HU</td>
+			
+				<td width="10%" valign=top class="Normal">HUN</td>
+			
+				<td width="10%" valign=top class="Normal">348</td>
+			
+				<td width="10%" valign=top class="Normal">HUN</td>
+			
+				<td width="10%" valign=top class="Normal">.hu</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Iceland</b></td>
+            <td width="10%" valign=top class="Normal">IC</td>
+            
+				<td width="10%" valign=top class="Normal">IS</td>
+			
+				<td width="10%" valign=top class="Normal">ISL</td>
+			
+				<td width="10%" valign=top class="Normal">352</td>
+			
+				<td width="10%" valign=top class="Normal">ISL</td>
+			
+				<td width="10%" valign=top class="Normal">.is</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>India</b></td>
+            <td width="10%" valign=top class="Normal">IN</td>
+            
+				<td width="10%" valign=top class="Normal">IN</td>
+			
+				<td width="10%" valign=top class="Normal">IND</td>
+			
+				<td width="10%" valign=top class="Normal">356</td>
+			
+				<td width="10%" valign=top class="Normal">IND</td>
+			
+				<td width="10%" valign=top class="Normal">.in</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Indonesia</b></td>
+            <td width="10%" valign=top class="Normal">ID</td>
+            
+				<td width="10%" valign=top class="Normal">ID</td>
+			
+				<td width="10%" valign=top class="Normal">IDN</td>
+			
+				<td width="10%" valign=top class="Normal">360</td>
+			
+				<td width="10%" valign=top class="Normal">IDN</td>
+			
+				<td width="10%" valign=top class="Normal">.id</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Iran</b></td>
+            <td width="10%" valign=top class="Normal">IR</td>
+            
+				<td width="10%" valign=top class="Normal">IR</td>
+			
+				<td width="10%" valign=top class="Normal">IRN</td>
+			
+				<td width="10%" valign=top class="Normal">364</td>
+			
+				<td width="10%" valign=top class="Normal">IRN</td>
+			
+				<td width="10%" valign=top class="Normal">.ir</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Iraq</b></td>
+            <td width="10%" valign=top class="Normal">IZ</td>
+            
+				<td width="10%" valign=top class="Normal">IQ</td>
+			
+				<td width="10%" valign=top class="Normal">IRQ</td>
+			
+				<td width="10%" valign=top class="Normal">368</td>
+			
+				<td width="10%" valign=top class="Normal">IRQ</td>
+			
+				<td width="10%" valign=top class="Normal">.iq</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Ireland</b></td>
+            <td width="10%" valign=top class="Normal">EI</td>
+            
+				<td width="10%" valign=top class="Normal">IE</td>
+			
+				<td width="10%" valign=top class="Normal">IRL</td>
+			
+				<td width="10%" valign=top class="Normal">372</td>
+			
+				<td width="10%" valign=top class="Normal">IRL</td>
+			
+				<td width="10%" valign=top class="Normal">.ie</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Isle of Man</b></td>
+            <td width="10%" valign=top class="Normal">IM</td>
+            
+				<td width="10%" valign=top class="Normal">IM</td>
+			
+				<td width="10%" valign=top class="Normal">IMN</td>
+			
+				<td width="10%" valign=top class="Normal">833</td>
+			
+				<td width="10%" valign=top class="Normal">UK</td>
+			
+				<td width="10%" valign=top class="Normal">.im</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Israel</b></td>
+            <td width="10%" valign=top class="Normal">IS</td>
+            
+				<td width="10%" valign=top class="Normal">IL</td>
+			
+				<td width="10%" valign=top class="Normal">ISR</td>
+			
+				<td width="10%" valign=top class="Normal">376</td>
+			
+				<td width="10%" valign=top class="Normal">ISR</td>
+			
+				<td width="10%" valign=top class="Normal">.il</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Italy</b></td>
+            <td width="10%" valign=top class="Normal">IT</td>
+            
+				<td width="10%" valign=top class="Normal">IT</td>
+			
+				<td width="10%" valign=top class="Normal">ITA</td>
+			
+				<td width="10%" valign=top class="Normal">380</td>
+			
+				<td width="10%" valign=top class="Normal">ITA</td>
+			
+				<td width="10%" valign=top class="Normal">.it</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Jamaica</b></td>
+            <td width="10%" valign=top class="Normal">JM</td>
+            
+				<td width="10%" valign=top class="Normal">JM</td>
+			
+				<td width="10%" valign=top class="Normal">JAM</td>
+			
+				<td width="10%" valign=top class="Normal">388</td>
+			
+				<td width="10%" valign=top class="Normal">JAM</td>
+			
+				<td width="10%" valign=top class="Normal">.jm</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Jan Mayen</b></td>
+            <td width="10%" valign=top class="Normal">JN</td>
+            
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">SJM</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="25%" valign=top class="Normal">ISO includes with Svalbard</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Japan</b></td>
+            <td width="10%" valign=top class="Normal">JA</td>
+            
+				<td width="10%" valign=top class="Normal">JP</td>
+			
+				<td width="10%" valign=top class="Normal">JPN</td>
+			
+				<td width="10%" valign=top class="Normal">392</td>
+			
+				<td width="10%" valign=top class="Normal">JPN</td>
+			
+				<td width="10%" valign=top class="Normal">.jp</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Jarvis Island</b></td>
+            <td width="10%" valign=top class="Normal">DQ</td>
+            
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">UMI</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="25%" valign=top class="Normal">ISO includes with the US Minor Outlying Islands</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Jersey</b></td>
+            <td width="10%" valign=top class="Normal">JE</td>
+            
+				<td width="10%" valign=top class="Normal">JE</td>
+			
+				<td width="10%" valign=top class="Normal">JEY</td>
+			
+				<td width="10%" valign=top class="Normal">832</td>
+			
+				<td width="10%" valign=top class="Normal">UK</td>
+			
+				<td width="10%" valign=top class="Normal">.je</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Johnston Atoll</b></td>
+            <td width="10%" valign=top class="Normal">JQ</td>
+            
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">UMI</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="25%" valign=top class="Normal">ISO includes with the US Minor Outlying Islands</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Jordan</b></td>
+            <td width="10%" valign=top class="Normal">JO</td>
+            
+				<td width="10%" valign=top class="Normal">JO</td>
+			
+				<td width="10%" valign=top class="Normal">JOR</td>
+			
+				<td width="10%" valign=top class="Normal">400</td>
+			
+				<td width="10%" valign=top class="Normal">JOR</td>
+			
+				<td width="10%" valign=top class="Normal">.jo</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Juan de Nova Island</b></td>
+            <td width="10%" valign=top class="Normal">JU</td>
+            
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="25%" valign=top class="Normal">administered as part of French Southern and Antarctic Lands; no ISO codes assigned</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Kazakhstan</b></td>
+            <td width="10%" valign=top class="Normal">KZ</td>
+            
+				<td width="10%" valign=top class="Normal">KZ</td>
+			
+				<td width="10%" valign=top class="Normal">KAZ</td>
+			
+				<td width="10%" valign=top class="Normal">398</td>
+			
+				<td width="10%" valign=top class="Normal">KAZ</td>
+			
+				<td width="10%" valign=top class="Normal">.kz</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Kenya</b></td>
+            <td width="10%" valign=top class="Normal">KE</td>
+            
+				<td width="10%" valign=top class="Normal">KE</td>
+			
+				<td width="10%" valign=top class="Normal">KEN</td>
+			
+				<td width="10%" valign=top class="Normal">404</td>
+			
+				<td width="10%" valign=top class="Normal">KEN</td>
+			
+				<td width="10%" valign=top class="Normal">.ke</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Kingman Reef</b></td>
+            <td width="10%" valign=top class="Normal">KQ</td>
+            
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">UMI</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="25%" valign=top class="Normal">ISO includes with the US Minor Outlying Islands</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Kiribati</b></td>
+            <td width="10%" valign=top class="Normal">KR</td>
+            
+				<td width="10%" valign=top class="Normal">KI</td>
+			
+				<td width="10%" valign=top class="Normal">KIR</td>
+			
+				<td width="10%" valign=top class="Normal">296</td>
+			
+				<td width="10%" valign=top class="Normal">KIR</td>
+			
+				<td width="10%" valign=top class="Normal">.ki</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Korea, North</b></td>
+            <td width="10%" valign=top class="Normal">KN</td>
+            
+				<td width="10%" valign=top class="Normal">KP</td>
+			
+				<td width="10%" valign=top class="Normal">PRK</td>
+			
+				<td width="10%" valign=top class="Normal">408</td>
+			
+				<td width="10%" valign=top class="Normal">PRK</td>
+			
+				<td width="10%" valign=top class="Normal">.kp</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Korea, South</b></td>
+            <td width="10%" valign=top class="Normal">KS</td>
+            
+				<td width="10%" valign=top class="Normal">KR</td>
+			
+				<td width="10%" valign=top class="Normal">KOR</td>
+			
+				<td width="10%" valign=top class="Normal">410</td>
+			
+				<td width="10%" valign=top class="Normal">KOR</td>
+			
+				<td width="10%" valign=top class="Normal">.kr</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Kuwait</b></td>
+            <td width="10%" valign=top class="Normal">KU</td>
+            
+				<td width="10%" valign=top class="Normal">KW</td>
+			
+				<td width="10%" valign=top class="Normal">KWT</td>
+			
+				<td width="10%" valign=top class="Normal">414</td>
+			
+				<td width="10%" valign=top class="Normal">KWT</td>
+			
+				<td width="10%" valign=top class="Normal">.kw</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Kyrgyzstan</b></td>
+            <td width="10%" valign=top class="Normal">KG</td>
+            
+				<td width="10%" valign=top class="Normal">KG</td>
+			
+				<td width="10%" valign=top class="Normal">KGZ</td>
+			
+				<td width="10%" valign=top class="Normal">417</td>
+			
+				<td width="10%" valign=top class="Normal">KGZ</td>
+			
+				<td width="10%" valign=top class="Normal">.kg</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Laos</b></td>
+            <td width="10%" valign=top class="Normal">LA</td>
+            
+				<td width="10%" valign=top class="Normal">LA</td>
+			
+				<td width="10%" valign=top class="Normal">LAO</td>
+			
+				<td width="10%" valign=top class="Normal">418</td>
+			
+				<td width="10%" valign=top class="Normal">LAO</td>
+			
+				<td width="10%" valign=top class="Normal">.la</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Latvia</b></td>
+            <td width="10%" valign=top class="Normal">LG</td>
+            
+				<td width="10%" valign=top class="Normal">LV</td>
+			
+				<td width="10%" valign=top class="Normal">LVA</td>
+			
+				<td width="10%" valign=top class="Normal">428</td>
+			
+				<td width="10%" valign=top class="Normal">LVA</td>
+			
+				<td width="10%" valign=top class="Normal">.lv</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Lebanon</b></td>
+            <td width="10%" valign=top class="Normal">LE</td>
+            
+				<td width="10%" valign=top class="Normal">LB</td>
+			
+				<td width="10%" valign=top class="Normal">LBN</td>
+			
+				<td width="10%" valign=top class="Normal">422</td>
+			
+				<td width="10%" valign=top class="Normal">LBN</td>
+			
+				<td width="10%" valign=top class="Normal">.lb</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Lesotho</b></td>
+            <td width="10%" valign=top class="Normal">LT</td>
+            
+				<td width="10%" valign=top class="Normal">LS</td>
+			
+				<td width="10%" valign=top class="Normal">LSO</td>
+			
+				<td width="10%" valign=top class="Normal">426</td>
+			
+				<td width="10%" valign=top class="Normal">LSO</td>
+			
+				<td width="10%" valign=top class="Normal">.ls</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Liberia</b></td>
+            <td width="10%" valign=top class="Normal">LI</td>
+            
+				<td width="10%" valign=top class="Normal">LR</td>
+			
+				<td width="10%" valign=top class="Normal">LBR</td>
+			
+				<td width="10%" valign=top class="Normal">430</td>
+			
+				<td width="10%" valign=top class="Normal">LBR</td>
+			
+				<td width="10%" valign=top class="Normal">.lr</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Libya</b></td>
+            <td width="10%" valign=top class="Normal">LY</td>
+            
+				<td width="10%" valign=top class="Normal">LY</td>
+			
+				<td width="10%" valign=top class="Normal">LBY</td>
+			
+				<td width="10%" valign=top class="Normal">434</td>
+			
+				<td width="10%" valign=top class="Normal">LBY</td>
+			
+				<td width="10%" valign=top class="Normal">.ly</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Liechtenstein</b></td>
+            <td width="10%" valign=top class="Normal">LS</td>
+            
+				<td width="10%" valign=top class="Normal">LI</td>
+			
+				<td width="10%" valign=top class="Normal">LIE</td>
+			
+				<td width="10%" valign=top class="Normal">438</td>
+			
+				<td width="10%" valign=top class="Normal">LIE</td>
+			
+				<td width="10%" valign=top class="Normal">.li</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Lithuania</b></td>
+            <td width="10%" valign=top class="Normal">LH</td>
+            
+				<td width="10%" valign=top class="Normal">LT</td>
+			
+				<td width="10%" valign=top class="Normal">LTU</td>
+			
+				<td width="10%" valign=top class="Normal">440</td>
+			
+				<td width="10%" valign=top class="Normal">LTU</td>
+			
+				<td width="10%" valign=top class="Normal">.lt</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Luxembourg</b></td>
+            <td width="10%" valign=top class="Normal">LU</td>
+            
+				<td width="10%" valign=top class="Normal">LU</td>
+			
+				<td width="10%" valign=top class="Normal">LUX</td>
+			
+				<td width="10%" valign=top class="Normal">442</td>
+			
+				<td width="10%" valign=top class="Normal">LUX</td>
+			
+				<td width="10%" valign=top class="Normal">.lu</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Macau</b></td>
+            <td width="10%" valign=top class="Normal">MC</td>
+            
+				<td width="10%" valign=top class="Normal">MO</td>
+			
+				<td width="10%" valign=top class="Normal">MAC</td>
+			
+				<td width="10%" valign=top class="Normal">446</td>
+			
+				<td width="10%" valign=top class="Normal">MAC</td>
+			
+				<td width="10%" valign=top class="Normal">.mo</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Macedonia</b></td>
+            <td width="10%" valign=top class="Normal">MK</td>
+            
+				<td width="10%" valign=top class="Normal">MK</td>
+			
+				<td width="10%" valign=top class="Normal">MKD</td>
+			
+				<td width="10%" valign=top class="Normal">807</td>
+			
+				<td width="10%" valign=top class="Normal">FYR</td>
+			
+				<td width="10%" valign=top class="Normal">.mk</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Madagascar</b></td>
+            <td width="10%" valign=top class="Normal">MA</td>
+            
+				<td width="10%" valign=top class="Normal">MG</td>
+			
+				<td width="10%" valign=top class="Normal">MDG</td>
+			
+				<td width="10%" valign=top class="Normal">450</td>
+			
+				<td width="10%" valign=top class="Normal">MDG</td>
+			
+				<td width="10%" valign=top class="Normal">.mg</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Malawi</b></td>
+            <td width="10%" valign=top class="Normal">MI</td>
+            
+				<td width="10%" valign=top class="Normal">MW</td>
+			
+				<td width="10%" valign=top class="Normal">MWI</td>
+			
+				<td width="10%" valign=top class="Normal">454</td>
+			
+				<td width="10%" valign=top class="Normal">MWI</td>
+			
+				<td width="10%" valign=top class="Normal">.mw</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Malaysia</b></td>
+            <td width="10%" valign=top class="Normal">MY</td>
+            
+				<td width="10%" valign=top class="Normal">MY</td>
+			
+				<td width="10%" valign=top class="Normal">MYS</td>
+			
+				<td width="10%" valign=top class="Normal">458</td>
+			
+				<td width="10%" valign=top class="Normal">MYS</td>
+			
+				<td width="10%" valign=top class="Normal">.my</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Maldives</b></td>
+            <td width="10%" valign=top class="Normal">MV</td>
+            
+				<td width="10%" valign=top class="Normal">MV</td>
+			
+				<td width="10%" valign=top class="Normal">MDV</td>
+			
+				<td width="10%" valign=top class="Normal">462</td>
+			
+				<td width="10%" valign=top class="Normal">MDV</td>
+			
+				<td width="10%" valign=top class="Normal">.mv</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Mali</b></td>
+            <td width="10%" valign=top class="Normal">ML</td>
+            
+				<td width="10%" valign=top class="Normal">ML</td>
+			
+				<td width="10%" valign=top class="Normal">MLI</td>
+			
+				<td width="10%" valign=top class="Normal">466</td>
+			
+				<td width="10%" valign=top class="Normal">MLI</td>
+			
+				<td width="10%" valign=top class="Normal">.ml</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Malta</b></td>
+            <td width="10%" valign=top class="Normal">MT</td>
+            
+				<td width="10%" valign=top class="Normal">MT</td>
+			
+				<td width="10%" valign=top class="Normal">MLT</td>
+			
+				<td width="10%" valign=top class="Normal">470</td>
+			
+				<td width="10%" valign=top class="Normal">MLT</td>
+			
+				<td width="10%" valign=top class="Normal">.mt</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Marshall Islands</b></td>
+            <td width="10%" valign=top class="Normal">RM</td>
+            
+				<td width="10%" valign=top class="Normal">MH</td>
+			
+				<td width="10%" valign=top class="Normal">MHL</td>
+			
+				<td width="10%" valign=top class="Normal">584</td>
+			
+				<td width="10%" valign=top class="Normal">MHL</td>
+			
+				<td width="10%" valign=top class="Normal">.mh</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Martinique</b></td>
+            <td width="10%" valign=top class="Normal">MB</td>
+            
+				<td width="10%" valign=top class="Normal">MQ</td>
+			
+				<td width="10%" valign=top class="Normal">MTQ</td>
+			
+				<td width="10%" valign=top class="Normal">474</td>
+			
+				<td width="10%" valign=top class="Normal">MTQ</td>
+			
+				<td width="10%" valign=top class="Normal">.mq</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Mauritania</b></td>
+            <td width="10%" valign=top class="Normal">MR</td>
+            
+				<td width="10%" valign=top class="Normal">MR</td>
+			
+				<td width="10%" valign=top class="Normal">MRT</td>
+			
+				<td width="10%" valign=top class="Normal">478</td>
+			
+				<td width="10%" valign=top class="Normal">MRT</td>
+			
+				<td width="10%" valign=top class="Normal">.mr</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Mauritius</b></td>
+            <td width="10%" valign=top class="Normal">MP</td>
+            
+				<td width="10%" valign=top class="Normal">MU</td>
+			
+				<td width="10%" valign=top class="Normal">MUS</td>
+			
+				<td width="10%" valign=top class="Normal">480</td>
+			
+				<td width="10%" valign=top class="Normal">MUS</td>
+			
+				<td width="10%" valign=top class="Normal">.mu</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Mayotte</b></td>
+            <td width="10%" valign=top class="Normal">MF</td>
+            
+				<td width="10%" valign=top class="Normal">YT</td>
+			
+				<td width="10%" valign=top class="Normal">MYT</td>
+			
+				<td width="10%" valign=top class="Normal">175</td>
+			
+				<td width="10%" valign=top class="Normal">FRA</td>
+			
+				<td width="10%" valign=top class="Normal">.yt</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Mexico</b></td>
+            <td width="10%" valign=top class="Normal">MX</td>
+            
+				<td width="10%" valign=top class="Normal">MX</td>
+			
+				<td width="10%" valign=top class="Normal">MEX</td>
+			
+				<td width="10%" valign=top class="Normal">484</td>
+			
+				<td width="10%" valign=top class="Normal">MEX</td>
+			
+				<td width="10%" valign=top class="Normal">.mx</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Micronesia, Federated States of</b></td>
+            <td width="10%" valign=top class="Normal">FM</td>
+            
+				<td width="10%" valign=top class="Normal">FM</td>
+			
+				<td width="10%" valign=top class="Normal">FSM</td>
+			
+				<td width="10%" valign=top class="Normal">583</td>
+			
+				<td width="10%" valign=top class="Normal">FSM</td>
+			
+				<td width="10%" valign=top class="Normal">.fm</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Midway Islands</b></td>
+            <td width="10%" valign=top class="Normal">MQ</td>
+            
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">UMI</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="25%" valign=top class="Normal">ISO includes with the US Minor Outlying Islands</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Moldova</b></td>
+            <td width="10%" valign=top class="Normal">MD</td>
+            
+				<td width="10%" valign=top class="Normal">MD</td>
+			
+				<td width="10%" valign=top class="Normal">MDA</td>
+			
+				<td width="10%" valign=top class="Normal">498</td>
+			
+				<td width="10%" valign=top class="Normal">MDA</td>
+			
+				<td width="10%" valign=top class="Normal">.md</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Monaco</b></td>
+            <td width="10%" valign=top class="Normal">MN</td>
+            
+				<td width="10%" valign=top class="Normal">MC</td>
+			
+				<td width="10%" valign=top class="Normal">MCO</td>
+			
+				<td width="10%" valign=top class="Normal">492</td>
+			
+				<td width="10%" valign=top class="Normal">MCO</td>
+			
+				<td width="10%" valign=top class="Normal">.mc</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Mongolia</b></td>
+            <td width="10%" valign=top class="Normal">MG</td>
+            
+				<td width="10%" valign=top class="Normal">MN</td>
+			
+				<td width="10%" valign=top class="Normal">MNG</td>
+			
+				<td width="10%" valign=top class="Normal">496</td>
+			
+				<td width="10%" valign=top class="Normal">MNG</td>
+			
+				<td width="10%" valign=top class="Normal">.mn</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Montenegro</b></td>
+            <td width="10%" valign=top class="Normal">MJ</td>
+            
+				<td width="10%" valign=top class="Normal">ME</td>
+			
+				<td width="10%" valign=top class="Normal">MNE</td>
+			
+				<td width="10%" valign=top class="Normal">499</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">.me</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Montserrat</b></td>
+            <td width="10%" valign=top class="Normal">MH</td>
+            
+				<td width="10%" valign=top class="Normal">MS</td>
+			
+				<td width="10%" valign=top class="Normal">MSR</td>
+			
+				<td width="10%" valign=top class="Normal">500</td>
+			
+				<td width="10%" valign=top class="Normal">MSR</td>
+			
+				<td width="10%" valign=top class="Normal">.ms</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Morocco</b></td>
+            <td width="10%" valign=top class="Normal">MO</td>
+            
+				<td width="10%" valign=top class="Normal">MA</td>
+			
+				<td width="10%" valign=top class="Normal">MAR</td>
+			
+				<td width="10%" valign=top class="Normal">504</td>
+			
+				<td width="10%" valign=top class="Normal">MAR</td>
+			
+				<td width="10%" valign=top class="Normal">.ma</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Mozambique</b></td>
+            <td width="10%" valign=top class="Normal">MZ</td>
+            
+				<td width="10%" valign=top class="Normal">MZ</td>
+			
+				<td width="10%" valign=top class="Normal">MOZ</td>
+			
+				<td width="10%" valign=top class="Normal">508</td>
+			
+				<td width="10%" valign=top class="Normal">MOZ</td>
+			
+				<td width="10%" valign=top class="Normal">.mz</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Myanmar</b></td>
+            <td width="10%" valign=top class="Normal">-</td>
+            
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="25%" valign=top class="Normal">see Burma</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Namibia</b></td>
+            <td width="10%" valign=top class="Normal">WA</td>
+            
+				<td width="10%" valign=top class="Normal">NA</td>
+			
+				<td width="10%" valign=top class="Normal">NAM</td>
+			
+				<td width="10%" valign=top class="Normal">516</td>
+			
+				<td width="10%" valign=top class="Normal">NAM</td>
+			
+				<td width="10%" valign=top class="Normal">.na</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Nauru</b></td>
+            <td width="10%" valign=top class="Normal">NR</td>
+            
+				<td width="10%" valign=top class="Normal">NR</td>
+			
+				<td width="10%" valign=top class="Normal">NRU</td>
+			
+				<td width="10%" valign=top class="Normal">520</td>
+			
+				<td width="10%" valign=top class="Normal">NRU</td>
+			
+				<td width="10%" valign=top class="Normal">.nr</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Navassa Island</b></td>
+            <td width="10%" valign=top class="Normal">BQ</td>
+            
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">US</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="25%" valign=top class="Normal">ISO includes with the US Minor Outlying Islands</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Nepal</b></td>
+            <td width="10%" valign=top class="Normal">NP</td>
+            
+				<td width="10%" valign=top class="Normal">NP</td>
+			
+				<td width="10%" valign=top class="Normal">NPL</td>
+			
+				<td width="10%" valign=top class="Normal">524</td>
+			
+				<td width="10%" valign=top class="Normal">NPL</td>
+			
+				<td width="10%" valign=top class="Normal">.np</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Netherlands</b></td>
+            <td width="10%" valign=top class="Normal">NL</td>
+            
+				<td width="10%" valign=top class="Normal">NL</td>
+			
+				<td width="10%" valign=top class="Normal">NLD</td>
+			
+				<td width="10%" valign=top class="Normal">528</td>
+			
+				<td width="10%" valign=top class="Normal">NLD</td>
+			
+				<td width="10%" valign=top class="Normal">.nl</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Netherlands Antilles</b></td>
+            <td width="10%" valign=top class="Normal">NT</td>
+            
+				<td width="10%" valign=top class="Normal">AN</td>
+			
+				<td width="10%" valign=top class="Normal">ANT</td>
+			
+				<td width="10%" valign=top class="Normal">530</td>
+			
+				<td width="10%" valign=top class="Normal">ANT</td>
+			
+				<td width="10%" valign=top class="Normal">.an</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>New Caledonia</b></td>
+            <td width="10%" valign=top class="Normal">NC</td>
+            
+				<td width="10%" valign=top class="Normal">NC</td>
+			
+				<td width="10%" valign=top class="Normal">NCL</td>
+			
+				<td width="10%" valign=top class="Normal">540</td>
+			
+				<td width="10%" valign=top class="Normal">NCL</td>
+			
+				<td width="10%" valign=top class="Normal">.nc</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>New Zealand</b></td>
+            <td width="10%" valign=top class="Normal">NZ</td>
+            
+				<td width="10%" valign=top class="Normal">NZ</td>
+			
+				<td width="10%" valign=top class="Normal">NZL</td>
+			
+				<td width="10%" valign=top class="Normal">554</td>
+			
+				<td width="10%" valign=top class="Normal">NZL</td>
+			
+				<td width="10%" valign=top class="Normal">.nz</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Nicaragua</b></td>
+            <td width="10%" valign=top class="Normal">NU</td>
+            
+				<td width="10%" valign=top class="Normal">NI</td>
+			
+				<td width="10%" valign=top class="Normal">NIC</td>
+			
+				<td width="10%" valign=top class="Normal">558</td>
+			
+				<td width="10%" valign=top class="Normal">NIC</td>
+			
+				<td width="10%" valign=top class="Normal">.ni</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Niger</b></td>
+            <td width="10%" valign=top class="Normal">NG</td>
+            
+				<td width="10%" valign=top class="Normal">NE</td>
+			
+				<td width="10%" valign=top class="Normal">NER</td>
+			
+				<td width="10%" valign=top class="Normal">562</td>
+			
+				<td width="10%" valign=top class="Normal">NER</td>
+			
+				<td width="10%" valign=top class="Normal">.ne</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Nigeria</b></td>
+            <td width="10%" valign=top class="Normal">NI</td>
+            
+				<td width="10%" valign=top class="Normal">NG</td>
+			
+				<td width="10%" valign=top class="Normal">NGA</td>
+			
+				<td width="10%" valign=top class="Normal">566</td>
+			
+				<td width="10%" valign=top class="Normal">NGA</td>
+			
+				<td width="10%" valign=top class="Normal">.ng</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Niue</b></td>
+            <td width="10%" valign=top class="Normal">NE</td>
+            
+				<td width="10%" valign=top class="Normal">NU</td>
+			
+				<td width="10%" valign=top class="Normal">NIU</td>
+			
+				<td width="10%" valign=top class="Normal">570</td>
+			
+				<td width="10%" valign=top class="Normal">NIU</td>
+			
+				<td width="10%" valign=top class="Normal">.nu</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Norfolk Island</b></td>
+            <td width="10%" valign=top class="Normal">NF</td>
+            
+				<td width="10%" valign=top class="Normal">NF</td>
+			
+				<td width="10%" valign=top class="Normal">NFK</td>
+			
+				<td width="10%" valign=top class="Normal">574</td>
+			
+				<td width="10%" valign=top class="Normal">NFK</td>
+			
+				<td width="10%" valign=top class="Normal">.nf</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Northern Mariana Islands</b></td>
+            <td width="10%" valign=top class="Normal">CQ</td>
+            
+				<td width="10%" valign=top class="Normal">MP</td>
+			
+				<td width="10%" valign=top class="Normal">MNP</td>
+			
+				<td width="10%" valign=top class="Normal">580</td>
+			
+				<td width="10%" valign=top class="Normal">MNP</td>
+			
+				<td width="10%" valign=top class="Normal">.mp</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Norway</b></td>
+            <td width="10%" valign=top class="Normal">NO</td>
+            
+				<td width="10%" valign=top class="Normal">NO</td>
+			
+				<td width="10%" valign=top class="Normal">NOR</td>
+			
+				<td width="10%" valign=top class="Normal">578</td>
+			
+				<td width="10%" valign=top class="Normal">NOR</td>
+			
+				<td width="10%" valign=top class="Normal">.no</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Oman</b></td>
+            <td width="10%" valign=top class="Normal">MU</td>
+            
+				<td width="10%" valign=top class="Normal">OM</td>
+			
+				<td width="10%" valign=top class="Normal">OMN</td>
+			
+				<td width="10%" valign=top class="Normal">512</td>
+			
+				<td width="10%" valign=top class="Normal">OMN</td>
+			
+				<td width="10%" valign=top class="Normal">.om</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Pakistan</b></td>
+            <td width="10%" valign=top class="Normal">PK</td>
+            
+				<td width="10%" valign=top class="Normal">PK</td>
+			
+				<td width="10%" valign=top class="Normal">PAK</td>
+			
+				<td width="10%" valign=top class="Normal">586</td>
+			
+				<td width="10%" valign=top class="Normal">PAK</td>
+			
+				<td width="10%" valign=top class="Normal">.pk</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Palau</b></td>
+            <td width="10%" valign=top class="Normal">PS</td>
+            
+				<td width="10%" valign=top class="Normal">PW</td>
+			
+				<td width="10%" valign=top class="Normal">PLW</td>
+			
+				<td width="10%" valign=top class="Normal">585</td>
+			
+				<td width="10%" valign=top class="Normal">PLW</td>
+			
+				<td width="10%" valign=top class="Normal">.pw</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Palmyra Atoll</b></td>
+            <td width="10%" valign=top class="Normal">LQ</td>
+            
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">UMI</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="25%" valign=top class="Normal">ISO includes with the US Minor Outlying Islands</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Panama</b></td>
+            <td width="10%" valign=top class="Normal">PM</td>
+            
+				<td width="10%" valign=top class="Normal">PA</td>
+			
+				<td width="10%" valign=top class="Normal">PAN</td>
+			
+				<td width="10%" valign=top class="Normal">591</td>
+			
+				<td width="10%" valign=top class="Normal">PAN</td>
+			
+				<td width="10%" valign=top class="Normal">.pa</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Papua New Guinea</b></td>
+            <td width="10%" valign=top class="Normal">PP</td>
+            
+				<td width="10%" valign=top class="Normal">PG</td>
+			
+				<td width="10%" valign=top class="Normal">PNG</td>
+			
+				<td width="10%" valign=top class="Normal">598</td>
+			
+				<td width="10%" valign=top class="Normal">PNG</td>
+			
+				<td width="10%" valign=top class="Normal">.pg</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Paracel Islands</b></td>
+            <td width="10%" valign=top class="Normal">PF</td>
+            
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Paraguay</b></td>
+            <td width="10%" valign=top class="Normal">PA</td>
+            
+				<td width="10%" valign=top class="Normal">PY</td>
+			
+				<td width="10%" valign=top class="Normal">PRY</td>
+			
+				<td width="10%" valign=top class="Normal">600</td>
+			
+				<td width="10%" valign=top class="Normal">PRY</td>
+			
+				<td width="10%" valign=top class="Normal">.py</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Peru</b></td>
+            <td width="10%" valign=top class="Normal">PE</td>
+            
+				<td width="10%" valign=top class="Normal">PE</td>
+			
+				<td width="10%" valign=top class="Normal">PER</td>
+			
+				<td width="10%" valign=top class="Normal">604</td>
+			
+				<td width="10%" valign=top class="Normal">PER</td>
+			
+				<td width="10%" valign=top class="Normal">.pe</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Philippines</b></td>
+            <td width="10%" valign=top class="Normal">RP</td>
+            
+				<td width="10%" valign=top class="Normal">PH</td>
+			
+				<td width="10%" valign=top class="Normal">PHL</td>
+			
+				<td width="10%" valign=top class="Normal">608</td>
+			
+				<td width="10%" valign=top class="Normal">PHL</td>
+			
+				<td width="10%" valign=top class="Normal">.ph</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Pitcairn Islands</b></td>
+            <td width="10%" valign=top class="Normal">PC</td>
+            
+				<td width="10%" valign=top class="Normal">PN</td>
+			
+				<td width="10%" valign=top class="Normal">PCN</td>
+			
+				<td width="10%" valign=top class="Normal">612</td>
+			
+				<td width="10%" valign=top class="Normal">PCN</td>
+			
+				<td width="10%" valign=top class="Normal">.pn</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Poland</b></td>
+            <td width="10%" valign=top class="Normal">PL</td>
+            
+				<td width="10%" valign=top class="Normal">PL</td>
+			
+				<td width="10%" valign=top class="Normal">POL</td>
+			
+				<td width="10%" valign=top class="Normal">616</td>
+			
+				<td width="10%" valign=top class="Normal">POL</td>
+			
+				<td width="10%" valign=top class="Normal">.pl</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Portugal</b></td>
+            <td width="10%" valign=top class="Normal">PO</td>
+            
+				<td width="10%" valign=top class="Normal">PT</td>
+			
+				<td width="10%" valign=top class="Normal">PRT</td>
+			
+				<td width="10%" valign=top class="Normal">620</td>
+			
+				<td width="10%" valign=top class="Normal">PRT</td>
+			
+				<td width="10%" valign=top class="Normal">.pt</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Puerto Rico</b></td>
+            <td width="10%" valign=top class="Normal">RQ</td>
+            
+				<td width="10%" valign=top class="Normal">PR</td>
+			
+				<td width="10%" valign=top class="Normal">PRI</td>
+			
+				<td width="10%" valign=top class="Normal">630</td>
+			
+				<td width="10%" valign=top class="Normal">PRI</td>
+			
+				<td width="10%" valign=top class="Normal">.pr</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Qatar</b></td>
+            <td width="10%" valign=top class="Normal">QA</td>
+            
+				<td width="10%" valign=top class="Normal">QA</td>
+			
+				<td width="10%" valign=top class="Normal">QAT</td>
+			
+				<td width="10%" valign=top class="Normal">634</td>
+			
+				<td width="10%" valign=top class="Normal">QAT</td>
+			
+				<td width="10%" valign=top class="Normal">.qa</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Reunion</b></td>
+            <td width="10%" valign=top class="Normal">RE</td>
+            
+				<td width="10%" valign=top class="Normal">RE</td>
+			
+				<td width="10%" valign=top class="Normal">REU</td>
+			
+				<td width="10%" valign=top class="Normal">638</td>
+			
+				<td width="10%" valign=top class="Normal">REU</td>
+			
+				<td width="10%" valign=top class="Normal">.re</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Romania</b></td>
+            <td width="10%" valign=top class="Normal">RO</td>
+            
+				<td width="10%" valign=top class="Normal">RO</td>
+			
+				<td width="10%" valign=top class="Normal">ROU</td>
+			
+				<td width="10%" valign=top class="Normal">642</td>
+			
+				<td width="10%" valign=top class="Normal">ROU</td>
+			
+				<td width="10%" valign=top class="Normal">.ro</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Russia</b></td>
+            <td width="10%" valign=top class="Normal">RS</td>
+            
+				<td width="10%" valign=top class="Normal">RU</td>
+			
+				<td width="10%" valign=top class="Normal">RUS</td>
+			
+				<td width="10%" valign=top class="Normal">643</td>
+			
+				<td width="10%" valign=top class="Normal">RUS</td>
+			
+				<td width="10%" valign=top class="Normal">.ru</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Rwanda</b></td>
+            <td width="10%" valign=top class="Normal">RW</td>
+            
+				<td width="10%" valign=top class="Normal">RW</td>
+			
+				<td width="10%" valign=top class="Normal">RWA</td>
+			
+				<td width="10%" valign=top class="Normal">646</td>
+			
+				<td width="10%" valign=top class="Normal">RWA</td>
+			
+				<td width="10%" valign=top class="Normal">.rw</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Saint Barthelemy</b></td>
+            <td width="10%" valign=top class="Normal">TB</td>
+            
+				<td width="10%" valign=top class="Normal">BL</td>
+			
+				<td width="10%" valign=top class="Normal">BLM</td>
+			
+				<td width="10%" valign=top class="Normal">652</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">.bl</td>
+			
+				<td width="25%" valign=top class="Normal">ccTLD  .fr and .gp may also be used</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Saint Helena</b></td>
+            <td width="10%" valign=top class="Normal">SH</td>
+            
+				<td width="10%" valign=top class="Normal">SH</td>
+			
+				<td width="10%" valign=top class="Normal">SHN</td>
+			
+				<td width="10%" valign=top class="Normal">654</td>
+			
+				<td width="10%" valign=top class="Normal">SHN</td>
+			
+				<td width="10%" valign=top class="Normal">.sh</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Saint Kitts and Nevis</b></td>
+            <td width="10%" valign=top class="Normal">SC</td>
+            
+				<td width="10%" valign=top class="Normal">KN</td>
+			
+				<td width="10%" valign=top class="Normal">KNA</td>
+			
+				<td width="10%" valign=top class="Normal">659</td>
+			
+				<td width="10%" valign=top class="Normal">KNA</td>
+			
+				<td width="10%" valign=top class="Normal">.kn</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Saint Lucia</b></td>
+            <td width="10%" valign=top class="Normal">ST</td>
+            
+				<td width="10%" valign=top class="Normal">LC</td>
+			
+				<td width="10%" valign=top class="Normal">LCA</td>
+			
+				<td width="10%" valign=top class="Normal">662</td>
+			
+				<td width="10%" valign=top class="Normal">LCA</td>
+			
+				<td width="10%" valign=top class="Normal">.lc</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Saint Martin</b></td>
+            <td width="10%" valign=top class="Normal">RN</td>
+            
+				<td width="10%" valign=top class="Normal">MF</td>
+			
+				<td width="10%" valign=top class="Normal">MAF</td>
+			
+				<td width="10%" valign=top class="Normal">663</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">.mf</td>
+			
+				<td width="25%" valign=top class="Normal">ccTLD  .fr and .gp may also be used</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Saint Pierre and Miquelon</b></td>
+            <td width="10%" valign=top class="Normal">SB</td>
+            
+				<td width="10%" valign=top class="Normal">PM</td>
+			
+				<td width="10%" valign=top class="Normal">SPM</td>
+			
+				<td width="10%" valign=top class="Normal">666</td>
+			
+				<td width="10%" valign=top class="Normal">SPM</td>
+			
+				<td width="10%" valign=top class="Normal">.pm</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Saint Vincent and the Grenadines</b></td>
+            <td width="10%" valign=top class="Normal">VC</td>
+            
+				<td width="10%" valign=top class="Normal">VC</td>
+			
+				<td width="10%" valign=top class="Normal">VCT</td>
+			
+				<td width="10%" valign=top class="Normal">670</td>
+			
+				<td width="10%" valign=top class="Normal">VCT</td>
+			
+				<td width="10%" valign=top class="Normal">.vc</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Samoa</b></td>
+            <td width="10%" valign=top class="Normal">WS</td>
+            
+				<td width="10%" valign=top class="Normal">WS</td>
+			
+				<td width="10%" valign=top class="Normal">WSM</td>
+			
+				<td width="10%" valign=top class="Normal">882</td>
+			
+				<td width="10%" valign=top class="Normal">WSM</td>
+			
+				<td width="10%" valign=top class="Normal">.ws</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>San Marino</b></td>
+            <td width="10%" valign=top class="Normal">SM</td>
+            
+				<td width="10%" valign=top class="Normal">SM</td>
+			
+				<td width="10%" valign=top class="Normal">SMR</td>
+			
+				<td width="10%" valign=top class="Normal">674</td>
+			
+				<td width="10%" valign=top class="Normal">SMR</td>
+			
+				<td width="10%" valign=top class="Normal">.sm</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Sao Tome and Principe</b></td>
+            <td width="10%" valign=top class="Normal">TP</td>
+            
+				<td width="10%" valign=top class="Normal">ST</td>
+			
+				<td width="10%" valign=top class="Normal">STP</td>
+			
+				<td width="10%" valign=top class="Normal">678</td>
+			
+				<td width="10%" valign=top class="Normal">STP</td>
+			
+				<td width="10%" valign=top class="Normal">.st</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Saudi Arabia</b></td>
+            <td width="10%" valign=top class="Normal">SA</td>
+            
+				<td width="10%" valign=top class="Normal">SA</td>
+			
+				<td width="10%" valign=top class="Normal">SAU</td>
+			
+				<td width="10%" valign=top class="Normal">682</td>
+			
+				<td width="10%" valign=top class="Normal">SAU</td>
+			
+				<td width="10%" valign=top class="Normal">.sa</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Senegal</b></td>
+            <td width="10%" valign=top class="Normal">SG</td>
+            
+				<td width="10%" valign=top class="Normal">SN</td>
+			
+				<td width="10%" valign=top class="Normal">SEN</td>
+			
+				<td width="10%" valign=top class="Normal">686</td>
+			
+				<td width="10%" valign=top class="Normal">SEN</td>
+			
+				<td width="10%" valign=top class="Normal">.sn</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Serbia</b></td>
+            <td width="10%" valign=top class="Normal">RB</td>
+            
+				<td width="10%" valign=top class="Normal">RS</td>
+			
+				<td width="10%" valign=top class="Normal">SRB</td>
+			
+				<td width="10%" valign=top class="Normal">688</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">.rs</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Seychelles</b></td>
+            <td width="10%" valign=top class="Normal">SE</td>
+            
+				<td width="10%" valign=top class="Normal">SC</td>
+			
+				<td width="10%" valign=top class="Normal">SYC</td>
+			
+				<td width="10%" valign=top class="Normal">690</td>
+			
+				<td width="10%" valign=top class="Normal">SYC</td>
+			
+				<td width="10%" valign=top class="Normal">.sc</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Sierra Leone</b></td>
+            <td width="10%" valign=top class="Normal">SL</td>
+            
+				<td width="10%" valign=top class="Normal">SL</td>
+			
+				<td width="10%" valign=top class="Normal">SLE</td>
+			
+				<td width="10%" valign=top class="Normal">694</td>
+			
+				<td width="10%" valign=top class="Normal">SLE</td>
+			
+				<td width="10%" valign=top class="Normal">.sl</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Singapore</b></td>
+            <td width="10%" valign=top class="Normal">SN</td>
+            
+				<td width="10%" valign=top class="Normal">SG</td>
+			
+				<td width="10%" valign=top class="Normal">SGP</td>
+			
+				<td width="10%" valign=top class="Normal">702</td>
+			
+				<td width="10%" valign=top class="Normal">SGP</td>
+			
+				<td width="10%" valign=top class="Normal">.sg</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Slovakia</b></td>
+            <td width="10%" valign=top class="Normal">LO</td>
+            
+				<td width="10%" valign=top class="Normal">SK</td>
+			
+				<td width="10%" valign=top class="Normal">SVK</td>
+			
+				<td width="10%" valign=top class="Normal">703</td>
+			
+				<td width="10%" valign=top class="Normal">SVK</td>
+			
+				<td width="10%" valign=top class="Normal">.sk</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Slovenia</b></td>
+            <td width="10%" valign=top class="Normal">SI</td>
+            
+				<td width="10%" valign=top class="Normal">SI</td>
+			
+				<td width="10%" valign=top class="Normal">SVN</td>
+			
+				<td width="10%" valign=top class="Normal">705</td>
+			
+				<td width="10%" valign=top class="Normal">SVN</td>
+			
+				<td width="10%" valign=top class="Normal">.si</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Solomon Islands</b></td>
+            <td width="10%" valign=top class="Normal">BP</td>
+            
+				<td width="10%" valign=top class="Normal">SB</td>
+			
+				<td width="10%" valign=top class="Normal">SLB</td>
+			
+				<td width="10%" valign=top class="Normal">090</td>
+			
+				<td width="10%" valign=top class="Normal">SLB</td>
+			
+				<td width="10%" valign=top class="Normal">.sb</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Somalia</b></td>
+            <td width="10%" valign=top class="Normal">SO</td>
+            
+				<td width="10%" valign=top class="Normal">SO</td>
+			
+				<td width="10%" valign=top class="Normal">SOM</td>
+			
+				<td width="10%" valign=top class="Normal">706</td>
+			
+				<td width="10%" valign=top class="Normal">SOM</td>
+			
+				<td width="10%" valign=top class="Normal">.so</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>South Africa</b></td>
+            <td width="10%" valign=top class="Normal">SF</td>
+            
+				<td width="10%" valign=top class="Normal">ZA</td>
+			
+				<td width="10%" valign=top class="Normal">ZAF</td>
+			
+				<td width="10%" valign=top class="Normal">710</td>
+			
+				<td width="10%" valign=top class="Normal">ZAF</td>
+			
+				<td width="10%" valign=top class="Normal">.za</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>South Georgia and the Islands</b></td>
+            <td width="10%" valign=top class="Normal">SX</td>
+            
+				<td width="10%" valign=top class="Normal">GS</td>
+			
+				<td width="10%" valign=top class="Normal">SGS</td>
+			
+				<td width="10%" valign=top class="Normal">239</td>
+			
+				<td width="10%" valign=top class="Normal">SGS</td>
+			
+				<td width="10%" valign=top class="Normal">.gs</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Spain</b></td>
+            <td width="10%" valign=top class="Normal">SP</td>
+            
+				<td width="10%" valign=top class="Normal">ES</td>
+			
+				<td width="10%" valign=top class="Normal">ESP</td>
+			
+				<td width="10%" valign=top class="Normal">724</td>
+			
+				<td width="10%" valign=top class="Normal">ESP</td>
+			
+				<td width="10%" valign=top class="Normal">.es</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Spratly Islands</b></td>
+            <td width="10%" valign=top class="Normal">PG</td>
+            
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Sri Lanka</b></td>
+            <td width="10%" valign=top class="Normal">CE</td>
+            
+				<td width="10%" valign=top class="Normal">LK</td>
+			
+				<td width="10%" valign=top class="Normal">LKA</td>
+			
+				<td width="10%" valign=top class="Normal">144</td>
+			
+				<td width="10%" valign=top class="Normal">LKA</td>
+			
+				<td width="10%" valign=top class="Normal">.lk</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Sudan</b></td>
+            <td width="10%" valign=top class="Normal">SU</td>
+            
+				<td width="10%" valign=top class="Normal">SD</td>
+			
+				<td width="10%" valign=top class="Normal">SDN</td>
+			
+				<td width="10%" valign=top class="Normal">736</td>
+			
+				<td width="10%" valign=top class="Normal">SDN</td>
+			
+				<td width="10%" valign=top class="Normal">.sd</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Suriname</b></td>
+            <td width="10%" valign=top class="Normal">NS</td>
+            
+				<td width="10%" valign=top class="Normal">SR</td>
+			
+				<td width="10%" valign=top class="Normal">SUR</td>
+			
+				<td width="10%" valign=top class="Normal">740</td>
+			
+				<td width="10%" valign=top class="Normal">SUR</td>
+			
+				<td width="10%" valign=top class="Normal">.sr</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Svalbard</b></td>
+            <td width="10%" valign=top class="Normal">SV</td>
+            
+				<td width="10%" valign=top class="Normal">SJ</td>
+			
+				<td width="10%" valign=top class="Normal">SJM</td>
+			
+				<td width="10%" valign=top class="Normal">744</td>
+			
+				<td width="10%" valign=top class="Normal">SJM</td>
+			
+				<td width="10%" valign=top class="Normal">.sj</td>
+			
+				<td width="25%" valign=top class="Normal">ISO includes Jan Mayen</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Swaziland</b></td>
+            <td width="10%" valign=top class="Normal">WZ</td>
+            
+				<td width="10%" valign=top class="Normal">SZ</td>
+			
+				<td width="10%" valign=top class="Normal">SWZ</td>
+			
+				<td width="10%" valign=top class="Normal">748</td>
+			
+				<td width="10%" valign=top class="Normal">SWZ</td>
+			
+				<td width="10%" valign=top class="Normal">.sz</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Sweden</b></td>
+            <td width="10%" valign=top class="Normal">SW</td>
+            
+				<td width="10%" valign=top class="Normal">SE</td>
+			
+				<td width="10%" valign=top class="Normal">SWE</td>
+			
+				<td width="10%" valign=top class="Normal">752</td>
+			
+				<td width="10%" valign=top class="Normal">SWE</td>
+			
+				<td width="10%" valign=top class="Normal">.se</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Switzerland</b></td>
+            <td width="10%" valign=top class="Normal">SZ</td>
+            
+				<td width="10%" valign=top class="Normal">CH</td>
+			
+				<td width="10%" valign=top class="Normal">CHE</td>
+			
+				<td width="10%" valign=top class="Normal">756</td>
+			
+				<td width="10%" valign=top class="Normal">CHE</td>
+			
+				<td width="10%" valign=top class="Normal">.ch</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Syria</b></td>
+            <td width="10%" valign=top class="Normal">SY</td>
+            
+				<td width="10%" valign=top class="Normal">SY</td>
+			
+				<td width="10%" valign=top class="Normal">SYR</td>
+			
+				<td width="10%" valign=top class="Normal">760</td>
+			
+				<td width="10%" valign=top class="Normal">SYR</td>
+			
+				<td width="10%" valign=top class="Normal">.sy</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Taiwan</b></td>
+            <td width="10%" valign=top class="Normal">TW</td>
+            
+				<td width="10%" valign=top class="Normal">TW</td>
+			
+				<td width="10%" valign=top class="Normal">TWN</td>
+			
+				<td width="10%" valign=top class="Normal">158</td>
+			
+				<td width="10%" valign=top class="Normal">TWN</td>
+			
+				<td width="10%" valign=top class="Normal">.tw</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Tajikistan</b></td>
+            <td width="10%" valign=top class="Normal">TI</td>
+            
+				<td width="10%" valign=top class="Normal">TJ</td>
+			
+				<td width="10%" valign=top class="Normal">TJK</td>
+			
+				<td width="10%" valign=top class="Normal">762</td>
+			
+				<td width="10%" valign=top class="Normal">TJK</td>
+			
+				<td width="10%" valign=top class="Normal">.tj</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Tanzania</b></td>
+            <td width="10%" valign=top class="Normal">TZ</td>
+            
+				<td width="10%" valign=top class="Normal">TZ</td>
+			
+				<td width="10%" valign=top class="Normal">TZA</td>
+			
+				<td width="10%" valign=top class="Normal">834</td>
+			
+				<td width="10%" valign=top class="Normal">TZA</td>
+			
+				<td width="10%" valign=top class="Normal">.tz</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Thailand</b></td>
+            <td width="10%" valign=top class="Normal">TH</td>
+            
+				<td width="10%" valign=top class="Normal">TH</td>
+			
+				<td width="10%" valign=top class="Normal">THA</td>
+			
+				<td width="10%" valign=top class="Normal">764</td>
+			
+				<td width="10%" valign=top class="Normal">THA</td>
+			
+				<td width="10%" valign=top class="Normal">.th</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Timor-Leste</b></td>
+            <td width="10%" valign=top class="Normal">TT</td>
+            
+				<td width="10%" valign=top class="Normal">TL</td>
+			
+				<td width="10%" valign=top class="Normal">TLS</td>
+			
+				<td width="10%" valign=top class="Normal">626</td>
+			
+				<td width="10%" valign=top class="Normal">TLS</td>
+			
+				<td width="10%" valign=top class="Normal">.tl</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Togo</b></td>
+            <td width="10%" valign=top class="Normal">TO</td>
+            
+				<td width="10%" valign=top class="Normal">TG</td>
+			
+				<td width="10%" valign=top class="Normal">TGO</td>
+			
+				<td width="10%" valign=top class="Normal">768</td>
+			
+				<td width="10%" valign=top class="Normal">TGO</td>
+			
+				<td width="10%" valign=top class="Normal">.tg</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Tokelau</b></td>
+            <td width="10%" valign=top class="Normal">TL</td>
+            
+				<td width="10%" valign=top class="Normal">TK</td>
+			
+				<td width="10%" valign=top class="Normal">TKL</td>
+			
+				<td width="10%" valign=top class="Normal">772</td>
+			
+				<td width="10%" valign=top class="Normal">TKL</td>
+			
+				<td width="10%" valign=top class="Normal">.tk</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Tonga</b></td>
+            <td width="10%" valign=top class="Normal">TN</td>
+            
+				<td width="10%" valign=top class="Normal">TO</td>
+			
+				<td width="10%" valign=top class="Normal">TON</td>
+			
+				<td width="10%" valign=top class="Normal">776</td>
+			
+				<td width="10%" valign=top class="Normal">TON</td>
+			
+				<td width="10%" valign=top class="Normal">.to</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Trinidad and Tobago</b></td>
+            <td width="10%" valign=top class="Normal">TD</td>
+            
+				<td width="10%" valign=top class="Normal">TT</td>
+			
+				<td width="10%" valign=top class="Normal">TTO</td>
+			
+				<td width="10%" valign=top class="Normal">780</td>
+			
+				<td width="10%" valign=top class="Normal">TTO</td>
+			
+				<td width="10%" valign=top class="Normal">.tt</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Tromelin Island</b></td>
+            <td width="10%" valign=top class="Normal">TE</td>
+            
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="25%" valign=top class="Normal">administered as part of French Southern and Antarctic Lands; no ISO codes assigned</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Tunisia</b></td>
+            <td width="10%" valign=top class="Normal">TS</td>
+            
+				<td width="10%" valign=top class="Normal">TN</td>
+			
+				<td width="10%" valign=top class="Normal">TUN</td>
+			
+				<td width="10%" valign=top class="Normal">788</td>
+			
+				<td width="10%" valign=top class="Normal">TUN</td>
+			
+				<td width="10%" valign=top class="Normal">.tn</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Turkey</b></td>
+            <td width="10%" valign=top class="Normal">TU</td>
+            
+				<td width="10%" valign=top class="Normal">TR</td>
+			
+				<td width="10%" valign=top class="Normal">TUR</td>
+			
+				<td width="10%" valign=top class="Normal">792</td>
+			
+				<td width="10%" valign=top class="Normal">TUR</td>
+			
+				<td width="10%" valign=top class="Normal">.tr</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Turkmenistan</b></td>
+            <td width="10%" valign=top class="Normal">TX</td>
+            
+				<td width="10%" valign=top class="Normal">TM</td>
+			
+				<td width="10%" valign=top class="Normal">TKM</td>
+			
+				<td width="10%" valign=top class="Normal">795</td>
+			
+				<td width="10%" valign=top class="Normal">TKM</td>
+			
+				<td width="10%" valign=top class="Normal">.tm</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Turks and Caicos Islands</b></td>
+            <td width="10%" valign=top class="Normal">TK</td>
+            
+				<td width="10%" valign=top class="Normal">TC</td>
+			
+				<td width="10%" valign=top class="Normal">TCA</td>
+			
+				<td width="10%" valign=top class="Normal">796</td>
+			
+				<td width="10%" valign=top class="Normal">TCA</td>
+			
+				<td width="10%" valign=top class="Normal">.tc</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Tuvalu</b></td>
+            <td width="10%" valign=top class="Normal">TV</td>
+            
+				<td width="10%" valign=top class="Normal">TV</td>
+			
+				<td width="10%" valign=top class="Normal">TUV</td>
+			
+				<td width="10%" valign=top class="Normal">798</td>
+			
+				<td width="10%" valign=top class="Normal">TUV</td>
+			
+				<td width="10%" valign=top class="Normal">.tv</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Uganda</b></td>
+            <td width="10%" valign=top class="Normal">UG</td>
+            
+				<td width="10%" valign=top class="Normal">UG</td>
+			
+				<td width="10%" valign=top class="Normal">UGA</td>
+			
+				<td width="10%" valign=top class="Normal">800</td>
+			
+				<td width="10%" valign=top class="Normal">UGA</td>
+			
+				<td width="10%" valign=top class="Normal">.ug</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Ukraine</b></td>
+            <td width="10%" valign=top class="Normal">UP</td>
+            
+				<td width="10%" valign=top class="Normal">UA</td>
+			
+				<td width="10%" valign=top class="Normal">UKR</td>
+			
+				<td width="10%" valign=top class="Normal">804</td>
+			
+				<td width="10%" valign=top class="Normal">UKR</td>
+			
+				<td width="10%" valign=top class="Normal">.ua</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>United Arab Emirates</b></td>
+            <td width="10%" valign=top class="Normal">AE</td>
+            
+				<td width="10%" valign=top class="Normal">AE</td>
+			
+				<td width="10%" valign=top class="Normal">ARE</td>
+			
+				<td width="10%" valign=top class="Normal">784</td>
+			
+				<td width="10%" valign=top class="Normal">ARE</td>
+			
+				<td width="10%" valign=top class="Normal">.ae</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>United Kingdom</b></td>
+            <td width="10%" valign=top class="Normal">UK</td>
+            
+				<td width="10%" valign=top class="Normal">GB</td>
+			
+				<td width="10%" valign=top class="Normal">GBR</td>
+			
+				<td width="10%" valign=top class="Normal">826</td>
+			
+				<td width="10%" valign=top class="Normal">GBR</td>
+			
+				<td width="10%" valign=top class="Normal">.uk</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>United States</b></td>
+            <td width="10%" valign=top class="Normal">US</td>
+            
+				<td width="10%" valign=top class="Normal">US</td>
+			
+				<td width="10%" valign=top class="Normal">USA</td>
+			
+				<td width="10%" valign=top class="Normal">840</td>
+			
+				<td width="10%" valign=top class="Normal">USA</td>
+			
+				<td width="10%" valign=top class="Normal">.us</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>United States Minor Outlying Islands</b></td>
+            <td width="10%" valign=top class="Normal">-</td>
+            
+				<td width="10%" valign=top class="Normal">UM</td>
+			
+				<td width="10%" valign=top class="Normal">UMI</td>
+			
+				<td width="10%" valign=top class="Normal">581</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">.um</td>
+			
+				<td width="25%" valign=top class="Normal">ISO includes Baker Island, Howland Island, Jarvis Island, Johnston Atoll, Kingman Reef, Midway Islands, Navassa Island, Palmyra Atoll, Wake Island</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Uruguay</b></td>
+            <td width="10%" valign=top class="Normal">UY</td>
+            
+				<td width="10%" valign=top class="Normal">UY</td>
+			
+				<td width="10%" valign=top class="Normal">URY</td>
+			
+				<td width="10%" valign=top class="Normal">858</td>
+			
+				<td width="10%" valign=top class="Normal">URY</td>
+			
+				<td width="10%" valign=top class="Normal">.uy</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Uzbekistan</b></td>
+            <td width="10%" valign=top class="Normal">UZ</td>
+            
+				<td width="10%" valign=top class="Normal">UZ</td>
+			
+				<td width="10%" valign=top class="Normal">UZB</td>
+			
+				<td width="10%" valign=top class="Normal">860</td>
+			
+				<td width="10%" valign=top class="Normal">UZB</td>
+			
+				<td width="10%" valign=top class="Normal">.uz</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Vanuatu</b></td>
+            <td width="10%" valign=top class="Normal">NH</td>
+            
+				<td width="10%" valign=top class="Normal">VU</td>
+			
+				<td width="10%" valign=top class="Normal">VUT</td>
+			
+				<td width="10%" valign=top class="Normal">548</td>
+			
+				<td width="10%" valign=top class="Normal">VUT</td>
+			
+				<td width="10%" valign=top class="Normal">.vu</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Venezuela</b></td>
+            <td width="10%" valign=top class="Normal">VE</td>
+            
+				<td width="10%" valign=top class="Normal">VE</td>
+			
+				<td width="10%" valign=top class="Normal">VEN</td>
+			
+				<td width="10%" valign=top class="Normal">862</td>
+			
+				<td width="10%" valign=top class="Normal">VEN</td>
+			
+				<td width="10%" valign=top class="Normal">.ve</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Vietnam</b></td>
+            <td width="10%" valign=top class="Normal">VM</td>
+            
+				<td width="10%" valign=top class="Normal">VN</td>
+			
+				<td width="10%" valign=top class="Normal">VNM</td>
+			
+				<td width="10%" valign=top class="Normal">704</td>
+			
+				<td width="10%" valign=top class="Normal">VNM</td>
+			
+				<td width="10%" valign=top class="Normal">.vn</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Virgin Islands</b></td>
+            <td width="10%" valign=top class="Normal">VQ</td>
+            
+				<td width="10%" valign=top class="Normal">VI</td>
+			
+				<td width="10%" valign=top class="Normal">VIR</td>
+			
+				<td width="10%" valign=top class="Normal">850</td>
+			
+				<td width="10%" valign=top class="Normal">VIR</td>
+			
+				<td width="10%" valign=top class="Normal">.vi</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Virgin Islands (UK)</b></td>
+            <td width="10%" valign=top class="Normal">-</td>
+            
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">.vg</td>
+			
+				<td width="25%" valign=top class="Normal">see British Virgin Islands</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Virgin Islands (US)</b></td>
+            <td width="10%" valign=top class="Normal">-</td>
+            
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">.vi</td>
+			
+				<td width="25%" valign=top class="Normal">see Virgin Islands</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Wake Island</b></td>
+            <td width="10%" valign=top class="Normal">WQ</td>
+            
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">UMI</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="25%" valign=top class="Normal">ISO includes with the US Minor Outlying Islands</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Wallis and Futuna</b></td>
+            <td width="10%" valign=top class="Normal">WF</td>
+            
+				<td width="10%" valign=top class="Normal">WF</td>
+			
+				<td width="10%" valign=top class="Normal">WLF</td>
+			
+				<td width="10%" valign=top class="Normal">876</td>
+			
+				<td width="10%" valign=top class="Normal">WLF</td>
+			
+				<td width="10%" valign=top class="Normal">.wf</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>West Bank</b></td>
+            <td width="10%" valign=top class="Normal">WE</td>
+            
+				<td width="10%" valign=top class="Normal">PS</td>
+			
+				<td width="10%" valign=top class="Normal">PSE</td>
+			
+				<td width="10%" valign=top class="Normal">275</td>
+			
+				<td width="10%" valign=top class="Normal">PSE</td>
+			
+				<td width="10%" valign=top class="Normal">.ps</td>
+			
+				<td width="25%" valign=top class="Normal">ISO identifies as Occupied Palestinian Territory</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Western Sahara</b></td>
+            <td width="10%" valign=top class="Normal">WI</td>
+            
+				<td width="10%" valign=top class="Normal">EH</td>
+			
+				<td width="10%" valign=top class="Normal">ESH</td>
+			
+				<td width="10%" valign=top class="Normal">732</td>
+			
+				<td width="10%" valign=top class="Normal">ESH</td>
+			
+				<td width="10%" valign=top class="Normal">.eh</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Western Samoa</b></td>
+            <td width="10%" valign=top class="Normal">-</td>
+            
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">.ws</td>
+			
+				<td width="25%" valign=top class="Normal">see Samoa</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>World</b></td>
+            <td width="10%" valign=top class="Normal">-</td>
+            
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="25%" valign=top class="Normal">the Factbook uses the W data code from DIAM 65-18 Geopolitical Data Elements and Related Features, Data Standard No. 3, December 1994, published by the Defense Intelligence Agency</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Yemen</b></td>
+            <td width="10%" valign=top class="Normal">YM</td>
+            
+				<td width="10%" valign=top class="Normal">YE</td>
+			
+				<td width="10%" valign=top class="Normal">YEM</td>
+			
+				<td width="10%" valign=top class="Normal">887</td>
+			
+				<td width="10%" valign=top class="Normal">YEM</td>
+			
+				<td width="10%" valign=top class="Normal">.ye</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Zaire</b></td>
+            <td width="10%" valign=top class="Normal">-</td>
+            
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="10%" valign=top class="Normal">-</td>
+			
+				<td width="25%" valign=top class="Normal">see Democratic Republic of the Congo</td>
+			
+          </tr>
+
+	      <tr bgcolor="#FFFFFF"> 
+      			
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Zambia</b></td>
+            <td width="10%" valign=top class="Normal">ZA</td>
+            
+				<td width="10%" valign=top class="Normal">ZM</td>
+			
+				<td width="10%" valign=top class="Normal">ZMB</td>
+			
+				<td width="10%" valign=top class="Normal">894</td>
+			
+				<td width="10%" valign=top class="Normal">ZMB</td>
+			
+				<td width="10%" valign=top class="Normal">.zm</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+		  <tr bgcolor="#CCCCCC"> 
+				
+			
+            <td width="15%" align="left" valign=top class="Normal"><b>Zimbabwe</b></td>
+            <td width="10%" valign=top class="Normal">ZI</td>
+            
+				<td width="10%" valign=top class="Normal">ZW</td>
+			
+				<td width="10%" valign=top class="Normal">ZWE</td>
+			
+				<td width="10%" valign=top class="Normal">716</td>
+			
+				<td width="10%" valign=top class="Normal">ZWE</td>
+			
+				<td width="10%" valign=top class="Normal">.zw</td>
+			
+				<td width="25%" valign=top class="Normal">&nbsp;</td>
+			
+          </tr>
+
+        </table>
+        	<p class="LastUpdate">This page was last updated on 13 December, 2007</p><br>		
+</td>
+    </tr>
+    <tr> 
+      <td valign="top" align="center" height="24" bgcolor="#666666" colspan="4"><img src="../graphics/bottombanner.jpg" width="712" height="23" border="0" alt="Bottom Banner"></td>
+    </tr> 
+</table>
+</div>
+<div align="center">&nbsp; </div>
+
+
+</body>
+</html>
+
