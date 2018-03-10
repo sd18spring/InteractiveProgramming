@@ -10,6 +10,26 @@ cx = 0
 cy = 0
 path = []
 clearpath = []
+dist = []
+colors = []
+
+
+def map(x, oldL, oldH, newL, newH):
+    """This function maps a value from one range to a differnet range
+
+    x: the value in the old range
+    oldL: the lower limit of the old range of values
+    oldH: the upper limit of the old range of values
+    newL: the lower limit of the new range of values
+    newH: the upper limit of the new range of values
+    """
+    return int(((x - oldL)/(oldH-oldL))*(newH-newL)+newL)
+
+def brush_color(hue):
+    """This function takes in a uint8 value for hue and generate
+    a BGR color range """
+    color = np.uint8([[[hue, 255, 255]]])
+    return cv2.cvtColor(color, cv2.COLOR_HSV2BGR)
 
 while(True):
     #capture frame by frame
@@ -17,7 +37,7 @@ while(True):
     frame = cv2.flip(frame,1)
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     #find specific color
-    lower_white = np.array([[0, 0, 230]])
+    lower_white = np.array([0, 0, 230])
     upper_white = np.array([180, 25, 255])
     lower_color = np.array([0,80,50])
     upper_color = np.array([20,100,100])
@@ -69,18 +89,25 @@ while(True):
         diffy = abs(cy-pair[1])
         distance = math.sqrt(diffx**2+diffy**2)
         if distance<10:
+            dist2hue = map(distance, 0.0, 10.0, 0.0, 255.0)
+            paintColor = brush_color(dist2hue)
+            print(paintColor[0][0][0])
+            colors.append((int(paintColor[0][0][0]), int(paintColor[0][0][1]), int(paintColor[0][0][2])))
+            print(colors)
             clearpath.append(pair)
 
     for i in range(len(clearpath)):
         if len(clearpath) < 1:
             break
         elif i<(len(clearpath)-1)<21:
-            cv2.line(res, clearpath[i], clearpath[i+1], (255,0,0), 3)
+            cv2.line(res, clearpath[i], clearpath[i+1], colors[i], 3)
         elif 20 < i < (len(clearpath)-1):
             cv2.rectangle(res, (0,0), (600, 400), (0,0,0))
             for j in range(20):
-                cv2.line(res, clearpath[-(j+1)], clearpath[-(j+2)], (255,0,0), 3)
+                cv2.line(res, clearpath[-(j+1)], clearpath[-(j+2)], colors[-(j+2)], 3)
 
+
+    # print(dist)
     frame_num += 1
     # cnts = cv2.findContours(res, cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
     #display the resulting frame
