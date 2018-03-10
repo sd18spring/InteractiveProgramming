@@ -38,7 +38,7 @@ class BrickBreakerModel(object):
         self.brick_width = 100
         self.brick_height = 40
         self.brick_space = 10
-
+        self.player_image = pygame.image.load("").convert()
         self.paddle = Paddle(20, 100, 500, self.height - 500)
 
     def update(self):
@@ -67,6 +67,7 @@ class Paddle(object):
         self.vx = 0.0
         self.vy = 0.0
 
+        self.player_image = pygame.image.load("top_down_tank-8hkMRt.png").convert()
     def update(self):
         """ update the state of the paddle """
         self.x += self.vx
@@ -114,6 +115,7 @@ if __name__ == '__main__':
             controller.handle_event(event)
         model.update()
         view.draw()
+        screen.blit(Paddle.player_image, [Paddle.x,Paddle.y])
         time.sleep(.001)
 
     pygame.quit()
