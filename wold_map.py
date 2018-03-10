@@ -13,6 +13,7 @@ import itertools
 from bs4 import BeautifulSoup
 from collections import OrderedDict
 from svg.path import parse_path
+from lxml import etree as ET
 
 __all__ = ['countries', 'countries_by_code', 'countries_by_name']
 
@@ -92,16 +93,16 @@ def _load_countries(svg_filename = 'theworld.svg'):
     countries = {}
 
     with open(svg_filename, 'r') as svg:
-        soup = BeautifulSoup(svg.read(), selfClosingTags=['defs'])
+        soup = BeautifulSoup(svg.read(),'lxml')
 
     for p in soup.findAll('path'):
         country_name = p.get('id', None)
         path_data = p.get('d', None)
-        if state_name and path_data:
+        if country_name and path_data:
             countries[country_name] = svg_path_to_polygons(path_data)
 
-    return OrderedDict(sorted(states.items()))
+    return OrderedDict(sorted(countries.items()))
 
-states = _load_countries()
+countries= _load_countries()
 """A `dict` of state abbreviations (e.g. `"MA"`) to lists of polygons. Each polygon is a list of points.
 Each point is a tuple of floats `(x, y)`."""

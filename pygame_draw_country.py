@@ -13,7 +13,7 @@ Requirements:
 import pygame
 import sys
 import matplotlib.path
-import world_map
+import wold_map
 
 # Colors
 WHITE = (255, 255, 255)
@@ -24,7 +24,7 @@ GRAY = (127, 127, 127)
 LIGHT_GRAY = (191, 191, 191)
 
 COUNTRY = 'AF'
-width, height = 800, 800
+width, height = 2000, 2000
 
 pygame.init()
 screen = pygame.display.set_mode((width, height))
@@ -55,7 +55,7 @@ while True:
         sys.exit()
 
     # Is the mouse inside the state?
-    mouse_in_state = any(point_in_polygon(pygame.mouse.get_pos(), polygon) for polygon in world_map.countries[COUNTRY])
+    mouse_in_state = any(point_in_polygon(pygame.mouse.get_pos(), polygon) for polygon in wold_map.countries[COUNTRY])
     # Only print a message if the mouse moved from the inside to the outside, or vice versa
     if mouse_in_state != last_mouse_in_state:
         last_mouse_in_state = mouse_in_state
