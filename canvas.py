@@ -5,8 +5,8 @@ import cv2
 class canvas():
 
     def __init__(self, width, height):
-        self.width = width
-        self.height = height
+        self.width = int(width)
+        self.height = int(height)
         self.new_canvas = np.zeros((self.height, self.width, 3), np.uint8)
 
     def set_color(self, B, G, R):
@@ -19,9 +19,17 @@ class canvas():
         cv2.imshow('newCanvas', self.new_canvas)
 
     def save_drawing(self):
-        """"""
+        """This function allows users to save their drawing with a name of
+        their choice.
+        """
         file_name = input('Please name your drawing: ')
         cv2.imwrite(file_name+'.jpg', self.new_canvas)
+
+    def clear(self):
+        """This function clears the screen.
+        """
+        cv2.rectangle(self.new_canvas, (0, 0), (self.width, self.height), (0, 0, 0))
+
 
 if __name__ == "__main__":
     canvas1 = canvas(1280, 960)
