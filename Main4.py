@@ -34,12 +34,16 @@ class PyGameWindowView(object):
         self.player = pygame.transform.scale(pygame.image.load('Genie1.png'),(100,100))
         self.screen.blit(self.player, (self.model.player.center_x, self.model.player.center_y))
 
-        self.skeleton = pygame.transform.scale(
-            pygame.image.load('skeleton.jpg'), (60, 60))
-
+        self.skeleton = pygame.transform.scale(pygame.image.load('skeleton.jpg'), (60, 60))
         for skeleton in self.model.skeletons:
             self.screen.blit(self.skeleton, (skeleton.left, skeleton.top))
 
+        self.end = pygame.transform.scale(pygame.image.load('gameover.jpg'), (1000, 1000))
+
+        pygame.display.update()
+
+    def gameover(self):
+        self.screen.blit(self.end, (self.size[1], self.size[0]))
         pygame.display.update()
 
 class Model(object):
@@ -56,9 +60,10 @@ class Model(object):
 
         self.skeletons = []
         self.lives = 3
-        self.skeleton_top = 50
-        self.skeleton_left = 50
-        self.skeleton_space = 40
+        self.skeleton_width = 50
+        self.skeleton_space = 10
+        self.skeleton_left = 30
+        self.skeleton_top = 30
 
         # if 460 <= self.bomb.center_y <= 540 and self.player.center_x - 50 <= self.bomb.center_x <= self.player.center_x + 100:
         #     self.lives -= 1
@@ -75,12 +80,14 @@ class Model(object):
         self.player.update()
 
         if 460 <= self.bomb.center_y <= 540 and self.player.center_x - 50 <= self.bomb.center_x <= self.player.center_x + 100:
+            # Decrease the number of lives and remove the touched bomb
             self.lives -= 1
             self.bomb.center_y = self.width + 100
 
+        self.skeletons = []
         for x in range(self.skeleton_left,
-                       self.skeleton_left * self.lives,
-                       self.skeleton_space):
+                       self.skeleton_left + (self.skeleton_width + self.skeleton_space) * self.lives,
+                       self.skeleton_width + self.skeleton_space):
             self.skeletons.append(Lives(x, self.skeleton_top))
 
 
@@ -140,8 +147,6 @@ class Lives(object):
         self.left = left
         self.top = top
         self.lives = 3
-
-    # def update(self):
 
 
 if __name__ == '__main__':
