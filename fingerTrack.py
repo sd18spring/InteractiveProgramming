@@ -96,9 +96,9 @@ class finger_track():
         for i in range(len(self.clearpath)):
             if len(self.clearpath) < 1:
                 break
-            elif i<(len(self.clearpath)-1)<21 and not disappr:
+            elif i<(len(self.clearpath)-1)<21:
                 cv2.line(canvas.new_canvas, self.clearpath[i], self.clearpath[i+1], self.colors[i], 3)
-            elif 20 < i < (len(self.clearpath)-1) and disappr:
-                canvas.clear()
+            elif 20 < i < (len(self.clearpath)-1):
+                canvas.new_canvas = np.zeros((canvas.height, canvas.width, 3), np.uint8)
                 for j in range(20):
                     cv2.line(canvas.new_canvas, self.clearpath[-(j+1)], self.clearpath[-(j+2)], self.colors[-(j+2)], 3)
