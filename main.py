@@ -1,9 +1,5 @@
-import pygame, sys
-from pygame.locals import *
-import random
-from classes import Player, Block
-from functions import main
+from classes import Player, Block, Game
 
-
-
-main()
+if __name__ == "__main__":
+    game = Game(num_blocks=10)
+    game.run()

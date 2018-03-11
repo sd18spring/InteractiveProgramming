@@ -68,15 +68,31 @@ class Game:
         for i in range(num_blocks):
             height = random.randint(30, 150)
             weight = random.randint(30, 150)
-            myBlock = Block(mainSurface, (255, 255, 255), weight, height)
+            myBlock = Block(self.mainSurface, (255, 255, 255), weight, height)
             x_displacement = random.randint(0, SCREENWIDTH)
             myBlock.rect.x = (SCREENWIDTH + x_displacement)
             myBlock.rect.y = random.randrange(SCREENHEIGHT - 150)
             self.blocksGroup.add(myBlock)
 
-        self.player = Player(mainSurface, player_color, 50, 20)
+        self.player = Player(self.mainSurface, player_color, 50, 20)
         self.player.rect.x = 200
         self.player.rect.y = 0.5*SCREENHEIGHT
-        self.player_group.add(player)
+        self.player_group.add(self.player)
 
-    
+    def run(self):
+        while True:
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    print(self.score)
+                    pygame.quit()
+                    sys.exit()
+                self.player.on_event(event)
+            self.mainSurface.fill((0, 0, 0))
+
+            self.player.collide(self.blocksGroup, self.score)
+
+            self.player_group.draw(self.mainSurface)
+            self.blocksGroup.update()
+            self.blocksGroup.draw(self.mainSurface)
+            pygame.display.update()
+            self.score += .01
