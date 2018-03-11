@@ -13,7 +13,7 @@ class finger_track():
         self.cy = 0
         self.path = []
         self.clearpath = []
-        self.pathlength = 20
+        self.pathlength = 10
         self.red_maskL = [np.array([0, 150, 100]), np.array([178, 150, 100])]
         self.red_maskH = [np.array([1, 255, 255]), np.array([180, 255, 255])]
         self.refreshDelay = 0
@@ -64,7 +64,7 @@ class finger_track():
             if self.frame_num > self.refreshDelay or self.frame_num == 0:
                 cnt = contours[0]
                 M = cv2.moments(cnt)
-                print(M['m10'] / M['m00'])
+                #print(M['m10'] / M['m00'])
                 self.cx = int(M['m10'] / M['m00'])
                 self.cy = int(M['m01'] / M['m00'])
                 self.frame_num = 0
@@ -76,7 +76,8 @@ class finger_track():
                     diffx = abs(self.cx-pair[0])
                     diffy = abs(self.cy-pair[1])
                     distance = math.sqrt(diffx**2+diffy**2)
-                    if distance < 10:
+                    if distance < 100:
+                        print('Far enough')
                         if len(self.path) < self.pathlength:
                             self.path.append((self.cx, self.cy))
                         else:
@@ -84,9 +85,11 @@ class finger_track():
                         dist2hue = self.map(distance, 0.0, 10.0, 0.0, 255.0)
                         paintColor = self.brush_color(dist2hue)
                         self.colors.append((int(paintColor[0][0][0]), int(paintColor[0][0][1]), int(paintColor[0][0][2])))
+                        print(paintColor, pair)
             cv2.circle(target, (self.cx, self.cy), 2, (0, 255, 0), -1)
         except IndexError:
             """"""
+            print('IndexError happened')
 
     # def refine_path(self):
     #     """This function takes evalutes every two consecutive points,
@@ -112,11 +115,12 @@ class finger_track():
         """This function draws the lines on the canvas of the screen.
         The default is that only the 20 newest points will be drawn on screen.
         """
+        canvas.new_canvas = np.zeros((canvas.height, canvas.width, 3), np.uint8)
         for i in range(len(self.path)):
             if len(self.path) <= 1:
                 break
             else:
-                if i < len(self.path)-1:
+                if i < len(self.path)-2:
                     cv2.line(canvas.new_canvas, self.path[i], self.path[i+1], self.colors[i], 3)
             # elif i<(len(self.path)-1)<21 and not disappr:
             #     cv2.line(canvas.new_canvas, self.path[i], self.clearpath[i+1], self.colors[i], 3)
