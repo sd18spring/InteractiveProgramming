@@ -31,20 +31,20 @@ class Model:
         #KEYDOWN events toggle movement on
         if event.type == KEYDOWN:
             if event.key == game_object.keys["left"]:
-                left = True
+                game_object.left = True
             if event.key == game_object.keys["right"]:
-                right = True
+                game_object.right = True
         #KEYUP events toggles movement off
         if event.type == KEYUP:
             if event.key == game_object.keys["left"]:
-                left = False
+                game_object.left = False
             if event.key == game_object.keys["right"]:
-                right = False
+                game_object.right = False
         #If left XOR right
-        if game_object.keys["left"] or game_object.keys["right"]:
-            if game_object.keys["left"]:
+        if game_object.left or game_object.right:
+            if game_object.left:
                 game_object.vel_x = -game_object.speed
-            if game_object.keys["right"]:
+            if game_object.right:
                 game_object.vel_x = game_object.speed
         #Slow character down when there's conflicting input or no input
         else:
@@ -59,6 +59,7 @@ class Model:
                 game_object.vel_y = game_object.jump_vel
                 game_object.jumps -= 1
                 print("up", game_object.vel_y)
+
     def attack_command(self, event, game_object):
         """
         Used to toggle the attacking mode for a character object for a given
@@ -66,7 +67,7 @@ class Model:
         """
         if event.type == KEYDOWN:
             #NOTE: Change to custom/dynamic character attack button.
-            if event.key == pygame.K_p:
+            if event.key == game_object.keys["attack"]:
                 game_object.attacking = True
                 #number of frames spent attacking
                 game_object.attack_time = 30
@@ -76,13 +77,13 @@ class Model:
         Updates the position and velocity and attack hitbox of each character.
         """
         for char in self.characters:
-            if char.in_air(800 - 1.5 * char.height):
+            if char.in_air(600 - 1.5 * char.height):
                 char.vel_y += self.g
             elif char.vel_y  > 0:
                 char.vel_y = 0
-                char.pos_y = 800 - char.height
+                char.pos_y = 600 - char.height
                 char.jumps = char.max_jumps
-            char.accelerate()
+            #char.accelerate()
             char.move()
             char.attack_action()
 
