@@ -29,7 +29,7 @@ def game_loop():
 
    x_start = random.randrange(0, display_width)  ##Where the moving blocks start moving from
    y_start = -200  ## Object starts 600 pixels above the window
-   moving_block_speed = 7  ## Determines the speed at which the object moves
+   moving_block_speed = 7  # Determines the speed at which the object moves
    width = 100
    height = 100
    radius = random.randrange(100, 200)
