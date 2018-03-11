@@ -15,15 +15,16 @@ def main():
     while True:
         ret, frame = cap.read()
         frame = cv2.flip(frame,1)
-        cv2.imshow('original', frame)
+
         hsv = track.BGR2HSV(frame)
         redMask = track.red_mask(hsv)
         mask = cv2.bilateralFilter(redMask, 10, 40, 40)
         mask = cv2.blur(mask, (5, 5))
         res = cv2.bitwise_and(frame, frame, mask=redMask)
+        cv2.imshow('original', res)
         mask = cv2.blur(mask, (20, 20))
         track.find_center(mask, frame)
-        track.refine_path()
+        # track.refine_path()
         track.draw(newCanvas, disappr=disappr)
         newCanvas.show_canvas()
 

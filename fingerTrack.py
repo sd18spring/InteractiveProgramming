@@ -13,6 +13,7 @@ class finger_track():
         self.cy = 0
         self.path = []
         self.clearpath = []
+        self.pathlength = 20
         self.red_maskL = [np.array([0, 150, 100]), np.array([178, 150, 100])]
         self.red_maskH = [np.array([1, 255, 255]), np.array([180, 255, 255])]
         self.refreshDelay = 0
@@ -50,6 +51,9 @@ class finger_track():
         mask2 = cv2.inRange(frame, self.red_maskL[1], self.red_maskH[1])
         return (mask1 | mask2)
 
+    def shift(self, myList, myElement):
+        return myList[1:] + [myElement]
+
     def find_center(self, mask, target):
         """This function takes in a cv2 mask, find the center of the
         contours in the mask, and draw a green dot at the center location
@@ -64,41 +68,59 @@ class finger_track():
                 self.cx = int(M['m10'] / M['m00'])
                 self.cy = int(M['m01'] / M['m00'])
                 self.frame_num = 0
-                self.path.append((self.cx, self.cy))
+                if len(self.path) <= 1:
+                    self.path.append((self.cx, self.cy))
+                elif len(self.path) >= 2:
+                    # Calculate the distance between the two newest point.
+                    pair = self.path[-1]
+                    diffx = abs(self.cx-pair[0])
+                    diffy = abs(self.cy-pair[1])
+                    distance = math.sqrt(diffx**2+diffy**2)
+                    if distance < 10:
+                        if len(self.path) < self.pathlength:
+                            self.path.append((self.cx, self.cy))
+                        else:
+                            self.path = self.shift(self.path, (self.cx, self.cy))
+                        dist2hue = self.map(distance, 0.0, 10.0, 0.0, 255.0)
+                        paintColor = self.brush_color(dist2hue)
+                        self.colors.append((int(paintColor[0][0][0]), int(paintColor[0][0][1]), int(paintColor[0][0][2])))
             cv2.circle(target, (self.cx, self.cy), 2, (0, 255, 0), -1)
         except IndexError:
             """"""
 
-    def refine_path(self):
-        """This function takes evalutes every two consecutive points,
-        find the distance between them, and add the new point to a
-        list of clear path if they are not off by roughly 15 pixels.
-        It also takes a distance and convert it to a color to be used
-        when plotting the line.
-        """
-        if len(self.path) == 1:
-            self.clearpath.append(self.path[0])
-        elif len(self.path) > 2:
-            pair = self.path[-2]
-            diffx = abs(self.cx-pair[0])
-            diffy = abs(self.cy-pair[1])
-            distance = math.sqrt(diffx**2+diffy**2)
-            if distance<10:
-                dist2hue = self.map(distance, 0.0, 10.0, 0.0, 255.0)
-                paintColor = self.brush_color(dist2hue)
-                self.colors.append((int(paintColor[0][0][0]), int(paintColor[0][0][1]), int(paintColor[0][0][2])))
-                self.clearpath.append(pair)
+    # def refine_path(self):
+    #     """This function takes evalutes every two consecutive points,
+    #     find the distance between them, and add the new point to a
+    #     list of clear path if they are not off by roughly 15 pixels.
+    #     It also takes a distance and convert it to a color to be used
+    #     when plotting the line.
+    #     """
+    #     if len(self.path) == 1:
+    #         self.clearpath.append(self.path[0])
+    #     elif len(self.path) > 2:
+    #         pair = self.path[-2]
+    #         diffx = abs(self.cx-pair[0])
+    #         diffy = abs(self.cy-pair[1])
+    #         distance = math.sqrt(diffx**2+diffy**2)
+    #         if distance<10:
+    #             dist2hue = self.map(distance, 0.0, 10.0, 0.0, 255.0)
+    #             paintColor = self.brush_color(dist2hue)
+    #             self.colors.append((int(paintColor[0][0][0]), int(paintColor[0][0][1]), int(paintColor[0][0][2])))
+    #             self.clearpath.append(pair)
 
     def draw(self, canvas, disappr=True):
         """This function draws the lines on the canvas of the screen.
         The default is that only the 20 newest points will be drawn on screen.
         """
-        for i in range(len(self.clearpath)):
-            if len(self.clearpath) < 1:
+        for i in range(len(self.path)):
+            if len(self.path) <= 1:
                 break
-            elif i<(len(self.clearpath)-1)<21 and not disappr:
-                cv2.line(canvas.new_canvas, self.clearpath[i], self.clearpath[i+1], self.colors[i], 3)
-            elif 20 < i < (len(self.clearpath)-1) and disappr:
-                canvas.clear()
-                for j in range(20):
-                    cv2.line(canvas.new_canvas, self.clearpath[-(j+1)], self.clearpath[-(j+2)], self.colors[-(j+2)], 3)
+            else:
+                if i < len(self.path)-1:
+                    cv2.line(canvas.new_canvas, self.path[i], self.path[i+1], self.colors[i], 3)
+            # elif i<(len(self.path)-1)<21 and not disappr:
+            #     cv2.line(canvas.new_canvas, self.path[i], self.clearpath[i+1], self.colors[i], 3)
+            # elif 20 < i < (len(self.clearpath)-1) and disappr:
+            #     canvas.clear()
+            #     for j in range(20):
+            #         cv2.line(canvas.new_canvas, self.clearpath[-(j+1)], self.clearpath[-(j+2)], self.colors[-(j+2)], 3)
