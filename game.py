@@ -16,6 +16,7 @@ class Model(object):
         self.road = Road()
         self.player = Player(4,2)
 
+
     def __str__(self):
         return str(self.arena_array)
 
@@ -25,6 +26,7 @@ class Model(object):
     def move_road(self):
         self.arena_array[:,:,4] = road.add_obj(4)
         road_pos = 4
+        self.road_pos = road_pos
         while True:
             self.arena_array[road_pos-1,:,:] = self.arena_array[road_pos,:,:]
             self.arena_array[road_pos,:,:] = numpy.zeros((5,5), dtype=numpy.object_)
@@ -120,6 +122,8 @@ if __name__ == "__main__":
     model.place_player()
     print(model)
     model.move_road()
+    if model.player.x == model.road_pos:
+        pygame.quit()
 
 
 
