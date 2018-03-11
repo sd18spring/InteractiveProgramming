@@ -30,13 +30,14 @@ def main():
         if cv2.waitKey(1) & 0xFF == ord('s'):
             newCanvas.save_drawing()
             break
-        elif cv2.waitKey(1) & 0xFF == ord('q'):
+        if cv2.waitKey(1) & 0xFF == ord('q'):
             break
-        elif cv2.waitKey(1) & 0xFF == ord('d'):
+        if cv2.waitKey(1) & 0xFF == ord('d'):
             disappr = ~disappr
-        elif cv2.waitKey(1) & 0xFF == ord('c'):
+        if cv2.waitKey(1) & 0xFF == ord('c'):
             newCanvas.clear()
 
+    cap.release()
     cv2.destroyAllWindows()
 
 if __name__ == "__main__":
