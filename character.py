@@ -29,6 +29,7 @@ class Character:
         self.lives = 3
         self.max_jumps = max_jumps
         self.jumps = max_jumps
+        self.rect = pygame.Rect(pos_x, pos_y, width, height)
         self.keys = keys
 
     def __str__(self):

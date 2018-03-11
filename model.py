@@ -26,8 +26,7 @@ class Model:
         """
         if not (event.type == KEYDOWN or event.type == KEYUP) or not (event.key == game_object.keys["left"] or event.key == game_object.keys["right"]):
            return
-        left = False
-        right = False
+
         #KEYDOWN events toggle movement on
         if event.type == KEYDOWN:
             if event.key == game_object.keys["left"]:
@@ -41,14 +40,14 @@ class Model:
             if event.key == game_object.keys["right"]:
                 right = False
         #If left XOR right
-        if left != right:
-            if left:
-                game_object.acc_direction = -1
-            if right:
-                game_object.acc_direction = 1
+        if game_object.keys["left"] or game_object.keys["right"]:
+            if game_object.keys["left"]:
+                game_object.vel_x = -game_object.speed
+            if game_object.keys["right"]:
+                game_object.vel_x = game_object.speed
         #Slow character down when there's conflicting input or no input
         else:
-            game_object.acc_direction = 0
+            game_object.vel_x = 0
 
     def y_movement(self, event, game_object):
         """
@@ -60,6 +59,9 @@ class Model:
                 game_object.vel_y = game_object.jump_vel
                 game_object.jumps -= 1
                 print("up", game_object.vel_y)
+#    def attack(self, event):
+#        if event.type == KEYDOWN:
+#            if event.key ==
 
     def update_motion(self):
         """

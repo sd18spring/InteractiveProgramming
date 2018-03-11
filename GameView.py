@@ -18,7 +18,7 @@ class GameView:
         for t in self.model.terrains:
             pygame.draw.rect(self.screen, pygame.Color(150,120,10), pygame.Rect(t.pos[0],t.pos[1],t.size[0], t.size[1]))
         for char in self.model.characters:
-            pygame.draw.rect(self.screen, pygame.Color(100,100,100), pygame.Rect(char.pos_x, char.pos_y, char.width, char.height))
+            pygame.draw.rect(self.screen, pygame.Color(100,100,100), char.rect)
         pygame.display.update()
 
 if __name__ == "__main__":
