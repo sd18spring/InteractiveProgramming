@@ -58,7 +58,7 @@ class Road():
     def add_obj(self, x_pos):
         gas = Gastanks()
         ped = Pedestrians()
-        obst = Obstacles
+        obst = Obstacles()
         obj_list = [gas, ped, obst]
         obj = obj_list[random.randint(0,2)]
         self.road_matrix[9, x_pos] = obj
@@ -83,7 +83,6 @@ class Controllers():
     def __init__(self, model):
         self.model = model
         self.player = Player()
-    #def __init__(self, )
     #def move_right
     #def move_left
     #def move_up
@@ -116,8 +115,7 @@ if __name__ == "__main__":
 
 
 
-
-
+#MAIN GAME LOOP:
     #size = (640, 480)
     #screen = pygame.display.set_mode(size)
     #pygame.display.set_caption('ROAD RAGE')
