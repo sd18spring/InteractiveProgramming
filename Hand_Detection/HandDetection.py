@@ -46,6 +46,7 @@ while(1):
 
     #Capture frames from the camera
     ret, frame = cap.read()
+    frame = cv2.flip(frame,1)
 
     #Blur the image
     blur = cv2.blur(frame,(3,3))
@@ -166,6 +167,8 @@ while(1):
     #Print number of pointed fingers
     cv2.putText(frame,str(result),(100,100),font,2,(255,255,255),2)
 
+    cv2.putText(frame,str(cx),(100,200),font,2,(255,255,255),2)
+    cv2.putText(frame,str(cy),(100,300),font,2,(255,255,255),2)
     #show height raised fingers
     #cv2.putText(frame,'finger1',tuple(finger[0]),font,2,(255,255,255),2)
     #cv2.putText(frame,'finger2',tuple(finger[1]),font,2,(255,255,255),2)
