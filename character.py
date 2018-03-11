@@ -11,6 +11,7 @@ class Character:
                      height = 150,
                      max_health = 100,
                      max_jumps = 3, keys = {"left": pygame.K_LEFT, "right": pygame.K_RIGHT, "up" : pygame.K_UP, "down": pygame.K_DOWN, "attack": pygame.K_SLASH}):
+        self.keys = keys
         self.label = label
         self.attack = attack
         self.defense = defense

@@ -59,6 +59,7 @@ class Model:
                 game_object.vel_y = game_object.jump_vel
                 game_object.jumps -= 1
                 print("up", game_object.vel_y)
+
     def attack_command(self, event, game_object):
         """
         Used to toggle the attacking mode for a character object for a given
@@ -66,7 +67,7 @@ class Model:
         """
         if event.type == KEYDOWN:
             #NOTE: Change to custom/dynamic character attack button.
-            if event.key == pygame.K_p:
+            if event.key == game_object.keys["attack"]:
                 game_object.attacking = True
                 #number of frames spent attacking
                 game_object.attack_time = 30
@@ -76,11 +77,11 @@ class Model:
         Updates the position and velocity and attack hitbox of each character.
         """
         for char in self.characters:
-            if char.in_air(800 - 1.5 * char.height):
+            if char.in_air(600 - 1.5 * char.height):
                 char.vel_y += self.g
             elif char.vel_y  > 0:
                 char.vel_y = 0
-                char.pos_y = 800 - char.height
+                char.pos_y = 600 - char.height
                 char.jumps = char.max_jumps
             #char.accelerate()
             char.move()
