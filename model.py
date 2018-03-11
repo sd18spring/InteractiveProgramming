@@ -13,9 +13,6 @@ class Model:
 
         for char in args:
             self.characters.append(char)
-
-        #NOTE: Why is this a double for loop? We should just have one terrain
-        #object for the ground, not 30.
         for i in range(10):
             for j in range(3):
                 self.terrains.append(terrain.Terrain((i * 100,1000 - j * 100)))
@@ -29,7 +26,8 @@ class Model:
         events and key down events.
         """
         if (not (event.type == KEYDOWN or event.type == KEYUP) or
-            not (event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT)):
+            not (event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT) or
+            game_object.attacking):
            return
 
         #KEYDOWN events toggle movement on
@@ -45,7 +43,7 @@ class Model:
             if event.key == pygame.K_RIGHT:
                 game_object.right = False
         #If left XOR right
-        if game_object.left or game_object.right:
+        if game_object.left != game_object.right:
             if game_object.left:
                 game_object.vel_x = -game_object.speed
             if game_object.right:
@@ -58,19 +56,28 @@ class Model:
         """
         used to update the v velocity of the object
         """
-        #KEYUP events toggles movement off
+        if not game_object.attacking:
+            #KEYUP events toggles movement off
+            if event.type == KEYDOWN:
+                if event.key == pygame.K_UP and game_object.jumps > 0:
+                    game_object.vel_y = game_object.jump_vel
+                    game_object.jumps -= 1
+
+    def attack_command(self, event, game_object):
+        """
+        Used to toggle the attacking mode for a character object for a given
+        amount of time.
+        """
         if event.type == KEYDOWN:
-            if event.key == pygame.K_UP and game_object.jumps > 0:
-                game_object.vel_y = game_object.jump_vel
-                game_object.jumps -= 1
-                print("up", game_object.vel_y)
-    def attack(self, event):
-        if event.type == KEYDOWN:
-            if event.key ==
+            #NOTE: Change to custom/dynamic character attack button.
+            if event.key == pygame.K_p:
+                game_object.attacking = True
+                #number of frames spent attacking
+                game_object.attack_time = 30
 
     def update_motion(self):
         """
-        Updates the position and velocity of each character.
+        Updates the position and velocity and attack hitbox of each character.
         """
         for char in self.characters:
             if char.in_air(800 - 1.5 * char.height):
@@ -81,6 +88,7 @@ class Model:
                 char.jumps = char.max_jumps
             char.accelerate()
             char.move()
+            char.attack_action()
 
     def quit(self, event):
         if event.type == QUIT:
