@@ -19,6 +19,7 @@ class GameView:
             pygame.draw.rect(self.screen, pygame.Color(150,120,10), pygame.Rect(t.pos[0],t.pos[1],t.size[0], t.size[1]))
         for char in self.model.characters:
             pygame.draw.rect(self.screen, pygame.Color(100,100,100), char.rect)
+            pygame.draw.rect(self.screen, pygame.Color(100,100,100), char.attack_rect)
         pygame.display.update()
 
 if __name__ == "__main__":
@@ -36,6 +37,7 @@ if __name__ == "__main__":
             for char in model.characters:
                 model.x_movement(event, char)
                 model.y_movement(event, char)
+                model.attack_command(event, char)
         model.update_motion()
         view.draw()
         clock.tick(FPS)

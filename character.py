@@ -21,6 +21,10 @@ class Character:
         self.width = width
         self.height = height
         self.health = max_health
+        self.left = True
+        self.right = False
+        self.attacking = False
+        self.damaged = False
         self.vel_x = 0
         self.vel_y = 0
         self.acc_x = acceleration
@@ -29,8 +33,9 @@ class Character:
         self.lives = 3
         self.max_jumps = max_jumps
         self.jumps = max_jumps
-        self.rect = pygame.Rect(pos_x, pos_y, width, height)
-        self.keys = keys
+        self.rect = pygame.Rect(self.pos_x, self.pos_y, self.width, self.height)
+        self.attack_rect = pygame.Rect(self.pos_x, self.pos_y, 0, 0)
+        self.attack_time = 0
 
     def __str__(self):
         output = self.label + ':\n'
@@ -60,28 +65,24 @@ class Character:
         """
         return self.health > 0
 
-    #NOTE: I think it is better if we didn't have acceleration in the x
-    #direction. If acceleration rate is slow, it makes manuvering hard. If the
-    #rate is high, then it is practically unnoticable.
     def accelerate(self):
         """
         updates the acceleration of the character, for movement on each frame
         when there is no movement, acceleration = 0
         direction is -1 or 1
         """
-        #NOTE: this is a pretty jank way of doing what I want, but i didn't
-        #want to overhaul your code
-        if self.acc_direction != 0:
-            self.vel_x += self.acc_x * self.acc_direction
-            if self.vel_x > self.speed:
-                self.vel_x = self.speed
-            if self.vel_x < -self.speed:
-                self.vel_x = -self.speed
-        else:
-            if self.vel_x > 0:
-                self.vel_x -= self.acc_x
-            elif self.vel_x < 0:
-                self.vel_x += self.acc_x
+        self.vel_x += self.acc_x * self.acc_direction
+        if self.vel_x > self.speed:
+            self.vel_x = self.speed
+        if self.vel_x < -self.speed:
+            self.vel_x = -self.speed
+
+        #Decelerates the object when there are no inputs.
+        # if self.vel_x > 0:
+        #     self.vel_x -= self.acc_x
+        # elif self.vel_x < 0:
+        #     self.vel_x += self.acc_x
+
     def move(self):
         """
         updates the position of the character laterally.
@@ -89,3 +90,36 @@ class Character:
         """
         self.pos_x += self.vel_x
         self.pos_y += self.vel_y
+        self.rect = pygame.Rect(self.pos_x, self.pos_y, self.width, self.height)
+
+    def attack_action(self):
+        """
+        updates the hitbox of the character to reflect the action of an attack.
+        """
+        #If the attacking time is up, then toggle off attacking.
+        if self.attack_time < 1:
+            self.attack_time = 0
+            self.attacking = False
+
+        if self.attacking:
+            #offsets that represent the size of the attack hitbox
+            x_offset = self.width * 0.7
+            y_offset = self.height * 0.5
+            self.vel_x = 0
+            #If the character is facing left, draw the attack hitbox on the left
+            if self.left:
+                self.attack_rect = pygame.Rect(self.pos_x - x_offset,
+                                               self.pos_y + y_offset,
+                                               x_offset,
+                                               y_offset)
+            #If char is facing right, draw the attack hitbox on the right
+            else:
+                self.attack_rect = pygame.Rect(self.pos_x + self.width,
+                                               self.pos_y + y_offset,
+                                               x_offset,
+                                               y_offset)
+            #update the time spent attacking
+            self.attack_time -= 1
+        #If the character isn't attacking, remove the attack hitbox
+        else:
+            self.attack_rect = pygame.Rect(self.pos_x, self.pos_y, 0, 0)
