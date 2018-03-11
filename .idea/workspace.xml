@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a62df23a-6508-44fc-a64c-ed68e67dffab" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Main3.py" afterPath="$PROJECT_DIR$/Main3.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Main4.py" afterPath="$PROJECT_DIR$/Main4.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -15,32 +13,32 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="brick_breaker.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/BrickBreakerMVC/brick_breaker.py">
+      <file leaf-file-name="DodgyGame2.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/InteractiveProgramming2/DodgyGame2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1472">
-              <caret line="163" column="11" lean-forward="true" selection-start-line="163" selection-start-column="11" selection-end-line="163" selection-end-column="11" />
+            <state relative-caret-position="166">
+              <caret line="81" column="12" lean-forward="true" selection-start-line="81" selection-start-column="12" selection-end-line="81" selection-end-column="12" />
               <folding>
-                <element signature="e#365#378#0" expanded="true" />
-                <element signature="e#3026#3506#0" expanded="false" />
-                <element signature="e#3533#4243#0" expanded="false" />
-                <element signature="e#4677#5105#0" expanded="false" />
-                <element signature="e#5147#5931#0" expanded="false" />
+                <element signature="e#0#13#0" expanded="true" />
+                <element signature="e#696#1642#0" expanded="false" />
+                <element signature="e#5942#6242#0" expanded="false" />
+                <element signature="e#6268#7081#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DodgyGame2.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/InteractiveProgramming2/DodgyGame2.py">
+      <file leaf-file-name="brick_breaker.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/BrickBreakerMVC/brick_breaker.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="131">
-              <caret line="168" column="10" lean-forward="false" selection-start-line="168" selection-start-column="6" selection-end-line="168" selection-end-column="10" />
+            <state relative-caret-position="576">
+              <caret line="92" column="65" lean-forward="true" selection-start-line="92" selection-start-column="65" selection-end-line="92" selection-end-column="65" />
               <folding>
-                <element signature="e#696#1642#0" expanded="false" />
-                <element signature="e#5942#6242#0" expanded="false" />
-                <element signature="e#6268#7081#0" expanded="false" />
-                <element signature="e#7394#7648#0" expanded="false" />
+                <element signature="e#365#378#0" expanded="true" />
+                <element signature="e#3026#3506#0" expanded="false" />
+                <element signature="e#4286#4631#0" expanded="false" />
+                <element signature="e#4677#5105#0" expanded="false" />
+                <element signature="e#5147#5931#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -49,11 +47,12 @@
       <file leaf-file-name="Main4.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Main4.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="516">
-              <caret line="109" column="29" lean-forward="true" selection-start-line="109" selection-start-column="29" selection-end-line="109" selection-end-column="29" />
+            <state relative-caret-position="-241">
+              <caret line="69" column="27" lean-forward="true" selection-start-line="69" selection-start-column="27" selection-end-line="69" selection-end-column="27" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
-                <element signature="e#3315#3569#0" expanded="false" />
+                <element signature="e#3227#3982#0" expanded="false" />
+                <element signature="e#4008#5063#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -62,8 +61,8 @@
       <file leaf-file-name="Main3.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Main3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1115">
-              <caret line="106" column="0" lean-forward="false" selection-start-line="106" selection-start-column="0" selection-end-line="107" selection-end-column="49" />
+            <state relative-caret-position="-55">
+              <caret line="86" column="30" lean-forward="true" selection-start-line="86" selection-start-column="30" selection-end-line="86" selection-end-column="30" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
                 <element signature="e#1072#1106#0" expanded="false" />
@@ -89,6 +88,9 @@
       <find>self.eyes</find>
       <find>y_start</find>
       <find>height</find>
+      <find>crash</find>
+      <find>moving_block_speed</find>
+      <find>cap</find>
       <find>MOUSEMOTION</find>
       <find>user</find>
     </findStrings>
@@ -108,11 +110,11 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="223" />
-    <option name="y" value="59" />
-    <option name="width" value="928" />
-    <option name="height" value="932" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="678" />
+    <option name="y" value="145" />
+    <option name="width" value="926" />
+    <option name="height" value="896" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -258,10 +260,10 @@
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python.Main4" />
-        <item index="1" class="java.lang.String" itemvalue="Python.Main3" />
-        <item index="2" class="java.lang.String" itemvalue="Python.brick_breaker" />
-        <item index="3" class="java.lang.String" itemvalue="Python.Main" />
-        <item index="4" class="java.lang.String" itemvalue="Python.DodgyGame2" />
+        <item index="1" class="java.lang.String" itemvalue="Python.DodgyGame2" />
+        <item index="2" class="java.lang.String" itemvalue="Python.Main3" />
+        <item index="3" class="java.lang.String" itemvalue="Python.brick_breaker" />
+        <item index="4" class="java.lang.String" itemvalue="Python.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -279,19 +281,19 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="223" y="59" width="1857" height="1092" extended-state="6" />
+    <frame x="678" y="145" width="926" height="896" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19137466" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33693305" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17689161" sideWeight="0.5040431" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20379747" sideWeight="0.51295894" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17689161" sideWeight="0.49595687" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20379747" sideWeight="0.48704103" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17075665" sideWeight="0.49811321" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17075665" sideWeight="0.4916442" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -307,7 +309,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="2" />
+      <option name="time" value="4" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -317,10 +319,10 @@
         <state relative-caret-position="2826">
           <caret line="162" column="29" lean-forward="false" selection-start-line="162" selection-start-column="29" selection-end-line="162" selection-end-column="29" />
           <folding>
+            <element signature="e#0#13#0" expanded="true" />
             <element signature="e#696#1642#0" expanded="false" />
             <element signature="e#5942#6242#0" expanded="false" />
             <element signature="e#6268#7081#0" expanded="false" />
-            <element signature="e#7394#7648#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -363,15 +365,15 @@
         <state relative-caret-position="12">
           <caret line="47" column="33" lean-forward="true" selection-start-line="47" selection-start-column="33" selection-end-line="47" selection-end-column="33" />
           <folding>
-            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#0#13#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Main3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1115">
-          <caret line="106" column="0" lean-forward="false" selection-start-line="106" selection-start-column="0" selection-end-line="107" selection-end-column="49" />
+        <state relative-caret-position="-55">
+          <caret line="86" column="30" lean-forward="true" selection-start-line="86" selection-start-column="30" selection-end-line="86" selection-end-column="30" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
             <element signature="e#1072#1106#0" expanded="false" />
@@ -381,12 +383,12 @@
     </entry>
     <entry file="file://$USER_HOME$/BrickBreakerMVC/brick_breaker.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1472">
-          <caret line="163" column="11" lean-forward="true" selection-start-line="163" selection-start-column="11" selection-end-line="163" selection-end-column="11" />
+        <state relative-caret-position="576">
+          <caret line="92" column="65" lean-forward="true" selection-start-line="92" selection-start-column="65" selection-end-line="92" selection-end-column="65" />
           <folding>
             <element signature="e#365#378#0" expanded="true" />
             <element signature="e#3026#3506#0" expanded="false" />
-            <element signature="e#3533#4243#0" expanded="false" />
+            <element signature="e#4286#4631#0" expanded="false" />
             <element signature="e#4677#5105#0" expanded="false" />
             <element signature="e#5147#5931#0" expanded="false" />
           </folding>
@@ -395,24 +397,25 @@
     </entry>
     <entry file="file://$USER_HOME$/InteractiveProgramming2/DodgyGame2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="168" column="10" lean-forward="false" selection-start-line="168" selection-start-column="6" selection-end-line="168" selection-end-column="10" />
+        <state relative-caret-position="166">
+          <caret line="81" column="12" lean-forward="true" selection-start-line="81" selection-start-column="12" selection-end-line="81" selection-end-column="12" />
           <folding>
+            <element signature="e#0#13#0" expanded="true" />
             <element signature="e#696#1642#0" expanded="false" />
             <element signature="e#5942#6242#0" expanded="false" />
             <element signature="e#6268#7081#0" expanded="false" />
-            <element signature="e#7394#7648#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Main4.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="516">
-          <caret line="109" column="29" lean-forward="true" selection-start-line="109" selection-start-column="29" selection-end-line="109" selection-end-column="29" />
+        <state relative-caret-position="-241">
+          <caret line="69" column="27" lean-forward="true" selection-start-line="69" selection-start-column="27" selection-end-line="69" selection-end-column="27" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
-            <element signature="e#3315#3569#0" expanded="false" />
+            <element signature="e#3227#3982#0" expanded="false" />
+            <element signature="e#4008#5063#0" expanded="false" />
           </folding>
         </state>
       </provider>
