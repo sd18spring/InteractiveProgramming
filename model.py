@@ -25,26 +25,26 @@ class Model:
         Toggles the different modes of acceleration depending on key up
         events and key down events.
         """
-        if not (event.type == KEYDOWN or event.type == KEYUP) or not (event.key == game_object.keys["left"] or event.key == game_object.keys["right"]):
+        if not (event.type == KEYDOWN or event.type == KEYUP):
            return
 
         #KEYDOWN events toggle movement on
         if event.type == KEYDOWN:
             if event.key == game_object.keys["left"]:
-                left = True
+                game_object.left = True
             if event.key == game_object.keys["right"]:
-                right = True
+                game_object.right = True
         #KEYUP events toggles movement off
         if event.type == KEYUP:
             if event.key == game_object.keys["left"]:
-                left = False
+                game_object.left = False
             if event.key == game_object.keys["right"]:
-                right = False
+                game_object.right = False
         #If left XOR right
-        if game_object.keys["left"] or game_object.keys["right"]:
-            if game_object.keys["left"]:
+        if game_object.left != game_object.right:
+            if game_object.left:
                 game_object.vel_x = -game_object.speed
-            if game_object.keys["right"]:
+            if game_object.right:
                 game_object.vel_x = game_object.speed
         #Slow character down when there's conflicting input or no input
         else:
@@ -82,7 +82,7 @@ class Model:
                 char.vel_y = 0
                 char.pos_y = 800 - char.height
                 char.jumps = char.max_jumps
-            char.accelerate()
+            #char.accelerate()
             char.move()
             char.attack_action()
 

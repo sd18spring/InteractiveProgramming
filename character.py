@@ -21,7 +21,7 @@ class Character:
         self.width = width
         self.height = height
         self.health = max_health
-        self.left = True
+        self.left = False
         self.right = False
         self.attacking = False
         self.damaged = False
@@ -29,13 +29,20 @@ class Character:
         self.vel_y = 0
         self.acc_x = acceleration
         self.speed = speed
-        self.acc_direction = 0
+        self.acc_direction = 1
         self.lives = 3
         self.max_jumps = max_jumps
         self.jumps = max_jumps
         self.rect = pygame.Rect(self.pos_x, self.pos_y, self.width, self.height)
         self.attack_rect = pygame.Rect(self.pos_x, self.pos_y, 0, 0)
         self.attack_time = 0
+        self.keys = keys
+        self.left_img = pygame.transform.scale(pygame.image.load("left.png"), (self.width, self.height))
+        self.right_img = pygame.transform.scale(pygame.image.load("right.png"), (self.width, self.height))
+        self.up_img = pygame.transform.scale(pygame.image.load("up.png"), (self.width, self.height))
+        self.down_img = pygame.transform.scale(pygame.image.load("down.png"), (self.width, self.height))
+
+
 
     def __str__(self):
         output = self.label + ':\n'
@@ -67,15 +74,14 @@ class Character:
 
     def accelerate(self):
         """
-        updates the acceleration of the character, for movement on each frame
         when there is no movement, acceleration = 0
         direction is -1 or 1
         """
-        self.vel_x += self.acc_x * self.acc_direction
-        if self.vel_x > self.speed:
-            self.vel_x = self.speed
-        if self.vel_x < -self.speed:
-            self.vel_x = -self.speed
+        #self.vel_x += self.acc_x * self.acc_direction
+        #if self.vel_x > self.speed:
+        #    self.vel_x = self.speed
+        #if self.vel_x < -self.speed:
+        #    self.vel_x = -self.speed
 
         #Decelerates the object when there are no inputs.
         # if self.vel_x > 0:

@@ -18,7 +18,15 @@ class GameView:
         for t in self.model.terrains:
             pygame.draw.rect(self.screen, pygame.Color(150,120,10), pygame.Rect(t.pos[0],t.pos[1],t.size[0], t.size[1]))
         for char in self.model.characters:
-            pygame.draw.rect(self.screen, pygame.Color(100,100,100), char.rect)
+            if(char.left):
+                self.screen.blit(char.left_img, char.rect)
+            elif(char.right):
+                self.screen.blit(char.right_img, char.rect)
+            elif (char.vel_y < 0):
+                self.screen.blit(char.down_img, char.rect)
+            else:
+                self.screen.blit(char.up_img, char.rect)
+
             pygame.draw.rect(self.screen, pygame.Color(100,100,100), char.attack_rect)
         pygame.display.update()
 
