@@ -24,9 +24,12 @@ class Hurricane(object):
     def convertlong(self):
         k = 6378137
         x = []
-        for i in np.asfarray(self.longs.values, float):
+        for ind, i in enumerate(np.asfarray(self.longs.values, float)):
             # print('i type is: ', type(i))
             xi = i * (k * np.pi/180.0)
+            if ind > 0:
+                if abs(xi-x[ind-1]) > (10 ** 7):
+                    xi = xi * -1
             x.append(xi)
         return x
 
