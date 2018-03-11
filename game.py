@@ -88,6 +88,21 @@ class View():
     """drawing what is in the model"""
     def __init__(self, model):
         self.model = model
+        self.screen = pygame.display.set_mode((640,480))
+
+    def draw(self):
+        """Draw the current game state on the screen"""
+        self.screen.fill(pygame.Color(0,0,0))
+        player = Player(310,470)
+        width = 20
+        height = 10
+        pygame.draw.rect(self.screen,
+                         pygame.Color(255,255,255),
+                         pygame.Rect(player.x,
+                                     player.y,
+                                     width,
+                                     height))
+        pygame.display.update()
 
 class Controllers():
     """keyboard controls"""
@@ -116,16 +131,24 @@ class Hud():
         self.player = Player()
 
 if __name__ == "__main__":
-    road = Road()
 
+    road = Road()
     model = Model(road)
     model.place_player()
-    print(model)
     model.move_road()
-    if model.player.x == model.road_pos:
-        pygame.quit()
 
+    pygame.init()
+    screen = pygame.display.set_mode((640,480))
+    view = View(model)
 
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                running = False
+        view.draw()
+        time.sleep(.001)
+    pygame.quit()
 
 
 
