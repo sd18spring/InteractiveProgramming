@@ -1,6 +1,5 @@
 import cv2
 print(cv2.__version__)
-
 import numpy as np
 import time
 
@@ -55,7 +54,9 @@ while(1):
     hsv = cv2.cvtColor(blur,cv2.COLOR_BGR2HSV)
 
     #Create a binary image with where white will be skin colors and rest is black
-    mask2 = cv2.inRange(hsv,np.array([2,50,50]),np.array([15,255,255]))
+    mask2 = cv2.inRange(hsv,np.array([2,50,50]),np.array([15,255,255])) #for skin colors
+    #tolerance = 30
+    #mask2 = cv2.inRange(hsv,np.array([60-tolerance,50,50]),np.array([60+tolerance,255,255]))#for green objects
 
     #Kernel matrices for morphological transformation
     kernel_square = np.ones((11,11),np.uint8)
@@ -93,25 +94,13 @@ while(1):
             ci=i
 
 	#Largest area contour
-    cnts = contours[ci]
+    if ci>=len(contours): #Passes if color cannot be found
+        pass
+    else:
+        cnts = contours[ci]
 
     #Find convex hull
     hull = cv2.convexHull(cnts)
-
-    #Find convex defects
-    hull2 = cv2.convexHull(cnts,returnPoints = False)
-    defects = cv2.convexityDefects(cnts,hull2)
-
-    #Get defect points and draw them in the original image
-    FarDefect = []
-    for i in range(defects.shape[0]):
-        s,e,f,d = defects[i,0]
-        start = tuple(cnts[s][0])
-        end = tuple(cnts[e][0])
-        far = tuple(cnts[f][0])
-        FarDefect.append(far)
-        cv2.line(frame,start,end,[0,255,0],1)
-        cv2.circle(frame,far,10,[100,255,255],3)
 
 	#Find moments of the largest contour
     moments = cv2.moments(cnts)
@@ -127,66 +116,20 @@ while(1):
     font = cv2.FONT_HERSHEY_SIMPLEX
     cv2.putText(frame,'Center',tuple(centerMass),font,2,(255,255,255),2)
 
-    #Distance from each finger defect(finger webbing) to the center mass
-    distanceBetweenDefectsToCenter = []
-    for i in range(0,len(FarDefect)):
-        x =  np.array(FarDefect[i])
-        centerMass = np.array(centerMass)
-        distance = np.sqrt(np.power(x[0]-centerMass[0],2)+np.power(x[1]-centerMass[1],2))
-        distanceBetweenDefectsToCenter.append(distance)
-
-    #Get an average of three shortest distances from finger webbing to center mass
-    sortedDefectsDistances = sorted(distanceBetweenDefectsToCenter)
-    AverageDefectDistance = np.mean(sortedDefectsDistances[0:2])
-
-    #Get fingertip points from contour hull
-    #If points are in proximity of 80 pixels, consider as a single point in the group
-    finger = []
-    for i in range(0,len(hull)-1):
-        if (np.absolute(hull[i][0][0] - hull[i+1][0][0]) > 80) or ( np.absolute(hull[i][0][1] - hull[i+1][0][1]) > 80):
-            if hull[i][0][1] <500 :
-                finger.append(hull[i][0])
-
-    #The fingertip points are 5 hull points with largest y coordinates
-    finger =  sorted(finger,key=lambda x: x[1])
-    fingers = finger[0:5]
-
-    #Calculate distance of each finger tip to the center mass
-    fingerDistance = []
-    for i in range(0,len(fingers)):
-        distance = np.sqrt(np.power(fingers[i][0]-centerMass[0],2)+np.power(fingers[i][1]-centerMass[0],2))
-        fingerDistance.append(distance)
-
-    #Finger is pointed/raised if the distance of between fingertip to the center mass is larger
-    #than the distance of average finger webbing to center mass by 130 pixels
-    result = 0
-    for i in range(0,len(fingers)):
-        if fingerDistance[i] > AverageDefectDistance+130:
-            result = result +1
-
-    #Print number of pointed fingers
-    cv2.putText(frame,str(result),(100,100),font,2,(255,255,255),2)
-
+    #Print x and y coordinates
     cv2.putText(frame,str(cx),(100,200),font,2,(255,255,255),2)
     cv2.putText(frame,str(cy),(100,300),font,2,(255,255,255),2)
-    #show height raised fingers
-    #cv2.putText(frame,'finger1',tuple(finger[0]),font,2,(255,255,255),2)
-    #cv2.putText(frame,'finger2',tuple(finger[1]),font,2,(255,255,255),2)
-    #cv2.putText(frame,'finger3',tuple(finger[2]),font,2,(255,255,255),2)
-    #cv2.putText(frame,'finger4',tuple(finger[3]),font,2,(255,255,255),2)
-    #cv2.putText(frame,'finger5',tuple(finger[4]),font,2,(255,255,255),2)
-    #cv2.putText(frame,'finger6',tuple(finger[5]),font,2,(255,255,255),2)
-    #cv2.putText(frame,'finger7',tuple(finger[6]),font,2,(255,255,255),2)
-    #cv2.putText(frame,'finger8',tuple(finger[7]),font,2,(255,255,255),2)
 
     #Print bounding rectangle
-    x,y,w,h = cv2.boundingRect(cnts)
-    img = cv2.rectangle(frame,(x,y),(x+w,y+h),(0,255,0),2)
+    #x,y,w,h = cv2.boundingRect(cnts)
+    #img = cv2.rectangle(frame,(x,y),(x+w,y+h),(0,255,0),2)
 
     cv2.drawContours(frame,[hull],-1,(255,255,255),2)
 
     ##### Show final image ########
+    cv2.namedWindow('Dilation')
     cv2.imshow('Dilation',frame)
+    cv2.moveWindow('Dilation',200,200)
     ###############################
 
     #Print execution time
