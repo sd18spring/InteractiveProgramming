@@ -76,8 +76,8 @@ class finger_track():
                     diffx = abs(self.cx-pair[0])
                     diffy = abs(self.cy-pair[1])
                     distance = math.sqrt(diffx**2+diffy**2)
-                    if distance < 100:
-                        print('Far enough')
+                    if distance < 150:
+                        # print('Far enough')
                         if len(self.path) < self.pathlength:
                             self.path.append((self.cx, self.cy))
                         else:
@@ -87,29 +87,10 @@ class finger_track():
                         self.colors.append((int(paintColor[0][0][0]), int(paintColor[0][0][1]), int(paintColor[0][0][2])))
                         print(paintColor, pair)
             cv2.circle(target, (self.cx, self.cy), 2, (0, 255, 0), -1)
+            self.notFound = False
         except IndexError:
             """"""
-            print('IndexError happened')
-
-    # def refine_path(self):
-    #     """This function takes evalutes every two consecutive points,
-    #     find the distance between them, and add the new point to a
-    #     list of clear path if they are not off by roughly 15 pixels.
-    #     It also takes a distance and convert it to a color to be used
-    #     when plotting the line.
-    #     """
-    #     if len(self.path) == 1:
-    #         self.clearpath.append(self.path[0])
-    #     elif len(self.path) > 2:
-    #         pair = self.path[-2]
-    #         diffx = abs(self.cx-pair[0])
-    #         diffy = abs(self.cy-pair[1])
-    #         distance = math.sqrt(diffx**2+diffy**2)
-    #         if distance<10:
-    #             dist2hue = self.map(distance, 0.0, 10.0, 0.0, 255.0)
-    #             paintColor = self.brush_color(dist2hue)
-    #             self.colors.append((int(paintColor[0][0][0]), int(paintColor[0][0][1]), int(paintColor[0][0][2])))
-    #             self.clearpath.append(pair)
+            self.notFound = True
 
     def draw(self, canvas, disappr=True):
         """This function draws the lines on the canvas of the screen.
@@ -122,9 +103,14 @@ class finger_track():
             else:
                 if i < len(self.path)-2:
                     cv2.line(canvas.new_canvas, self.path[i], self.path[i+1], self.colors[i], 3)
-            # elif i<(len(self.path)-1)<21 and not disappr:
-            #     cv2.line(canvas.new_canvas, self.path[i], self.clearpath[i+1], self.colors[i], 3)
-            # elif 20 < i < (len(self.clearpath)-1) and disappr:
-            #     canvas.clear()
-            #     for j in range(20):
-            #         cv2.line(canvas.new_canvas, self.clearpath[-(j+1)], self.clearpath[-(j+2)], self.colors[-(j+2)], 3)
+
+        if len(self.path) > 4:
+            def det(p1, p2, p3, p4):
+                deltaA = p1[0] - p2[0]
+                deltaB = p1[1] - p2[1]
+                deltaC = p3[0] - p4[0]
+                deltaD = p3[1] - p4[1]
+                return deltaA * deltaD - deltaB * deltaC
+            div = det(self.path[-1], self.path[-2], self.path[-3], self.path[-4])
+            if div != 0 and not self.notFound:
+                print('the two line intersects!!!')
