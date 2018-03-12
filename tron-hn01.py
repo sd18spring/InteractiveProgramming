@@ -16,11 +16,12 @@ class PyGameWindowView(object):
         for i in range(self.model.height):
             for j in range(self.model.width):
                 cell_coord = (i*self.model.cell_length,j*self.model.cell_length)
-                self.model.cells[(i,j)] = Cell(self.model.screen,cell_coord,cell_size)
+                self.model.cells[(i,j)] = Cellview(self.model.screen,cell_coord,cell_size)
         all_cells = self.model.cells.values()
 
         for cell in all_cells:
             cell.draw()
+
     def draw(self):
         self.model._draw_players()
         pygame.display.update()
@@ -33,18 +34,30 @@ class TronModelView(object):
         self.width = width
         self.height = height
         self.cell_length = cell_length
+        self.cell_lst = []
+        self.player_paths = []
         self.player1 = Player(self.screen,10,(self.width/2+100),(self.height/2),"r",(255,140,0))
         self.player2 = Player(self.screen,10,(self.width/2-100),(self.height/2),"l",(0,255,0))
-
-    def path_init(self):
         self.cells_loc = {}
         for i in range(self.height):
             for j in range(self.width):
-                cell_coords = (i*self.cell_length,j*self.cell_length)
-                self.cells_loc[(i,j)] = Cell(self.screen,cell_coords,cell_size)
+                cell_coords = (i*self.cell_length, j*self.cell_length)
+                self.cells_loc[(i,j)] = Cell(self.screen, cell_coords, cell_length)
 
-        self.hit_cells = [(self.player1.x, self.player1.y), (self.player2.x, self.player2.y)]
-        
+        self.cell_lst = list(self.cells_loc.values())
+
+
+
+    def in_cell(self):
+        for cell in self.cell_lst:
+            if self.player1.x in cell.xrange and self.player1.y in cell.yrange:
+                self.player1.current_cell = cell
+                break
+
+        for cell in self.cell_lst:
+            if self.player2.x in cell.xrange and self.player2.y in cell.yrange:
+                self.player2.current_cell = cell
+                break
 
     def _draw_players(self):
         self.player1.draw()
@@ -62,20 +75,40 @@ class TronModelView(object):
             self.player1.dir = "None"
             self.player2.dir = "None"
 
+        last_seen_p1 = self.player1.current_cell
+        last_seen_p2 = self.player2.current_cell
+        self.in_cell()
+        if self.player1.current_cell != last_seen_p1:
+            self.player_paths.append(last_seen_p1)
+            print(player_paths)
+        if self.player2.current_cell != last_seen_p2:
+            self.player_paths.append(last_seen_p2)
+            print(player_paths)
+
+        if self.player1.current_cell in self.player_paths:
+            end_game("PLAYER 2")
+        if self.player2.current_cell in self.player_paths:
+            end_game("PLAYER 1")
+
+
     def end_game(self,player):
         pygame.display.set_caption(player + "WINS!")
 
 class Cell(object):
-    def __init__(self, draw_screen, coordinates, side_length):
+    def __init__(self,coords, cell_lenth):
+        self.xmin = coords[0]
+        self.ymin = coords[1]
+        self.xmax = coords[0] + cell_length
+        self.ymas = coords[1] + cell_length
+        self.xrange = range(self.xmin, self.xmax)
+        self.yrange = range(self.ymin, self.ymax)
+
+class Cellview(object):
+    def __init__(self, draw_screen, coordinates, cell_length):
         self.draw_screen = draw_screen
         self.coordinates = coordinates
-        self.side_length = side_length
+        self.side_length = cell_length
         self.color = (0, 0, 0)
-        self.area_pix = []
-        for i in range(self.coordinates[0], self.coordinates[0]+self.side_length):
-            for j in range(self.coordinates[1], self.coordinates[1]+self.side_length):
-                self.area_pix.append((i,j))
-
 
     def draw(self):
         line_width = 1
@@ -93,6 +126,9 @@ class Player(object):
         self.vy = 0
         self.dir = direction
         self.color = color
+        self.current_cell = None
+
+
 
     def draw(self):
         line_width = .5
@@ -116,6 +152,7 @@ class Player(object):
             self.vy = 0
         self.x += self.vx
         self.y += self.vy
+
 
     def crash(self):
         if self.x == 640 or self.x == -10:
