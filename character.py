@@ -4,7 +4,7 @@ class Character:
                      attack = 10,
                      defense = 10,
                      weight = 10,
-                     jump_vel = -100,
+                     jump_vel = -80,
                      acceleration = 3,
                      speed = 15,
                      width = 75,
@@ -25,7 +25,6 @@ class Character:
         self.left = False
         self.right = False
         self.attacking = False
-        self.damaged = False
         self.vel_x = 0
         self.vel_y = 0
         self.acc_x = acceleration
@@ -37,6 +36,7 @@ class Character:
         self.rect = pygame.Rect(self.pos_x, self.pos_y, self.width, self.height)
         self.attack_rect = pygame.Rect(self.pos_x, self.pos_y, 0, 0)
         self.attack_time = 0
+        self.damage_time = 0
         self.keys = keys
         self.left_img = pygame.transform.scale(pygame.image.load("left.png"), (self.width, self.height))
         self.right_img = pygame.transform.scale(pygame.image.load("right.png"), (self.width, self.height))
@@ -63,9 +63,7 @@ class Character:
         checks to see if character is in the air, or supported by terrain
         *args are (probably) terrain objects and their coordinates
         """
-        if self.pos_y >= terrain:
-            return False
-        return True
+        return not self.rect.colliderect(terrain)
 
     def alive(self):
         """
@@ -95,14 +93,26 @@ class Character:
         updates the position of the character laterally.
         direction is either -1 or 1
         """
+        #For the second to last frame of the damaged animation, the velocity
+        #should be set to zero
+        if self.damage_time == 1:
+            self.vel_x = 0
+            self.vel_y = 0
+        if self.damage_time > 0:
+            self.damage_time -= 1
+
         self.pos_x += self.vel_x
         self.pos_y += self.vel_y
         self.rect = pygame.Rect(self.pos_x, self.pos_y, self.width, self.height)
+
 
     def attack_action(self):
         """
         updates the hitbox of the character to reflect the action of an attack.
         """
+        if self.damage_time > 0:
+
+            self.attack_time = 0
         #If the attacking time is up, then toggle off attacking.
         if self.attack_time < 1:
             self.attack_time = 0
@@ -121,6 +131,7 @@ class Character:
                                                y_offset)
             #If char is facing right, draw the attack hitbox on the right
             else:
+                self.right = True
                 self.attack_rect = pygame.Rect(self.pos_x + self.width,
                                                self.pos_y + y_offset,
                                                x_offset,
@@ -129,4 +140,17 @@ class Character:
             self.attack_time -= 1
         #If the character isn't attacking, remove the attack hitbox
         else:
-            self.attack_rect = pygame.Rect(self.pos_x, self.pos_y, 0, 0)
+            #put the hitbox underground where it can't interfere wither others
+            self.attack_rect = pygame.Rect(self.pos_x, 1000, 0, 0)
+
+    def detect_damage(self, attack_hitbox, direction):
+        """
+        detects whether a character object is subjected to an attack or not, and
+        then appropriately designates a knockback force. 
+        """
+        if self.rect.colliderect(attack_hitbox):
+            #add 10 to the damage timer
+            self.damage_time = 10
+            #set push directions
+            self.vel_x = direction * self.speed * 1.5
+            self.vel_y = -abs(self.vel_x * 1.5)

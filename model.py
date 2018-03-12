@@ -18,28 +18,38 @@ class Model:
 
         #for i in range(10):
         #    if(random.randint(1,2) == 2):
-        #        self.terrains.append(terrain.Terrain((i * 100,1000 - 3 * 100)))s
+        #        self.terrains.append(terrain.Terrain((i * 100,1000 - 3 * 100)))
 
     def x_movement(self, event, game_object):
         """
         Toggles the different modes of acceleration depending on key up
         events and key down events.
         """
-        if not (event.type == KEYDOWN or event.type == KEYUP):
+        if (not (event.type == KEYDOWN or event.type == KEYUP) or
+           game_object.attacking or
+           game_object.damage_time > 0):
            return
 
         #KEYDOWN events toggle movement on
         if event.type == KEYDOWN:
             if event.key == game_object.keys["left"]:
                 game_object.left = True
-            if event.key == game_object.keys["right"]:
+                game_object.right = False
+                game_object.vel_x = -game_object.speed
+            elif event.key == game_object.keys["right"]:
                 game_object.right = True
+                game_object.left = False
+                game_object.vel_x = game_object.speed
         #KEYUP events toggles movement off
         if event.type == KEYUP:
-            if event.key == game_object.keys["left"]:
-                game_object.left = False
-            if event.key == game_object.keys["right"]:
-                game_object.right = False
+            if (event.key == game_object.keys["left"] and
+               not game_object.right):
+                game_object.vel_x = 0
+            elif (event.key == game_object.keys["right"] and
+                 not game_object.left):
+                game_object.vel_x = 0
+
+        """
         #If left XOR right
         if game_object.left != game_object.right:
             if game_object.left:
@@ -49,7 +59,7 @@ class Model:
         #Slow character down when there's conflicting input or no input
         else:
             game_object.vel_x = 0
-
+        """
     def y_movement(self, event, game_object):
         """
         used to update the v velocity of the object
@@ -77,13 +87,18 @@ class Model:
         Updates the position and velocity and attack hitbox of each character.
         """
         for char in self.characters:
-            if char.in_air(600 - 1.5 * char.height):
+            if char.in_air(self.terrains[0].rect):
                 char.vel_y += self.g
             elif char.vel_y  > 0:
                 char.vel_y = 0
-                char.pos_y = 600 - char.height
+                char.pos_y = self.terrains[0].rect.top - char.height + 1
                 char.jumps = char.max_jumps
-            #char.accelerate()
+            for other_chars in self.characters:
+                if other_chars.left:
+                    char.detect_damage(other_chars.attack_rect, -1)
+                else:
+                    char.detect_damage(other_chars.attack_rect, 1)
+            print(char.damage_time)
             char.move()
             char.attack_action()
 

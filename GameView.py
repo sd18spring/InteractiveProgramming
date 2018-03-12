@@ -16,7 +16,7 @@ class GameView:
         """
         self.screen.fill(pygame.Color(200,210,255))
         for t in self.model.terrains:
-            pygame.draw.rect(self.screen, pygame.Color(150,120,10), pygame.Rect(t.pos[0],t.pos[1],t.size[0], t.size[1]))
+            pygame.draw.rect(self.screen, pygame.Color(150,120,10), t.rect)
         for char in self.model.characters:
             if(char.left):
                 self.screen.blit(char.left_img, char.rect)
