@@ -10,7 +10,7 @@ VERSION = "0.1"
 ASSET_DIRECTORY = "assets"
 RESOLUTION_X = 1920
 RESOLUTION_Y = 1080
-
+G = -0.018
 
 """ Loads all modules/dependencies.
 """
@@ -19,6 +19,7 @@ try:
     import sys
     import random
     import math
+    import numpy as np
     import os
     import pygame
     from pygame.locals import *
@@ -59,6 +60,8 @@ class Fruit(pygame.sprite.Sprite):
         self.image, self.rect = load_png(ASSET_DIRECTORY + '/' + str(type) + '.png')
         screen = pygame.display.get_surface()
         self.area = screen.get_rect()
+        self.rect.x = 400;
+        self.rect.y = 1000;
         self.vector = vector
 
     def update(self):
@@ -67,9 +70,11 @@ class Fruit(pygame.sprite.Sprite):
 
     def calcnewpos(self,rect,vector):
         # Work out low gravity toss physics
+        self.vector = (vector[0]-G,vector[1])
         (angle,z) = vector
+        print(angle*180/np.pi)
         # polar 2 cartesian
-        (dx,dy) = (z*math.cos(angle),z*math.sin(angle))
+        (dx,dy) = (z*math.cos(angle%(2*np.pi)), z*math.sin((angle-G)%(2*np.pi)))
         return rect.move(dx,dy)
 
 
@@ -85,16 +90,15 @@ def main():
     # Fill background
     background = pygame.image.load('data/back1.png')
     background = background.convert()
-    background.fill((0, 0, 0))
 
     # Initialise players
     global player1
 
 
     # Initialise ball
-    speed = 13
+    speed = 15
     rand = ((0.1 * (random.randint(5,8))))
-    ball = Fruit('orange',(0.47,speed))
+    ball = Fruit('orange',(-1.62,speed))
 
     # Initialise sprites
     #playersprites = pygame.sprite.RenderPlain((player1))
@@ -117,14 +121,11 @@ def main():
 
         ballsprite.update()
 
-        if ball.rect.collidepoint(pygame.mouse.get_pos()):
-        	all_sprites_list.remove(ballsprite)
-
-        	
-        #playersprites.update()
-        ballsprite.draw(screen)
-        #playersprites.draw(screen)
-        pygame.display.flip()
+        if not 	(ball.rect.collidepoint(pygame.mouse.get_pos())):
+	        #playersprites.update()
+	        ballsprite.draw(screen)
+	        #playersprites.draw(screen)
+	        pygame.display.flip()
 
 
 if __name__ == '__main__': main()
