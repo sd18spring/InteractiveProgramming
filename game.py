@@ -1,4 +1,4 @@
-import pygame
+import pygame, sys
 from pygame.locals import *
 from pygame.font import *
 import time
@@ -9,32 +9,14 @@ pygame.init()
 
 class Model(object):
     """keeps track of the game state"""
-    def __init__(self, road):
-        #initialize array that road will cycle through
-        self.arena_array = numpy.zeros((5,5,5), dtype=numpy.object_)
-        #environment objects will be tethered to a position on the road below
-        self.road = Road()
-        self.player = Player(4,2)
+    def __init__(self):
+
+        self.player = Player(295, 200)
+
+    def update(self):
+        self.player.update()
 
 
-    def __str__(self):
-        return str(self.arena_array)
-
-    def place_player(self):
-        self.arena_array[0,self.player.x,self.player.y] = self.player
-
-    def move_road(self):
-        self.arena_array[:,:,4] = road.add_obj(4)
-        road_pos = 4
-        self.road_pos = road_pos
-        while True:
-            self.arena_array[road_pos-1,:,:] = self.arena_array[road_pos,:,:]
-            self.arena_array[road_pos,:,:] = numpy.zeros((5,5), dtype=numpy.object_)
-            road_pos -= 1
-            print(self.__str__())
-            time.sleep(1)
-            if road_pos==0:
-                break
 
 class EnvironmentObject():
     """base class for objects"""
@@ -57,22 +39,22 @@ class Obstacles(EnvironmentObject):
     def __init(self):
         pass
 
-class Road():
-    """describing the surface that will bring objects to the player"""
-    def __init__(self):
-        self.road_matrix = numpy.zeros((5,5),dtype=numpy.object_)
-
-    def __str__(self):
-        return str(self.road_matrix)
-
-    def add_obj(self, x_pos):
-        gas = Gastanks()
-        ped = Pedestrians()
-        obst = Obstacles()
-        obj_list = [gas, ped, obst]
-        obj = obj_list[random.randint(0,2)]
-        self.road_matrix[4, x_pos] = obj
-        return self.road_matrix
+#class Road():
+#    """describing the surface that will bring objects to the player"""
+#    def __init__(self):
+#        self.road_matrix = numpy.zeros((5,5),dtype=numpy.object_)
+#
+#    def __str__(self):
+#        return str(self.road_matrix)
+#
+#    def add_obj(self, x_pos):
+#        gas = Gastanks()
+#        ped = Pedestrians()
+#        obst = Obstacles()
+#        obj_list = [gas, ped, obst]
+#        obj = obj_list[random.randint(0,2)]
+#        self.road_matrix[4, x_pos] = obj
+#        return self.road_matrix
 
 class Player():
     """user controlled player"""
@@ -81,6 +63,26 @@ class Player():
         self.y = y_pos
         self.gas_level = gas_level
         self.score = start_score
+        self.rect = pygame.Rect(self.x, self.y, 50, 80)
+        self.image = pygame.image.load('car.jpg')
+        self.image = pygame.transform.scale(self.image, (50,80))
+        self.vx = 0.0
+        self.vy = 0.0
+
+    def update(self):
+        if self.x > 640 or self.x < 0:
+            self.vx = 0
+            self.x += self.vx
+        else:
+            self.x += self.vx
+
+        if self.y > 480 or self.y < 0:
+            self.vy = 0
+            self.y += self.vy
+        else:
+            self.y += self.vy
+
+
     def __str__(self):
         return '4'
 
@@ -93,25 +95,39 @@ class View():
     def draw(self):
         """Draw the current game state on the screen"""
         self.screen.fill(pygame.Color(0,0,0))
-        player = Player(310,470)
-        width = 20
-        height = 10
+        width = 50
+        height = 80
+        #self.screen.blit(self.model.player.image, self.model.player.rect)
         pygame.draw.rect(self.screen,
                          pygame.Color(255,255,255),
-                         pygame.Rect(player.x,
-                                     player.y,
-                                     width,
-                                     height))
+                         pygame.Rect(self.model.player.x,
+                                     self.model.player.y, 50, 80))
+
+#pygame.Rect(player.x,
+#player.y,
+#width,
+#height))
         pygame.display.update()
 
-class Controllers():
+class Controllers(object):
     """keyboard controls"""
     def __init__(self, model):
         self.model = model
-        self.player = Player()
-    #def move_right
-    #def move_left
-    #def move_up
+
+    def handle_event(self, event):
+        pygame.key.set_repeat(1,50)
+        if event.type != KEYDOWN:
+            return
+        if event.key == pygame.K_UP:
+            self.model.player.y -= 10
+        if event.key == pygame.K_DOWN:
+            self.model.player.y += 10
+        if event.key == pygame.K_LEFT:
+            self.model.player.x -= 10
+        if event.key == pygame.K_RIGHT:
+            self.model.player.x += 10
+        
+
 
 class Menu():
     """base class for main and pause menus"""
@@ -129,23 +145,29 @@ class Hud():
     """display current score and gas level"""
     def __init__(self):
         self.player = Player()
+FPS = 30
+fpsClock = pygame.time.Clock()
+
+
+
 
 if __name__ == "__main__":
-
-    road = Road()
-    model = Model(road)
-    model.place_player()
-    model.move_road()
+    #player = Player(295, 200)
 
     pygame.init()
-    screen = pygame.display.set_mode((640,480))
+    model = Model()
+    #screen = pygame.display.set_mode((640,480))
     view = View(model)
+    controller = Controllers(model)
 
     running = True
     while running:
+
         for event in pygame.event.get():
             if event.type == QUIT:
                 running = False
+            controller.handle_event(event)
+        model.update()
         view.draw()
         time.sleep(.001)
     pygame.quit()
@@ -172,3 +194,25 @@ if __name__ == "__main__":
 
 
 #testing
+
+
+
+
+#if direction == 'right':
+#    carx += 5
+#
+#    if carx == 350:
+#        direction == 'down'
+#elif direction == 'down':
+#    cary += 5
+#    if cary == 480:
+#        direction == 'left'
+#if direction == 'left':
+#    carx += 5
+
+#    if carx == 20:
+#        direction == 'up'
+#elif direction == 'up':
+#    cary += 5
+#    if cary == 10:
+#        direction == 'right'
