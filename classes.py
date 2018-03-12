@@ -10,14 +10,14 @@ class Model(object):
         self.height = size[1]
         self.nodes = []
         self.nodes.append(Node('title',size[0]/2,size[1]/2))
-        self.nodes.append(Node('title2',15,30))
         self.clines = []
-        self.clines.append(ConnectionLine(self.nodes[0],self.nodes[1]))
+
         self.panning = False
         self.mouse_pos = None
         self.boxes = []
         self.boxes.append(Box('Main Box'))
         self.rectangle = pygame.Rect(((size[0]/2)-(size[0]/4),(size[1]*.33)-(size[1]/30),(size[0]/2),(size[1]/10)))
+        self.scale = 1
 
     def zoom_in(self,center):
         """Zooms in around the center
@@ -28,6 +28,7 @@ class Model(object):
             node.y = (node.y - center[1])*1.05 + center[1]
         for cline in self.clines:
             cline.update()
+        self.scale = self.scale * 1.05
 
     def zoom_out(self,center):
         """Zooms out around the center
@@ -38,6 +39,7 @@ class Model(object):
             node.y = (node.y - center[1])*0.95 + center[1]
         for cline in self.clines:
             cline.update()
+        self.scale = self.scale * 0.95
 
     def pan(self,dx,dy):
         """Moves everything on the screen by dx,dy
@@ -59,13 +61,15 @@ class Viewer(object):
     def draw(self):
         self.screen.fill(pygame.Color(28, 172, 229))
         for cline in self.model.clines:
+            cline.update()
             pygame.draw.lines(self.screen, pygame.Color(200, 200, 200), False, cline.points,
                         ConnectionLine.line_width)
         for node in self.model.nodes:
             pygame.draw.circle(self.screen, pygame.Color(175,175,175),
                             (int(node.x), int(node.y)), node.size,0)
-        for box in self.model.boxes:
+        """for box in self.model.boxes:
             pygame.draw.rect(self.screen,pygame.Color(255,255,255),pygame.Rect(((self.model.width/2)-(self.model.width/4),(self.model.height*.33)-(self.model.height/30),(self.model.width/2),(self.model.height/10))))
+"""
         pygame.display.update()
 
 class Controler(object):
@@ -76,6 +80,8 @@ class Controler(object):
 
     def handle_event(self, event):
         """Updates model according to type of input"""
+
+
         if model.panning:
             dx = pygame.mouse.get_pos()[0] - self.model.mouse_pos[0]
             dy = pygame.mouse.get_pos()[1] - self.model.mouse_pos[1]
@@ -83,6 +89,7 @@ class Controler(object):
             self.model.mouse_pos = pygame.mouse.get_pos()
 
         if event.type == pygame.MOUSEBUTTONDOWN:
+
             if event.button == 5:
                 m_pos = pygame.mouse.get_pos()
                 self.model.zoom_in(m_pos)
@@ -92,8 +99,15 @@ class Controler(object):
                 self.model.zoom_out(m_pos)
 
             elif event.button == 1:
-                rect = self.model.rectangle
                 m_pos = pygame.mouse.get_pos()
+                for node in self.model.nodes:
+                    if ((m_pos[0]-node.x)**2+(m_pos[1]-node.y)**2)**.5 <= Node.node_size:
+                        self.model.nodes.extend(node.expand(self.model.scale))
+                        self.model.clines.append(ConnectionLine(node, self.model.nodes[-1]))
+                        self.model.clines.append(ConnectionLine(node, self.model.nodes[-2]))
+                        self.model.clines.append(ConnectionLine(node, self.model.nodes[-3]))
+                rect = self.model.rectangle
+
                 if rect[0] < m_pos[0] < rect[0]+rect[2] and rect[1] < m_pos[1] < rect[1]+rect[3]:
                     print('yay!')
                 print(self.model.mouse_pos)
@@ -139,15 +153,30 @@ class Node(object):
 
     node_size = 10
 
-    def __init__(self,title,x,y):
+    def __init__(self,title,x,y, level = 1):
         self.children = []
         self.x = x
         self.y = y
         self.title = title
         self.size = Node.node_size
+        self.level = level
+        self.expanded = False
 
     def __str__(self):
         return '%d,%d' % (self.x,self.y)
+
+    def expand(self, scale):
+        r = 100*scale/1.2**(self.level)
+
+        first = Node('1', self.x, self.y + r, self.level + 1)
+        second = Node('2', self.x + r*math.sin(math.pi/3), self.y - r*math.cos(math.pi/3), self.level + 1)
+        third = Node('3', self.x - r*math.sin(math.pi/3), self.y - r*math.cos(math.pi/3), self.level + 1)
+
+        cline1 = ConnectionLine(self, first)
+        cline2 = ConnectionLine(self, second)
+        cline3 = ConnectionLine(self, third)
+
+        return [first, second, third]
 
 class ConnectionLine(object):
 
