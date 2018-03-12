@@ -27,16 +27,16 @@ class Asteroid():
                 self.y = 0 - self.h
             elif(self.y <= 0 - self.h):
                 self.y = height
-            self.rect = pygame.Rect((self.x + self.shrinkage / 2,self.y + self.shrinkage / 2),(self.w - self.shrinkage,self.h - self.shrinkage))
-            pygame.draw.rect(self.gameDisplay,(255,0,0),self.rect)
+            self.rect = pygame.Rect((self.x + self.shrinkage / 2,self.y + self.shrinkage / 2),(self.w - self.shrinkage,self.h - self.shrinkage)) # The Rect is for the hitbox
             self.gameDisplay.blit(self.image,(self.x,self.y)) # draws the asteroid on the screen
+            #pygame.draw.rect(self.gameDisplay,(0,255,0),self.rect) # display's the asteroid's hit box in red (for testing)
 class LargeAsteroid(Asteroid):
     def __init__(self,x,y,speed,direction,gameDisplay):
         super().__init__(x,y,speed,direction,gameDisplay)
         self.image = pygame.transform.scale(self.image,(self.w // 2,self.h // 2)) # scales the asteroid to size
         self.w,self.h = self.image.get_size()
         self.shrinkage = 50
-        self.rect = pygame.Rect((self.x + self.shrinkage / 2,self.y + self.shrinkage / 2),(self.w - self.shrinkage,self.h - self.shrinkage))
+        self.rect = pygame.Rect((self.x + self.shrinkage / 2,self.y + self.shrinkage / 2),(self.w - self.shrinkage,self.h - self.shrinkage)) # lessening the hitbox so the corners don't stick out
     def destroy(self):
         if(not self.destroyed):
             self.destroyed = True
@@ -57,13 +57,13 @@ class MediumAsteroid(Asteroid):
             self.destroyed = True
             SmallAster = []
             for i in range(2):
-                SmallAster.append(SmallAsteroid(self.x,self.y,self.speed*1.5,random.uniform(0,2*math.pi),self.gameDisplay)) #makes two more medium asteroids in it's place with random directions
+                SmallAster.append(SmallAsteroid(self.x,self.y,self.speed*1.5,random.uniform(0,2*math.pi),self.gameDisplay)) #makes two more small asteroids in it's place with random directions
             return SmallAster
         return []
 class SmallAsteroid(Asteroid):
     def __init__(self,x,y,speed,direction,gameDisplay):
         super().__init__(x,y,speed,direction,gameDisplay)
-        self.image = pygame.transform.scale(self.image,(self.w // 8,self.h // 8)) # half as big as large asteroid
+        self.image = pygame.transform.scale(self.image,(self.w // 8,self.h // 8)) # half as big as medium asteroid
         self.w,self.h = self.image.get_size()
         self.shrinkage = 12
         self.rect = pygame.Rect((self.x + self.shrinkage / 2,self.y + self.shrinkage / 2),(self.w - self.shrinkage,self.h - self.shrinkage))
@@ -78,7 +78,7 @@ class CollectionOfAsteroids():
     def spawnAsteroids(self,numberOfAsteroids):
         width, height = self.gameDisplay.get_size()
         listOfAsteroids = [] # initializes a list of asteroids to update
-        listOfRects = []
+        listOfRects = [] # initializes a list of hitboxes
         sampleAsteroid = LargeAsteroid(0,0,0,0,self.gameDisplay) # a sample asteroid to know where to spawn the asteroids in case we change the size later
         smallArea = 100 # the area that asteroids are to spawn around the the edge
         for i in range(numberOfAsteroids):
@@ -102,17 +102,17 @@ class CollectionOfAsteroids():
         self.listOfRects = listOfRects
     def update(self):
         listOfRects = []
-        ListToDelete = []
+        ListToDelete = [] # a list that incluedes the indicies of what to delete
         for i in range(len(self.listOfAsteroids)):
             if(self.listOfAsteroids[i].destroyed):
-                ListToDelete.append(i)
+                ListToDelete.append(i) # if the asteroid is destroyed, remember the number to remove it later
             else:
                 self.listOfAsteroids[i].update()
                 listOfRects.append(self.listOfAsteroids[i].rect)
-        for j in reversed(ListToDelete):
+        for j in reversed(ListToDelete): # reversed so that it doesn't delete one and shift mid for loop.
             del self.listOfAsteroids[j]
         self.listOfRects = listOfRects
-    def destroyAll(self):
+    def destroyAll(self): # function for testing, not for the real game
         sizeOfAsteroids = range(len(self.listOfAsteroids))
         for i in sizeOfAsteroids:
             newAsteroid = self.listOfAsteroids[i].destroy()
@@ -135,14 +135,14 @@ class Projectile():
         self.gameDisplay = gameDisplay
         self.destroyed = False
         self.distanceTravelled = 0
-        self.distanceWanted = 500
+        self.distanceWanted = 500 # the distance that the projectile travels before it is destroyed
     def update(self):
-        if(self.distanceTravelled < self.distanceWanted): # once the asteroid is destroyed, it will stop redrawing the asteroid
+        if(self.distanceTravelled < self.distanceWanted): # if the projectile has travelled farther than the wanted distance, it destroys itself
             width, height = self.gameDisplay.get_size() # gets the display's width and length
-            self.x = self.x + (self.speed * math.cos(self.direction))  # Sets the Asteroid's to a small change in space
+            self.x = self.x + (self.speed * math.cos(self.direction))  # Sets the speed to a small change in space
             self.y = self.y + (self.speed * math.sin(self.direction))
-            self.distanceTravelled += self.speed
-            if(self.x >= width): # If the asteroid's coordinate goes outside of the window, set that coordinate to the other side of the map
+            self.distanceTravelled += self.speed # updates the disnance travelled
+            if(self.x >= width): # If the projectile's coordinate goes outside of the window, set that coordinate to the other side of the map
                 self.x = 0 - self.w  # adding the width of the image to make sure that the image doesn't appear suddenly (the image's position is the top right of the image)
             elif(self.x <= 0 - self.w): # same as above (makes it so that the whole image has to leave the screen for it to go to the other side)
                 self.x = width
@@ -151,41 +151,41 @@ class Projectile():
             elif(self.y <= 0 - self.h):
                 self.y = height
             self.rect = pygame.Rect((self.x,self.y),(self.w,self.h))
-            pygame.draw.rect(self.gameDisplay,(0,255,0),self.rect)
-            self.gameDisplay.blit(self.image,(self.x,self.y)) # draws the asteroid on the screen
+            self.gameDisplay.blit(self.image,(self.x,self.y)) # draws the pixel on the screen
+            #pygame.draw.rect(self.gameDisplay,(0,255,0),self.rect) # display's the projectile's hit box in green (for testing)
         else:
-            self.destroy()
+            self.destroy() # satisfying to right
     def destroy(self):
         self.destroyed = True
 class CollectionOfProjectiles():
     def __init__(self,gameDisplay):
-        self.listOfProjectiles = []
-        self.listOfRects = []
+        self.listOfProjectiles = [] #initializes the projectiles
+        self.listOfRects = [] # initializes their hitboxes
         self.gameDisplay = gameDisplay
     def addProjectile(self,x,y,direction):
-        self.listOfProjectiles.append(Projectile(x,y,direction,self.gameDisplay))
+        self.listOfProjectiles.append(Projectile(x,y,direction,self.gameDisplay)) # The spacebar command should call this
+                                            # with the x,y and directions of the ship (with an offset bc of the front of the ship and that the origin is top left)
     def update(self):
-        print(len(self.listOfProjectiles))
-        ListToDelete = []
+        ListToDelete = [] # initializes the indices of what to delete
         for i in range(len(self.listOfProjectiles)):
             if(self.listOfProjectiles[i].destroyed):
-                ListToDelete.append(i)
+                ListToDelete.append(i) # adding the index of destroyed particles to delete
             else:
                 self.listOfProjectiles[i].update()
         for j in reversed(ListToDelete):
             del self.listOfProjectiles[j]
 class listOfObjects():
-    def __init__(self,asteroids,proj):
+    def __init__(self,asteroids,projectiles):
         self.Asteroids = asteroids
-        self.Projectiles = proj
+        self.Projectiles = projectiles # contains the CollectionOfAsteroids and CollectionOfProjectiles objects
     def update(self):
         self.Projectiles.update()
         self.Asteroids.update()
         print(len(self.Asteroids.listOfAsteroids),len(self.Asteroids.listOfRects))
-        for i in self.Projectiles.listOfProjectiles:
-            collisions = i.rect.collidelist(self.Asteroids.listOfRects)
-            if (collisions != -1):
-                self.Asteroids.listOfAsteroids += self.Asteroids.listOfAsteroids[collisions].destroy()
+        for i in self.Projectiles.listOfProjectiles: # runs throught each projectile
+            collisions = i.rect.collidelist(self.Asteroids.listOfRects) # detects if any of the asteroids are in contact with the projectile
+            if (collisions != -1): # if there is a collision
+                self.Asteroids.listOfAsteroids += self.Asteroids.listOfAsteroids[collisions].destroy() #destroy both the asteroid and the projectile.
                 i.destroy()
 
 
@@ -206,7 +206,7 @@ running = True # for the exit of the game
 randomCounter = 0
 while running:
     randomCounter += 1
-    if(randomCounter % 50 == 0):
+    if(randomCounter % 5 == 0):
         AllThings.Projectiles.addProjectile(400,300,random.uniform(0,2*math.pi))
     gameDisplay.fill(Black)
     AllThings.update()# update each asteroid
