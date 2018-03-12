@@ -38,13 +38,20 @@ class PyGameWindowView(object):
         for skeleton in self.model.skeletons:
             self.screen.blit(self.skeleton, (skeleton.left, skeleton.top))
 
-        self.end = pygame.transform.scale(pygame.image.load('gameover.jpg'), (1000, 1000))
+        # self.end = pygame.transform.scale(pygame.image.load('gameover.jpg'), (400, 400))
 
         pygame.display.update()
 
     def gameover(self):
-        self.screen.blit(self.end, (self.size[1], self.size[0]))
+        self.end = pygame.transform.scale(pygame.image.load('gameover.jpg'), (400, 400))
+        self.endpicturesize = self.end.get_size()
+        # print (self.endpicturesize[1])
+        self.screen.blit(self.end, ((self.size[0]-self.endpicturesize[0])/2, (self.size[1]-self.endpicturesize[1])/2))
         pygame.display.update()
+        time.sleep(1)
+        pygame.quit()
+        cap.release()
+        cv2.destroyAllWindows()
 
 class Model(object):
     def __init__(self,size):
@@ -164,4 +171,7 @@ if __name__ == '__main__':
     while running:
         model.update()
         view.draw()
+        # print (model.lives)
+        if model.lives <= 0:
+            view.gameover()
         time.sleep(.001)
