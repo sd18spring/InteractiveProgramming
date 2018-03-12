@@ -6,9 +6,7 @@ import time
 #Open Camera object
 cap = cv2.VideoCapture(0)
 
-#Decrease frame size
-cap.set(cv2.cv.CV_CAP_PROP_FRAME_WIDTH, 1000)
-cap.set(cv2.cv.CV_CAP_PROP_FRAME_HEIGHT, 600)
+
 
 def nothing(x):
     pass
