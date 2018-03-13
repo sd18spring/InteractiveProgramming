@@ -39,12 +39,12 @@ class TronModelView(object):
         self.player1 = Player(self.screen,10,(self.width/2+100),(self.height/2),"r",(255,140,0))
         self.player2 = Player(self.screen,10,(self.width/2-100),(self.height/2),"l",(0,255,0))
         self.cells_loc = {}
-        for i in range(self.height):
-            for j in range(self.width):
+        for i in range(self.height//cell_length):
+            for j in range(self.width//cell_length):
                 cell_coords = (i*self.cell_length, j*self.cell_length)
-                self.cells_loc[(i,j)] = Cell(self.screen, cell_coords, cell_length)
+                self.cell_lst.append(Cell(cell_coords, cell_length))
 
-        self.cell_lst = list(self.cells_loc.values())
+
 
 
 
@@ -80,26 +80,31 @@ class TronModelView(object):
         self.in_cell()
         if self.player1.current_cell != last_seen_p1:
             self.player_paths.append(last_seen_p1)
-            print(player_paths)
+
         if self.player2.current_cell != last_seen_p2:
             self.player_paths.append(last_seen_p2)
-            print(player_paths)
+
 
         if self.player1.current_cell in self.player_paths:
-            end_game("PLAYER 2")
+            self.end_game("PLAYER 2 ")
+            self.player1.dir = "None"
+            self.player2.dir = "None"
         if self.player2.current_cell in self.player_paths:
-            end_game("PLAYER 1")
+            self.end_game("PLAYER 1 ")
+            self.player1.dir = "None"
+            self.player2.dir = "None"
 
 
     def end_game(self,player):
         pygame.display.set_caption(player + "WINS!")
 
+
 class Cell(object):
-    def __init__(self,coords, cell_lenth):
+    def __init__(self,coords, cell_length):
         self.xmin = coords[0]
         self.ymin = coords[1]
         self.xmax = coords[0] + cell_length
-        self.ymas = coords[1] + cell_length
+        self.ymax = coords[1] + cell_length
         self.xrange = range(self.xmin, self.xmax)
         self.yrange = range(self.ymin, self.ymax)
 
