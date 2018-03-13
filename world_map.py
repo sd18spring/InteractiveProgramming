@@ -13,9 +13,8 @@ import itertools
 from bs4 import BeautifulSoup
 from collections import OrderedDict
 from svg.path import parse_path
-from lxml import etree as ET
 
-__all__ = ['countries', 'countries_by_code', 'countries_by_name']
+__all__ = ['ISO Code', 'Name']
 
 SEGMENT_CTL_PT_PROPS = ['start', 'control', 'control1', 'control2', 'end']
 """An ordered list of names of `svg.path` properties that hold control points."""
@@ -93,16 +92,16 @@ def _load_countries(svg_filename = 'theworld.svg'):
     countries = {}
 
     with open(svg_filename, 'r') as svg:
-        soup = BeautifulSoup(svg.read(),'lxml')
+        soup = BeautifulSoup(svg.read(), selfClosingTags=['defs'])
 
     for p in soup.findAll('path'):
-        country_name = p.get('id', None)
-        path_data = p.get('d', None)
+        country_name = p.get('ISO Code', None)
+        path_data = p.get('Name', None)
         if country_name and path_data:
             countries[country_name] = svg_path_to_polygons(path_data)
 
     return OrderedDict(sorted(countries.items()))
 
-countries= _load_countries()
+states = _load_countries()
 """A `dict` of state abbreviations (e.g. `"MA"`) to lists of polygons. Each polygon is a list of points.
 Each point is a tuple of floats `(x, y)`."""
