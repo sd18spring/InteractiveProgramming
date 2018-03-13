@@ -82,10 +82,13 @@ class finger_track():
                             self.path.append((self.cx, self.cy))
                         else:
                             self.path = self.shift(self.path, (self.cx, self.cy))
-                        dist2hue = self.map(distance, 0.0, 10.0, 0.0, 255.0)
+                        dist2hue = self.map(distance, 0.0, 150.0, 0.0, 255.0)
                         paintColor = self.brush_color(dist2hue)
-                        self.colors.append((int(paintColor[0][0][0]), int(paintColor[0][0][1]), int(paintColor[0][0][2])))
-                        print(paintColor, pair)
+                        if len(self.colors) < self.pathlength:
+                            self.colors.append((int(paintColor[0][0][0]), int(paintColor[0][0][1]), int(paintColor[0][0][2])))
+                        else:
+                            self.colors = self.shift(self.colors, (int(paintColor[0][0][0]), int(paintColor[0][0][1]), int(paintColor[0][0][2])))
+                        print(self.colors)
             cv2.circle(target, (self.cx, self.cy), 2, (0, 255, 0), -1)
             self.notFound = False
         except IndexError:
@@ -113,4 +116,5 @@ class finger_track():
                 return deltaA * deltaD - deltaB * deltaC
             div = det(self.path[-1], self.path[-2], self.path[-3], self.path[-4])
             if div != 0 and not self.notFound:
-                print('the two line intersects!!!')
+                """"""
+                # print('the two line intersects!!!')
