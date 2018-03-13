@@ -26,16 +26,23 @@ def main():
         track.find_center(mask, frame)
         # track.refine_path()
         track.draw(newCanvas, disappr=disappr)
+
+        if newCanvas.points == 0:
+            newCanvas.rectangle()
+        elif newCanvas.in_rect(track.cx,track.cy) == True:
+            newCanvas.clear()
+            newCanvas.rectangle()
         newCanvas.show_canvas()
 
+
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
         if cv2.waitKey(1) & 0xFF == ord('s'):
             newCanvas.save_drawing()
             break
-        elif cv2.waitKey(1) & 0xFF == ord('q'):
-            break
-        elif cv2.waitKey(1) & 0xFF == ord('d'):
+        if cv2.waitKey(1) & 0xFF == ord('d'):
             disappr = ~disappr
-        elif cv2.waitKey(1) & 0xFF == ord('c'):
+        if cv2.waitKey(1) & 0xFF == ord('c'):
             newCanvas.clear()
 
     cv2.destroyAllWindows()

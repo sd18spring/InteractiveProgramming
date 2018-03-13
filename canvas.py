@@ -9,8 +9,8 @@ class canvas():
         self.width = int(width)
         self.height = int(height)
         self.new_canvas = np.zeros((self.height, self.width, 3), np.uint8)
-        self.randx = np.linrange(10,580)
-        self.randy = np.linrange(10,380)
+        self.randx = np.linspace(10,580)
+        self.randy = np.linspace(10,380)
         #white,red, green, blue, yellow, purple, orange
         self.colorlist = [(255,255,255), (0,0,255), (0,255,0), (255,0,0), (0,255,255), (255,0,188), (0,15,255)]
         self.points = 0
@@ -35,18 +35,18 @@ class canvas():
     def clear(self):
         """This function clears the screen.
         """
-        canvas.new_canvas = np.zeros((canvas.height, canvas.width, 3), np.uint8)
+        canvas.new_canvas = np.zeros((self.height, self.width, 3), np.uint8)
 
     def rectangle(self):
-        self.xpos = random.choice(self.randx)
-        self.ypos = random.choice(self.randy)
+        self.xpos = int(random.choice(self.randx))
+        self.ypos = int(random.choice(self.randy))
         color = random.choice(self.colorlist)
-        cv2.rectangle(self.new_canvas, (xpos, ypos), (10,10), color)
+        cv2.rectangle(self.new_canvas, (self.xpos, self.ypos), (self.xpos+20,self.ypos+20), color,-1)
 
-    def in_rect(self,point):
-        if self.xpos<=point[0]<=self.xpos and self.ypos<=point[1]<=self.ypos
+    def in_rect(self,pointx,pointy):
+        if self.xpos<pointx<self.xpos and self.ypos<pointy<self.ypos:
             self.points += self.value
-            self.clear()
+            return True
 
 if __name__ == "__main__":
     canvas1 = canvas(1280, 960)
