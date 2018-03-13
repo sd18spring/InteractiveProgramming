@@ -1,6 +1,7 @@
 from Hurricane import Hurricane
 from collections import defaultdict
 import pandas as pd
+import pickle
 
 
 class Model(object):
@@ -8,7 +9,7 @@ class Model(object):
 
     def __init__(self, start=None, end=None):
         # make the Hurricanes
-        self.hurricaneLst = defaultdict(list)
+        self.hurricaneLst = defaultdict(list) # might want to change to just a simple array
         if start is None:
             start = 0
         if end is None:
@@ -35,7 +36,14 @@ class Model(object):
             output += "\n" + "\n"
         return output
 
+    def pickle(self):
+        with open('hurricane_data.pkl', 'wb') as output:
+            for k, v in self.hurricaneLst.items():
+                for elm in v:
+                    pickle.dump(elm, output, pickle.HIGHEST_PROTOCOL)
+
 
 # TESTING
-# test = Model(0, 5)
+test = Model(12000, 12100)
+test.pickle()
 # print(test)
