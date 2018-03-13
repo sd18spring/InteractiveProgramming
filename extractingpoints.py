@@ -3,6 +3,7 @@ import pygame, sys
 from pygame.locals import *
 import math
 import random
+import csv
 
 '''Takes the latitude and longitudes of the state borders and stores them in point objects.'''
 
@@ -38,7 +39,7 @@ for state in datastore:
         #pt.x = coord["lat"]
         #pt.y = coord["lng"]
         #points_list.append((get_x(coord['lng']*7+200), get_y(coord['lat']*7+1300)))
-        points_list.append((get_x(3000, coord['lng']), get_y(3000, 2000, coord['lat'])))
+        points_list.append((get_x(4000, coord['lng']), get_y(4000, 2300, coord['lat'])))
         #point_list.append(pt)
         #all_points_list.append((abs(coord['lat'])*3, abs(coord['lng'])*3))
         #all_points_list.append((coord['lat']*7+200, coord['lng']*7+1300))
@@ -46,7 +47,18 @@ for state in datastore:
 #print(state_borders)
 # for state in state_borders:
     # print(state_borders[state])
-#print(all_points_list)
+
+numbers = {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '-': 0}
+
+hospitals = {}
+with open('Hospitals.csv', newline='') as csvfile:
+    hospitaldata = csv.reader(csvfile)#, delimiter=' ')
+    for hospital in hospitaldata:
+        if len(hospital) > 4 and hospital[0][0] in numbers:
+            lng = hospital[0]
+            lat = hospital[1]
+            name = hospital[4]
+            hospitals[str(name)] = (get_x(4000, float(lng)), get_y(4000, 2300, float(lat)))
 
 #credit for following function to: http://www.ariel.com.au/a/python-point-int-poly.html
 def is_in_polygon(x, y, points):
@@ -70,6 +82,7 @@ size = (1500, 1500)
 screen = pygame.display.set_mode(size)
 background = pygame.image.load('USflag.png')
 background = pygame.transform.scale(background, size)
+
 #pygame.display.flip()
 red = (255,0,0)
 green = (0,255,0)
@@ -113,8 +126,10 @@ while (True):
                     # print("You pressed the left mouse button at (%d, %d)" % event.pos)
                     myfont = pygame.font.SysFont("monospace", 50)
                     pygame.draw.polygon(screen, red, state_borders[state])
+                    #pygame.transform.scale2x(state_borders[state])
                     label = myfont.render(state, 1, blue)
                     screen.blit(label, random.choice(state_borders[state]))
+                    #screen.blit(pygame.draw.polygon(scree))
                     #print(random.choice(state_borders[state]))
                     print("You pressed the left mouse button in " + state)
                     pygame.display.update()
@@ -141,8 +156,12 @@ while (True):
    for state in state_borders:
        #subscreen = pygame.display.set_mode((100, 100))
        pygame.draw.polygon(screen,white,state_borders[state])
-       pygame.draw.polygon(screen,black,state_borders[state], 1)  # redraw the points
+       pygame.draw.polygon(screen,black,state_borders[state], 1)
+       #print(state_borders[state])
+       # redraw the points
        #subscreen.fill(red)
 
+   for hospital in hospitals:
+       pygame.draw.circle(screen, green, hospitals[hospital], 1)
    # update the screen
    pygame.display.update()
