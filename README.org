@@ -1,3 +1,10 @@
+* How to play
+1. install [[https://www.python.org/][python]] and [[https://www.pygame.org/news][pygame]].
+2. =$ git clone https://github.com/concavegit/interactiveprogramming=
+3. =$ cd InteractiveProgramming=
+4. =$ python SpaceShip.py=
+5. Bang your head on your desk wondering why you are playing such an evil game. 
+
 * FlappyNerd
 Educational Flappy Bird
 
