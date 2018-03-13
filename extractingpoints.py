@@ -4,6 +4,7 @@ from pygame.locals import *
 import math
 import random
 import csv
+from PIL import Image
 
 '''Takes the latitude and longitudes of the state borders and stores them in point objects.'''
 
@@ -105,7 +106,46 @@ colors = {(255,0,0): 'red', (0,255,0): 'green', (0,0,255): 'blue', (0,0,128): 'd
 #         if event.button == 1:
 #             for object in clickableObjectsList:
 #                 object.clickCheck(event.pos)
+the_image = pygame.Surface([500,500], pygame.SRCALPHA, 32)
+the_image = the_image.convert_alpha()
+the_image_size = the_image.get_rect()
 
+#screen.blit(image, (1000, 0))
+#blank_rect = pygame.Rect(0, 0, 500, 500)
+#pygame.draw.rect(image, green, blank_rect)
+#pygame.draw.polygon(image, green, state_borders['Michigan'])
+
+
+#im = Image.new("RGB", (500, 500))
+#the_image = #
+#im.save('Michigan.png')
+# image_size = image_size.inflate(1, 1)
+# pygame.transform.smoothscale(image, image_size.size)
+
+for state in state_borders:
+    lats = []
+    lngs = []
+    #coordinate = np.matrix()
+    for coord in state_borders[state]:
+        lats.append(coord[0])
+        lngs.append(coord[1])
+    updated_borders = {}
+    updated_borders_list = []
+    for element in state_borders[state]:
+        lat = element[0]
+        lng = element[1]
+        updated_borders_list.append((lat - min(lats), lng - min(lngs)))
+    updated_borders[state] = updated_borders_list
+    pygame.draw.polygon(the_image, green, updated_borders[state])
+    pygame.image.save(the_image, state + '.png')
+    #updated_borders.clear()
+    lats[:] = []
+    lngs[:] = []
+    updated_borders_list[:] = []
+    the_image = pygame.Surface([500, 500], pygame.SRCALPHA, 32)
+    the_image = the_image.convert_alpha()
+
+#import numpy
 # blueval = 0
 # bluedir  = 1
 LEFT = 1
@@ -129,17 +169,22 @@ while (True):
                     #pygame.transform.scale2x(state_borders[state])
                     label = myfont.render(state, 1, blue)
                     screen.blit(label, random.choice(state_borders[state]))
+                    individual_state = pygame.image.load(state + '.png')
+                    if state != 'Alaska':
+                        individual_state = pygame.transform.scale(individual_state, (1500, 1500))
+                    screen.blit(individual_state, (1000, 0))
+                    #screen.blit(individual_state, (1000, 0))
                     #screen.blit(pygame.draw.polygon(scree))
                     #print(random.choice(state_borders[state]))
-                    print("You pressed the left mouse button in " + state)
+                    #print("You pressed the left mouse button in " + state)
                     pygame.display.update()
                     pygame.time.wait(1000)
         elif event.type == pygame.MOUSEBUTTONUP and event.button == LEFT:
             x, y = event.pos
-            for state in state_borders:
-                if is_in_polygon(x, y, state_borders[state]):
+            #for state in state_borders:
+            #    if is_in_polygon(x, y, state_borders[state]):
                     # print("You released the left mouse button at (%d, %d)" % event.pos)
-                    print("You released the left mouse button in " + state)
+                    #print("You released the left mouse button in " + state)
 
    # erase the screen
    #screen.fill(white)
@@ -160,6 +205,31 @@ while (True):
        #print(state_borders[state])
        # redraw the points
        #subscreen.fill(red)
+   # screen.blit(image, (1000, 0))
+   # blank_rect = pygame.Rect(0, 0, 500, 500)
+   # pygame.draw.rect(image, green, blank_rect)
+   # #pygame.draw.polygon(image, green, state_borders['Michigan'])
+   # lats = []
+   # lngs = []
+   # #coordinate = np.matrix()
+   # for coord in state_borders['Michigan']:
+   #     lats.append(coord[0])
+   #     lngs.append(coord[1])
+   # updated_borders = {}
+   # updated_borders_list = []
+   # for element in state_borders['Michigan']:
+   #     lat = element[0]
+   #     lng = element[1]
+   #     updated_borders_list.append((lat - min(lats), lng - min(lngs)))
+   # updated_borders['Michigan'] = updated_borders_list
+   # #pygame.draw.polygon(image, green, updated_borders['Michigan'])
+   # image_size = image_size.inflate(1, 1)
+   # pygame.transform.smoothscale(image, image_size.size)
+   #screen.blit(pygame.transform.scale(image, (1000, 1000)))
+   #pygame.draw.polygon(image, green, )
+   #print(updated_borders)
+   #print(min(lats))
+   #print(min(lngs))
 
    for hospital in hospitals:
        pygame.draw.circle(screen, green, hospitals[hospital], 1)
