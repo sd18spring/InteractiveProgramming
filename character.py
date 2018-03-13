@@ -1,6 +1,6 @@
 import pygame
 class Character:
-    def __init__(self, pos_x = 0, pos_y = 0, label = "blank",
+    def __init__(self, pos_x = 300, pos_y = 0, label = "blank",
                      attack = 10,
                      defense = 10,
                      weight = 10,
@@ -10,7 +10,13 @@ class Character:
                      width = 75,
                      height = 150,
                      max_health = 100,
-                     max_jumps = 3, keys = {"left": pygame.K_LEFT, "right": pygame.K_RIGHT, "up" : pygame.K_UP, "down": pygame.K_DOWN, "attack": pygame.K_SLASH}):
+                     max_jumps = 3, keys = {"left": pygame.K_LEFT, "right": pygame.K_RIGHT, "up" : pygame.K_UP, "down": pygame.K_DOWN, "attack": pygame.K_SLASH},
+                     left_img = "left.png",
+                     right_img = "right.png",
+                     up_img = "up.png",
+                     down_img = "down.png",
+                     lives = 3,
+                     player = 1):
         self.keys = keys
         self.label = label
         self.attack = attack
@@ -38,10 +44,11 @@ class Character:
         self.attack_time = 0
         self.damage_time = 0
         self.keys = keys
-        self.left_img = pygame.transform.scale(pygame.image.load("left.png"), (self.width, self.height))
-        self.right_img = pygame.transform.scale(pygame.image.load("right.png"), (self.width, self.height))
-        self.up_img = pygame.transform.scale(pygame.image.load("up.png"), (self.width, self.height))
-        self.down_img = pygame.transform.scale(pygame.image.load("down.png"), (self.width, self.height))
+        self.left_img = pygame.transform.scale(pygame.image.load(left_img), (self.width, self.height))
+        self.right_img = pygame.transform.scale(pygame.image.load(right_img), (self.width, self.height))
+        self.up_img = pygame.transform.scale(pygame.image.load(up_img), (self.width, self.height))
+        self.down_img = pygame.transform.scale(pygame.image.load(down_img), (self.width, self.height))
+        self.player = player
 
 
 
@@ -104,7 +111,10 @@ class Character:
         self.pos_x += self.vel_x
         self.pos_y += self.vel_y
         self.rect = pygame.Rect(self.pos_x, self.pos_y, self.width, self.height)
-
+        if(self.pos_y > 1000):
+            self.pos_y = 0
+            self.pos_x = 500
+            self.lives -= 1
 
     def attack_action(self):
         """
@@ -146,11 +156,11 @@ class Character:
     def detect_damage(self, attack_hitbox, direction):
         """
         detects whether a character object is subjected to an attack or not, and
-        then appropriately designates a knockback force. 
+        then appropriately designates a knockback force.
         """
         if self.rect.colliderect(attack_hitbox):
             #add 10 to the damage timer
             self.damage_time = 10
             #set push directions
-            self.vel_x = direction * self.speed * 1.5
-            self.vel_y = -abs(self.vel_x * 1.5)
+            self.vel_x = direction * self.speed * 2.5 #I changed these from 1.5 to 2.5 to be more dramatic, feel free to change back
+            self.vel_y = -abs(self.vel_x * 2.5)

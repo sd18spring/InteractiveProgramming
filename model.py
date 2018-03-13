@@ -14,11 +14,7 @@ class Model:
         for char in args:
             self.characters.append(char)
 
-        self.terrains.append(terrain.Terrain((0,600), (1000,400)))
-
-        #for i in range(10):
-        #    if(random.randint(1,2) == 2):
-        #        self.terrains.append(terrain.Terrain((i * 100,1000 - 3 * 100)))
+        self.terrains.append(terrain.Terrain((200,600), (1100,400)))
 
     def x_movement(self, event, game_object):
         """
