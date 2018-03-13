@@ -28,7 +28,7 @@ class canvas():
     def clear(self):
         """This function clears the screen.
         """
-        cv2.rectangle(self.new_canvas, (0, 0), (self.width, self.height), (0, 0, 0))
+        canvas.new_canvas = np.zeros((canvas.height, canvas.width, 3), np.uint8)
 
 
 if __name__ == "__main__":
