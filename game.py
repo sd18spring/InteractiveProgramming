@@ -12,9 +12,13 @@ class Model(object):
     def __init__(self):
 
         self.player = Player(295, 200)
-
+        self.pedestrians = []
+        self.gastanks = []
+        self.obstacles = []
     def update(self):
         self.player.update()
+    #def add_environment_obj:
+
 
 
 
@@ -26,19 +30,23 @@ class EnvironmentObject():
 
 class Gastanks(EnvironmentObject):
     """describing type of EnvironmentObject"""
-    def __init__(self):
-        pass
+    def __init__(self,x,y):
+        self.x = x
+        self.y = y
+        self.rect = pygame.Rect(self.x, self.y, 20, 30)
 
 class Pedestrians(EnvironmentObject):
     """describing type of EnvironmentObject"""
-    def __init__(self):
-        pass
-
+    def __init__(self,x,y):
+        self.x = x
+        self.y = y
+        self.rect = pygame.Rect(self.x, self.y, 10, 13)
 class Obstacles(EnvironmentObject):
     """describing type of EnvironmentObject"""
-    def __init(self):
-        pass
-
+    def __init__(self,x,y):
+        self.x = x
+        self.y = y
+        self.rect = pygame.Rect(self.x, self.y, 50, 20)
 #class Road():
 #    """describing the surface that will bring objects to the player"""
 #    def __init__(self):
@@ -70,14 +78,20 @@ class Player():
         self.vy = 0.0
 
     def update(self):
-        if self.x > 640 or self.x < 0:
-            self.vx = 0
+        if self.x < 1:
+            self.x = 0
+            self.x += self.vx
+        elif self.x > 589:
+            self.x = 590
             self.x += self.vx
         else:
             self.x += self.vx
 
-        if self.y > 480 or self.y < 0:
-            self.vy = 0
+        if self.y < 1:
+            self.y = 0
+            self.y += self.vy
+        elif self.y > 399:
+            self.y = 400
             self.y += self.vy
         else:
             self.y += self.vy
@@ -92,16 +106,23 @@ class View():
         self.model = model
         self.screen = pygame.display.set_mode((640,480))
 
+
     def draw(self):
         """Draw the current game state on the screen"""
         self.screen.fill(pygame.Color(0,0,0))
         width = 50
         height = 80
-        #self.screen.blit(self.model.player.image, self.model.player.rect)
-        pygame.draw.rect(self.screen,
-                         pygame.Color(255,255,255),
-                         pygame.Rect(self.model.player.x,
-                                     self.model.player.y, 50, 80))
+        self.screen.blit(self.model.player.image, (self.model.player.x,self.model.player.y))
+        for pedestrian in self.model.pedestrians:
+            self.screen.blit(pedestrian.png,(self.model.pedestrian.x,self.model.pedestrian.y))
+        for gastank in self.model.gastanks:
+            self.screen.blit(gastank.png,(self.model.gastank.x,self.model.gastank.y))
+        for obstacle in self.model.obstacles:
+            self.screen.blit(road-closed.jpg,(self.model.obstacles.x,self.model.obstacles.y))
+        #pygame.draw.rect(self.screen,
+        #                 pygame.Color(255,255,255),
+        #                 pygame.Rect(self.model.player.x,
+        #                             self.model.player.y, 50, 80))
 
 #pygame.Rect(player.x,
 #player.y,
@@ -117,16 +138,18 @@ class Controllers(object):
     def handle_event(self, event):
         pygame.key.set_repeat(1,50)
         if event.type != KEYDOWN:
-            return
-        if event.key == pygame.K_UP:
-            self.model.player.y -= 10
-        if event.key == pygame.K_DOWN:
-            self.model.player.y += 10
-        if event.key == pygame.K_LEFT:
-            self.model.player.x -= 10
-        if event.key == pygame.K_RIGHT:
-            self.model.player.x += 10
-        
+            self.model.player.vx = 0
+            self.model.player.vy = 0
+        elif event.type == KEYDOWN:
+            if event.key == pygame.K_UP:
+                self.model.player.vy -= .5
+            if event.key == pygame.K_DOWN:
+                self.model.player.vy += .5
+            if event.key == pygame.K_LEFT:
+                self.model.player.vx -= .5
+            if event.key == pygame.K_RIGHT:
+                self.model.player.vx += .5
+
 
 
 class Menu():
