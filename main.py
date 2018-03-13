@@ -27,11 +27,18 @@ def main():
         # track.refine_path()
         track.draw(newCanvas, disappr=disappr)
 
+        # newCanvas.rectangle()
+        print(newCanvas.points, newCanvas.run)
         if newCanvas.points == 0:
-            newCanvas.rectangle()
-        elif newCanvas.in_rect(track.cx,track.cy) == True:
+            if newCanvas.run == False:
+                newCanvas.make_rect()
+            newCanvas.show_rect()
+        flag = newCanvas.in_rect(track.cx,track.cy)
+        if flag == True:
+            newCanvas.addpoints()
             newCanvas.clear()
-            newCanvas.rectangle()
+            newCanvas.show_rect()
+        newCanvas.show_rect()
         newCanvas.show_canvas()
 
 

@@ -88,7 +88,7 @@ class finger_track():
                             self.colors.append((int(paintColor[0][0][0]), int(paintColor[0][0][1]), int(paintColor[0][0][2])))
                         else:
                             self.colors = self.shift(self.colors, (int(paintColor[0][0][0]), int(paintColor[0][0][1]), int(paintColor[0][0][2])))
-                        print(self.colors)
+                        # print(self.colors)
             cv2.circle(target, (self.cx, self.cy), 2, (0, 255, 0), -1)
             self.notFound = False
         except IndexError:
