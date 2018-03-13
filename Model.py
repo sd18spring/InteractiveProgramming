@@ -1,5 +1,4 @@
 from Hurricane import Hurricane
-from collections import defaultdict
 import pandas as pd
 import pickle
 
@@ -9,7 +8,7 @@ class Model(object):
 
     def __init__(self, start=None, end=None):
         # make the Hurricanes
-        self.hurricaneLst = defaultdict(list) # might want to change to just a simple array
+        self.hurricaneLst = []
         if start is None:
             start = 0
         if end is None:
@@ -23,27 +22,25 @@ class Model(object):
             data.to_csv("hurricane.csv", header=None)
             df2 = pd.read_csv("hurricane.csv", low_memory=False)
             hurricane = Hurricane(df2)
-            self.hurricaneLst[int(hurricane.season)].append(hurricane)
+            self.hurricaneLst.append(hurricane)
 
         # make view and Bokeh stuff
 
     def __str__(self):
         output = ""
-        for k, v in self.hurricaneLst.items():
-            output += "YEAR: " + str(k) + "\n"
-            for elm in v:
-                output += Hurricane.__str__(elm)
+        for elm in self.hurricaneLst:
+            output += Hurricane.__str__(elm)
             output += "\n" + "\n"
         return output
 
     def pickle(self):
         with open('hurricane_data.pkl', 'wb') as output:
-            for k, v in self.hurricaneLst.items():
-                for elm in v:
-                    pickle.dump(elm, output, pickle.HIGHEST_PROTOCOL)
+            pickle.dump(len(self.hurricaneLst),output)
+            for elm in self.hurricaneLst:
+                pickle.dump(elm, output)
 
 
 # TESTING
-test = Model(12000, 12100)
+test = Model(0, 100)
 test.pickle()
 # print(test)
