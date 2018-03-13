@@ -57,18 +57,17 @@ for country in countries:
     pygame.display.flip()
 
 
-    last_mouse_in_state = False
+last_mouse_in_state = False
 
-    while True:
-        if any(event.type == pygame.QUIT for event in pygame.event.get()):
-            sys.exit()
+while True:
+    if any(event.type == pygame.QUIT for event in pygame.event.get()):
+        sys.exit()
 
+    for country in countries:
         # Is the mouse inside the state?
         mouse_in_state = any(point_in_polygon(pygame.mouse.get_pos(), polygon) for polygon in wold_map.countries[country])
         # Only print a message if the mouse moved from the inside to the outside, or vice versa
         if mouse_in_state != last_mouse_in_state:
             last_mouse_in_state = mouse_in_state
             if mouse_in_state:
-                print ('mouse in state')
-            else:
-                print ('mouse not in state')
+                print ('mouse in',country)
