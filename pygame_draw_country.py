@@ -44,6 +44,16 @@ def point_in_polygon(pt, polygon):
 
     return matplotlib.path.Path(polygon).contains_point(pt)
 
+<<<<<<< HEAD
+# Draw the polygons for the state.
+for polygon in world_map.countries[COUNTRY]:
+    # `polygon` points are tuples `(float, float)`. PyGame requires `(int, int)`.
+    points = [(int(x), int(y)) for x, y in polygon]
+    # Draw the interior
+    pygame.draw.polygon(screen, GREEN, points)
+    # Draw the boundary
+    pygame.draw.polygon(screen, BLACK, points, 1)
+=======
 for country in countries:
     # Draw the polygons for the state.
     for polygon in wold_map.countries[country]:
@@ -55,6 +65,7 @@ for country in countries:
         pygame.draw.polygon(screen, BLACK, points, 1)
 
     pygame.display.flip()
+>>>>>>> 753a204141c4e4663a762ad3af931af7c1493eaa
 
 
 last_mouse_in_state = False
