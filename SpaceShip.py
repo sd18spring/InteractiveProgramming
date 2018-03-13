@@ -58,6 +58,22 @@ class KeyboardController:
                 self.model.reset()
 
 
+class Jupiter(pygame.sprite.Sprite):
+    """ Backdrop of jupiter"""
+
+    def __init__(self, size):
+        super().__init__()
+        self.image = pygame.image.load('jupiter.png')
+        self.rect = self.image.get_rect()
+        self.rect.left = size[0]
+        self.vx = 0.05
+        self.x = size[0]
+
+    def update(self):
+        self.x -= self.vx
+        self.rect.left = self.x
+
+
 class Model:
     """ The model encompassing the state of the game. """
 
@@ -65,6 +81,7 @@ class Model:
         self.spaceship = SpaceShip(size)
         self.astroidBelt = AstroidBelt(99, size)
         self.in_progress = True
+        self.jupiter = Jupiter(size)
         self.over_message = "Game Over, Hit Space!"
 
     def update(self):
@@ -83,6 +100,7 @@ class Model:
         if self.in_progress:
             self.spaceship.update()
             self.astroidBelt.update()
+            self.jupiter.update()
 
     def reset(self):
         self.astroidBelt = AstroidBelt(99, size)
@@ -100,6 +118,7 @@ class WindowView:
 
     def draw(self):
         self.screen.fill(pygame.Color(0, 0, 0))
+        self.screen.blit(self.model.jupiter.image, self.model.jupiter.rect)
         self.model.astroidBelt.astroids.draw(self.screen)
 
         # render the number options.
@@ -183,6 +202,8 @@ class AstroidBelt:
         self.prob = MultProb(self.difficulty)
         self.gen_astroids()
         self.score = 0
+        self.x = size[0]
+        self.vx = 2/3
 
     def gen_astroids(self):
         """ Generate new astroids. """
@@ -210,12 +231,15 @@ class AstroidBelt:
         the screen.
         """
         for astroid in self.astroids:
-            if astroid.rect.left < -astroid.rect.width:
+            if self.x < -astroid.rect.width:
                 self.score += 1 / 4
                 self.prob.new_prob()
                 self.gen_astroids()
+                self.vx += 0.01
+                self.x = self.size[0]
             else:
-                astroid.rect = astroid.rect.move(-1, 0)
+                self.x -= self.vx / 4
+                astroid.rect.left = self.x
 
 
 if __name__ == '__main__':
