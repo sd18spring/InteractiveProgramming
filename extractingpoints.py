@@ -51,6 +51,7 @@ for state in datastore:
 
 numbers = {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '-': 0}
 
+#https://hifld-dhs-gii.opendata.arcgis.com/datasets/5eafb083e43a457b9810c36b2414d3d3_0?uiTab=table&geometry=110.215%2C9.449%2C72.949%2C74.683&filterByExtent=false
 hospitals = {}
 with open('Hospitals.csv', newline='') as csvfile:
     hospitaldata = csv.reader(csvfile)#, delimiter=' ')
@@ -60,6 +61,15 @@ with open('Hospitals.csv', newline='') as csvfile:
             lat = hospital[1]
             name = hospital[4]
             hospitals[str(name)] = (get_x(4000, float(lng)), get_y(4000, 2300, float(lat)))
+
+#https://www.census.gov/data/datasets/time-series/demo/saipe/model-tables.html
+irs_agi = {} #key = state, value = (median AGI, mean AGI)
+with open('irs.csv', newline='') as csvfile:
+    irsdata = csv.reader(csvfile)#, delimiter=' ')
+    for row in irsdata:
+        if row[2] == '2015':
+            state = row[1]
+            irs_agi[state] = (row[11], row[12])
 
 #credit for following function to: http://www.ariel.com.au/a/python-point-int-poly.html
 def is_in_polygon(x, y, points):
@@ -136,12 +146,13 @@ for state in state_borders:
         lng = element[1]
         updated_borders_list.append((lat - min(lats), lng - min(lngs)))
     updated_borders[state] = updated_borders_list
-    pygame.draw.polygon(the_image, green, updated_borders[state])
+    pygame.draw.polygon(the_image, white, updated_borders[state])
+    pygame.draw.polygon(the_image, black, updated_borders[state], 2)
     pygame.image.save(the_image, state + '.png')
     #updated_borders.clear()
-    lats[:] = []
-    lngs[:] = []
-    updated_borders_list[:] = []
+    #lats[:] = []
+    #lngs[:] = []
+    #updated_borders_list[:] = []
     the_image = pygame.Surface([500, 500], pygame.SRCALPHA, 32)
     the_image = the_image.convert_alpha()
 
@@ -165,7 +176,7 @@ while (True):
                 if is_in_polygon(x, y, state_borders[state]):
                     # print("You pressed the left mouse button at (%d, %d)" % event.pos)
                     myfont = pygame.font.SysFont("monospace", 50)
-                    pygame.draw.polygon(screen, red, state_borders[state])
+                    pygame.draw.polygon(screen, red, state_borders[state], 2)
                     #pygame.transform.scale2x(state_borders[state])
                     label = myfont.render(state, 1, blue)
                     screen.blit(label, random.choice(state_borders[state]))
@@ -173,6 +184,13 @@ while (True):
                     if state != 'Alaska':
                         individual_state = pygame.transform.scale(individual_state, (1500, 1500))
                     screen.blit(individual_state, (1000, 0))
+                    myfont = pygame.font.SysFont("monospace", 20)
+                    label = myfont.render(state, 1, blue)
+                    label2 = myfont.render('Median AGI: $' + irs_agi[state][0], 1, blue)
+                    label3 = myfont.render('Mean AGI: $' + irs_agi[state][1], 1, blue)
+                    screen.blit(label, (1000, 10))
+                    screen.blit(label2, (1000, 30))
+                    screen.blit(label3, (1000, 50))
                     #screen.blit(individual_state, (1000, 0))
                     #screen.blit(pygame.draw.polygon(scree))
                     #print(random.choice(state_borders[state]))
