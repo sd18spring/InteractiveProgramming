@@ -26,7 +26,7 @@ SCREENHEIGHT=500
 
 size = (SCREENWIDTH, SCREENHEIGHT)
 screen = pygame.display.set_mode(size)
-pygame.display.set_caption("Car Racing")
+pygame.display.set_caption("Club Penguin Sledding Game")
 
 #This will be a list that will contain all the sprites we intend to use in our game.
 all_sprites_list = pygame.sprite.Group()

@@ -85,6 +85,7 @@ class Sled_Main:
 
             self.screen.fill(self.WHITE)
             self.boulders.draw(self.screen)
+            self.ice_patches.draw(self.screen)
             self.all_penguins.draw(self.screen)
             pygame.display.update()
             clock.tick(60)

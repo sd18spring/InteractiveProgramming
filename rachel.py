@@ -2,13 +2,15 @@
 import pygame
 from pygame.locals import *
 import time
+from random import *
 clock = pygame.time.Clock()
 """
 THINGS TO DO:
-1. figure out how to generalize obstacle class w/ images
-    a. add slow down and speed up functions
+1. figure out how to generalize obstacle class w/ images #done
+    a. add slow down and speed up functions #done
+    b. figure out how logs will work
 2. figure out how to generate more Obstacles
-    a. create random tracks... if possible
+    a. create random tracks... if possible #yes!
 3. Collisions
     a. somehow display that penguino has crashed
 4. Extensions
@@ -41,25 +43,33 @@ class Penguin(pygame.sprite.Sprite): # code is from pygame documenta
 
 
 class Obstacles(pygame.sprite.Sprite):
-    def __init__(self, rect = None):
+    def __init__(self, image_name, rect = None):
         super().__init__()
-        self.image = pygame.image.load("rock.png")
+        self.image = pygame.image.load(image_name)
         self.rect = self.image.get_rect()
         if rect != None:
             self.rect = rect
 
-    def moveLeft(self, pixels):
+    def moveLeft(self, pixels = 3):
+        self.rect.x -= pixels
+    def slowDown(self, pixels = 1):
+        self.rect.x -= pixels
+    def speedUp(self, pixels = 5):
+        self.rect.x -= pixels
+
+class Powerups(Obstacles):
+    def speedUp(self, pixels = 5):
         self.rect.x -= pixels
 # class Model:
 #     def __init__(self):
 #         self.all_penguins = pygame.sprite.Group()
 #         penguin = Penguin()
 
-
 class Sled_Main:
     def __init__(self):
         pygame.init()
-        size = (500, 400)
+        #track length is 4000 x 400
+        size = (500, 400) #viewing frame is 500 x 400 pixels
         self.WHITE = pygame.Color(255, 255, 255)
         self.screen = pygame.display.set_mode(size)
 
@@ -67,12 +77,27 @@ class Sled_Main:
         self.penguin = Penguin()
     #    self.penguin.image = pygame.transform.rotate(self.penguin.image, -30)
         self.all_penguins = pygame.sprite.RenderPlain(self.penguin)
-
         self.boulders = pygame.sprite.RenderPlain()
-        self.boulders.add(Obstacles(pygame.Rect(100, 100, 60, 60)))
+        self.ice_patches = pygame.sprite.RenderPlain()
+        for num_boulders in range(20):
+            x_position = num_boulders * 400 #randint(260, 360)
+            y_boulders = randint(1,3)
+            for i in range(y_boulders):
+                y_position = randrange(0, 340, 70)
+                self.boulder = Obstacles("rock.png", pygame.Rect(x_position, y_position, 60, 60))
+                self.boulders.add(self.boulder)
+
+        for num_ice_patches in range(8):
+            x_position = num_ice_patches * 560 #randint(260, 360)
+            y_position = randint(0, 340)
+            self.ice_patch = Powerups("ice_patch_flat.png", pygame.Rect(x_position, y_position, 280, 70))
+            self.ice_patches.add(self.ice_patch)
 
     def main_loop(self):
         self.loadSprites()
+        list_of_obstacles = self.boulders.sprites()
+        list_of_obstacles.extend(self.ice_patches.sprites())
+
         running = True
         pygame.display.set_caption("Club Penguing Sledding Game")
         while running:
@@ -82,22 +107,31 @@ class Sled_Main:
                     running = False
             keys = pygame.key.get_pressed()
             if keys[pygame.K_LEFT]:
-                self.penguin.moveUp(15)
+                self.penguin.moveUp(5)
             if keys[pygame.K_RIGHT]:
-                self.penguin.moveDown(15)
+                self.penguin.moveDown(5)
             self.all_penguins.update()
 
-            list_of_boulders = self.boulders.sprites()
+            hit = False
+            ice = False
+            for obstacle in list_of_obstacles:
+                if self.penguin.rect.colliderect(obstacle.rect):
+                    hit = True
+                    if type(obstacle) == Powerups:
+                        ice = True
+            for obstacle in list_of_obstacles:
+                    if ice:
+                        obstacle.speedUp()
+                    elif hit:
+                        obstacle.slowDown()
+                    else:
+                        obstacle.moveLeft()
 
-
-            if self.penguin.rect.colliderect(list_of_boulders[0].rect):
-                list_of_boulders[0].moveLeft(0)
-            else:
-                list_of_boulders[0].moveLeft(1)
             self.boulders.update()
-
+            self.ice_patches.update()
             self.screen.fill(self.WHITE)
             self.boulders.draw(self.screen)
+            self.ice_patches.draw(self.screen)
             self.all_penguins.draw(self.screen)
             pygame.display.update()
             clock.tick(60)
