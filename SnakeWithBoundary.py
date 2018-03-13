@@ -22,7 +22,7 @@ class SnakeGameWindowView(object):
         for material in self.model.Snake:
             pygame.draw.rect(self.screen,
                             pygame.Color(0, 255, 0),
-                            pygame.Rect(material.x, material.y, material.height, material.width))
+                            pygame.Rect(material.x, material.y, material.height, material.width), not material.head)
         for material in self.model.Arena:
             pygame.draw.rect(self.screen,
                             pygame.Color(0, 0, 255),
@@ -41,14 +41,18 @@ class SnakeGameModel(object):
         snake = Snake(100, 10, 300, 300)
         self.Mouse.append(Mouse(10, 10, 100, 100))
         self.Arena.append(Arena())
-        for i in range(int(snake.height / snake.width)):
-            self.Snake.append(Snake(snake.height / snake.width, 10, i*snake.width+snake.x, snake.y))
+        for i in range(snake.n):
+            self.Snake.append(Snake(10, 10, i*snake.width+snake.x, snake.y, i == snake.n-1))
     def update(self):
         """
         This function will update the function.
+        self.Snake[-1] represents the snake head
         """
-        for part in self.Snake:
-            part.update()
+        if self.Snake[-1].vx != 0  or self.Snake[-1].vy != 0:
+            for i in range(len(self.Snake)-1):
+                self.Snake[i].x = self.Snake[i+1].x
+                self.Snake[i].y = self.Snake[i+1].y
+        self.Snake[-1].update()
     def __str__(self):
         output_lines = []
         for p in self.Mouse:
@@ -93,12 +97,19 @@ class Mouse(object):
 
 class Snake(object):
 
-    def __init__(self, height, width, x, y):
+    def __init__(self, height, width, x, y, h = False):
         """
         This creates a snake object with position, length, width, and velocity.
+        If the segment represents the snakes head, self.head = 1
         """
+        if h:
+            self.head = 1
+        else:
+            self.head = 0
+
         self.height = height
         self.width = width
+        self.n = int(height / width)
         self.x = x
         self.y = y
         self.vx = 0.0
@@ -122,73 +133,33 @@ class SnakeController(object):
         if event.type != KEYDOWN:
             return
         if event.key == pygame.K_DOWN:
-            if abs(self.model.Snake[-1].vy) == -.1:
+            if abs(self.model.Snake[-1].vy) != 0:
                 return
-            #if self.model.Snake[-1].vx == -.1:
-            #    self.model.Snake.reverse()
-            while self.model.Snake[0].x != self.model.Snake[-1].x:
-                for i in range(len(self.model.Snake)-1):
-                    self.model.Snake[i].x += self.model.Snake[i+1].x - self.model.Snake[i].x
-                    self.model.Snake[i].y += self.model.Snake[i+1].y - self.model.Snake[i].y
-                    if self.model.Snake[i].x == self.model.Snake[-1].x:
-                        self.model.Snake[i].y += self.model.Snake[i].width
 
-            if self.model.Snake[0].x == self.model.Snake[-1].x:
-                for part in self.model.Snake:
-                    part.vy = .1
-                    part.vx = 0
+            self.model.Snake[-1].vy = 10
+            self.model.Snake[-1].vx = 0
 
 
         if event.key == pygame.K_LEFT:
-            if abs(self.model.Snake[-1].vx) == -.1:
+            if abs(self.model.Snake[-1].vx) != 0:
                 return
-            #if self.model.Snake[-1].vy == .1:
-            #    self.model.Snake.reverse()
-            while self.model.Snake[0].y != self.model.Snake[-1].y:
-                for i in range(len(self.model.Snake)-1):
-                    self.model.Snake[i].x += self.model.Snake[i+1].x - self.model.Snake[i].x
-                    self.model.Snake[i].y += self.model.Snake[i+1].y - self.model.Snake[i].y
-                    if self.model.Snake[i].y == self.model.Snake[-1].y:
-                        self.model.Snake[i].x -= self.model.Snake[i].width
 
-            if self.model.Snake[0].y == self.model.Snake[-1].y:
-                for part in self.model.Snake:
-                    part.vy = 0
-                    part.vx = -.1
+            self.model.Snake[-1].vy = 0
+            self.model.Snake[-1].vx = -10
 
         if event.key == pygame.K_RIGHT:
-            if abs(self.model.Snake[-1].vx) == -.1:
+            if abs(self.model.Snake[-1].vx) != 0:
                 return
-            #if self.model.Snake[-1].vy == -.1:
-            #    self.model.Snake.reverse()
-            while self.model.Snake[0].y != self.model.Snake[-1].y:
-                for i in range(len(self.model.Snake)-1):
-                    self.model.Snake[i].x += self.model.Snake[i+1].x - self.model.Snake[i].x
-                    self.model.Snake[i].y += self.model.Snake[i+1].y - self.model.Snake[i].y
-                    if self.model.Snake[i].y == self.model.Snake[-1].y:
-                        self.model.Snake[i].x += self.model.Snake[i].width
 
-            if self.model.Snake[0].y == self.model.Snake[-1].y:
-                for part in self.model.Snake:
-                    part.vy = 0
-                    part.vx = .1
+            self.model.Snake[-1].vy = 0
+            self.model.Snake[-1].vx = 10
 
         if event.key == pygame.K_UP:
-            if abs(self.model.Snake[-1].vy) == -.1:
+            if abs(self.model.Snake[-1].vy) != 0:
                 return
-            #if self.model.Snake[-1].vx == -.1:
-            #    self.model.Snake.reverse()
-            while self.model.Snake[0].x != self.model.Snake[-1].x:
-                for i in range(len(self.model.Snake)-1):
-                    self.model.Snake[i].x += self.model.Snake[i+1].x - self.model.Snake[i].x
-                    self.model.Snake[i].y += self.model.Snake[i+1].y - self.model.Snake[i].y
-                    if self.model.Snake[i].x == self.model.Snake[-1].x:
-                        self.model.Snake[i].y -= self.model.Snake[i].width
 
-            if self.model.Snake[0].x == self.model.Snake[-1].x:
-                for part in self.model.Snake:
-                    part.vx = 0
-                    part.vy = -.1
+            self.model.Snake[-1].vy = -10
+            self.model.Snake[-1].vx = 0
 
 if __name__ == '__main__':
     pygame.init()
@@ -204,5 +175,5 @@ if __name__ == '__main__':
             control.handle_event(event)
         model.update()
         window.draw()
-        time.sleep(0.001)
+        time.sleep(0.1)
     pygame.quit()
