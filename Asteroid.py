@@ -3,7 +3,19 @@ from pygame.locals import *
 import time
 import math
 import random
+
+
 class Asteroid():
+    """
+    Asteroid Class:
+    x - position
+    y - position
+    speed - speed of asteroid
+    direction - direction of asteroid
+    image - surface containing picture of asteroid
+    gameDisplay - the display to put the asteroid on
+    w, h - the width and height of the surface
+    """
     def __init__(self,x,y,speed,direction,gameDisplay):
         self.x = x
         self.y = y
@@ -15,6 +27,9 @@ class Asteroid():
         self.destroyed = False
         self.gameDisplay = gameDisplay
     def update(self):
+        """
+        updates the position of the asteroid and rectangle
+        """
         if(not self.destroyed): # once the asteroid is destroyed, it will stop redrawing the asteroid
             width, height = self.gameDisplay.get_size() # gets the display's width and length
             self.x = self.x + (self.speed * math.cos(self.direction))  # Sets the Asteroid's to a small change in space
@@ -30,7 +45,14 @@ class Asteroid():
             self.rect = pygame.Rect((self.x + self.shrinkage / 2,self.y + self.shrinkage / 2),(self.w - self.shrinkage,self.h - self.shrinkage)) # The Rect is for the hitbox
             self.gameDisplay.blit(self.image,(self.x,self.y)) # draws the asteroid on the screen
             #pygame.draw.rect(self.gameDisplay,(0,255,0),self.rect) # display's the asteroid's hit box in red (for testing)
+
 class LargeAsteroid(Asteroid):
+
+    """
+    subclass of the asteroid, for the starting asteroids
+    shrinkage - number that the rectangle hitbox shrinks by
+    rect - the hitbox rectangle
+    """
     def __init__(self,x,y,speed,direction,gameDisplay):
         super().__init__(x,y,speed,direction,gameDisplay)
         self.image = pygame.transform.scale(self.image,(self.w // 2,self.h // 2)) # scales the asteroid to size
@@ -38,6 +60,9 @@ class LargeAsteroid(Asteroid):
         self.shrinkage = 50
         self.rect = pygame.Rect((self.x + self.shrinkage / 2,self.y + self.shrinkage / 2),(self.w - self.shrinkage,self.h - self.shrinkage)) # lessening the hitbox so the corners don't stick out
     def destroy(self):
+        """
+        destroys the asteroid and returns the asteroids that should take it's place.
+        """
         if(not self.destroyed):
             self.destroyed = True
             MedAster = []
@@ -46,6 +71,11 @@ class LargeAsteroid(Asteroid):
             return MedAster
         return []
 class MediumAsteroid(Asteroid):
+    """
+    subclass of the asteroid, for the second asteroid
+    shrinkage - number that the rectangle hitbox shrinks by
+    rect - the hitbox rectangle
+    """
     def __init__(self,x,y,speed,direction,gameDisplay):
         super().__init__(x,y,speed,direction,gameDisplay)
         self.image = pygame.transform.scale(self.image,(self.w // 4,self.h // 4)) # half as big as large asteroid
@@ -53,6 +83,9 @@ class MediumAsteroid(Asteroid):
         self.shrinkage = 25
         self.rect = pygame.Rect((self.x + self.shrinkage / 2,self.y + self.shrinkage / 2),(self.w - self.shrinkage,self.h - self.shrinkage))
     def destroy(self):
+        """
+        destroys the asteroid and returns the asteroids that should take it's place.
+        """
         if(not self.destroyed):
             self.destroyed = True
             SmallAster = []
@@ -61,6 +94,11 @@ class MediumAsteroid(Asteroid):
             return SmallAster
         return []
 class SmallAsteroid(Asteroid):
+    """
+    subclass of the asteroid, for the last asteroid
+    shrinkage - number that the rectangle hitbox shrinks by
+    rect - the hitbox rectangle
+    """
     def __init__(self,x,y,speed,direction,gameDisplay):
         super().__init__(x,y,speed,direction,gameDisplay)
         self.image = pygame.transform.scale(self.image,(self.w // 8,self.h // 8)) # half as big as medium asteroid
@@ -68,6 +106,9 @@ class SmallAsteroid(Asteroid):
         self.shrinkage = 12
         self.rect = pygame.Rect((self.x + self.shrinkage / 2,self.y + self.shrinkage / 2),(self.w - self.shrinkage,self.h - self.shrinkage))
     def destroy(self):
+        """
+        destroys the asteroid and returns nothing because it is the smallest asteroid
+        """
         self.destroyed = True
         return []
 class CollectionOfAsteroids():
@@ -174,6 +215,65 @@ class CollectionOfProjectiles():
                 self.listOfProjectiles[i].update()
         for j in reversed(ListToDelete):
             del self.listOfProjectiles[j]
+
+class UFO():
+    def __init__(self,y,FacingRight,gameDisplay):
+        self.y = y
+        self.speed = 4
+        self.destroyed = False
+        self.image = pygame.image.load('UFO.gif').convert()
+        self.image.set_colorkey((0,0,0))
+        self.w, self.h = self.image.get_size()
+        self.straight = bool(random.getrandbits(1))
+        self.FacingRight = FacingRight
+        self.gameDisplay = gameDisplay
+        width, height = gameDisplay.get_size()
+        if(FacingRight):
+            self.x = -self.w
+        else:
+            self.x = width
+    def update(self):
+        width, height = self.gameDisplay.get_size()
+        if(self.straight == True):
+            if(self.FacingRight):
+                self.direction = 0
+            else:
+                self.direction = math.pi
+        else:
+            if(self.FacingRight):
+                if((self.x + self.w / 2) < width * 1 / 4):
+                    self.direction = 0
+                elif(self.x + self.w / 2 < width / 2):
+                    self.direction = math.pi / 4
+                else:
+                    self.direction = - math.pi / 4
+            else:
+                if((self.x + self.w / 2) > width * 3 / 4):
+                    self.direction = math.pi
+                elif(self.x + self.w / 2 > width / 2):
+                    self.direction = 5 * math.pi / 4
+                else:
+                    self.direction = 3 * math.pi / 4
+        self.x = self.x + (self.speed * math.cos(self.direction))  # Sets the speed to a small change in space
+        self.y = self.y + (self.speed * math.sin(self.direction))
+        if(self.x >= width): # if the UFO goes out of the screen, destroy it
+            self.destroyed = True
+        elif(self.x <= 0 - self.w):
+            self.destroyed = True
+        if(self.y >= height): # If the UFOs coordinate goes outside of the window, set that coordinate to the other side of the map
+            self.y = 0 - self.h # adding the width of the image to make sure that the image doesn't appear suddenly (the image's position is the top right of the image)
+        elif(self.y <= 0 - self.h): # same as above (makes it so that the whole image has to leave the screen for it to go to the other side)
+            self.y = height
+        self.gameDisplay.blit(self.image,(self.x,self.y))
+    def destroy(self):
+        self.destroyed = True
+def BigUFO(UFO):
+    def __init__(self,y,FacingRight,gameDisplay):
+        super().__init__(y,FacingRight,gameDisplay)
+        self.image = pygame.transform.scale(self.image,(self.w // 2,self.h // 2))
+        self.w,self.h = self.image.get_size()
+    def shoot(self,listOfProjectiles):
+        listOfProjectiles.addProjectile(self.x,self.y,random.uniform(0,2*math.pi))
 class listOfObjects():
     def __init__(self,asteroids,projectiles):
         self.Asteroids = asteroids
@@ -193,28 +293,30 @@ pygame.init()
 gameDisplay = pygame.display.set_mode((800,600))
 clock = pygame.time.Clock()
 numberOfAsteroids = 4
-CollAster = CollectionOfAsteroids(gameDisplay,1)
-CollAster.spawnAsteroids(numberOfAsteroids) # initiating a list of asteroids to keep track of
-proj = CollectionOfProjectiles(gameDisplay)
-proj.addProjectile(400,300,math.pi / 4)
+# CollAster = CollectionOfAsteroids(gameDisplay,1)
+# CollAster.spawnAsteroids(numberOfAsteroids) # initiating a list of asteroids to keep track of
+# proj = CollectionOfProjectiles(gameDisplay)
+# proj.addProjectile(400,300,math.pi / 4)
 Black = (0,0,0) # black screen is the background
 gameDisplay.fill(Black)
-AllThings = listOfObjects(CollAster,proj)
-AllThings.update() # testing the many asteroids spawn in the right spot
+# AllThings = listOfObjects(CollAster,proj)
+# AllThings.update() # testing the many asteroids spawn in the right spot
 pygame.display.update()
 running = True # for the exit of the game
 randomCounter = 0
+UFO = UFO(300,True,gameDisplay)
 while running:
-    randomCounter += 1
-    if(randomCounter % 5 == 0):
-        AllThings.Projectiles.addProjectile(400,300,random.uniform(0,2*math.pi))
+    # randomCounter += 1
+    # if(randomCounter % 5 == 0):
+    #     AllThings.Projectiles.addProjectile(400,300,random.uniform(0,2*math.pi))
     gameDisplay.fill(Black)
-    AllThings.update()# update each asteroid
+    # AllThings.update()# update each asteroid
     #proj.update()
+    UFO.update()
     pygame.display.update()
-    if(len(AllThings.Asteroids.listOfAsteroids) == 0):
-        numberOfAsteroids += 1
-        AllThings.Asteroids.spawnAsteroids(numberOfAsteroids)
+    # if(len(AllThings.Asteroids.listOfAsteroids) == 0):
+    #     numberOfAsteroids += 1
+    #     AllThings.Asteroids.spawnAsteroids(numberOfAsteroids)
     clock.tick(60)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
