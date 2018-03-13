@@ -1,21 +1,10 @@
-"""
- Sample Python/Pygame Programs
- Simpson College Computer Science
- http://programarcadegames.com/
- http://simpson.edu/computer-science/
-
- Explanation video: http://youtu.be/4YqIKncMJNs
- Explanation video: http://youtu.be/ONAK8VZIcI4
- Explanation video: http://youtu.be/_6c4o41BIms
-"""
-
 import pygame
 from pygame.locals import *
 import time
 
 # Define some colors
-#WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
+WHITE = (255, 255, 255) # have no idea what it does
+BLACK = (0, 0, 0) # need to keep
 
 # Call this function so the Pygame library can initialize itself
 pygame.init()
@@ -23,21 +12,19 @@ pygame.init()
 # Create an 800x600 sized screen
 screen = pygame.display.set_mode([600, 361])
 
-# This sets the name of the window
-# pygame.display.set_caption('CMSC 150 is cool')
+clock = pygame.time.Clock() # I sure this controls the time the game (how faster the puase is at the bottom)
 
-clock = pygame.time.Clock()
-
-class Player(object):
+class Player(object): # player object right now is confusing do it postion here but not being used
     """ Encodes the state of the paddle in the game """
     def __init__(self):
         """ Initialize the player and position (x,y) """
 
         self.x = 0
         self.y = 0
-        self.player_image = pygame.image.load("top_down_tank-8hkMRt.png").convert()
+        self.player_image = pygame.image.load("top_down_tank-8hkMRt.png").convert() #image goes here
         self.player_image.set_colorkey(BLACK)
-    def update(self):
+
+    def update(self):# this may work idk yet
         """ update the state of the paddle """
         self.x += self.x
         self.y += self.y
@@ -45,7 +32,7 @@ class Player(object):
     def __str__(self):
         return "Player, x=%f, y=%f" % (self.x, self.y)
 
-class PyGameKeyboardController(object):
+class PyGameKeyboardController(object): #works well a little jumpy maybe use vx
     """ Handles keyboard input for brick breaker """
     def __init__(self):
        #self.model = model
@@ -72,10 +59,9 @@ class PyGameKeyboardController(object):
 # Set positions of graphics
 background_position = [0, 0]
 
-# Load and set up graphics.
+# Load and set up graphics only back grond
 background_image = pygame.image.load("GrassBackground.jpg").convert()
-# player_image = pygame.image.load("top_down_tank-8hkMRt.png").convert()
-# player_image.set_colorkey(BLACK)
+
 
 clock = pygame.time.Clock()
 controller = PyGameKeyboardController()
@@ -85,9 +71,7 @@ while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
-        # elif event.type == pygame.MOUSEBUTTONDOWN:
-        #     click_sound.play()
-        #if event.type != KEYDOWN:
+        
 
     # Copy image to screen:
     screen.blit(background_image, background_position)
