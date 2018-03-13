@@ -40,24 +40,19 @@ while running:
         if event.type == pygame.QUIT:
             running = False
         # print(event)
-
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_UP:
-                ship.forward = True
-            if event.key == pygame.K_LEFT:
-                ship.ro = True
-                ship.rdir = 1
-            if event.key == pygame.K_RIGHT:
-                ship.ro = True
-                ship.rdir = -1
         if event.type == pygame.KEYUP:
-            if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
-                ship.ro = False
-            if event.key == pygame.K_UP:
-                ship.drift = True
-                ship.forward = False
             if event.key == pygame.K_q:
                 running = False
+    keys_pressed = pygame.key.get_pressed()
+
+    if keys_pressed[pygame.K_UP]:
+        ship.move()
+    else:
+        ship.drift = True
+    if keys_pressed[pygame.K_LEFT]:
+        ship.rotate(1)
+    if keys_pressed[pygame.K_RIGHT]:
+        ship.rotate(-1)
 
     gameDisplay.fill(black)
     gui.update(150000)

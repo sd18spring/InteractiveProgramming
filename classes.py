@@ -24,25 +24,27 @@ class GUI():
 
 
 
-# def rot_center(image, angle):
-#     """rotate an image while keeping its center and size
-#     Found online. Very helpful
-#     print(type(image))
-#     """
-#     orig_rect = image.get_rect()
-#     rot_image = pygame.transform.rotate(image, angle)
-#     rot_rect = orig_rect.copy()
-#     rot_rect.center = rot_image.get_rect().center
-#     rot_image = rot_image.subsurface(rot_rect).copy()
-#     return rot_image
 def rot_center(image, angle):
-    """rotate a Surface, maintaining position."""
-    #DOES NOT WORK
-
-    loc = image.get_rect().center  #rot_image is not defined
-    rot_sprite = pygame.transform.rotate(image, angle)
-    rot_sprite.get_rect().center = loc
-    return rot_sprite
+    """rotate an image while keeping its center and size
+    Found online. Very helpful
+    print(type(image))
+    """
+    orig_rect = image.get_rect()
+    rot_image = pygame.transform.rotate(image, angle)
+    rot_rect = orig_rect.copy()
+    rot_rect.center = rot_image.get_rect().center
+    rot_image = rot_image.subsurface(rot_rect).copy()
+    return rot_image
+# def rot_center(image, angle):
+#     """rotate a Surface, maintaining position."""
+#     #DOES NOT WORK
+#
+#     loc = image.get_rect().center  #rot_image is not defined
+#     rot_sprite = pygame.transform.rotate(image, angle)
+#     # rot_sprite.get_rect().center = loc
+#     rotRect = rot_sprite.get_rect()
+#     rotRect.center = loc
+#     return rot_sprite,rotRect
 
 class Ship():
     """Ship class!
@@ -63,9 +65,6 @@ class Ship():
     x_speed = 0
     y_speed = 0
     drift = False
-    forward  = False
-    ro = False
-    rdir = 0
     def __init__(self,x,y,angle,img,gD):
         """
         Initliazes with where the ship is facing as the angle
@@ -77,19 +76,20 @@ class Ship():
         self.nImage = img
         self.w,self.h = img.get_size()
         self.gD = gD
+        self.rect = img.get_rect()
     def move(self):
         """FORWARD!!!
         Moves the ship forward in the direction it's heading (its angle)
         """
         self.drift = False
-        self.x_speed += cos(radians(self.angle))*.7
-        self.y_speed += sin(radians(self.angle))*.7
+        self.x_speed += cos(radians(self.angle))*.4
+        self.y_speed += sin(radians(self.angle))*.4
         # if sqrt(self.x_speed**2+self.y_speed**2) < 10:
 
-    def rotate(self):
+    def rotate(self,posNeg):
         """Rotates ship"""
-        self.nImage = rot_center(self.oImage,self.rdir*3+(270-self.angle))
-        self.angle -= self.rdir*3
+        self.nImage = rot_center(self.oImage,posNeg*3+(270-self.angle))
+        self.angle -= posNeg*3
 
     def update(self):
         """MAGIC
@@ -98,7 +98,8 @@ class Ship():
         """
         width,height = self.gD.get_size()
         speed = sqrt(self.x_speed**2+self.y_speed**2)
-        if speed < .02 and self.drift:
+        # print(speed)
+        if speed < .08 and self.drift:
             self.drift = False
             self.x_speed = 0
             self.y_speed = 0
@@ -107,14 +108,14 @@ class Ship():
             self.x_speed = cos(radians(self.angle))*10
             self.y_speed = sin(radians(self.angle))*10
         if self.drift:
-            theta = atan(self.y_speed/self.x_speed)
-            self.x_speed -= cos(theta)*speed*.02
-            self.y_speed -= sin(theta)*speed*.02
+            #theta = atan(self.y_speed/self.x_speed)
+            self.x_speed *= .98
+            self.y_speed *= .98
 
-        if self.forward:
-            self.move()
-        if self.ro:
-            self.rotate()
+        # if self.forward:
+        #     self.move()
+        # if self.ro:
+        #     self.rotate()
 
         self.y += self.y_speed
         self.x += self.x_speed
