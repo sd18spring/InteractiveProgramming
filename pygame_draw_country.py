@@ -38,7 +38,7 @@ def point_in_polygon(pt, polygon):
     return matplotlib.path.Path(polygon).contains_point(pt)
 
 # Draw the polygons for the state.
-for polygon in wold_map.countries[COUNTRY]:
+for polygon in world_map.countries[COUNTRY]:
     # `polygon` points are tuples `(float, float)`. PyGame requires `(int, int)`.
     points = [(int(x), int(y)) for x, y in polygon]
     # Draw the interior
