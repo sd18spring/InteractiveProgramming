@@ -1,6 +1,7 @@
 import pygame
 from pygame.locals import *
 import time
+import random
 
 
 class SnakeGameWindowView(object):
@@ -41,6 +42,7 @@ class SnakeGameModel(object):
         snake = Snake(100, 10, 300, 300)
         self.Mouse.append(Mouse(10, 10, 100, 100))
         self.Arena.append(Arena())
+        self.Score = Score()
         for i in range(snake.n):
             self.Snake.append(Snake(10, 10, i*snake.width+snake.x, snake.y, i == snake.n-1))
     def update(self):
@@ -53,6 +55,27 @@ class SnakeGameModel(object):
                 self.Snake[i].x = self.Snake[i+1].x
                 self.Snake[i].y = self.Snake[i+1].y
         self.Snake[-1].update()
+        if self.Snake[-1].x == self.Mouse[0].x and self.Snake[-1].y == self.Mouse[0].y:
+            self.Mouse[0].x = random.randint(2,60) * 10
+            self.Mouse[0].y = random.randint(2, 70) * 10
+            self.Score.update()
+            if self.Snake[1].x - self.Snake[0].x == 10:
+                self.Snake.insert(0, Snake(10, 10, self.Snake[0].x-10, self.Snake[0].y))
+            if self.Snake[1].x - self.Snake[0].x == -10:
+                self.Snake.insert(0, Snake(10, 10, self.Snake[0].x+10, self.Snake[0].y))
+            if self.Snake[1].y - self.Snake[0].y == 10:
+                self.Snake.insert(0, Snake(10, 10, self.Snake[0].x, self.Snake[0].y-10))
+            if self.Snake[1].y - self.Snake[0].y == -10:
+                self.Snake.insert(0, Snake(10, 10, self.Snake[0].x, self.Snake[0].y+10))
+            print('The Snake gained length!')
+            print(self.Score)
+        if abs(self.Snake[-1].x - Arena().width) < Arena().padding or abs(self.Snake[-1].y - Arena().height) < Arena().padding:
+            pygame.quit()
+        if self.Snake[-1].x < Arena().padding - 10 or self.Snake[-1].y < Arena().padding - 10:
+            pygame.quit()
+        for i in range(len(self.Snake)-1):
+            if self.Snake[i].x - self.Snake[-1].x == 0 and self.Snake[i].y - self.Snake[-1].y == 0:
+                pygame.quit()
     def __str__(self):
         output_lines = []
         for p in self.Mouse:
@@ -112,7 +135,7 @@ class Snake(object):
         self.n = int(height / width)
         self.x = x
         self.y = y
-        self.vx = 0.0
+        self.vx = 10.0
         self.vy = 0.0
 
     def update(self):
@@ -120,6 +143,18 @@ class Snake(object):
         self.y += self.vy
     def __str__(self):
         return 'Snake is in %f, %f and is %f long.' % (self.x, self.y, self.height)
+
+class Score(object):
+    def __init__(self, score = 0):
+        """
+        This creates a score object that indicates the number of time it
+        catches the mouse.
+        """
+        self.score = score
+    def update(self):
+        self.score  += 1
+    def __str__(self):
+        return str(self.score)
 
 class SnakeController(object):
 
