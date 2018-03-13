@@ -1,5 +1,6 @@
 import numpy as np
 import cv2
+import random
 
 
 class canvas():
@@ -8,6 +9,10 @@ class canvas():
         self.width = int(width)
         self.height = int(height)
         self.new_canvas = np.zeros((self.height, self.width, 3), np.uint8)
+        self.randx = []
+        self.randy = []
+        #white,red, green, blue, yellow, purple, orange
+        self.colorlist = [(255,255,255), (0,0,255), (0,255,0), (255,0,0), (0,255,255), (255,0,188), (0,15,255)]
 
     def set_color(self, B, G, R):
         self.color = (B, G, R)
@@ -30,6 +35,11 @@ class canvas():
         """
         cv2.rectangle(self.new_canvas, (0, 0), (self.width, self.height), (0, 0, 0))
 
+    def rectangle(self):
+        xpos = random.choice(self.randx)
+        ypos = rand.choice(self.randy)
+        color = rand.choice(self.colorlist)
+        cv2.rectangle(self.new_canvas, (xpos, ypos), (10,10), color)
 
 if __name__ == "__main__":
     canvas1 = canvas(1280, 960)
