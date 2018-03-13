@@ -9,6 +9,9 @@ class SnakeGameWindowView(object):
     def __init__(self, model, width, height):
         self.model = model
         self.screen = pygame.display.set_mode((width, height))
+        self.font = pygame.font.SysFont("arial", 50)
+        self.width = width
+        self.height = height
     def draw(self):
         """
         This function in the class will draw necessary materials
@@ -29,6 +32,8 @@ class SnakeGameWindowView(object):
                             pygame.Color(0, 0, 255),
                             pygame.Rect(material.x, material.y, material.width, material.height),
                             material.padding)
+        play_score = self.font.render(str(self.model.Score.score), 1, (125, 125, 0))
+        self.screen.blit(play_score,(self.width // 2 , self.height // 2))
         pygame.display.update()
 
 class SnakeGameModel(object):
