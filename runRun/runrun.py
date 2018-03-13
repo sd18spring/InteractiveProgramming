@@ -66,10 +66,10 @@ def main(SCREEN_WIDTH, SCREEN_HEIGHT):
                     sys.exit()
                 if event.key == pygame.K_SPACE:
                     player.jump(ground_height)
-                if event.key == pygame.K_LEFT:
-                    player.move_left()
-                if event.key == pygame.K_RIGHT:
-                    player.move_right()
+                # if event.key == pygame.K_LEFT:
+                #     player.move_left()
+                # if event.key == pygame.K_RIGHT:
+                #     player.move_right()
 
         """Check for collisions with rocks and end game """
 
@@ -108,7 +108,8 @@ class Player(pygame.sprite.Sprite):
         self.calc_grav(ground_height)
 
         self.rect.y += self.change_y
-        self.rect.x += self.change_x
+        #
+        # self.rect.x += self.change_x
 
     def calc_grav(self, ground_height):
         bottom = self.rect.y + self.rect.height
@@ -125,17 +126,31 @@ class Player(pygame.sprite.Sprite):
         if bottom > threshold:
             self.change_y = -15
 
-    def move_right(self):
-        self.change_x += .5
-
-    def move_left(self):
-        self.change_x -= -.5
+    # def move_right(self):
+    #     self.change_x += .5
+    #
+    # def move_left(self):
+    #     self.change_x -= -.5
 
 
 class Coin(pygame.sprite.Sprite):
-    pass
-        # self.vSpeed = 4
-        # self.maxVspeed = 4
+
+    def __init__(self):
+        super().__init__()
+        self.image = (pygame.image.load('data/images/coin.png'))
+        self.rect = self.image.get_rect()
+
+        self.speed = 10
+        self.height = 0.2 * SCREEN_HEIGHT
+
+        self.location = []
+        for i in (2*SCREEN_WIDTH):
+            n = random.choice([1,2])
+            self.location.append(n)
+
+    def advance(self, x = 0):
+        pass
+
 
 class Ground():
     """ Class representing the ground """
