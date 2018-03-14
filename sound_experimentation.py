@@ -1,7 +1,7 @@
 import pyaudio
 from pyaudio import *
 import wave
-import 
+
 
 FORMAT = pyaudio.paInt16
 CHANNELS = 2
@@ -61,6 +61,4 @@ def record(record_time, a_format=pyaudio.paInt16, channels=2, rate=44100, chunk=
     waveFile.writeframes(b''.join(frames))
     waveFile.close()
 
-def get_frequency(file):
-
-record(3)
+#def get_frequency(file):

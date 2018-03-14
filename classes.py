@@ -1,8 +1,18 @@
 import pygame, sys, random
 from pygame.locals import *
 
+import pyaudio
+from pyaudio import *
+import wave
+
+import matplotlib.pyplot as plt
+from scipy.fftpack import fft
+from scipy.io import wavfile # get the api
+from numpy import arange
+
 SCREENWIDTH = 1500
 SCREENHEIGHT = 1000
+WAVE_OUTPUT_FILENAME = "file.wav"
 
 class Block(pygame.sprite.Sprite):
     def __init__(self, screen, color, width, height):
@@ -30,8 +40,13 @@ class Player(pygame.sprite.Sprite):
         self.screen = screen
         self.rect = self.image.get_rect()
         self.increment = increment
+        self.is_recording = False
+
+        self.calibrated_high = 100
+        self.calibrated_low = 450
 
     def on_event(self, event):
+
         if event.type == KEYDOWN:
 
             if self.rect.y > SCREENHEIGHT-(self.size + self.increment):
@@ -52,6 +67,72 @@ class Player(pygame.sprite.Sprite):
             print(int(score))
             pygame.quit()
             sys.exit()
+
+    def record(self, record_time, a_format=pyaudio.paInt16, channels=2, rate=44100, chunk=1024):
+        self.is_recording = True
+        audio = pyaudio.PyAudio()
+        stream = audio.open(format=a_format, channels=channels,
+                        rate=rate, input=True,
+                        frames_per_buffer=chunk)
+
+        frames = []
+        for i in range(0, int(rate / chunk * record_time)):
+            data = stream.read(chunk)
+            frames.append(data)
+
+        stream.stop_stream()
+        stream.close()
+        audio.terminate()
+
+        waveFile = wave.open(WAVE_OUTPUT_FILENAME, 'wb')
+        waveFile.setnchannels(channels)
+        waveFile.setsampwidth(audio.get_sample_size(a_format))
+        waveFile.setframerate(rate)
+        waveFile.writeframes(b''.join(frames))
+        waveFile.close()
+        self.is_recording = False
+
+
+    def analyze_freq(self, filename='file.wav'):
+        fs, data = wavfile.read(filename) # load the data
+        a = data.T[0] # this is a two channel soundtrack, I get the first track
+        b=[(ele/2**8.)*2-1 for ele in a] # this is 8-bit track, b is now normalized on [-1,1)
+        c = fft(b) # calculate fourier transform (complex numbers list)
+
+        #print(abs(max(c)))
+        d = len(c)//2  # you only need half of the fft list (real signal symmetry)
+
+        k = arange(len(data))
+        T = len(data)/fs  # where fs is the sampling frequency
+        frqLabel = k/T
+
+        val = max(abs(c[2:(d-1)]))
+        i = list(abs(c[2:(d-1)])).index(val)
+        return frqLabel[2:(d-1)][i]
+
+    def remap_interval(self, val,
+                       input_interval_start,
+                       input_interval_end,
+                       output_interval_start=0,
+                       output_interval_end=SCREENHEIGHT):
+        input_interval = input_interval_end - input_interval_start
+        output_interval = output_interval_end - output_interval_start
+        val_interval = val - input_interval_start
+
+        scale_factor = output_interval/input_interval
+        new_val = output_interval_start+(scale_factor*val_interval)
+        return new_val
+
+    def freq_movement(self, frequency):
+        frequencyish = self.remap_interval(frequency, self.calibrated_high, self.calibrated_low)
+        if frequencyish > self.rect.y:
+            self.rect.y -=20
+        elif frequencyish < 50:
+            pass
+        elif frequencyish < self.rect.y:
+            self.rect.y += 20
+
+
 
 
 
@@ -87,6 +168,10 @@ class Game:
                     pygame.quit()
                     sys.exit()
                 self.player.on_event(event)
+            if self.player.is_recording == False:
+                self.player.record(0.2)
+            freq = self.player.analyze_freq()
+            self.player.freq_movement(freq)
             self.mainSurface.fill((0, 0, 0))
 
             self.player.collide(self.blocksGroup, self.score)
