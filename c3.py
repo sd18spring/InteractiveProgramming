@@ -19,6 +19,9 @@ class Model(object):
         self.rectangle = pygame.Rect(((size[0]/2)-(size[0]/4),(size[1]*.33)-(size[1]/30),(size[0]/2),(size[1]/10)))
         self.scale = 1
 
+
+
+        self.inputbox = Inputbox()
         self.inputboxes = []
         self.inputboxes2 = []
         self.dingding = False
@@ -76,7 +79,7 @@ class Viewer(object):
         for zebox in self.model.inputboxes:
             font = pygame.font.SysFont('Arial',200)
             my_string = str(zebox.string)
-            text = font.render('test', True, (127,127,127))
+            text = font.render(my_string, True, (127,127,127))
             self.screen.blit(text,(((self.model.width/2)-(self.model.width/4)),((self.model.height*.33)-(self.model.height/30))))
 
         pygame.display.update()
@@ -129,64 +132,88 @@ class Controler(object):
         elif pygame.mouse.get_pressed()[0] == False:
             self.model.panning = False
 
-
         if event.type == pygame.KEYDOWN:
             if self.model.dingding == True:
-                my_input = ''
                 if event.key == pygame.K_a:
-                    my_input = my_input + 'a'
+                    self.model.inputbox.string += 'a'
+                    self.model.inputboxes.append(self.model.inputbox)
                 if event.key == pygame.K_b:
-                    my_input = my_input + 'b'
+                    self.model.inputbox.string += 'b'
+                    self.model.inputboxes.append(self.model.inputbox)
                 if event.key == pygame.K_c:
-                    my_input = my_input + 'c'
+                    self.model.inputbox.string += 'c'
+                    self.model.inputboxes.append(self.model.inputbox)
                 if event.key == pygame.K_d:
-                    my_input = my_input + 'd'
+                    self.model.inputbox.string += 'd'
+                    self.model.inputboxes.append(self.model.inputbox)
                 if event.key == pygame.K_e:
-                    my_input = my_input + 'e'
-                if event.key == pygame.K_a:
-                    my_input = my_input + 'f'
-                if event.key == pygame.K_a:
-                    my_input += 'g'
-                if event.key == pygame.K_a:
-                    my_input += 'h'
-                if event.key == pygame.K_a:
-                    my_input += 'i'
-                if event.key == pygame.K_a:
-                    my_input += 'j'
-                if event.key == pygame.K_a:
-                    my_input += 'k'
-                if event.key == pygame.K_a:
-                    my_input += 'l'
-                if event.key == pygame.K_a:
-                    my_input += 'm'
-                if event.key == pygame.K_a:
-                    my_input += 'n'
-                if event.key == pygame.K_a:
-                    my_input += 'o'
-                if event.key == pygame.K_a:
-                    my_input += 'p'
-                if event.key == pygame.K_a:
-                    my_input += 'q'
-                if event.key == pygame.K_a:
-                    my_input += 'r'
+                    self.model.inputbox.string += 'e'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_f:
+                    self.model.inputbox.string += 'f'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_g:
+                    self.model.inputbox.string += 'g'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_h:
+                    self.model.inputbox.string += 'h'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_i:
+                    self.model.inputbox.string += 'i'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_j:
+                    self.model.inputbox.string += 'j'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_k:
+                    self.model.inputbox.string += 'k'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_l:
+                    self.model.inputbox.string += 'l'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_m:
+                    self.model.inputbox.string += 'm'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_n:
+                    self.model.inputbox.string += 'n'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_o:
+                    self.model.inputbox.string += 'o'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_p:
+                    self.model.inputbox.string += 'p'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_q:
+                    self.model.inputbox.string += 'q'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_r:
+                    self.model.inputbox.string += 'r'
+                    self.model.inputboxes.append(self.model.inputbox)
                 if event.key == pygame.K_s:
-                    my_input += 's'
+                    self.model.inputbox.string += 's'
+                    self.model.inputboxes.append(self.model.inputbox)
                 if event.key == pygame.K_t:
-                    my_input += 't'
+                    self.model.inputbox.string += 't'
+                    self.model.inputboxes.append(self.model.inputbox)
                 if event.key == pygame.K_u:
-                    my_input += 'u'
+                    self.model.inputbox.string += 'u'
+                    self.model.inputboxes.append(self.model.inputbox)
                 if event.key == pygame.K_v:
-                    my_input += 'v'
+                    self.model.inputbox.string += 'v'
+                    self.model.inputboxes.append(self.model.inputbox)
                 if event.key == pygame.K_w:
-                    my_input += 'w'
+                    self.model.inputbox.string += 'w'
+                    self.model.inputboxes.append(self.model.inputbox)
                 if event.key == pygame.K_x:
-                    my_input += 'x'
+                    self.model.inputbox.string += 'x'
+                    self.model.inputboxes.append(self.model.inputbox)
                 if event.key == pygame.K_y:
-                    my_input = my_input + 'y'
+                    self.model.inputbox.string += 'y'
+                    self.model.inputboxes.append(self.model.inputbox)
                 if event.key == pygame.K_z:
-                    my_input = my_input + 'z'
+                    self.model.inputbox.string += 'z'
+                    self.model.inputboxes.append(self.model.inputbox)
                 if event.key == pygame.K_RETURN:
-                    self.model.inputboxes.append(Inputbox(my_input))
+                    del self.model.inputboxes[:]
 
             if event.key == pygame.K_UP:
                 self.model.pan(0,10)
@@ -214,7 +241,7 @@ class Controler(object):
 
 
 class Inputbox(object):
-    def __init__(self,string):
+    def __init__(self,string=''):
         self.string = string
 
 
