@@ -233,6 +233,7 @@ class AstroidBelt:
         for astroid in self.astroids:
             if self.x < -astroid.rect.width:
                 self.score += 1 / 4
+                self.difficulty += 1/4
                 self.prob.new_prob()
                 self.gen_astroids()
                 self.vx += 0.01
