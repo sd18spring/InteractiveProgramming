@@ -220,7 +220,7 @@ class CollectionOfProjectiles():
 class UFO():
     def __init__(self,y,FacingRight,gameDisplay,listOfProjectiles):
         self.y = y
-        self.speed = 4
+        self.speed = 2
         self.destroyed = False
         self.image = pygame.image.load('UFO.gif').convert()
         self.image.set_colorkey((0,0,0))
@@ -282,7 +282,7 @@ class BigUFO(UFO):
         self.w,self.h = self.image.get_size()
         self.shrinkage = 30
         self.rect = pygame.Rect((self.x + self.shrinkage / 2,self.y + self.shrinkage / 2),(self.w - self.shrinkage,self.h - self.shrinkage))
-        self.fireRate = 120
+        self.fireRate = 60
     def shoot(self):
         if(not self.destroyed):
             self.listOfProjectiles.addProjectile(self.x + self.w / 2,self.y + self.h / 2,random.uniform(0,2*math.pi),"UFO")
