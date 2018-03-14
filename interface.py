@@ -38,7 +38,7 @@ ship = Ship(shipX,shipY,270,shipImg,gameDisplay)
 
 """ initiate asteroids and UFOs """
 numberOfAsteroids = 4
-AllThings = listOfObjects(gameDisplay)
+AllThings = listOfObjects(gameDisplay,ship)
 AllThings.Asteroids.spawnAsteroids(numberOfAsteroids)
 AllThings.UFOs.spawnBigUFO()
 AllThings.update() # testing the many asteroids spawn in the right spot

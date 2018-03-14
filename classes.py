@@ -112,10 +112,13 @@ class Ship():
         self.rect.center = (self.x,self.y)
 
         self.gD.blit(self.nImage,self.rect)
+        pygame.draw.rect(self.gD,(255,0,255),self.rect) # display's the ship's hit box in purple (for testing)
     def shoot(self,AllThings):
         x = self.x + int(5 * cos(self.angle))
         y = self.y + int(5 * sin(self.angle))
         AllThings.Projectiles.addProjectile(x,y,radians(self.angle),"Ship")
+    def destroy(self):
+        print("destroyed")
 class Asteroid():
     """
     Asteroid Class:
@@ -284,9 +287,10 @@ class Projectile():
         self.image = pygame.Surface((size,size))
         self.image.fill((255,255,255))
         self.gameDisplay = gameDisplay
+        width,height = self.gameDisplay.get_size()
         self.destroyed = False
         self.distanceTravelled = 0 # asteroids
-        self.distanceWanted = 500 # the distance that the projectile travels before it is destroyed
+        self.distanceWanted = 5/8 * height # the distance that the projectile travels before it is destroyed
         self.alliance = alliance
     def update(self):
         if(self.distanceTravelled < self.distanceWanted): # if the projectile has travelled farther than the wanted distance, it destroys itself
@@ -420,15 +424,28 @@ class CollectionOfUFOs():
             del self.listOfUFOs[j]
         self.listOfRects = listOfRects
 class listOfObjects():
-    def __init__(self,gameDisplay):
+    def __init__(self,gameDisplay, ship):
         self.gameDisplay = gameDisplay
         self.Asteroids = CollectionOfAsteroids(gameDisplay)
         self.Projectiles = CollectionOfProjectiles(gameDisplay) # contains the CollectionOfAsteroids and CollectionOfProjectiles objects
         self.UFOs = CollectionOfUFOs(gameDisplay,self.Projectiles)
+        self.ship = ship
     def update(self):
         self.Asteroids.update()
         self.UFOs.update()
         self.Projectiles.update()
+        collisionsAster = self.ship.rect.collidelist(self.Asteroids.listOfRects) # detects if any of the asteroids are in contact with the projectile
+        if (collisionsAster != -1): # if there is a collision
+            self.Asteroids.listOfAsteroids += self.Asteroids.listOfAsteroids[collisionsAster].destroy() #destroy both the asteroid and the projectile.
+            self.ship.destroy()
+        collisionsUFO = self.ship.rect.collidelist(self.UFOs.listOfRects)
+        if (collisionsUFO != -1): # if there is a collision
+            #self.UFOs.listOfUFOs[collisionsUFO].destroy() #destroy both the asteroid and the projectile.
+            self.ship.destroy()
+        collisionsProj = self.ship.rect.collidelist(self.Projectiles.listOfRects)
+        if (collisionsProj != -1):
+            self.Projectiles.listOfProjectiles[collisionsProj].destroy()
+            self.ship.destroy()
         for i in self.Projectiles.listOfProjectiles: # runs through each projectile
             collisionsAster = i.rect.collidelist(self.Asteroids.listOfRects) # detects if any of the asteroids are in contact with the projectile
             if (collisionsAster != -1): # if there is a collision
