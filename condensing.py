@@ -34,9 +34,6 @@ class Point():
 
     #credit for following function (in slightly more general form) to: http://www.ariel.com.au/a/python-point-int-poly.html
     def is_in_polygon(self, points):
-        # points = []
-        # for pt in points_objects:
-        #     points.append(pt.to_pixel_coords())
         n = len(points)
         inside = False
         px1, py1 = points[0]
@@ -52,13 +49,48 @@ class Point():
             px1, py1 = px2, py2
         return inside
 
-def get_x(width, lng):
-    return int(round(math.fmod((width * (180.0 + lng) / 360.0), (1.5 * width))))
+    def get_mercator_projection(self, width, height):
+        new_x = int(round(math.fmod((width * (180.0 + self.x) / 360.0), (1.5 * width))))
+        lat_rad = self.y * math.pi / 180.0
+        merc = 0.5 * math.log( (1 + math.sin(lat_rad)) / (1 - math.sin(lat_rad)) )
+        new_y = int(round((height / 2) - (width * merc / (2 * math.pi))))
+        return Point(new_x, new_y)
 
-def get_y(width, height, lat):
-    lat_rad = lat * math.pi / 180.0
-    merc = 0.5 * math.log( (1 + math.sin(lat_rad)) / (1 - math.sin(lat_rad)) )
-    return int(round((height / 2) - (width * merc / (2 * math.pi))))
+class State():
+    '''
+    Represents a US State
+    attributes:
+    name
+    border_coord_list
+    mean/median AGI
+
+    methods:
+    __init__
+    __str__
+    extract_lng_lat
+    plot
+    '''
+
+    def __init__(self, name):
+        self.name = name
+        self.border_coord_list = [Point(coord['lng'], coord['lat']).get_mercator_projection(4000, 2300) for coord in datastore[self.name]["Coordinates"]]
+        self.agi_tuple = irs_agi[self.name]
+
+    def __str__(self):
+        state = [self.name + ' has coordinates: ']
+        for coord in self.border_coord_list:
+            s = str(coord.to_pixel_coords())
+            state.append(s)
+        state.append(' and has AGI: ' + str(self.agi_tuple))
+        return ' '.join(state)
+
+    def extract_lng_lat(self):
+        lng_lat = [(coord.to_pixel_coords()[0], coord.to_pixel_coords()[1]) for coord in self.border_coord_list]
+        return lng_lat
+
+    def plot_state(self):
+        pygame.draw.polygon(screen,white,self.extract_lng_lat())
+        pygame.draw.polygon(screen,black,self.extract_lng_lat(), 1)
 
 #https://www.census.gov/data/datasets/time-series/demo/saipe/model-tables.html
 irs_agi = {} #key = state, value = (median AGI, mean AGI)
@@ -83,43 +115,8 @@ with open('Hospitals.csv', newline='') as csvfile:
             lng = hospital[0]
             lat = hospital[1]
             name = hospital[4]
-            hospitals[str(name)] = Point(get_x(4000, float(lng)), get_y(4000, 2300, float(lat)))
-
-class State():
-    '''
-    Represents a US State
-    attributes:
-    name
-    border_coord_list
-    mean/median AGI
-
-    methods:
-    __init__
-    __str__
-    extract_lng_lat
-    plot
-    '''
-
-    def __init__(self, name):
-        self.name = name
-        self.border_coord_list = [Point(coord['lng'], coord['lat']) for coord in datastore[self.name]["Coordinates"]]
-        self.agi_tuple = irs_agi[self.name]
-
-    def __str__(self):
-        state = [self.name + ' has coordinates: ']
-        for coord in self.border_coord_list:
-            s = str(coord.to_pixel_coords())
-            state.append(s)
-        state.append(' and has AGI: ' + str(self.agi_tuple))
-        return ' '.join(state)
-
-    def extract_lng_lat(self):
-        lng_lat = [(get_x(4000, coord.to_pixel_coords()[0]), get_y(4000, 2300, coord.to_pixel_coords()[1])) for coord in self.border_coord_list]
-        return lng_lat
-
-    def plot_state(self):
-        pygame.draw.polygon(screen,white,self.extract_lng_lat())
-        pygame.draw.polygon(screen,black,self.extract_lng_lat(), 1)
+            # hospitals[str(name)] = Point(get_x(4000, float(lng)), get_y(4000, 2300, float(lat)))
+            hospitals[str(name)] = Point(float(lng), float(lat)).get_mercator_projection(4000, 2300)
 
 pygame.init()
 size = (1500, 1500)
