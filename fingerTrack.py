@@ -109,6 +109,7 @@ class finger_track():
         for i in range(len(self.path)):
             if len(self.path) <= 1:
                 break
+
             else:
                 if i < len(self.path)-2:
                     cv2.line(canvas.new_canvas, self.path[i], self.path[i+1], self.colors[i], 3)
