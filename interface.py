@@ -6,36 +6,49 @@ Asteroids via Pygame
 """
 
 import pygame
-from math import cos,sin,sqrt,radians,atan
+from math import cos,sin,sqrt,radians,atan,pi
 from classes import *
+import time
+import random
 
 
+""" initiate pygame """
 pygame.init()
 
-display_width = 1000
-display_height = 800
-imgScale = .2
-
+""" initiate screen """
+display_width = 1600
+display_height = 1200
+imgScale = .13
 gameDisplay = pygame.display.set_mode((display_width,display_height))
 pygame.display.set_caption("Asteroids")
-
 black = (0,0,0)
 white = (255,255,255)
 
+""" some other important things """
 clock = pygame.time.Clock()
 running = True
-shipImg = pygame.image.load('spa1.png')
 
+""" initiate ship object """
+shipImg = pygame.image.load('spa1.png')
 shipX = (display_width * .5)
 shipY = (display_height * .5)
 w,h = shipImg.get_size()
 shipImg = pygame.transform.scale(shipImg,(int(w*imgScale),int(h*imgScale)))
 ship = Ship(shipX,shipY,270,shipImg,gameDisplay)
 
+""" initiate asteroids and UFOs """
+numberOfAsteroids = 4
+AllThings = listOfObjects(gameDisplay)
+AllThings.Asteroids.spawnAsteroids(numberOfAsteroids)
+AllThings.UFOs.spawnBigUFO()
+AllThings.update() # testing the many asteroids spawn in the right spot
+
+""" initiate GUI """
 gui = GUI(gameDisplay)
 
 while running:
 
+    """ listens to events and does stuff """
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -43,8 +56,8 @@ while running:
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_q:
                 running = False
+    """ player interface """
     keys_pressed = pygame.key.get_pressed()
-
     if keys_pressed[pygame.K_UP]:
         ship.move()
     else:
@@ -54,9 +67,22 @@ while running:
     if keys_pressed[pygame.K_RIGHT]:
         ship.rotate(-1)
 
+    """ UFO spawning """
+    randomInt = random.randint(1,1000)
+    if(randomInt == 1 and len(AllThings.UFOs.listOfUFOs) == 0):
+        AllThings.UFOs.spawnBigUFO()
+
+    """ spawns new level """
+    if(len(AllThings.Asteroids.listOfAsteroids) == 0 and len(AllThings.UFOs.listOfUFOs) == 0):
+        numberOfAsteroids += 1
+        AllThings.Asteroids.spawnAsteroids(numberOfAsteroids)
+
+
+
     gameDisplay.fill(black)
     gui.update(150000)
     ship.update()
+    AllThings.update()
 
     pygame.display.update()
     clock.tick(60)

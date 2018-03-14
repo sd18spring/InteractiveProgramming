@@ -1,5 +1,9 @@
 import pygame
 from math import cos,sin,sqrt,radians,atan
+from pygame.locals import *
+import time
+import math
+import random
 
 pygame.init()
 
