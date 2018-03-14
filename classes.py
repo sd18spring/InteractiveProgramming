@@ -112,7 +112,7 @@ class Ship():
         self.rect.center = (self.x,self.y)
 
         self.gD.blit(self.nImage,self.rect)
-        pygame.draw.rect(self.gD,(255,0,255),self.rect) # display's the ship's hit box in purple (for testing)
+        #pygame.draw.rect(self.gD,(255,0,255),self.rect) # display's the ship's hit box in purple (for testing)
     def shoot(self,AllThings):
         x = self.x + int(5 * cos(self.angle))
         y = self.y + int(5 * sin(self.angle))
