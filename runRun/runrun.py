@@ -19,6 +19,8 @@ def main(SCREEN_WIDTH, SCREEN_HEIGHT):
 
     """Initialize PyGame"""
     pygame.init()
+    time = pygame.time.Clock()
+
     """Set the window Size"""
 
     """Create the Screen"""
@@ -31,14 +33,9 @@ def main(SCREEN_WIDTH, SCREEN_HEIGHT):
 
     player = Player()
     ground = Ground()
-    # level_list = []
-    # level_list.append(Level_01(player))
-
-    # current_level_no = 0
-    # current_level = level_list[current_level_no]
+    items = Items(ground)
 
     active_sprite_list = pygame.sprite.Group()
-    # player.level = current_level
 
     player.rect.x = 0
     player.rect.y = .5 * SCREEN_HEIGHT - player.rect.height
@@ -55,9 +52,14 @@ def main(SCREEN_WIDTH, SCREEN_HEIGHT):
     #     self.background = self.background.convert()
     #     self.background.fill((0,0,0))
 
-    pygame.key.set_repeat(500, 30)
+    #pygame.key.set_repeat(0, 30)
 
     while True:
+        """Keep track of time"""
+        time.tick(60)
+        frame_time = time.get_time()
+
+        """Check for player inputs"""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
@@ -66,25 +68,24 @@ def main(SCREEN_WIDTH, SCREEN_HEIGHT):
                     sys.exit()
                 if event.key == pygame.K_SPACE:
                     player.jump(ground_height)
-                # if event.key == pygame.K_LEFT:
-                #     player.move_left()
-                # if event.key == pygame.K_RIGHT:
-                #     player.move_right()
+                if event.key == pygame.K_LEFT:
+                    player.move_left(frame_time)
+                elif event.key == pygame.K_RIGHT:
+                    player.move_right(frame_time)
+            elif player.change_x != 0:
+                player.stop(frame_time)
 
         """Check for collisions with rocks and end game """
 
         """Check for collision with coins and update score"""
 
         """Advance the ground"""
-        ground_height = ground.advance()
-        ground.build()
+        ground_height = ground.advance(frame_time, player.rect.x, player.rect.width, items)
+        ground.build(items)
 
-        player.update(ground_height)
-        # current_level.update()
-
+        player.update(frame_time, ground_height)
 
         """Draw the game"""
-        # current_level.draw(screen)
         screen.blit(background, (0, 0))
         active_sprite_list.draw(screen)
         ground.draw(screen, GREEN)
@@ -94,76 +95,87 @@ def main(SCREEN_WIDTH, SCREEN_HEIGHT):
 class Player(pygame.sprite.Sprite):
 
     def __init__(self):
-
         super().__init__()
         self.image = (pygame.image.load('data/images/snake.png'))
         self.rect = self.image.get_rect()
-
-        self.change_y = 0
+        self.acceleration_y = .01
+        self.acceleration_x = .02
+        self.jump_power = 1.5
+        self.speed_limit = 4
         self.change_x = 0
+        self.change_y = 0
 
-        self.level = None
+    def update(self, t, ground_height):
+        self.calc_grav(t, ground_height)
 
-    def update(self, ground_height):
-        self.calc_grav(ground_height)
+        self.rect.y += self.change_y * t
+        self.rect.x += self.change_x * t
 
-        self.rect.y += self.change_y
-        #
-        # self.rect.x += self.change_x
+        if self.rect.x < 0:
+            self.rect.x = 0
+            self.change_x = 0
+        elif self.rect.x + self.rect.width > SCREEN_WIDTH/2:
+            self.rect.x = SCREEN_WIDTH/2 - self.rect.width
+            self.change_x = 0
 
-    def calc_grav(self, ground_height):
+    def calc_grav(self, t, ground_height):
         bottom = self.rect.y + self.rect.height
         if bottom < ground_height:
-            self.change_y += 1
+            self.change_y += self.acceleration_y * t
 
-        if bottom >= ground_height and self.change_y >= 0:
+        if bottom >= ground_height - 5 and self.change_y >= 0:
             self.change_y = 0
             self.rect.y = ground_height - self.rect.height
 
     def jump(self, height):
         bottom = self.rect.y + self.rect.height
-        threshold = height - 5
+        threshold = height - 10
         if bottom > threshold:
-            self.change_y = -15
+            self.change_y = -self.jump_power
 
-    # def move_right(self):
-    #     self.change_x += .5
-    #
-    # def move_left(self):
-    #     self.change_x -= -.5
+    def move_right(self, t):
+        self.change_x += self.acceleration_x * t
+        if self.change_x > self.speed_limit:
+            self.change_x = self.speed_limit
+
+    def move_left(self, t):
+         self.change_x -= self.acceleration_x * t
+         if self.change_x < -self.speed_limit:
+             self.change_x = -self.speed_limit
+
+    def stop(self, t):
+        self.change_x = 0
 
 
-class Coin(pygame.sprite.Sprite):
-
+class Item(pygame.sprite.Sprite):
+    """ Class representing an item the player can interact with"""
     def __init__(self):
         super().__init__()
+
+
+class Coin(Item):
+    """ Class representing a coin"""
+    def __init__(self, x, y):
+        Item.__init__()
         self.image = (pygame.image.load('data/images/coin.png'))
         self.rect = self.image.get_rect()
-
-        self.speed = 10
-        self.height = 0.2 * SCREEN_HEIGHT
-
-        self.location = []
-        for i in (2*SCREEN_WIDTH):
-            n = random.choice([1,2])
-            self.location.append(n)
-
-    def advance(self, x = 0):
-        pass
+        self.rect.x = x
+        self.rect.y = y
 
 
 class Ground():
     """ Class representing the ground """
-
     def __init__(self):
-        self.speed = 10
+        self.speed = 1
         self.ground_min = .9 * SCREEN_HEIGHT
         self.ground_max = .4 * SCREEN_HEIGHT
         self.ground_height = [.75 * SCREEN_HEIGHT] * (2 * SCREEN_WIDTH)
 
-    def advance(self, x = 0):
-        height = self.ground_height[x]
-        del self.ground_height[:self.speed]
+    def advance(self, t, start, end, items):
+        height = min(self.ground_height[start:start+end])
+        distance = t * self.speed
+        del self.ground_height[:distance]
+        items.advance(distance)
         return height
 
     def draw(self, screen, color):
@@ -171,17 +183,17 @@ class Ground():
             y = int(self.ground_height[x-1])
             pygame.draw.line(screen, color, (x, y), (x, y+5))
 
-    def build(self, score = 0):
+    def build(self, items, score = 0):
         if len(self.ground_height) > 1.1 * SCREEN_WIDTH:
             return
 
         pick = random.randint(1,10)
         if pick > 7:
-            self.slope()
+            self.slope(items)
         else:
-            self.flat()
+            self.flat(items)
 
-    def slope(self):
+    def slope(self, items):
         start = self.ground_height[-1]
         space_below = self.ground_min - start
         space_above = self.ground_max - start
@@ -194,10 +206,34 @@ class Ground():
             y = int(slope * x) + start
             self.ground_height.append(y)
 
-    def flat(self):
+        items.add(run)
+
+    def flat(self, items):
         length = random.randint(20, SCREEN_WIDTH)
         height = self.ground_height[-1]
         self.ground_height.extend([height] * length)
+
+        items.add(length)
+
+class Items():
+    """ Class representing a list all the items in the game"""
+
+    def __init__(self, ground):
+        self.item_list = ['None'] * len(ground.ground_height)
+        self.chance_coin = .01
+
+    def advance(self, distance):
+        for item in self.item_list[:distance]:
+            if item != 'None':
+                item.kill
+        del self.item_list[:distance]
+        for item in self.item_list:
+            if item != 'None':
+                item.location -= distance
+
+    def add(self, amount):
+        self.item_list.extend(['None'] * amount)
+
 
 
 
