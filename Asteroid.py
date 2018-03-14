@@ -112,10 +112,10 @@ class SmallAsteroid(Asteroid):
         self.destroyed = True
         return []
 class CollectionOfAsteroids():
-    def __init__(self,gameDisplay,speed):
+    def __init__(self,gameDisplay):
         self.listOfAsteroids = []
         self.gameDisplay = gameDisplay
-        self.speed = speed
+        self.speed = 1
     def spawnAsteroids(self,numberOfAsteroids):
         width, height = self.gameDisplay.get_size()
         listOfAsteroids = [] # initializes a list of asteroids to update
@@ -142,7 +142,7 @@ class CollectionOfAsteroids():
         self.listOfAsteroids = listOfAsteroids
         self.listOfRects = listOfRects
     def update(self):
-        listOfRects = []
+        listOfRects = [] # asteroid
         ListToDelete = [] # a list that incluedes the indicies of what to delete
         for i in range(len(self.listOfAsteroids)):
             if(self.listOfAsteroids[i].destroyed):
@@ -153,7 +153,7 @@ class CollectionOfAsteroids():
         for j in reversed(ListToDelete): # reversed so that it doesn't delete one and shift mid for loop.
             del self.listOfAsteroids[j]
         self.listOfRects = listOfRects
-    def destroyAll(self): # function for testing, not for the real game
+    def destroyAll(self): # function for testingasteroid, not for the real game
         sizeOfAsteroids = range(len(self.listOfAsteroids))
         for i in sizeOfAsteroids:
             newAsteroid = self.listOfAsteroids[i].destroy()
@@ -162,7 +162,7 @@ class CollectionOfAsteroids():
         for i in sizeOfAsteroids:
             self.listOfAsteroids.pop(0)
 class Projectile():
-    def __init__(self,x,y,direction,gameDisplay):
+    def __init__(self,x,y,direction,alliance,gameDisplay):
         size = 3
         self.x = x
         self.y = y
@@ -175,8 +175,9 @@ class Projectile():
         self.image.fill((255,255,255))
         self.gameDisplay = gameDisplay
         self.destroyed = False
-        self.distanceTravelled = 0
+        self.distanceTravelled = 0 # asteroids
         self.distanceWanted = 500 # the distance that the projectile travels before it is destroyed
+        self.alliance = alliance
     def update(self):
         if(self.distanceTravelled < self.distanceWanted): # if the projectile has travelled farther than the wanted distance, it destroys itself
             width, height = self.gameDisplay.get_size() # gets the display's width and length
@@ -200,11 +201,11 @@ class Projectile():
         self.destroyed = True
 class CollectionOfProjectiles():
     def __init__(self,gameDisplay):
-        self.listOfProjectiles = [] #initializes the projectiles
+        self.listOfProjectiles = [] #initializes the asteroidprojectiles
         self.listOfRects = [] # initializes their hitboxes
         self.gameDisplay = gameDisplay
-    def addProjectile(self,x,y,direction):
-        self.listOfProjectiles.append(Projectile(x,y,direction,self.gameDisplay)) # The spacebar command should call this
+    def addProjectile(self,x,y,direction,alliance):
+        self.listOfProjectiles.append(Projectile(x,y,direction,alliance,self.gameDisplay)) # The spacebar command should call this
                                             # with the x,y and directions of the ship (with an offset bc of the front of the ship and that the origin is top left)
     def update(self):
         ListToDelete = [] # initializes the indices of what to delete
@@ -217,7 +218,7 @@ class CollectionOfProjectiles():
             del self.listOfProjectiles[j]
 
 class UFO():
-    def __init__(self,y,FacingRight,gameDisplay):
+    def __init__(self,y,FacingRight,gameDisplay,listOfProjectiles):
         self.y = y
         self.speed = 4
         self.destroyed = False
@@ -228,11 +229,16 @@ class UFO():
         self.FacingRight = FacingRight
         self.gameDisplay = gameDisplay
         width, height = gameDisplay.get_size()
+        self.counter = 0
+        self.listOfProjectiles = listOfProjectiles
         if(FacingRight):
             self.x = -self.w
         else:
             self.x = width
     def update(self):
+        if(self.counter % self.fireRate == 0):
+            self.shoot()
+        self.counter += 1
         width, height = self.gameDisplay.get_size()
         if(self.straight == True):
             if(self.FacingRight):
@@ -256,67 +262,105 @@ class UFO():
                     self.direction = 3 * math.pi / 4
         self.x = self.x + (self.speed * math.cos(self.direction))  # Sets the speed to a small change in space
         self.y = self.y + (self.speed * math.sin(self.direction))
-        if(self.x >= width): # if the UFO goes out of the screen, destroy it
+        if(self.x >= width and self.FacingRight): # if the UFO goes out of the screen, destroy it
             self.destroyed = True
-        elif(self.x <= 0 - self.w):
+        elif(self.x <= 0 - self.w and not self.FacingRight):
             self.destroyed = True
         if(self.y >= height): # If the UFOs coordinate goes outside of the window, set that coordinate to the other side of the map
             self.y = 0 - self.h # adding the width of the image to make sure that the image doesn't appear suddenly (the image's position is the top right of the image)
         elif(self.y <= 0 - self.h): # same as above (makes it so that the whole image has to leave the screen for it to go to the other side)
             self.y = height
+        self.rect = pygame.Rect((self.x + self.shrinkage / 2,self.y + self.shrinkage / 2),(self.w - self.shrinkage,self.h - self.shrinkage))
+        #pygame.draw.rect(self.gameDisplay,(0,0,255),self.rect) # display's the asteroid's hit box in red (for testing)
         self.gameDisplay.blit(self.image,(self.x,self.y))
     def destroy(self):
         self.destroyed = True
-def BigUFO(UFO):
-    def __init__(self,y,FacingRight,gameDisplay):
-        super().__init__(y,FacingRight,gameDisplay)
+class BigUFO(UFO):
+    def __init__(self,y,FacingRight,gameDisplay,listOfProjectiles):
+        super().__init__(y,FacingRight,gameDisplay,listOfProjectiles)
         self.image = pygame.transform.scale(self.image,(self.w // 2,self.h // 2))
         self.w,self.h = self.image.get_size()
-    def shoot(self,listOfProjectiles):
-        listOfProjectiles.addProjectile(self.x,self.y,random.uniform(0,2*math.pi))
-class listOfObjects():
-    def __init__(self,asteroids,projectiles):
-        self.Asteroids = asteroids
-        self.Projectiles = projectiles # contains the CollectionOfAsteroids and CollectionOfProjectiles objects
+        self.shrinkage = 30
+        self.rect = pygame.Rect((self.x + self.shrinkage / 2,self.y + self.shrinkage / 2),(self.w - self.shrinkage,self.h - self.shrinkage))
+        self.fireRate = 120
+    def shoot(self):
+        if(not self.destroyed):
+            self.listOfProjectiles.addProjectile(self.x + self.w / 2,self.y + self.h / 2,random.uniform(0,2*math.pi),"UFO")
+class CollectionOfUFOs():
+    def __init__(self,gameDisplay,listOfProjectiles):
+        self.listOfUFOs = [] #initializes the projectiles
+        self.listOfRects = [] # initializes their hitboxes
+        self.gameDisplay = gameDisplay
+        self.listOfProjectiles = listOfProjectiles
+    def spawnBigUFO(self):
+        width, height = self.gameDisplay.get_size()
+        sampleUFO = BigUFO(0,True,self.gameDisplay,self.listOfProjectiles)
+        y = random.randint(-sampleUFO.h // 2,height - sampleUFO.h // 2)
+        facingRight = bool(random.getrandbits(1))
+        self.listOfUFOs.append(BigUFO(y,facingRight,self.gameDisplay,self.listOfProjectiles))
     def update(self):
-        self.Projectiles.update()
+        listOfRects = []
+        ListToDelete = [] # initializes the indices of what to delete
+        for i in range(len(self.listOfUFOs)):
+            if(self.listOfUFOs[i].destroyed):
+                ListToDelete.append(i) # adding the index of destroyed particles to delete
+            else:
+                self.listOfUFOs[i].update()
+                listOfRects.append(self.listOfUFOs[i].rect)
+        for j in reversed(ListToDelete):
+            del self.listOfUFOs[j]
+        self.listOfRects = listOfRects
+class listOfObjects():
+    def __init__(self,gameDisplay):
+        self.gameDisplay = gameDisplay
+        self.Asteroids = CollectionOfAsteroids(gameDisplay)
+        self.Projectiles = CollectionOfProjectiles(gameDisplay) # contains the CollectionOfAsteroids and CollectionOfProjectiles objects
+        self.UFOs = CollectionOfUFOs(gameDisplay,self.Projectiles)
+    def update(self):
         self.Asteroids.update()
-        print(len(self.Asteroids.listOfAsteroids),len(self.Asteroids.listOfRects))
-        for i in self.Projectiles.listOfProjectiles: # runs throught each projectile
-            collisions = i.rect.collidelist(self.Asteroids.listOfRects) # detects if any of the asteroids are in contact with the projectile
-            if (collisions != -1): # if there is a collision
-                self.Asteroids.listOfAsteroids += self.Asteroids.listOfAsteroids[collisions].destroy() #destroy both the asteroid and the projectile.
+        self.UFOs.update()
+        self.Projectiles.update()
+        for i in self.Projectiles.listOfProjectiles: # runs through each projectile
+            collisionsAster = i.rect.collidelist(self.Asteroids.listOfRects) # detects if any of the asteroids are in contact with the projectile
+            if (collisionsAster != -1): # if there is a collision
+                self.Asteroids.listOfAsteroids += self.Asteroids.listOfAsteroids[collisionsAster].destroy() #destroy both the asteroid and the projectile.
                 i.destroy()
-
+            collisionsUFO = i.rect.collidelist(self.UFOs.listOfRects)
+            if (collisionsUFO != -1 and i.alliance != "UFO"): # if there is a collision
+                self.UFOs.listOfUFOs[collisionsUFO].destroy() #destroy both the asteroid and the projectile.
+                i.destroy()
+        for i in self.UFOs.listOfUFOs:
+            collisionsAster = i.rect.collidelist(self.Asteroids.listOfRects) # detects if any of the asteroids are in contact with the projectile
+            if (collisionsAster != -1): # if there is a collision
+                self.Asteroids.listOfAsteroids += self.Asteroids.listOfAsteroids[collisionsAster].destroy() #destroy both the asteroid and the projectile.
+                i.destroy()
 
 pygame.init()
 gameDisplay = pygame.display.set_mode((800,600))
 clock = pygame.time.Clock()
 numberOfAsteroids = 4
-# CollAster = CollectionOfAsteroids(gameDisplay,1)
-# CollAster.spawnAsteroids(numberOfAsteroids) # initiating a list of asteroids to keep track of
-# proj = CollectionOfProjectiles(gameDisplay)
-# proj.addProjectile(400,300,math.pi / 4)
 Black = (0,0,0) # black screen is the background
 gameDisplay.fill(Black)
-# AllThings = listOfObjects(CollAster,proj)
-# AllThings.update() # testing the many asteroids spawn in the right spot
+AllThings = listOfObjects(gameDisplay)
+AllThings.Asteroids.spawnAsteroids(numberOfAsteroids)
+AllThings.UFOs.spawnBigUFO()
+AllThings.update() # testing the many asteroids spawn in the right spot
 pygame.display.update()
 running = True # for the exit of the game
 randomCounter = 0
-UFO = UFO(300,True,gameDisplay)
 while running:
-    # randomCounter += 1
-    # if(randomCounter % 5 == 0):
-    #     AllThings.Projectiles.addProjectile(400,300,random.uniform(0,2*math.pi))
+    randomCounter += 1
+    randomInt = random.randint(1,1000)
+    if(randomInt == 1 and len(AllThings.UFOs.listOfUFOs) == 0):
+        AllThings.UFOs.spawnBigUFO()
+    if(randomCounter % 30 == 0):
+        AllThings.Projectiles.addProjectile(400,300,random.uniform(0,2*math.pi),"Ship")
     gameDisplay.fill(Black)
-    # AllThings.update()# update each asteroid
-    #proj.update()
-    UFO.update()
+    AllThings.update()# update each asteroid
     pygame.display.update()
-    # if(len(AllThings.Asteroids.listOfAsteroids) == 0):
-    #     numberOfAsteroids += 1
-    #     AllThings.Asteroids.spawnAsteroids(numberOfAsteroids)
+    if(len(AllThings.Asteroids.listOfAsteroids) == 0 and len(AllThings.UFOs.listOfUFOs) == 0):
+        numberOfAsteroids += 1
+        AllThings.Asteroids.spawnAsteroids(numberOfAsteroids)
     clock.tick(60)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
