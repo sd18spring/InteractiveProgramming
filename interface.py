@@ -46,6 +46,9 @@ AllThings.update() # testing the many asteroids spawn in the right spot
 """ initiate GUI """
 gui = GUI(gameDisplay)
 
+""" initialize the ship to be able to shoot"""
+canShoot = True
+
 while running:
 
     """ listens to events and does stuff """
@@ -66,8 +69,17 @@ while running:
         ship.rotate(1)
     if keys_pressed[pygame.K_RIGHT]:
         ship.rotate(-1)
+    if(canShoot):
+        counter = 0
+    else:
+        counter += 1
+        if(counter >= 20):
+            canShoot = True
     if keys_pressed[pygame.K_SPACE]:
-        ship.shoot(AllThings)
+        if(canShoot):
+            ship.shoot(AllThings)
+            canShoot = False
+            counter = 0
     """ UFO spawning """
     randomInt = random.randint(1,1000)
     if(randomInt == 1 and len(AllThings.UFOs.listOfUFOs) == 0):

@@ -113,9 +113,8 @@ class Ship():
 
         self.gD.blit(self.nImage,self.rect)
     def shoot(self,AllThings):
-        x,y = self.rect.center
-        x = x + int(5 * cos(self.angle))
-        y = y + int(5 * sin(self.angle))
+        x = self.x + int(5 * cos(self.angle))
+        y = self.y + int(5 * sin(self.angle))
         AllThings.Projectiles.addProjectile(x,y,radians(self.angle),"Ship")
 class Asteroid():
     """
