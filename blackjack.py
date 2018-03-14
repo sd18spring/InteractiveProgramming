@@ -1,6 +1,7 @@
 import random
 from unicards import unicard
-
+import card_setup
+import card_detect
 
 class Card:
     """Represents a standard playing card.
@@ -123,14 +124,19 @@ class Game():
         self.deck=Deck()
         self.deck.shuffle()
         self.player=Hand('Player')
+        #self.player=card_detect.cards
         self.dealer=Hand('Dealer')
 
     def deal(self):
         """Deals 2 cards to the player and one to the dealer"""
         self.deck.move_cards(self.dealer,1)
         print("Dealer" + str(self.dealer) + " []")
-        self.deck.move_cards(self.player,2)
-        print("Player" + str(self.player))
+        #self.deck.move_cards(self.player,2)
+        #print("Player" + str(self.player))
+        
+        # Call mainloop function from card_detect.py and print resulting rank and suit
+        rank_name, suit_name = card_detect.mainloop()
+        print("Player has:" + str(rank_name),'of', str(suit_name))
 
     def play(self):
         """Simulates the player's turn in a game of blackjack"""
@@ -175,7 +181,7 @@ class Game():
         """Calculates the current total points of the dealer.
 
         If there is an ace it will determine whether to be worth 11 or 1 point
-        besed on if the current total is less than or equal to 10"""
+        based on if the current total is less than or equal to 10"""
         values = [None, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
         self.dealer.cards.sort(reverse = True)
         self.dealer.total = 0

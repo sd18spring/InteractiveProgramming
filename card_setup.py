@@ -300,6 +300,7 @@ def match_card(unknownCard, rank_training, suit_training):
 
 def draw_results(image, unknownCard):
     '''Draw the card name, center point, and contour on the image frame.'''
+    #card_results = []
 
     x = unknownCard.center[0]
     y = unknownCard.center[1]
@@ -308,13 +309,16 @@ def draw_results(image, unknownCard):
     rank_name = unknownCard.best_rank_match
     suit_name = unknownCard.best_suit_match
 
+    #card_results = [rank_name, suit_name]
+    #print(card_results)
+
     # Draw card name twice, so letters have black outline
     cv2.putText(image,(rank_name+' of'),(x-60,y-10),font,1,(0,0,0),3,cv2.LINE_AA)
     cv2.putText(image,(rank_name+' of'),(x-60,y-10),font,1,(200,200,200),2,cv2.LINE_AA)
 
     cv2.putText(image,suit_name,(x-60,y+25),font,1,(0,0,0),3,cv2.LINE_AA)
     cv2.putText(image,suit_name,(x-60,y+25),font,1,(200,200,200),2,cv2.LINE_AA)
-    print(rank_name+' of', suit_name)
+    #print(rank_name+' of', suit_name)
     '''
     Can draw difference value for troubleshooting purposes
     rank_difference = str(unknownCard.rank_difference)
@@ -322,7 +326,7 @@ def draw_results(image, unknownCard):
     cv2.putText(image,rank_difference,(x+20,y+30),font,0.5,(0,0,255),1,cv2.LINE_AA)
     cv2.putText(image,suit_difference,(x+20,y+50),font,0.5,(0,0,255),1,cv2.LINE_AA)
      '''
-    return image
+    return image, rank_name, suit_name
 
 def flattener(image, pts, w, h):
     '''
