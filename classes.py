@@ -154,7 +154,7 @@ class Controler(object):
                 for node in self.model.nodes:
                     if ((m_pos[0]-node.x)**2+(m_pos[1]-node.y)**2)**.5 <= Node.node_size:
                         new_stuff = self.model.delete_branch(self.model.nodes.index(node))
-                        self.model.nodes = new_stuff[0 #give model a new list not containing the "deleted" nodes
+                        self.model.nodes = new_stuff[0] #give model a new list not containing the "deleted" nodes
                         self.model.clines = new_stuff[1]
 
 
@@ -319,9 +319,9 @@ class Node(object):
 
 
 class ConnectionLine(object):
-"""A line connecting a node to each of it's children, the length being determined
-by the locations of the nodes within it
-Attributes: start, end, x0, x1, y0, y1, length, points"""
+    """A line connecting a node to each of it's children, the length being determined
+    by the locations of the nodes within it
+    Attributes: start, end, x0, x1, y0, y1, length, points"""
     line_width = 3
 
     def __init__(self,start,end):
