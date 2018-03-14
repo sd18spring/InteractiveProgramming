@@ -1,11 +1,22 @@
-import pandas as pd
+"""Hurricane.py contains the code for the Hurricane class, which is utilized in the Model class. Make sure to have
+the numpy and datetime libraries. Script can be run just by typing "python Hurricane.py" in terminal."""
 import numpy as np
 from datetime import datetime
 
 
 class Hurricane(object):
-    # Primary constructor
+    """
+    The Hurricane class represents each hurricane in the map. Id, name, latitude, longitude, season, times,
+    and winds are extracted from a large data frame inputted by Model.py. Each hurricane object contains information
+    necessary for the hover, slider, and plotting tools in the View class.
+    """
     def __init__(self, df):
+        """
+        Creates the hurricane object with a data frame obtained from NOAA. Each object has an id, name, a season,
+        a date, a duration, a category, and arrays of web mercator projection coordinates.
+
+        :param df: data frame that Model.__init__ creates, there is one df for each hurricane
+        """
         self.id = df['Serial_Num'][1]
         self.name = df['Name'][1]
 
@@ -14,10 +25,10 @@ class Hurricane(object):
         self.x = self.convertLong(longs)
         self.y = self.convertLat(lats)
 
-        season = df['Season'][1]
+        self.season = df['Season'][1]
         times = df['ISO_time'][1:].tolist()
 
-        self.time = self.findTime(season, times[0])
+        self.time = self.findTime(self.season, times[0])
         self.duration = self.findDuration(times)
 
         winds = df['Wind(WMO)'][1:]
@@ -25,11 +36,21 @@ class Hurricane(object):
         self.category = self.findCat(winds)
 
     def __str__(self):
+        """
+        Creates a string representation of a hurricane object
+        :return: the string representing hurricane
+        """
         output = "ID: " + str(self.id) + " Name: " + str(self.name) + " Time: " + str(self.time) + " Duration: " + \
                  str(self.duration) + " Cat: " + str(self.category) + "\n" + "\n" + "x:" + str(self.x) + "\n" + "y:" + str(self.y)
         return output
 
     def convertLong(self, longs):
+        """
+        Converts an array of longitudes signifying a hurricane's path to web mercator x values
+        INPUT DOCTESTS
+        :param longs:
+        :return:
+        """
         k = 6378137
         x = []
         for ind, i in enumerate(np.asfarray(longs.values, float)):
@@ -61,7 +82,7 @@ class Hurricane(object):
         start2 = datetime.strptime(start, "%Y-%m-%d")
         end2 = datetime.strptime(end, "%Y-%m-%d")
         duration = abs((end2 - start2).days)
-        return str(duration)
+        return str(duration)+ " day(s)"
 
     def findCat(self, winds):
         maxWind = -1

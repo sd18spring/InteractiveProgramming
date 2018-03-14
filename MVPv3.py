@@ -1,9 +1,3 @@
-
-# coding: utf-8
-
-# In[1]:
-
-
 from Model import Model
 import pandas as pd
 from bokeh.io import output_file, show
@@ -12,17 +6,6 @@ from bokeh.models import WMTSTileSource, HoverTool, CustomJS, Slider, ColumnData
 from bokeh.layouts import widgetbox, layout
 import pickle
 # from bokeh.models.widgets import TextInput
-
-
-# In[2]:
-
-
-# test = Model(12790, 12805)
-# print(test)
-
-
-# In[3]:
-
 
 hurricanes = []
 with open('hurricane_data.pkl', 'rb') as f:
