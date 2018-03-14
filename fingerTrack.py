@@ -54,7 +54,7 @@ class finger_track():
     def shift(self, myList, myElement):
         return myList[1:] + [myElement]
 
-    def find_center(self, mask, target):
+    def find_center(self, mask, target, disappr=True):
         """This function takes in a cv2 mask, find the center of the
         contours in the mask, and draw a green dot at the center location
         on the target frame
@@ -81,13 +81,19 @@ class finger_track():
                         if len(self.path) < self.pathlength:
                             self.path.append((self.cx, self.cy))
                         else:
-                            self.path = self.shift(self.path, (self.cx, self.cy))
+                            if disappr:
+                                self.path = self.shift(self.path, (self.cx, self.cy))
+                            else:
+                                self.path.append((self.cx, self.cy))
                         dist2hue = self.map(distance, 0.0, 150.0, 0.0, 255.0)
                         paintColor = self.brush_color(dist2hue)
                         if len(self.colors) < self.pathlength:
                             self.colors.append((int(paintColor[0][0][0]), int(paintColor[0][0][1]), int(paintColor[0][0][2])))
                         else:
-                            self.colors = self.shift(self.colors, (int(paintColor[0][0][0]), int(paintColor[0][0][1]), int(paintColor[0][0][2])))
+                            if disappr:
+                                self.colors = self.shift(self.colors, (int(paintColor[0][0][0]), int(paintColor[0][0][1]), int(paintColor[0][0][2])))
+                            else:
+                                self.colors.append((int(paintColor[0][0][0]), int(paintColor[0][0][1]), int(paintColor[0][0][2])))
                         # print(self.colors)
             cv2.circle(target, (self.cx, self.cy), 2, (0, 255, 0), -1)
             self.notFound = False
@@ -95,7 +101,7 @@ class finger_track():
             """"""
             self.notFound = True
 
-    def draw(self, canvas, disappr=True):
+    def draw(self, canvas):
         """This function draws the lines on the canvas of the screen.
         The default is that only the 20 newest points will be drawn on screen.
         """

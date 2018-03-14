@@ -54,15 +54,14 @@ class canvas():
             self.make_rect()
             return True
 
-    def addpoints(self):
+    def addpoints(self, track):
         self.points += self.value
+        track.pathlength += 1
 
 if __name__ == "__main__":
     canvas1 = canvas(1280, 960)
     canvas1.set_color(0, 0, 0)
     canvas1.set_bgColor()
-    # cam = cv2.VideoCapture(0)
-    # print(cam.get(3), cam.get(4))
     while True:
         canvas1.show_canvas()
         if cv2.waitKey(1) & 0xFF == ord('s'):
