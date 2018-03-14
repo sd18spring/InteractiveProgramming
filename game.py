@@ -24,6 +24,8 @@ class Model(object):
             line.add(self.rd_lines)
 
     def update(self):
+        """update positions of objects, player, rd_lines, and adds more
+        objects to the arena"""
         self.player.update()
         for gas in self.gastanks:
             gas.update()
@@ -44,6 +46,7 @@ class Model(object):
         self.add_obj()
 
     def add_obj(self):
+        """Randomly adds objects for the player to interact with"""
         obj_index = random.randint(1,4000)
         if self.player.gas_level < 20:
             if obj_index>3990:
@@ -165,6 +168,7 @@ class Player(pygame.sprite.Sprite):
 class View():
     """drawing what is in the model"""
     def __init__(self, model):
+
         self.model = model
         self.screen = pygame.display.set_mode((640,480))
         self.gas_image = pygame.image.load('gas.png')
@@ -175,6 +179,7 @@ class View():
 
     def draw(self):
         """Draw the current game state on the screen"""
+        #drawing the road
         self.screen.fill(pygame.Color(50,50,50))
         pygame.draw.rect(self.screen,
                        pygame.Color(255,255,0),
@@ -182,19 +187,19 @@ class View():
         pygame.draw.rect(self.screen,
                        pygame.Color(255,255,0),
                        pygame.Rect(620,0,10,480))
-
+            #drawing scrolling road lines
         for line in self.model.rd_lines:
             pygame.draw.rect(self.screen,
                              pygame.Color(255,255,255),
                              pygame.Rect(line.x,line.y-40,10,40))
 
+        #drawing objects
         for pedestrian in self.model.pedestrians:
             self.screen.blit(pedestrian.image,(pedestrian.x,pedestrian.y))
         for gastank in self.model.gastanks:
             self.screen.blit(gastank.image,(gastank.x,gastank.y))
         for obstacle in self.model.obstacles:
             self.screen.blit(obstacle.image,(obstacle.x,obstacle.y))
-
 
         #HUD elements
         myfont = pygame.font.SysFont('Arial', 20)
@@ -210,7 +215,7 @@ class View():
                          pygame.Rect(25,455,self.model.player.gas_level,10))
         self.screen.blit(self.hud_gas, (130,452.5))
 
-
+        #draw player
         self.screen.blit(self.model.player.image, (self.model.player.x,self.model.player.y))
 
         pygame.display.update()
@@ -237,22 +242,15 @@ class Controllers(object):
 
 
 
-class Menu():
-    """base class for main and pause menus"""
-    pass
 
-class MainMenu(Menu):
+class MainMenu():
     """main menu"""
     pass
 
-class PauseMenu(Menu):
+class PauseMenu():
     """pause menu"""
     pass
 
-class Hud():
-    """display current score and gas level"""
-    def __init__(self, model):
-        self.model = model
 FPS = 30
 fpsClock = pygame.time.Clock()
 
@@ -260,11 +258,8 @@ fpsClock = pygame.time.Clock()
 
 
 if __name__ == "__main__":
-    #player = Player(295, 200)
 
-    pygame.init()
     model = Model()
-    #screen = pygame.display.set_mode((640,480))
     view = View(model)
     controller = Controllers(model)
 
