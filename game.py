@@ -128,11 +128,11 @@ class Obstacle(EnvironmentObject):
 
 class Player(pygame.sprite.Sprite):
     """user controlled player"""
-    def __init__(self, x_pos, y_pos, gas_level = 100, score=0):
+    def __init__(self, x_pos, y_pos):
         self.x = x_pos
         self.y = y_pos
-        self.gas_level = gas_level
-        self.score = score
+        self.gas_level = 100
+        self.score = 0
         self.rect = pygame.Rect(self.x, self.y, 50, 80)
         self.image = pygame.image.load('car.jpg')
         self.image = pygame.transform.scale(self.image, (50,80))
