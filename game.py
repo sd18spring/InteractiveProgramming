@@ -5,7 +5,7 @@ import time
 import numpy
 import random
 pygame.init()
-
+pygame.font.init()
 
 class Model(object):
     """keeps track of the game state"""
@@ -45,11 +45,11 @@ class Model(object):
 
     def add_obj(self):
         obj_index = random.randint(1,4000)
-        if self.player.gas_level < 10:
-            if obj_index>3997:
+        if self.player.gas_level < 20:
+            if obj_index>3990:
                 gas = Gastank(random.randint(20,600))
                 gas.add(self.gastanks)
-            pass
+
         if obj_index == 1:
             gas = Gastank(random.randint(20,600))
             if pygame.sprite.spritecollideany(gas, self.all_objs):
@@ -104,6 +104,7 @@ class Gastank(EnvironmentObject):
         super().__init__(x)
         self.rect = pygame.Rect(self.x, self.y, 20, 30)
         self.image = pygame.image.load('gas.png')
+        self.hud_image = pygame.transform.scale(self.image, (10,15))
         self.image = pygame.transform.scale(self.image, (20,30))
 
 class Pedestrian(EnvironmentObject):
@@ -124,11 +125,11 @@ class Obstacle(EnvironmentObject):
 
 class Player(pygame.sprite.Sprite):
     """user controlled player"""
-    def __init__(self, x_pos, y_pos, gas_level = 100, start_score=0):
+    def __init__(self, x_pos, y_pos, gas_level = 100, score=0):
         self.x = x_pos
         self.y = y_pos
         self.gas_level = gas_level
-        self.score = start_score
+        self.score = score
         self.rect = pygame.Rect(self.x, self.y, 50, 80)
         self.image = pygame.image.load('car.jpg')
         self.image = pygame.transform.scale(self.image, (50,80))
@@ -166,6 +167,10 @@ class View():
     def __init__(self, model):
         self.model = model
         self.screen = pygame.display.set_mode((640,480))
+        self.gas_image = pygame.image.load('gas.png')
+        self.hud_gas = pygame.transform.scale(self.gas_image, (10,15))
+        self.ped_image = pygame.image.load('pedestrian.png')
+        self.hud_ped = pygame.transform.scale(self.ped_image, (10,25))
 
 
     def draw(self):
@@ -181,7 +186,7 @@ class View():
         for line in self.model.rd_lines:
             pygame.draw.rect(self.screen,
                              pygame.Color(255,255,255),
-                             pygame.Rect(line.x, line.y-40, 10, 40))
+                             pygame.Rect(line.x,line.y-40,10,40))
 
         for pedestrian in self.model.pedestrians:
             self.screen.blit(pedestrian.image,(pedestrian.x,pedestrian.y))
@@ -189,6 +194,23 @@ class View():
             self.screen.blit(gastank.image,(gastank.x,gastank.y))
         for obstacle in self.model.obstacles:
             self.screen.blit(obstacle.image,(obstacle.x,obstacle.y))
+
+
+        #HUD elements
+        myfont = pygame.font.SysFont('Arial', 20)
+        textsurf = myfont.render('Score: '+str(self.model.player.score),
+                                 False, (255,255,255))
+        self.screen.blit(textsurf, (25,430))
+        self.screen.blit(self.hud_ped, (105,425))
+        pygame.draw.rect(self.screen,
+                         pygame.Color(255,0,0),
+                         pygame.Rect(25,455,100,10))
+        pygame.draw.rect(self.screen,
+                         pygame.Color(0,255,0),
+                         pygame.Rect(25,455,self.model.player.gas_level,10))
+        self.screen.blit(self.hud_gas, (130,452.5))
+
+
         self.screen.blit(self.model.player.image, (self.model.player.x,self.model.player.y))
 
         pygame.display.update()
