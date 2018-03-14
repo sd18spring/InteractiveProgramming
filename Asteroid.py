@@ -112,11 +112,19 @@ class SmallAsteroid(Asteroid):
         self.destroyed = True
         return []
 class CollectionOfAsteroids():
+    """
+    A collection of the Asteroids in the game
+    listOfAsteroids - a list of the asteroids in the game
+    gameDisplay - the display
+    """
     def __init__(self,gameDisplay):
         self.listOfAsteroids = []
         self.gameDisplay = gameDisplay
         self.speed = 1
     def spawnAsteroids(self,numberOfAsteroids):
+        """
+        spawns a set number of asteroids in the sides of the game
+        """
         width, height = self.gameDisplay.get_size()
         listOfAsteroids = [] # initializes a list of asteroids to update
         listOfRects = [] # initializes a list of hitboxes
@@ -142,6 +150,9 @@ class CollectionOfAsteroids():
         self.listOfAsteroids = listOfAsteroids
         self.listOfRects = listOfRects
     def update(self):
+        """
+        updates all the asteroids, deleting them from the list if they are destroyed.
+        """
         listOfRects = [] # asteroid
         ListToDelete = [] # a list that incluedes the indicies of what to delete
         for i in range(len(self.listOfAsteroids)):
@@ -162,6 +173,18 @@ class CollectionOfAsteroids():
         for i in sizeOfAsteroids:
             self.listOfAsteroids.pop(0)
 class Projectile():
+    """
+    projectiles that fire and destroy asteroids, ufos and players.
+    x - position x
+    y - position y
+    w, h - size of the projectiles
+    speed - speed of the projectile
+    direction- direction given to the projectiles
+    rect - the hitbox of the projectile
+    gameDisplay - the display
+    destroyed - senses whether the projectile is destroyed or not
+    distanceTravelled - detects how far the projectile has travelled
+    """
     def __init__(self,x,y,direction,alliance,gameDisplay):
         size = 3
         self.x = x
@@ -176,7 +199,7 @@ class Projectile():
         self.gameDisplay = gameDisplay
         self.destroyed = False
         self.distanceTravelled = 0 # asteroids
-        self.distanceWanted = 500 # the distance that the projectile travels before it is destroyed
+        self.distanceWanted =  # the distance that the projectile travels before it is destroyed
         self.alliance = alliance
     def update(self):
         if(self.distanceTravelled < self.distanceWanted): # if the projectile has travelled farther than the wanted distance, it destroys itself
@@ -334,6 +357,7 @@ class listOfObjects():
             if (collisionsAster != -1): # if there is a collision
                 self.Asteroids.listOfAsteroids += self.Asteroids.listOfAsteroids[collisionsAster].destroy() #destroy both the asteroid and the projectile.
                 i.destroy()
+
 
 pygame.init()
 gameDisplay = pygame.display.set_mode((800,600))

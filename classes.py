@@ -1,10 +1,6 @@
 import pygame
-from math import cos,sin,sqrt,radians,atan
-from pygame.locals import *
-import time
-import math
+from math import cos,sin,sqrt,radians,atan,pi
 import random
-
 pygame.init()
 
 class GUI():
@@ -116,7 +112,11 @@ class Ship():
         self.rect.center = (self.x,self.y)
 
         self.gD.blit(self.nImage,self.rect)
-
+    def shoot(self,AllThings):
+        x,y = self.rect.center
+        x = x + int(5 * cos(self.angle))
+        y = y + int(5 * sin(self.angle))
+        AllThings.Projectiles.addProjectile(x,y,radians(self.angle),"Ship")
 class Asteroid():
     """
     Asteroid Class:
@@ -144,8 +144,8 @@ class Asteroid():
         """
         if(not self.destroyed): # once the asteroid is destroyed, it will stop redrawing the asteroid
             width, height = self.gameDisplay.get_size() # gets the display's width and length
-            self.x = self.x + (self.speed * math.cos(self.direction))  # Sets the Asteroid's to a small change in space
-            self.y = self.y + (self.speed * math.sin(self.direction))
+            self.x = self.x + (self.speed * cos(self.direction))  # Sets the Asteroid's to a small change in space
+            self.y = self.y + (self.speed * sin(self.direction))
             if(self.x >= width): # If the asteroid's coordinate goes outside of the window, set that coordinate to the other side of the map
                 self.x = 0 - self.w  # adding the width of the image to make sure that the image doesn't appear suddenly (the image's position is the top right of the image)
             elif(self.x <= 0 - self.w): # same as above (makes it so that the whole image has to leave the screen for it to go to the other side)
@@ -157,7 +157,6 @@ class Asteroid():
             self.rect = pygame.Rect((self.x + self.shrinkage / 2,self.y + self.shrinkage / 2),(self.w - self.shrinkage,self.h - self.shrinkage)) # The Rect is for the hitbox
             self.gameDisplay.blit(self.image,(self.x,self.y)) # draws the asteroid on the screen
             #pygame.draw.rect(self.gameDisplay,(0,255,0),self.rect) # display's the asteroid's hit box in red (for testing)
-
 class LargeAsteroid(Asteroid):
 
     """
@@ -179,7 +178,7 @@ class LargeAsteroid(Asteroid):
             self.destroyed = True
             MedAster = []
             for i in range(2):
-                MedAster.append(MediumAsteroid(self.x,self.y,self.speed*1.5,random.uniform(0,2*math.pi),self.gameDisplay)) #makes two more medium asteroids in it's place with random directions
+                MedAster.append(MediumAsteroid(self.x,self.y,self.speed*1.5,random.uniform(0,2*pi),self.gameDisplay)) #makes two more medium asteroids in it's place with random directions
             return MedAster
         return []
 class MediumAsteroid(Asteroid):
@@ -202,7 +201,7 @@ class MediumAsteroid(Asteroid):
             self.destroyed = True
             SmallAster = []
             for i in range(2):
-                SmallAster.append(SmallAsteroid(self.x,self.y,self.speed*1.5,random.uniform(0,2*math.pi),self.gameDisplay)) #makes two more small asteroids in it's place with random directions
+                SmallAster.append(SmallAsteroid(self.x,self.y,self.speed*1.5,random.uniform(0,2*pi),self.gameDisplay)) #makes two more small asteroids in it's place with random directions
             return SmallAster
         return []
 class SmallAsteroid(Asteroid):
@@ -248,7 +247,7 @@ class CollectionOfAsteroids():
             elif(side == 4): # bottom of the screen
                 x = random.randint(-sampleAsteroid.w // 2,width - sampleAsteroid.w // 2)
                 y = random.randint(height-smallArea - sampleAsteroid.w // 2,height - sampleAsteroid.w // 2)
-            direction = random.uniform(0,math.pi * 2) # initiate each asteroid with a random direction
+            direction = random.uniform(0,pi * 2) # initiate each asteroid with a random direction
             listOfAsteroids.append(LargeAsteroid(x,y,self.speed,direction,self.gameDisplay))
             listOfRects.append(listOfAsteroids[i].rect)
         self.listOfAsteroids = listOfAsteroids
@@ -293,8 +292,8 @@ class Projectile():
     def update(self):
         if(self.distanceTravelled < self.distanceWanted): # if the projectile has travelled farther than the wanted distance, it destroys itself
             width, height = self.gameDisplay.get_size() # gets the display's width and length
-            self.x = self.x + (self.speed * math.cos(self.direction))  # Sets the speed to a small change in space
-            self.y = self.y + (self.speed * math.sin(self.direction))
+            self.x = self.x + (self.speed * cos(self.direction))  # Sets the speed to a small change in space
+            self.y = self.y + (self.speed * sin(self.direction))
             self.distanceTravelled += self.speed # updates the disnance travelled
             if(self.x >= width): # If the projectile's coordinate goes outside of the window, set that coordinate to the other side of the map
                 self.x = 0 - self.w  # adding the width of the image to make sure that the image doesn't appear suddenly (the image's position is the top right of the image)
@@ -328,7 +327,6 @@ class CollectionOfProjectiles():
                 self.listOfProjectiles[i].update()
         for j in reversed(ListToDelete):
             del self.listOfProjectiles[j]
-
 class UFO():
     def __init__(self,y,FacingRight,gameDisplay,listOfProjectiles):
         self.y = y
@@ -356,24 +354,24 @@ class UFO():
             if(self.FacingRight):
                 self.direction = 0
             else:
-                self.direction = math.pi
+                self.direction = pi
         else:
             if(self.FacingRight):
                 if((self.x + self.w / 2) < width * 1 / 4):
                     self.direction = 0
                 elif(self.x + self.w / 2 < width / 2):
-                    self.direction = math.pi / 4
+                    self.direction = pi / 4
                 else:
-                    self.direction = - math.pi / 4
+                    self.direction = - pi / 4
             else:
                 if((self.x + self.w / 2) > width * 3 / 4):
-                    self.direction = math.pi
+                    self.direction = pi
                 elif(self.x + self.w / 2 > width / 2):
-                    self.direction = 5 * math.pi / 4
+                    self.direction = 5 * pi / 4
                 else:
-                    self.direction = 3 * math.pi / 4
-        self.x = self.x + (self.speed * math.cos(self.direction))  # Sets the speed to a small change in space
-        self.y = self.y + (self.speed * math.sin(self.direction))
+                    self.direction = 3 * pi / 4
+        self.x = self.x + (self.speed * cos(self.direction))  # Sets the speed to a small change in space
+        self.y = self.y + (self.speed * sin(self.direction))
         if(self.x >= width and self.FacingRight): # if the UFO goes out of the screen, destroy it
             self.destroyed = True
         elif(self.x <= 0 - self.w and not self.FacingRight):
@@ -397,7 +395,7 @@ class BigUFO(UFO):
         self.fireRate = 60
     def shoot(self):
         if(not self.destroyed):
-            self.listOfProjectiles.addProjectile(self.x + self.w / 2,self.y + self.h / 2,random.uniform(0,2*math.pi),"UFO")
+            self.listOfProjectiles.addProjectile(self.x + self.w / 2,self.y + self.h / 2,random.uniform(0,2*pi),"UFO")
 class CollectionOfUFOs():
     def __init__(self,gameDisplay,listOfProjectiles):
         self.listOfUFOs = [] #initializes the projectiles

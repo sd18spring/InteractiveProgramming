@@ -66,7 +66,8 @@ while running:
         ship.rotate(1)
     if keys_pressed[pygame.K_RIGHT]:
         ship.rotate(-1)
-
+    if keys_pressed[pygame.K_SPACE]:
+        ship.shoot(AllThings)
     """ UFO spawning """
     randomInt = random.randint(1,1000)
     if(randomInt == 1 and len(AllThings.UFOs.listOfUFOs) == 0):
