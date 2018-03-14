@@ -21,6 +21,7 @@ class Model(object):
 
         self.inputboxes = []
         self.inputboxes2 = []
+        self.dingding = False
 
     def zoom_in(self,center):
         """Zooms in around the center
@@ -85,7 +86,6 @@ class Controler(object):
 
     def __init__(self, model):
         self.model = model
-        self.dingding = False
 
     def handle_event(self, event):
         """Updates model according to type of input"""
@@ -110,7 +110,7 @@ class Controler(object):
                 m_pos = pygame.mouse.get_pos()
                 rect = self.model.rectangle
                 if rect[0] < m_pos[0] < rect[0]+rect[2] and rect[1] < m_pos[1] < rect[1]+rect[3]:
-                        self.dingding = True
+                        self.model.dingding = True
                         self.model.inputboxes2.append('yes')
                 for node in self.model.nodes:
                     if ((m_pos[0]-node.x)**2+(m_pos[1]-node.y)**2)**.5 <= Node.node_size:
@@ -131,7 +131,7 @@ class Controler(object):
 
 
         if event.type == pygame.KEYDOWN:
-            if self.dingding == True:
+            if self.model.dingding == True:
                 my_input = ''
                 if event.key == pygame.K_a:
                     my_input = my_input + 'a'
