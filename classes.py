@@ -118,7 +118,7 @@ class Ship():
         y = self.y + int(5 * sin(self.angle))
         AllThings.Projectiles.addProjectile(x,y,radians(self.angle),"Ship")
     def destroy(self):
-        print("destroyed")
+        print("destroyed") # right now just a test, need to put something else here
 class Asteroid():
     """
     Asteroid Class:
@@ -290,7 +290,10 @@ class Projectile():
         width,height = self.gameDisplay.get_size()
         self.destroyed = False
         self.distanceTravelled = 0 # asteroids
-        self.distanceWanted = 5/8 * height # the distance that the projectile travels before it is destroyed
+        if(alliance == "Ship"):
+            self.distanceWanted = 5/8 * height # the distance that the projectile travels before it is destroyed
+        else:
+            self.distanceWanted = 3/8 * height
         self.alliance = alliance
     def update(self):
         if(self.distanceTravelled < self.distanceWanted): # if the projectile has travelled farther than the wanted distance, it destroys itself

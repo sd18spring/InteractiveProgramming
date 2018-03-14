@@ -199,7 +199,8 @@ class Projectile():
         self.gameDisplay = gameDisplay
         self.destroyed = False
         self.distanceTravelled = 0 # asteroids
-        self.distanceWanted =  # the distance that the projectile travels before it is destroyed
+        width, height = self.gameDisplay.get_size()
+        self.distanceWanted = 5/8 *  # the distance that the projectile travels before it is destroyed
         self.alliance = alliance
     def update(self):
         if(self.distanceTravelled < self.distanceWanted): # if the projectile has travelled farther than the wanted distance, it destroys itself
