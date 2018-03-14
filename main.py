@@ -1,20 +1,45 @@
 from fingerTrack import *
 from canvas import *
 import cv2
+from optparse import OptionParser
+import time
+
+def init_opts():
+    parser = OptionParser()
+    parser.add_option("-d", action="store_false",
+                      dest="disappr", default=True,
+                      help="To run the program in the drawing mode")
+    parser.add_option("-t", action="store_true",
+                      dest="disappr", default=True,
+                      help="To run the program in the tailing mode where the lines disappear after a period of time")
+    parser.add_option("-g", action="store_true",
+                      dest="game", default=False,
+                      help="To run the program in the gaming mode where you try to hit boxes")
+    parser.add_option("-l", "--length", action="store", type='int',
+                      dest="length", default=3,
+                      help="The starting length of the line")
+    options, args = parser.parse_args()
+    return options, args
 
 
 def main():
     """
     """
+    start = time.time()
+    options, args = init_opts()
     track = finger_track()
     cap = cv2.VideoCapture(0)
     newCanvas = canvas(cap.get(3), cap.get(4))
-    disappr = True
-
+    disappr = options.disappr
+    track.pathlength = options.length
 
     while True:
+        if time.time() - start > 1:
+            print(time.time() - start)
+            start = time.time()
+
         ret, frame = cap.read()
-        frame = cv2.flip(frame,1)
+        frame = cv2.flip(frame, 1)
 
         hsv = track.BGR2HSV(frame)
         redMask = track.red_mask(hsv)
@@ -23,22 +48,23 @@ def main():
         res = cv2.bitwise_and(frame, frame, mask=redMask)
         cv2.imshow('original', res)
         mask = cv2.blur(mask, (20, 20))
-        track.find_center(mask, frame)
+        track.find_center(mask, frame, disappr=disappr)
         # track.refine_path()
-        track.draw(newCanvas, disappr=disappr)
+        track.draw(newCanvas)
 
         # newCanvas.rectangle()
-        print(newCanvas.points, newCanvas.run)
-        if newCanvas.points == 0:
-            if newCanvas.run == False:
-                newCanvas.make_rect()
+        if options.game:
+            print(newCanvas.points, newCanvas.run)
+            if newCanvas.points == 0:
+                if newCanvas.run == False:
+                    newCanvas.make_rect()
+                newCanvas.show_rect()
+            flag = newCanvas.in_rect(track.cx, track.cy)
+            if flag == True:
+                newCanvas.addpoints(track)
+                newCanvas.clear()
+                newCanvas.show_rect()
             newCanvas.show_rect()
-        flag = newCanvas.in_rect(track.cx,track.cy)
-        if flag == True:
-            newCanvas.addpoints()
-            newCanvas.clear()
-            newCanvas.show_rect()
-        newCanvas.show_rect()
         newCanvas.show_canvas()
 
 
@@ -48,11 +74,16 @@ def main():
             newCanvas.save_drawing()
             break
         if cv2.waitKey(1) & 0xFF == ord('d'):
-            disappr = ~disappr
+            if disappr:
+                disappr = False
+            else:
+                disappr = True
+            print(disappr)
         if cv2.waitKey(1) & 0xFF == ord('c'):
             newCanvas.clear()
 
     cv2.destroyAllWindows()
 
 if __name__ == "__main__":
+
     main()
