@@ -117,7 +117,11 @@ class Hand(Deck):
 
 
 class Game():
-    """Represents a game of blackjack"""
+    """Represents a game of blackjack
+
+    player: Hand object containing real cards
+    dealer: Hand object of the computer's cards
+    """
 
     def __init__(self):
         """Starts a new round of blackjack"""
@@ -133,7 +137,7 @@ class Game():
         print("Dealer" + str(self.dealer) + " []")
         #self.deck.move_cards(self.player,2)
         #print("Player" + str(self.player))
-        
+
         # Call mainloop function from card_detect.py and print resulting rank and suit
         rank_name, suit_name = card_detect.mainloop()
         print("Player has:" + str(rank_name),'of', str(suit_name))
