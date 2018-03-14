@@ -212,8 +212,12 @@ class Controler(object):
                 if event.key == pygame.K_z:
                     self.model.inputbox.string += 'z'
                     self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_BACKSPACE:
+                    self.model.inputbox.string = self.model.inputbox.string[:len(self.model.inputbox.string)-1]
+                    self.model.inputboxes.append(self.model.inputbox)
                 if event.key == pygame.K_RETURN:
                     del self.model.inputboxes[:]
+                    self.model.inputbox.string = ''
 
             if event.key == pygame.K_UP:
                 self.model.pan(0,10)
