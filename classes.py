@@ -23,28 +23,16 @@ class GUI():
         self.gD.blit(box,(0,0))
 
 
-
 def rot_center(image, angle):
-    """rotate an image while keeping its center and size
-    Found online. Very helpful
-    print(type(image))
-    """
-    orig_rect = image.get_rect()
-    rot_image = pygame.transform.rotate(image, angle)
-    rot_rect = orig_rect.copy()
-    rot_rect.center = rot_image.get_rect().center
-    rot_image = rot_image.subsurface(rot_rect).copy()
-    return rot_image
-# def rot_center(image, angle):
-#     """rotate a Surface, maintaining position."""
-#     #DOES NOT WORK
-#
-#     loc = image.get_rect().center  #rot_image is not defined
-#     rot_sprite = pygame.transform.rotate(image, angle)
-#     # rot_sprite.get_rect().center = loc
-#     rotRect = rot_sprite.get_rect()
-#     rotRect.center = loc
-#     return rot_sprite,rotRect
+    """rotate a Surface, maintaining position."""
+    #DOES NOT WORK
+
+    loc = image.get_rect().center  #rot_image is not defined
+    rot_sprite = pygame.transform.rotate(image, angle)
+    # rot_sprite.get_rect().center = loc
+    rotRect = rot_sprite.get_rect()
+    rotRect.center = loc
+    return rot_sprite,rotRect
 
 class Ship():
     """Ship class!
@@ -57,9 +45,7 @@ class Ship():
     oImage (img) original
     nImage (img) new
     drift (boolean)
-    forward (boolean)
-    ro (boolean)
-    rdir (1 or -1)
+    rect (pygame surface)
 
     """
     x_speed = 0
@@ -88,7 +74,7 @@ class Ship():
 
     def rotate(self,posNeg):
         """Rotates ship"""
-        self.nImage = rot_center(self.oImage,posNeg*3+(270-self.angle))
+        self.nImage,self.rect = rot_center(self.oImage,posNeg*3+(270-self.angle))
         self.angle -= posNeg*3
 
     def update(self):
@@ -104,18 +90,12 @@ class Ship():
             self.x_speed = 0
             self.y_speed = 0
         if speed > 10:
-            # self.drift = False
             self.x_speed = cos(radians(self.angle))*10
             self.y_speed = sin(radians(self.angle))*10
         if self.drift:
             #theta = atan(self.y_speed/self.x_speed)
             self.x_speed *= .98
             self.y_speed *= .98
-
-        # if self.forward:
-        #     self.move()
-        # if self.ro:
-        #     self.rotate()
 
         self.y += self.y_speed
         self.x += self.x_speed
@@ -129,4 +109,6 @@ class Ship():
         elif(self.y <= 0 - self.h):
             self.y = height
 
-        self.gD.blit(self.nImage,(self.x,self.y))
+        self.rect.center = (self.x,self.y)
+
+        self.gD.blit(self.nImage,self.rect)
