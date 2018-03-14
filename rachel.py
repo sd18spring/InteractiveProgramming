@@ -12,7 +12,7 @@ THINGS TO DO:
 2. figure out how to generate more Obstacles
     a. create random tracks... if possible #yes!
 3. Collisions
-    a. somehow display that penguino has crashed
+    a. somehow display that penguino has crashed #done
 4. Extensions
     a. 2 player
     b. easy, medium, hard mode (single player)
@@ -50,15 +50,15 @@ class Obstacles(pygame.sprite.Sprite):
         if rect != None:
             self.rect = rect
 
-    def moveLeft(self, pixels = 3):
+    def moveLeft(self, pixels = 5):
         self.rect.x -= pixels
     def slowDown(self, pixels = 1):
         self.rect.x -= pixels
-    def speedUp(self, pixels = 5):
+    def speedUp(self, pixels = 7):
         self.rect.x -= pixels
 
 class Powerups(Obstacles):
-    def speedUp(self, pixels = 5):
+    def speedUp(self, pixels = 7):
         self.rect.x -= pixels
 # class Model:
 #     def __init__(self):
@@ -80,15 +80,16 @@ class Sled_Main:
         self.boulders = pygame.sprite.RenderPlain()
         self.ice_patches = pygame.sprite.RenderPlain()
         for num_boulders in range(20):
-            x_position = num_boulders * 400 #randint(260, 360)
+            x_position = (num_boulders+1) * 400 #randint(260, 360)
             y_boulders = randint(1,3)
             for i in range(y_boulders):
                 y_position = randrange(0, 340, 70)
                 self.boulder = Obstacles("rock.png", pygame.Rect(x_position, y_position, 60, 60))
+                self.boulder.rect.inflate(0, -10)
                 self.boulders.add(self.boulder)
 
         for num_ice_patches in range(8):
-            x_position = num_ice_patches * 560 #randint(260, 360)
+            x_position = (num_ice_patches+1) * 560 #randint(260, 360)
             y_position = randint(0, 340)
             self.ice_patch = Powerups("ice_patch_flat.png", pygame.Rect(x_position, y_position, 280, 70))
             self.ice_patches.add(self.ice_patch)
@@ -106,11 +107,6 @@ class Sled_Main:
                 if event.type is pygame.QUIT:
                     running = False
             keys = pygame.key.get_pressed()
-            if keys[pygame.K_LEFT]:
-                self.penguin.moveUp(5)
-            if keys[pygame.K_RIGHT]:
-                self.penguin.moveDown(5)
-            self.all_penguins.update()
 
             hit = False
             ice = False
@@ -120,13 +116,25 @@ class Sled_Main:
                     if type(obstacle) == Powerups:
                         ice = True
             for obstacle in list_of_obstacles:
-                    if ice:
-                        obstacle.speedUp()
-                    elif hit:
-                        obstacle.slowDown()
-                    else:
-                        obstacle.moveLeft()
-
+                if ice:
+                    obstacle.speedUp()
+                elif hit:
+                    obstacle.slowDown()
+                else:
+                    obstacle.moveLeft()
+            if hit and not ice:
+                self.penguin.image = pygame.image.load("fallen_penguin_smol_demanding_diego.png")
+                if keys[pygame.K_LEFT]:
+                    self.penguin.moveUp(0)
+                if keys[pygame.K_RIGHT]:
+                    self.penguin.moveDown(0)
+            else:
+                self.penguin.image = pygame.image.load("penguin_smol.png")
+                if keys[pygame.K_LEFT]:
+                    self.penguin.moveUp(5)
+                if keys[pygame.K_RIGHT]:
+                    self.penguin.moveDown(5)
+            self.all_penguins.update()
             self.boulders.update()
             self.ice_patches.update()
             self.screen.fill(self.WHITE)
