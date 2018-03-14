@@ -11,14 +11,17 @@ depending on the blocks found, one ring at a time."""
 
 import pygame
 import time
+import fluidsynth
+from math import atan, pi
 
 BLACK = (25, 25, 25)
 GRAY = (40, 40, 40)
 LTGRAY = (100, 100, 100)
-BLUE = (50, 100, 200)
-RED = (200, 50, 100)
-GREEN = (100, 200, 50)
 YELLOW = (200, 200, 50)
+RED = (160, 10, 10)
+GREEN = (10, 160, 110)
+BLUE = (60, 10, 160)
+
 
 class Grid():
     """ A grid full of cells, where note blocks can be placed by the user
@@ -74,21 +77,28 @@ class Grid():
         self._draw_cells()
         pygame.display.update()
 
-    def _add_block(self, mouse_pos, shape, color):
+    def _add_block(self, mouse_pos, shape, color, d):
         coord = (mouse_pos[0]//36, mouse_pos[1]//36)
         self.blocks.pop(coord, None)
-        block = Block(coord, self, shape, color)
+        block = Block(coord, self, shape, color, d)
         self.blocks[coord] = block
 
     def _remove_block(self, mouse_pos):
         coord = (mouse_pos[0]//36, mouse_pos[1]//36)
         self.blocks.pop(coord, None)
 
+    def color_update(self):
+        r, g, b = self.color_name
+        d = self.d
+        self.color = (r+d, g+d, b+d)
+
     def main_loop(self):
         """ Updates graphics and checks for pygame events """
         running = True
         shape = 'square'
-        color = LTGRAY
+        self.color_name = LTGRAY
+        self.color = LTGRAY
+        self.d = 40
         mode = 1
         while running:
             self._redraw()
@@ -98,22 +108,28 @@ class Grid():
                 elif event.type is pygame.MOUSEBUTTONDOWN:
                     if mode > 0:
                         if event.button == 1 or event.button == 4:
-                            self._add_block(event.pos, shape, color)
+                            self._add_block(event.pos, shape, self.color, self.d)
                         elif event.button == 3 or event.button == 5:
                             self._remove_block(event.pos)
                     else:
                         mode *= -1
-                        print("Processing...")
                         s.make_rings(event.pos)
                         s.draw_rings()
-                        print("Done.")
                 elif event.type is pygame.KEYDOWN:
-                    if event.key == pygame.K_r:
-                        color = RED
+                    if event.key == pygame.K_UP:
+                        if self.d < 90:
+                            self.d += 10
+                        print(self.d)
+                    elif event.key == pygame.K_DOWN:
+                        if self.d > 30:
+                            self.d -= 10
+                        print(self.d)
+                    elif event.key == pygame.K_r:
+                        self.color_name = RED
                     elif event.key == pygame.K_g:
-                        color = GREEN
+                        self.color_name = GREEN
                     elif event.key == pygame.K_b:
-                        color = BLUE
+                        self.color_name = BLUE
                     elif event.key == pygame.K_c:
                         shape = 'circle'
                     elif event.key == pygame.K_s:
@@ -125,18 +141,20 @@ class Grid():
                     elif event.key == pygame.K_SPACE:
                         mode *= -1
                         print(mode)
+                    self.color_update()
             time.sleep(.01)
 
 class Block(object):
     """ A note block with attributes shape and color which determine the type
     of sound created when it is reached by the sweeper."""
 
-    def __init__(self, cell_coordinates, world, shape, color):
+    def __init__(self, cell_coordinates, world, shape, color, d):
         """ takes coordinates as a tuple """
         self.cell_coordinates = cell_coordinates
         self.world = world
         self.shape = shape
         self.color = color
+        self.d = d
 
     def draw(self):
         cells = self.world.cells
@@ -190,6 +208,8 @@ class Sweeper():
         return rings
 
     def make_rings(self, start):
+        self.start = (start[0]//36, start[1]//36)
+        print("start:", self.start)
         center = (start[0]//36, start[1]//36)
         new_rings = {}
         number = len(self.rings)
@@ -201,21 +221,61 @@ class Sweeper():
             new_rings[n] = new_cells
         self.new_rings = new_rings
 
+    def pos_to_note(self, coord, offset):
+        print(self.start, coord)
+        if coord[1] == self.start[1]:
+            if coord[0] >= self.start[0]:
+                return 2 + offset
+            else:
+                return 6 + offset
+        else:
+            note = atan((coord[0]-self.start[0])/(coord[1]-self.start[1]))
+            note = note*4/pi
+            if coord[1] < self.start[1]:
+                note += 4
+            elif coord[0] < self.start[0]:
+                note += 8
+            return int(note + offset)
+
     def draw_rings(self):
         cells = self.world.cells
         screen = self.world.screen
+
+        fs = fluidsynth.Synth()
+        fs.start(driver="alsa")
+        sfid = fs.sfload("example.sf2")
+        fs.program_select(0, sfid, 0, 0)
+
         for ring in self.new_rings.values():
+            short = []
+            held = []
             for coord in ring:
                 cell = cells[coord]
                 coords = self.world._add_coords(cell.coordinates, (3, 3))
-                print(coords)
                 rect_dim = (30, 30)
                 image_rect = pygame.Rect(coords, rect_dim)
                 pygame.draw.rect(screen, GRAY, image_rect, 0)
+                if coord in self.world.blocks.keys():
+                    d = self.world.blocks[coord].d
+                    pitch = self.pos_to_note(coord, d)
+                    color = self.world.blocks[coord].color
+                    shape = self.world.blocks[coord].shape
+                    if shape == 'circle':
+                        short.append(pitch)
+                    else:
+                        held.append(pitch)
+            for note in short:
+                fs.noteon(0, note, 30)
+            for note in held:
+                fs.noteon(0, note, 30)
             pygame.display.update()
-            time.sleep(.33)
+            time.sleep(.40)
+            for note in short:
+                fs.noteoff(0, note)
             self.world._redraw()
-            print("Redrawn.")
+        for note in held:
+            fs.noteoff(0, note)
+        fs.delete()
 
 if __name__ == "__main__":
     g = Grid()
