@@ -44,7 +44,7 @@ class PyGameWindowView(object):
             if dot.label == target.label:
                 target = dot
 
-        while target.x < size[0]//2 and target.y < size[1]//2:
+        while target.radius < 600:
             self.screen.fill(pygame.Color(255,250,240))
             for dot in dots:
                 if dot.x <= self.size[0]//2 and dot.y < self.size[1]//2:
@@ -77,7 +77,6 @@ class PyGameWindowView(object):
     def returnHome(self):
         """Returns to the screen with all of the movie dots when in a zoomed in state."""
         self.model.dots = self.model.home_dots
-        self.home = not self.home
 
 class VisualizerModel(object):
     """ Encodes a model of the game state """
@@ -91,7 +90,6 @@ class VisualizerModel(object):
         for dot in self.dots:
             self.dot_to_child[dot.label] = []
             self.home_dots.append(dot)
-
 
     def __str__(self):
         output_lines = []
@@ -142,8 +140,6 @@ class Dot(object):
         return "Dot radius=%f, x=%f, y=%f" % (self.radius,
                                               self.x,
                                               self.y)
-
-
 
 class MovieDot(Dot):
     def __init__(self,radius,x,y,movie0):
@@ -201,6 +197,7 @@ class PyGameMouseController(object):
 
         elif event.type == MOUSEBUTTONUP and not self.view.home:
             self.view.returnHome()
+            self.view.home = not self.view.home
 
 if __name__ == '__main__':
     pygame.init()
