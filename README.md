@@ -1,6 +1,7 @@
 # InteractiveProgramming
 
-Uses a modified version of code from https://github.com/sashagaz/Hand_Detection
+Uses a modified version of code from https://github.com/sashagaz/Hand_Detection. Code is included in the Hand_Detection folder for reference (Note: code in Hand_Detection folder is unused by main script)
+
 Requires OpenCV2 and Python2
 
 Instructions to install OpenCV2: https://gist.github.com/arthurbeggs/06df46af94af7f261513934e56103b30
