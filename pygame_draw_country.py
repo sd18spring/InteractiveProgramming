@@ -17,7 +17,7 @@ import wold_map
 import csv
 
 #year that the data will be plotted for
-year = '2014'
+year = '2016'
 # Colors
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -35,7 +35,7 @@ countries=['AF','AL','DZ','AD','AO','AI','AG','AR','AM','AW','AU','AT','AZ','BS'
 'SI','SB','SO','ZA','SS','ES','LK','SD','SR','SZ','SE','CH','SY','TW','TJ','TZ','TH','TL','TG','TO','TT','TN','TR','TM','TC','UG','UA','AE','GB','US',
 'UY','UZ','VU','VE','VN','VI','EH','YE','ZM','ZW']
 COUNTRY = 'AF'
-width, height = 2000, 2000
+width, height = 2000,2000
 
 pygame.init()
 screen = pygame.display.set_mode((width, height))
@@ -82,14 +82,36 @@ def find_magic(countries):
 
     return magic_numbers
 
-color_mappings = find_magic(countries)
+def remap_interval(val,
+                   input_interval_start,
+                   input_interval_end,
+                   output_interval_start,
+                   output_interval_end):
+    """Remap a value from one interval to another."""
+    range_output = output_interval_end-output_interval_start
+    range_input = input_interval_end-input_interval_start
+    distance = val - input_interval_start
+    remap = ((distance/range_input)*range_output)+output_interval_start
+    return remap
+
+def color_map(val,minimum, maximum):
+    """Maps input values between max and min IU/gdp cofficients to an integer
+    0-255,suitable for use as an RGB color code
+    """
+    color_code = remap_interval(val,minimum ,maximum, 0, 255)
+    return int(color_code)
+
+color_coefficients = find_magic(countries)
+max_coeff = max(color_coefficients)
+min_coeff = min(color_coefficients)
+
 for i in range(len(countries)):
     # Draw the polygons for the state.
     for polygon in wold_map.countries[countries[i]]:
         # `polygon` points are tuples `(float, float)`. PyGame requires `(int, int)`.
         points = [(int(x), int(y)) for x, y in polygon]
         # Draw the interior
-        number = 255*color_mappings[i]*20
+        number = color_map(color_coefficients[i],min_coeff,max_coeff)
         if number > 0:
             color = (0,0,number)
         else:
