@@ -338,7 +338,7 @@ class Bird(pygame.sprite.Sprite):
         self.change_height = 20
 
     def update(self, distance):
-        self.rect.x -= distance
+        self.rect.x -= distance +  10
 
 if __name__ == "__main__":
     # MainWindow = RunRunMain()
