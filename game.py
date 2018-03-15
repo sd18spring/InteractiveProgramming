@@ -45,13 +45,16 @@ class Model(object):
             if line.y>520:
                 line.y = 0
         self.add_obj()
-        self.detect_collisions()
+        self.player.is_collided_with_gas(self.gastanks)
+        self.player.is_collided_with_peds(self.pedestrians)
+        self.player.is_collided_with_obst(self.obstacles)
+
 
     def add_obj(self):
         """Randomly adds objects for the player to interact with"""
-        obj_index = random.randint(1,2000)
+        obj_index = random.randint(1,4000)
         if self.player.gas_level < 20:
-            if obj_index>1990:
+            if obj_index>3995:
                 gas = Gastank(random.randint(20,600))
                 if pygame.sprite.spritecollideany(gas, self.all_objs):
                     gas.kill()
@@ -67,7 +70,7 @@ class Model(object):
                 gas.add(self.all_objs)
                 gas.add(self.gastanks)
 
-        if obj_index > 1 and obj_index < 5:
+        if obj_index > 1 and obj_index < 9:
             ped = Pedestrian(random.randint(20,600))
             if pygame.sprite.spritecollideany(ped, self.all_objs):
                 ped.kill()
@@ -75,7 +78,7 @@ class Model(object):
                 ped.add(self.all_objs)
                 ped.add(self.pedestrians)
 
-        if obj_index > 8 and obj_index < 20:
+        if obj_index > 10 and obj_index < 20:
             obst = Obstacle(random.randint(20,520))
             if pygame.sprite.spritecollideany(obst, self.all_objs):
                 obst.kill()
@@ -86,9 +89,10 @@ class Model(object):
     def detect_collisions(self):
         """detect collisions between player and objs"""
 
-        objs=pygame.sprite.groupcollide(self.player_group, self.all_objs, False, True)
+        objs=pygame.sprite.groupcollide(self.player_group, self.all_objs, False, False)
         if objs:
-            objs[self.player].kill()
+            for i in objs[self.player]:
+                i.kill()
 
 
 class RoadLines(pygame.sprite.Sprite):
@@ -100,7 +104,7 @@ class RoadLines(pygame.sprite.Sprite):
         self.rect = pygame.Rect(self.x, self.y, 10, 40)
 
     def update(self):
-        self.y += .25
+        self.y += .50
 
 
 class EnvironmentObject(pygame.sprite.Sprite):
@@ -111,34 +115,40 @@ class EnvironmentObject(pygame.sprite.Sprite):
         self.y = y
 
     def update(self):
-        self.y += .25
+        self.y += .50
         self.rect.x = self.x
         self.rect.y = self.y
-        print(self.rect, self.rect.x, self.rect.y)
 
 class Gastank(EnvironmentObject):
     """describing type of EnvironmentObject"""
     def __init__(self,x):
         super().__init__(x)
-        self.rect = pygame.Rect(self.x, self.y, 20, 30)
+        #self.rect = pygame.Rect(self.x, self.y, 20, 30)
         self.image = pygame.image.load('gas.png')
         self.image = pygame.transform.scale(self.image, (20,30))
+        self.rect = self.image.get_rect()
+        self.rect.x = self.x
+        self.rect.y = self.y
 
 class Pedestrian(EnvironmentObject):
     """describing type of EnvironmentObject"""
     def __init__(self,x):
         super().__init__(x)
-        self.rect = pygame.Rect(self.x, self.y, 20, 50)
         self.image = pygame.image.load('pedestrian.png')
         self.image = pygame.transform.scale(self.image, (20,50))
+        self.rect = self.image.get_rect()
+        self.rect.x = self.x
+        self.rect.y = self.y
 
 class Obstacle(EnvironmentObject):
     """describing type of EnvironmentObject"""
     def __init__(self,x):
         super().__init__(x)
-        self.rect = pygame.Rect(self.x, self.y, 150, 50)
         self.image = pygame.image.load('road_closed.png')
         self.image = pygame.transform.scale(self.image, (150,50))
+        self.rect = self.image.get_rect()
+        self.rect.x = self.x
+        self.rect.y = self.y
 
 class Player(pygame.sprite.Sprite):
     """user controlled player"""
@@ -148,9 +158,11 @@ class Player(pygame.sprite.Sprite):
         self.y = y_pos
         self.gas_level = 100
         self.score = 0
-        self.rect = pygame.Rect(self.x, self.y, 50, 80)
         self.image = pygame.image.load('car.jpg')
         self.image = pygame.transform.scale(self.image, (50,80))
+        self.rect = self.image.get_rect()
+        self.rect.x = self.x
+        self.rect.y = self.y
         self.alive = True
         self.vx = 0.0
         self.vy = 0.0
@@ -178,10 +190,29 @@ class Player(pygame.sprite.Sprite):
         if self.gas_level < 0:
             self.alive = False
 
-
         self.rect.y = self.y
         self.rect.x = self.x
-        print(self.rect.x, self.rect.y)
+
+    def is_collided_with_gas(self, gas_group):
+        for gas_sprite in gas_group:
+            if self.rect.colliderect(gas_sprite.rect):
+                self.gas_level += 5
+                if self.gas_level > 100:
+                    self.gas_level = 100
+                gas_sprite.kill()
+
+    def is_collided_with_peds(self, ped_group):
+        for ped_sprite in ped_group:
+            if self.rect.colliderect(ped_sprite.rect):
+                self.score += 1
+                ped_sprite.kill()
+
+    def is_collided_with_obst(self, obst_group):
+        for obst_sprite in obst_group:
+            if self.rect.colliderect(obst_sprite.rect):
+                self.alive = False
+                
+
 
 
 class View():
@@ -225,7 +256,7 @@ class View():
         textsurf = myfont.render('Score: '+str(self.model.player.score),
                                  False, (255,255,255))
         self.screen.blit(textsurf, (25,430))
-        self.screen.blit(self.hud_ped, (105,425))
+        self.screen.blit(self.hud_ped, (120,425))
         pygame.draw.rect(self.screen,
                          pygame.Color(255,0,0),
                          pygame.Rect(25,455,100,10))
@@ -251,13 +282,13 @@ class Controller(object):
             self.model.player.vy = 0
         elif event.type == KEYDOWN:
             if event.key == pygame.K_UP:
-                self.model.player.vy -= .5
+                self.model.player.vy -= 1
             if event.key == pygame.K_DOWN:
-                self.model.player.vy += .5
+                self.model.player.vy += 1
             if event.key == pygame.K_LEFT:
-                self.model.player.vx -= .5
+                self.model.player.vx -= 1
             if event.key == pygame.K_RIGHT:
-                self.model.player.vx += .5
+                self.model.player.vx += 1
 
 
 
@@ -290,6 +321,8 @@ if __name__ == "__main__":
                 running = False
             controller.handle_event(event)
         model.update()
+        if not model.player.alive:
+            running = False
         view.draw()
         time.sleep(.001)
     pygame.quit()
