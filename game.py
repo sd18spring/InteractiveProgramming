@@ -29,20 +29,20 @@ class Model(object):
         objects to the arena"""
         self.player.update()
         for gas in self.gastanks:
-            gas.update()
+            gas.update(model)
             if gas.y>500:
                 gas.kill()
         for pedestrian in self.pedestrians:
-            pedestrian.update()
+            pedestrian.update(model)
             if pedestrian.y>500:
                 pedestrian.kill()
         for obstacle in self.obstacles:
-            obstacle.update()
+            obstacle.update(model)
             if obstacle.y>500:
                 obstacle.kill()
                 self.player.obstacles_avoided+=1
         for line in self.rd_lines:
-            line.update()
+            line.update(model)
             if line.y>520:
                 line.y = 0
         self.add_obj()
@@ -94,9 +94,16 @@ class RoadLines(pygame.sprite.Sprite):
         self.y = y
         self.rect = pygame.Rect(self.x, self.y, 10, 40)
 
-    def update(self):
+    def update(self,model):
         self.y += .50
-
+        if model.player.score > 19:
+            self.y += .26
+        if model.player.score > 49:
+            self.y += .27
+        if model.player.score > 74:
+            self.y += .28
+        if model.player.score > 99:
+            self.y += .29
 class EnvironmentObject(pygame.sprite.Sprite):
     """base class for objects"""
     def __init__(self,x,y=-30):
@@ -104,11 +111,18 @@ class EnvironmentObject(pygame.sprite.Sprite):
         self.x = x
         self.y = y
 
-    def update(self):
+    def update(self,model):
         self.y += .50
         self.rect.x = self.x
         self.rect.y = self.y
-
+        if model.player.score > 19:
+            self.y += .26
+        if model.player.score > 49:
+            self.y += .27
+        if model.player.score > 74:
+            self.y += .28
+        if model.player.score > 99:
+            self.y += .29
 class Gastank(EnvironmentObject):
     """describing type of EnvironmentObject"""
     def __init__(self,x):
@@ -158,6 +172,7 @@ class Player(pygame.sprite.Sprite):
         self.vy = 0.0
         self.gas_collected = 0
         self.obstacles_avoided = 0
+        self.level = 1
 
     def update(self):
         if self.x < 1:
@@ -184,6 +199,15 @@ class Player(pygame.sprite.Sprite):
 
         self.rect.y = self.y
         self.rect.x = self.x
+
+        if self.score > 19:
+            self.level = 2
+        if self.score > 49:
+            self.level = 3
+        if self.score > 74:
+            self.level = 4
+        if self.score > 99:
+            self.level = 5
 
     def is_collided_with_gas(self, gas_group):
         for gas_sprite in gas_group:
@@ -246,6 +270,9 @@ class View():
         textsurf = myfont.render('Score: '+str(self.model.player.score),
                                  False, (255,255,255))
         self.screen.blit(textsurf, (25,430))
+        textsurf1 = myfont.render('Level: '+str(self.model.player.level),
+                                  False, (255,255,255))
+        self.screen.blit(textsurf1, (25, 410))
         self.screen.blit(self.hud_ped, (120,425))
         pygame.draw.rect(self.screen,
                          pygame.Color(255,0,0),
@@ -337,12 +364,15 @@ def death_screen(model):
     msg_surf = msg_font.render('YOU ARE DEAD', True, (0,0,0))
     #instructions
     stat_font = pygame.font.SysFont('Arial', 30)
+
     stat_surf1 = stat_font.render('Pedestrians Hit: '+str(model.player.score),
                                    True, (0,0,0))
     high_score_surf = stat_font.render('***NEW HIGH SCORE***', True, (0,0,0))
     stat_surf2 = stat_font.render('Gastanks Collected: '+str(model.player.gas_collected),
                                    True, (0,0,0))
     stat_surf3 = stat_font.render('Obstacles Avoided: '+str(model.player.obstacles_avoided),
+                                   True, (0,0,0))
+    stat_surf4 = stat_font.render('Level Reached: '+str(model.player.level),
                                    True, (0,0,0))
     #instructions
     instruction_font = pygame.font.SysFont('Arial', 20)
@@ -355,6 +385,7 @@ def death_screen(model):
         screen.blit(stat_surf1, (150,150))
         screen.blit(stat_surf2, (150,180))
         screen.blit(stat_surf3, (150,210))
+        screen.blit(stat_surf4, (150,240))
         screen.blit(instruction_surf, (150,400))
         for event in pygame.event.get():
             if event.type == KEYDOWN:
