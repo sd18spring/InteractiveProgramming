@@ -4,6 +4,8 @@ from pygame.font import *
 import time
 import numpy
 import random
+import pickle
+from os.path import exists
 
 class Model(object):
     """keeps track of the game state"""
@@ -278,7 +280,7 @@ class Controller(object):
             if event.key == pygame.K_RIGHT:
                 self.model.player.vx += 1
 
-def main_menu():
+def main_menu(model):
     """Main menu function"""
     #screen
     screen = pygame.display.set_mode((640,480))
@@ -295,6 +297,14 @@ def main_menu():
     instruction_surf5 = instruction_font.render('Use the arrow keys to move.',True,(0,0,0))
     instruction_surf6 = instruction_font.render('Press SPACE to start, or Esc to quit.',True,(0,0,0))
 
+    #high score stuff
+    high_scores = extract_high_scores(model)
+    hs_font = pygame.font.SysFont('Arial', 20)
+    hs_title = hs_font.render("Most Hit 'n Runs (so far)",True,(0,0,0))
+    hs_1 = hs_font.render(str(high_scores[0]),True,(0,0,0))
+    hs_2 = hs_font.render(str(high_scores[1]),True,(0,0,0))
+    hs_3 = hs_font.render(str(high_scores[2]),True,(0,0,0))
+
     running = True
     while running:
         screen.blit(title_surf, (30,100))
@@ -304,6 +314,10 @@ def main_menu():
         screen.blit(instruction_surf4, (30,240))
         screen.blit(instruction_surf5, (30,270))
         screen.blit(instruction_surf6, (30,300))
+        screen.blit(hs_title, (350,50))
+        screen.blit(hs_1, (425,70))
+        screen.blit(hs_2, (425,90))
+        screen.blit(hs_3, (425,110))
         for event in pygame.event.get():
             if event.type == KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
@@ -314,6 +328,7 @@ def main_menu():
 
 def death_screen(model):
     """screen that you see when you die"""
+    store_high_scores(model)
     #screen
     screen = pygame.display.set_mode((640,480))
     screen.fill(pygame.Color(255,0,0))
@@ -324,6 +339,7 @@ def death_screen(model):
     stat_font = pygame.font.SysFont('Arial', 30)
     stat_surf1 = stat_font.render('Pedestrians Hit: '+str(model.player.score),
                                    True, (0,0,0))
+    high_score_surf = stat_font.render('***NEW HIGH SCORE***', True, (0,0,0))
     stat_surf2 = stat_font.render('Gastanks Collected: '+str(model.player.gas_collected),
                                    True, (0,0,0))
     stat_surf3 = stat_font.render('Obstacles Avoided: '+str(model.player.obstacles_avoided),
@@ -362,6 +378,26 @@ def main_game_loop(model,view,controller):
         view.draw()
         time.sleep(.001)
 
+def store_high_scores(model):
+    """stores top 3 local high scores"""
+    filename = 'road_rage_high_scores.pickle'
+    current_scores = pickle.load(open(filename,'rb+'))
+    if model.player.score > min(current_scores):
+        current_scores.pop()
+        current_scores.append(model.player.score)
+    current_scores.sort(reverse=True)
+    pickle.dump(current_scores,open(filename,'wb'))
+    return
+
+def extract_high_scores(model):
+    """stores top 3 local high scores"""
+    filename = 'road_rage_high_scores.pickle'
+    if not exists(filename):
+        base_hs = [3,2,1]
+        pickle.dump(base_hs,open(filename,'wb'))
+    return pickle.load(open(filename, 'rb'))
+
+
 if __name__ == "__main__":
     pygame.init()
     pygame.font.init()
@@ -372,6 +408,6 @@ if __name__ == "__main__":
         model = Model()
         view = View(model)
         controller = Controller(model)
-        main_menu()
+        main_menu(model)
         main_game_loop(model,view,controller)
         running = death_screen(model)
