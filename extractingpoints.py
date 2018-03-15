@@ -8,6 +8,66 @@ from PIL import Image
 
 '''Takes the latitude and longitudes of the state borders and stores them in point objects.'''
 
+state_abb = {
+        'AK': 'Alaska',
+        'AL': 'Alabama',
+        'AR': 'Arkansas',
+        'AS': 'American Samoa',
+        'AZ': 'Arizona',
+        'CA': 'California',
+        'CO': 'Colorado',
+        'CT': 'Connecticut',
+        'DC': 'District of Columbia',
+        'DE': 'Delaware',
+        'FL': 'Florida',
+        'GA': 'Georgia',
+        'GU': 'Guam',
+        'HI': 'Hawaii',
+        'IA': 'Iowa',
+        'ID': 'Idaho',
+        'IL': 'Illinois',
+        'IN': 'Indiana',
+        'KS': 'Kansas',
+        'KY': 'Kentucky',
+        'LA': 'Louisiana',
+        'MA': 'Massachusetts',
+        'MD': 'Maryland',
+        'ME': 'Maine',
+        'MI': 'Michigan',
+        'MN': 'Minnesota',
+        'MO': 'Missouri',
+        'MP': 'Northern Mariana Islands',
+        'MS': 'Mississippi',
+        'MT': 'Montana',
+        'NA': 'National',
+        'NC': 'North Carolina',
+        'ND': 'North Dakota',
+        'NE': 'Nebraska',
+        'NH': 'New Hampshire',
+        'NJ': 'New Jersey',
+        'NM': 'New Mexico',
+        'NV': 'Nevada',
+        'NY': 'New York',
+        'OH': 'Ohio',
+        'OK': 'Oklahoma',
+        'OR': 'Oregon',
+        'PA': 'Pennsylvania',
+        'PR': 'Puerto Rico',
+        'RI': 'Rhode Island',
+        'SC': 'South Carolina',
+        'SD': 'South Dakota',
+        'TN': 'Tennessee',
+        'TX': 'Texas',
+        'UT': 'Utah',
+        'VA': 'Virginia',
+        'VI': 'Virgin Islands',
+        'VT': 'Vermont',
+        'WA': 'Washington',
+        'WI': 'Wisconsin',
+        'WV': 'West Virginia',
+        'WY': 'Wyoming'
+}
+
 class Point(object):
     '''Represents a point in 2-D space
 
@@ -70,6 +130,37 @@ with open('irs.csv', newline='') as csvfile:
         if row[2] == '2015':
             state = row[1]
             irs_agi[state] = (row[11], row[12])
+
+charge_data = {}
+charge_data_list =[]
+
+with open('result.csv', newline='') as csvfile:
+    health_charge_data = csv.reader(csvfile)
+    for row in health_charge_data:
+        if row[8] in state_abb:
+            state = state_abb[row[8]]
+            #charge_data[state] = (row[1])
+            #print((charge))
+            charge = float(row[1])
+            if state not in charge_data.keys():
+                charge_data[state] = [charge]
+            else:
+                charge_data[state].append(charge)
+            #charge_data[state] = charge_data.get(state, list()).append(charge)
+
+            #charge_data[state] = charge_data[state].append(charge)
+
+    for state in charge_data:
+         charge_data[state] = sum(charge_data[state])/len(charge_data[state])
+    #         #charge_data[state] = charge_data.get(state, 0) + float(row[1])
+    #
+            #charge_data[state] = (charge_data.get(state[0], 0) + charge, charge_data.get(state[1], 0) + 1)
+
+            #charge_data[state] =
+            #charge_amount
+
+
+    print(charge_data)
 
 #credit for following function to: http://www.ariel.com.au/a/python-point-int-poly.html
 def is_in_polygon(x, y, points):
@@ -188,15 +279,17 @@ while (True):
                     label = myfont.render(state, 1, blue)
                     label2 = myfont.render('Median AGI: $' + irs_agi[state][0], 1, blue)
                     label3 = myfont.render('Mean AGI: $' + irs_agi[state][1], 1, blue)
+                    label4 = myfont.render('Average Charge Data: $' + str(charge_data[state]), 1, blue)
                     screen.blit(label, (1000, 10))
                     screen.blit(label2, (1000, 30))
                     screen.blit(label3, (1000, 50))
+                    screen.blit(label4, (1000,70))
                     #screen.blit(individual_state, (1000, 0))
                     #screen.blit(pygame.draw.polygon(scree))
                     #print(random.choice(state_borders[state]))
                     #print("You pressed the left mouse button in " + state)
                     pygame.display.update()
-                    pygame.time.wait(1000)
+                    pygame.time.wait(5000)
         elif event.type == pygame.MOUSEBUTTONUP and event.button == LEFT:
             x, y = event.pos
             #for state in state_borders:
