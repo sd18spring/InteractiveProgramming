@@ -1,6 +1,7 @@
 import pygame
 from pygame.locals import *
 import time
+import random
 
 
 
@@ -82,10 +83,55 @@ class Ball(pygame.sprite.Sprite):
         else:
             return 1
 
-
     def __str__(self):
         return "Ball x=%f, y=%f, radius=%f" % (self.x, self.y, self.radius)
 
+class Ball(object):
+    def init(self, SCREEN_WIDTH, SCREEN_HEIGHT):
+        self.radius = 20
+        self.centerx = SCREEN_WIDTH*0.5
+        self.centery = SCREEN_HEIGHT*0.5
+
+        self.rect = pygame.Rect(self.centerx - self.radius,
+                               self.centery - self.radius,
+                               self.radius * 2,
+                               self.radius * 2)
+
+    # x , y
+        self.direction = [random.choice([1, -1]), random.choice([1, -1])]
+        self.speed = [5, 8] # x, y
+
+    # left, right, top, bottom
+        self.hit_edge = [False, False, False, False]
+
+    def update(self, paddle1, paddle2, SCREEN_WIDTH,
+            SCREEN_HEIGHT):
+        self.centerx += self.direction[0] * self.speed[0]
+        self.centery += self.direction[1] * self.speed[1]
+
+        self.rect.center = (self.centerx, self.centery)
+
+        #detects if someone losses
+        if self.rect.left <= 0:
+            self.hit_edge[0] = True
+        elif self.rect.right >= SCREEN_WIDTH-1:
+            self.hit_edge[1] = True
+        elif self.rect.top <= 0:
+            self.hit_edge[2] = True
+        elif self.rect.bottom >= SCREEN_HEIGHT-1:
+            self.hit_edge[3] = True
+
+        #detects collision between players & the ball
+        if self.rect.colliderect(self.paddle1):
+            self.direction[0] = 1
+            self.up_speed()
+        elif self.rect.colliderect(self.paddle2):
+            self.direction[0] = -1
+            self.up_speed()
+
+    def up_speed(self):
+        self.speed[0] += random.uniform(0, 0.25)
+        self.speed[1] += random.uniform(0, 0.25)
 
 
 class Paddle(pygame.sprite.Sprite):
@@ -139,8 +185,9 @@ if __name__ == '__main__':
     pygame.init()
 
     FPS = 200
-
-    size = (1800, 800)
+    width = 1800
+    height = 800
+    size = (width, height)
     model = PongModel(size)
 
     view = PyGameWindowView(model, size)
