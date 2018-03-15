@@ -22,7 +22,7 @@ class PyGameWindowView(object):
         self.size = size
         self.home = True
 
-        self.myfont = pygame.font.Font(None, 50)
+        self.myfont = pygame.font.Font(None, 40)
 
     def draw(self):
         """ Draw the current game state to the screen """
@@ -33,8 +33,8 @@ class PyGameWindowView(object):
                              (dot.x, dot.y),
                              dot.radius)
         if not self.home:
-            self.label = self.myfont.render(str(self.text), True, (0, 0, 0))
-            self.screen.blit(self.label, (self.size[0]//2,self.size[1]//2))
+            self.label = self.myfont.render("Movie: %s" % str(self.text), True, (0, 0, 0))
+            self.screen.blit(self.label, (self.size[0]//4, self.size[1]//4))
         pygame.display.update()
 
     def zoom(self, target):
@@ -53,7 +53,7 @@ class PyGameWindowView(object):
         while target.radius < 600:
             self.screen.fill(pygame.Color(255,250,240))
             for dot in dots:
-                if dot.x <= self.size[0]//2 and dot.y < self.size[1]//2:
+                if dot.x < self.size[0]//2 and dot.y < self.size[1]//2:
                     dot.x += vx
                     dot.y += vy
                 elif dot.x > self.size[0]//2 and dot.y < self.size[1]//2:
@@ -77,7 +77,7 @@ class PyGameWindowView(object):
                                             int(dot.radius))
 
             pygame.display.update()
-            time.sleep(0.01)
+            time.sleep(0.001)
 
 
         self.screen.fill(pygame.Color(255,250,240))
