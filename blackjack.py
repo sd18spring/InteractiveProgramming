@@ -2,6 +2,7 @@ import random
 from unicards import unicard
 import card_setup
 import card_detect
+import time
 
 class Card:
     """Represents a standard playing card.
@@ -140,32 +141,35 @@ class Game():
         #print("Player" + str(self.player))
 
         # Call mainloop function from card_detect.py and print resulting rank and suit
-        #rank_name, suit_name = card_detect.mainloop()
-        #print("Player has:" + str(rank_name),'of', str(suit_name))
-        #suitInt, rankInt = convert_card_to_int(suit_name, rank_name)
+        print("Please show your first card to the camera")
+        rank_name, suit_name = card_detect.mainloop()
+        rank_name1 = rank_name
+        suit_name1 = suit_name
+        print("Player has:" + str(rank_name1),'of', str(suit_name1))
+        suitInt1, rankInt1 = convert_card_to_int(suit_name1, rank_name1)
+        print("Please show your second card to the camera (program will wait momentarily)")
+        time.sleep(5)
 
-        #TODO how to input multiple cards? (if card is in deck, then add card to hand and remove from deck)
-        #p1 = Card(suitInt, rankInt)
-        #self.deck.remove_card(p1)
-        #self.player.add_card(p1)
-        self.deck.move_cards(self.player,2) #TODO change back to 1 and uncomment code
+        # Call mainloop function from card_detect.py and print resulting rank and suit
+        rank_name, suit_name = card_detect.mainloop()
+        rank_name2 = rank_name
+        suit_name2 = suit_name
+        print("Player has:" + str(rank_name2),'of', str(suit_name2))
+        suitInt2, rankInt2 = convert_card_to_int(suit_name2, rank_name2)
+
+        # Remove cards from deck and deal them to player
+        p1 = Card(suitInt1, rankInt1)
+        p2 = Card(suitInt2, rankInt2)
+        self.deck.remove_card(p1)
+        self.deck.remove_card(p2)
+        self.player.add_card(p1)
+        self.player.add_card(p2)
         print("Player" + str(self.player))
 
 
 
     def play(self):
         """Simulates the player's turn in a game of blackjack"""
-
-        rank_name, suit_name = card_detect.mainloop()
-        print("Hit is:" + str(rank_name),'of', str(suit_name))
-        suitInt, rankInt = convert_card_to_int(suit_name, rank_name)
-
-        p1 = Card(suitInt, rankInt)
-        self.deck.remove_card(p1)
-        self.player.add_card(p1)
-        print("Player" + str(self.player))
-
-
         ans = input("Would you like to hit or stay?\n")
         if (ans == "hit"):
             self.deck.move_cards(self.player,1)

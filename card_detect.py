@@ -8,7 +8,6 @@ import numpy as np
 import time
 import os
 import card_setup
-from card_setup import draw_results
 
 # Define constants and initialize variables
 def mainloop():
@@ -71,10 +70,9 @@ def mainloop():
 
                     # Draw center point and match result on the image.
                     image, rank_name, suit_name = card_setup.draw_results(image, cards[k])
-                    print(str(rank_name))
-                    print(str(suit_name))
+                    #print(str(rank_name))
+                    #print(str(suit_name))
                     k = k + 1
-
             # Draw card contours on image
             if (len(cards) != 0):
                 temp_contours = []
