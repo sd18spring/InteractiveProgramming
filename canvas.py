@@ -6,12 +6,24 @@ import random
 class canvas():
 
     def __init__(self, width, height):
+        """Initizes a canvas class with following attributes
+        
+        width: the width of the drawing canvas given in pixels
+        height: the height of the drawing canvas given in pixels
+        new_canvas: a numpy array of zeros with depth of 3
+        randx: a range of x pixel value to choose from
+        randy: a range of y pixel value to choose from
+        colorlist: white,red, green, blue, yellow, purple, orange to randomly choose from
+        boxsize: the size of the box appearing in the gaming mode
+        points: the score a user has earned
+        value: the score given to a user upon hitting one rectangle
+        run: a boolean that makes sure boxes appear and disappear accordingly
+        """
         self.width = int(width)
         self.height = int(height)
         self.new_canvas = np.zeros((self.height, self.width, 3), np.uint8)
         self.randx = np.linspace(10,580)
         self.randy = np.linspace(10,380)
-        #white,red, green, blue, yellow, purple, orange
         self.colorlist = [(255,255,255), (0,0,255), (0,255,0), (255,0,0), (0,255,255), (255,0,188), (0,15,255)]
         self.boxsize = 30
         self.points = 0
@@ -19,12 +31,18 @@ class canvas():
         self.run = False
 
     def set_color(self, B, G, R):
+        """Stores the BGR value
+        """
         self.color = (B, G, R)
 
     def set_bgColor(self):
+        """Applies the BGR value to the drawing canvas
+        """
         self.new_canvas[:, :] = self.color
 
     def show_canvas(self):
+        """Displays a canvas on the screen
+        """
         cv2.imshow('newCanvas', self.new_canvas)
 
     def save_drawing(self):
@@ -45,6 +63,8 @@ class canvas():
         self.color = random.choice(self.colorlist)
 
     def show_rect(self):
+        """Draw a rectangle in the 
+        """
         cv2.rectangle(self.new_canvas, (self.xpos, self.ypos), (self.xpos+self.boxsize,self.ypos+self.boxsize), self.color)
         self.run = True
 
