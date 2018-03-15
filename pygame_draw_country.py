@@ -14,12 +14,16 @@ import pygame
 import sys
 import matplotlib.path
 import wold_map
+import csv
 
+#year that the data will be plotted for
+year = '2014'
 # Colors
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
-BLUE = (0, 0, 255)
-GREEN = (0, 255, 0)
+BLUE = (75, 75, 255)
+GREEN = (75, 255, 75)
+RED = (255, 50, 50)
 GRAY = (127, 127, 127)
 LIGHT_GRAY = (191, 191, 191)
 countries=['AF','AL','DZ','AD','AO','AI','AG','AR','AM','AW','AU','AT','AZ','BS','BD','BB','BY','BE','BZ','BJ','BM','BT','BO','BA','BW','BR',
@@ -44,28 +48,57 @@ def point_in_polygon(pt, polygon):
 
     return matplotlib.path.Path(polygon).contains_point(pt)
 
-<<<<<<< HEAD
-# Draw the polygons for the state.
-for polygon in world_map.countries[COUNTRY]:
-    # `polygon` points are tuples `(float, float)`. PyGame requires `(int, int)`.
-    points = [(int(x), int(y)) for x, y in polygon]
-    # Draw the interior
-    pygame.draw.polygon(screen, GREEN, points)
-    # Draw the boundary
-    pygame.draw.polygon(screen, BLACK, points, 1)
-=======
-for country in countries:
+def find_magic(countries):
+#for i in range(len(countries)):
+    magic_numbers = []
+    for i in range(len(countries)):
+        with open('Internet_Users_percentofpop_2000_2016.csv', newline='') as InternetUse:
+            internet = csv.DictReader(InternetUse)
+            for row in internet:
+                if countries[i] in row['Country Code']:
+                    IU = row[year]
+                    if IU == '':
+                        IU = 0
+                    else:
+                        IU = float(IU)
+                    country_name = row['Country Name']
+
+        with open('GDP_PC.csv', newline='') as GDP:
+            GNP = csv.DictReader(GDP)
+            for row in GNP:
+                if country_name == row['Country Name']:
+                    gdp = row[year]
+                    if gdp == '':
+                        gdp = 0
+                    else:
+                        gdp = float(gdp)
+
+        if float(IU) != float(0) and float(gdp) != float(0):
+            magic_number = [IU/gdp]
+            magic_numbers = magic_numbers + magic_number
+        else:
+            zero = [0]
+            magic_numbers = magic_numbers + zero
+
+    return magic_numbers
+
+color_mappings = find_magic(countries)
+for i in range(len(countries)):
     # Draw the polygons for the state.
-    for polygon in wold_map.countries[country]:
+    for polygon in wold_map.countries[countries[i]]:
         # `polygon` points are tuples `(float, float)`. PyGame requires `(int, int)`.
         points = [(int(x), int(y)) for x, y in polygon]
         # Draw the interior
-        pygame.draw.polygon(screen, GREEN, points)
+        number = 255*color_mappings[i]*20
+        if number > 0:
+            color = (0,0,number)
+        else:
+            color = RED
+        pygame.draw.polygon(screen,color, points)
         # Draw the boundary
         pygame.draw.polygon(screen, BLACK, points, 1)
-
     pygame.display.flip()
->>>>>>> 753a204141c4e4663a762ad3af931af7c1493eaa
+
 
 
 last_mouse_in_state = False
