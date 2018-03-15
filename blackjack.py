@@ -145,7 +145,7 @@ class Game():
         suitInt, rankInt = convert_card_to_int(suit_name, rank_name)
 
         #TODO how to input multiple cards? (if card is in deck, then add card to hand and remove from deck)
-
+        p1 = Card(suitInt, rankInt)
         self.deck.remove_card(p1)
         self.player.add_card(p1)
         print("Player" + str(self.player))
