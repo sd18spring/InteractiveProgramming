@@ -30,10 +30,13 @@ def main():
     options, args = init_opts()
     track = finger_track()
     cap = cv2.VideoCapture(0)
-    newCanvas = canvas(cap.get(3), cap.get(4))
+    scaler = 2
+    if options.game:
+        scaler = 1
+    newCanvas = canvas(cap.get(3), cap.get(4), scaler)
     disappr = options.disappr
     track.pathlength = options.length
-    game_time = 5
+    game_time = 30
     current_time = 1
     start = time.time()
     while True:
@@ -60,7 +63,7 @@ def main():
         res = cv2.bitwise_and(frame, frame, mask=redMask)
         cv2.imshow('original', res)
         mask = cv2.blur(mask, (20, 20))
-        track.find_center(mask, frame, disappr=disappr)
+        track.find_center(mask, frame, newCanvas, disappr=disappr)
         # track.refine_path()
         track.draw(newCanvas)
 

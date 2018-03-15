@@ -5,9 +5,9 @@ import random
 
 class canvas():
 
-    def __init__(self, width, height):
+    def __init__(self, width, height, scaler):
         """Initizes a canvas class with following attributes
-        
+
         width: the width of the drawing canvas given in pixels
         height: the height of the drawing canvas given in pixels
         new_canvas: a numpy array of zeros with depth of 3
@@ -19,11 +19,12 @@ class canvas():
         value: the score given to a user upon hitting one rectangle
         run: a boolean that makes sure boxes appear and disappear accordingly
         """
-        self.width = int(width)
-        self.height = int(height)
+        self.screen_scaler = scaler
+        self.width = int(width) * self.screen_scaler
+        self.height = int(height) * self.screen_scaler
         self.new_canvas = np.zeros((self.height, self.width, 3), np.uint8)
-        self.randx = np.linspace(10,580)
-        self.randy = np.linspace(10,380)
+        self.randx = np.linspace(10,580*self.screen_scaler)
+        self.randy = np.linspace(10,380*self.screen_scaler)
         self.colorlist = [(255,255,255), (0,0,255), (0,255,0), (255,0,0), (0,255,255), (255,0,188), (0,15,255)]
         self.boxsize = 30
         self.points = 0
@@ -63,12 +64,17 @@ class canvas():
         self.color = random.choice(self.colorlist)
 
     def show_rect(self):
-        """Draw a rectangle in the 
+        """Draws a rectangle in the gaming mode.
         """
-        cv2.rectangle(self.new_canvas, (self.xpos, self.ypos), (self.xpos+self.boxsize,self.ypos+self.boxsize), self.color)
+        cv2.rectangle(self.new_canvas, (self.xpos, self.ypos), (self.xpos+self.boxsize,self.ypos+self.boxsize), self.color, 3)
         self.run = True
 
-    def in_rect(self,pointx,pointy):
+    def in_rect(self, pointx, pointy):
+        """Decides whether a point is within a rectangle
+
+        pointx: x pixel position of the point
+        pointy: y pixel position of the point
+        """
         if self.xpos<pointx<self.xpos+self.boxsize and self.ypos<pointy<self.ypos+self.boxsize:
             self.run = False
             self.make_rect()
