@@ -4,7 +4,7 @@ from pygame.locals import*
 import time
 
 class PyGameWindowView(object):
-    def __init__(self,model,width=640,height=480):
+    def __init__(self,model,width,height):
         self.model = model
         size = (width,height)
         self.model.screen = pygame.display.set_mode(size)
@@ -20,13 +20,13 @@ class PyGameWindowView(object):
         all_cells = self.model.cells.values()
         for cell in all_cells:
             cell.draw()
-            
+
     def draw(self):
         self.model._draw_players()
         pygame.display.update()
 
 class TronModelView(object):
-    def __init__(self,cell_length=10,width=640,height=480):
+    def __init__(self,cell_length,width,height):
         pygame.init()
         size = (width,height)
         self.screen = pygame.display.set_mode(size)
@@ -35,6 +35,7 @@ class TronModelView(object):
         self.cell_length = cell_length
         self.player1 = Player(self.screen,10,(self.width/2+100),(self.height/2),"r",(255,140,0))
         self.player2 = Player(self.screen,10,(self.width/2-100),(self.height/2),"l",(0,255,0))
+        self.game_over = False
 
     def _draw_players(self):
         self.player1.draw()
@@ -44,16 +45,15 @@ class TronModelView(object):
         self.player1.update()
         self.player2.update()
         if self.player1.crash():
-            self.end_game("PLAYER 2 ")
-            self.player1.dir = "None"
-            self.player2.dir = "None"
+            self.end_game("GREEN ")
         if self.player2.crash():
-            self.end_game("PLAYER 1 ")
-            self.player1.dir = "None"
-            self.player2.dir = "None"
+            self.end_game("ORANGE ")
 
     def end_game(self,player):
         pygame.display.set_caption(player + "WINS!")
+        self.game_over = True
+        self.player1.dir = "None"
+        self.player2.dir = "None"
 
 class Cell(object):
     def __init__(self, draw_screen, coordinates, side_length):
@@ -112,6 +112,18 @@ class Player(object):
 class PlayerPath(object):
     def __init__(self,model):
         self.model = model
+        self.model.cells_loc = {}
+        for i in range(self.model.height):
+            for j in range(self.model.height):
+                cell_coords = (i*self.model.cell_length,j*self.model.cell_length)
+                self.model.cells_loc[(i,j)] = Cell(self.model.screen,cell_coords,cell_size)
+        self.model.hit_cells = [(self.model.player1.x,self.model.player1.y),(self.model.player2.x,self.model.player2.y)]
+
+    def update(self):
+        if (self.model.player1.x,self.model.player1,y) not in self.hit_cells:
+            self.hit_cells.append((self.model.player1.x, self.model.player1.y))
+        if (self.model.player2.x,self.model.player2.y) not in self.hit_cells:
+            self.hit_cells.append((self.model.player2.x,self.model.player2.y))
 
 class KeyControl(object):
     def __init__(self, model):
@@ -120,48 +132,61 @@ class KeyControl(object):
     def handle_event(self, event):
         if event.type != KEYDOWN:
             return
-        if event.key == pygame.K_LEFT:
+        if event.key == pygame.K_LEFT and self.model.game_over != True:
             if self.model.player1.dir != "r":
                 self.model.player1.dir = "l"
-        if event.key == pygame.K_RIGHT:
+        if event.key == pygame.K_RIGHT and self.model.game_over != True:
             if self.model.player1.dir != "l":
                 self.model.player1.dir = "r"
-        if event.key == pygame.K_DOWN:
+        if event.key == pygame.K_DOWN and self.model.game_over != True:
             if self.model.player1.dir != "u":
                 self.model.player1.dir = "d"
-        if event.key == pygame.K_UP:
+        if event.key == pygame.K_UP and self.model.game_over != True:
             if self.model.player1.dir != "d":
                 self.model.player1.dir = "u"
 
-        if event.key ==pygame.K_a:
+        if event.key ==pygame.K_a and self.model.game_over != True:
             if self.model.player2.dir != "r":
                 self.model.player2.dir = "l"
-        if event.key == pygame.K_d:
+        if event.key == pygame.K_d and self.model.game_over != True:
             if self.model.player2.dir != "l":
                 self.model.player2.dir = "r"
-        if event.key == pygame.K_s:
+        if event.key == pygame.K_s and self.model.game_over != True:
             if self.model.player2.dir != "u":
                 self.model.player2.dir = "d"
-        if event.key == pygame.K_w:
+        if event.key == pygame.K_w and self.model.game_over != True:
             if self.model.player2.dir != "d":
                 self.model.player2.dir = "u"
 
+        if event.key == pygame.K_SPACE and self.model.game_over == True:
+            return True
 
 if __name__ == '__main__':
-    pygame.init()
-    model = TronModelView()
-    view = PyGameWindowView(model)
-    view._init_draw()
-    controller = KeyControl(model)
 
-    running = True
-    while running:
-        for event in pygame.event.get():
-            if event.type == QUIT:
-                running = False
-            controller.handle_event(event)
-        model.update()
-        view.draw()
-        time.sleep(.1)
+    def main_loop():
+        pygame.init()
+        running = True
+        while running:
+            model = TronModelView(10,640,480)
+            view = PyGameWindowView(model,640,480)
+            view._init_draw()
+            controller = KeyControl(model)
 
-    pygame.quit()
+            game_over = False
+            while not game_over:
+                for event in pygame.event.get():
+                    if event.type == QUIT:
+                        running = False
+                        game_over = True
+                    if controller.handle_event(event):
+                        game_over = True
+                    controller.handle_event(event)
+                model.update()
+                view.draw()
+                time.sleep(.1)
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    running = False
+        pygame.quit()
+
+    main_loop()
