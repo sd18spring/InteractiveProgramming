@@ -22,6 +22,8 @@ class PyGameWindowView(object):
         self.size = size
         self.home = True
 
+        self.myfont = pygame.font.Font(None, 50)
+
     def draw(self):
         """ Draw the current game state to the screen """
         self.screen.fill(pygame.Color(245,241,232))
@@ -30,6 +32,9 @@ class PyGameWindowView(object):
                              pygame.Color(int(dot.movie.newR),0, int(dot.movie.newB)),
                              (dot.x, dot.y),
                              dot.radius)
+        if not self.home:
+            self.label = self.myfont.render(str(self.text), True, (0, 0, 0))
+            self.screen.blit(self.label, (self.size[0]//2,self.size[1]//2))
         pygame.display.update()
 
     def zoom(self, target):
@@ -37,6 +42,7 @@ class PyGameWindowView(object):
         vr = 1.5
         vx = 1
         vy = 1
+        self.text = target.label
 
         #copy dots so originals aren't modified and find the target to be zoomed in on
         dots = copy.deepcopy(self.model.dots)
@@ -59,6 +65,9 @@ class PyGameWindowView(object):
                 elif dot.x > self.size[0]//2 and dot.y > self.size[1]//2:
                     dot.x -= vx
                     dot.y -= vy
+                elif (dot.x == self.size[0]//2 or dot.y == self.size[1]//2) and dot != target:
+                    dot.x = 2000
+                    dot.y = 2000
             target.radius += vr
 
             for dot in dots:
