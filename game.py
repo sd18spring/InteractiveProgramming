@@ -12,13 +12,14 @@ class Model(object):
     def __init__(self):
 
         self.player = Player(295, 200)
+        self.player_group = pygame.sprite.Group()
 
         self.pedestrians = pygame.sprite.Group()
         self.gastanks = pygame.sprite.Group()
         self.obstacles = pygame.sprite.Group()
         self.all_objs = pygame.sprite.Group()
-        self.rd_lines = pygame.sprite.Group()
 
+        self.rd_lines = pygame.sprite.Group()
         for i in numpy.linspace(0, 520, 12):
             line = RoadLines(i)
             line.add(self.rd_lines)
@@ -44,14 +45,19 @@ class Model(object):
             if line.y>520:
                 line.y = 0
         self.add_obj()
+        self.detect_collisions()
 
     def add_obj(self):
         """Randomly adds objects for the player to interact with"""
-        obj_index = random.randint(1,4000)
+        obj_index = random.randint(1,2000)
         if self.player.gas_level < 20:
-            if obj_index>3990:
+            if obj_index>1990:
                 gas = Gastank(random.randint(20,600))
-                gas.add(self.gastanks)
+                if pygame.sprite.spritecollideany(gas, self.all_objs):
+                    gas.kill()
+                else:
+                    gas.add(self.all_objs)
+                    gas.add(self.gastanks)
 
         if obj_index == 1:
             gas = Gastank(random.randint(20,600))
@@ -69,7 +75,7 @@ class Model(object):
                 ped.add(self.all_objs)
                 ped.add(self.pedestrians)
 
-        if obj_index > 10 and obj_index < 20:
+        if obj_index > 8 and obj_index < 20:
             obst = Obstacle(random.randint(20,520))
             if pygame.sprite.spritecollideany(obst, self.all_objs):
                 obst.kill()
@@ -77,6 +83,12 @@ class Model(object):
                 obst.add(self.all_objs)
                 obst.add(self.obstacles)
 
+    def detect_collisions(self):
+        """detect collisions between player and objs"""
+
+        objs=pygame.sprite.groupcollide(self.player_group, self.all_objs, False, True)
+        if objs:
+            objs[self.player].kill()
 
 
 class RoadLines(pygame.sprite.Sprite):
@@ -100,6 +112,9 @@ class EnvironmentObject(pygame.sprite.Sprite):
 
     def update(self):
         self.y += .25
+        self.rect.x = self.x
+        self.rect.y = self.y
+        print(self.rect, self.rect.x, self.rect.y)
 
 class Gastank(EnvironmentObject):
     """describing type of EnvironmentObject"""
@@ -107,7 +122,6 @@ class Gastank(EnvironmentObject):
         super().__init__(x)
         self.rect = pygame.Rect(self.x, self.y, 20, 30)
         self.image = pygame.image.load('gas.png')
-        self.hud_image = pygame.transform.scale(self.image, (10,15))
         self.image = pygame.transform.scale(self.image, (20,30))
 
 class Pedestrian(EnvironmentObject):
@@ -129,6 +143,7 @@ class Obstacle(EnvironmentObject):
 class Player(pygame.sprite.Sprite):
     """user controlled player"""
     def __init__(self, x_pos, y_pos):
+        super().__init__()
         self.x = x_pos
         self.y = y_pos
         self.gas_level = 100
@@ -163,6 +178,10 @@ class Player(pygame.sprite.Sprite):
         if self.gas_level < 0:
             self.alive = False
 
+
+        self.rect.y = self.y
+        self.rect.x = self.x
+        print(self.rect.x, self.rect.y)
 
 
 class View():
@@ -220,7 +239,7 @@ class View():
 
         pygame.display.update()
 
-class Controllers(object):
+class Controller(object):
     """keyboard controls"""
     def __init__(self, model):
         self.model = model
@@ -261,7 +280,7 @@ if __name__ == "__main__":
 
     model = Model()
     view = View(model)
-    controller = Controllers(model)
+    controller = Controller(model)
 
     running = True
     while running:
