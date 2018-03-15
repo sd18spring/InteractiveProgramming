@@ -10,7 +10,10 @@ SAMPLE_FILE = os.path.join(SAMPLES_DIR, "bass_D2.wav")
 SAMPLE_NOTE = D2  # the sample file plays at this pitch
 
 class PyGameWindowView(object):
-
+    """
+    This class draws the graphics of the program, which only consists of a
+    static image of 12 rectangles, each with a note on them.
+    """
     def __init__(self, model, size):
         self.model = model
         self.screen = pygame.display.set_mode(size)
@@ -39,10 +42,14 @@ class PyGameWindowView(object):
         pygame.display.update()
 
 class NoteBoardModel(object):
-
+    """
+    This class houses the collection of notes on the noteboard. It initiallizes
+    What notes are contained, their Sonic Pi note values, the colors they
+    have on the graphical noteboard, and the positions they have on the noteboard.
+    """
     def __init__(self,size):
-        self.notes = ["Ab","A","Bb","B","C","Db","D","Eb","E","F","Gb","G"]
-        self.note_colors = {"Ab" : pygame.Color(255,0,0),
+        self.notes = ["Ab","A","Bb","B","C","Db","D","Eb","E","F","Gb","G"] #Note names
+        self.note_colors = {"Ab" : pygame.Color(255,0,0), #Colors for the graphics
                             "A" : pygame.Color(255,128,0),
                             "Bb" : pygame.Color(255,255,0),
                             "B" : pygame.Color(128,255,0),
@@ -54,7 +61,7 @@ class NoteBoardModel(object):
                             "F" : pygame.Color(128,0,255),
                             "Gb" : pygame.Color(255,0,255),
                             "G" : pygame.Color(255,0,128)}
-        self.note_values = {"Ab" : 56,
+        self.note_values = {"Ab" : 56, #Sonic Pi note values
                             "A" : 57,
                             "Bb" : 58,
                             "B" : 59,
@@ -91,7 +98,10 @@ class NoteBoardModel(object):
         return "\n".join(output_lines)
 
 class NoteBlock(object):
-
+    """
+    This class makes a Note Block which has its size, position, Sonic Pi note
+    value, and its color on the graphical note board.
+    """
     def __init__(self, note, height, width, x, y, color, value):
         self.note = note
         self.height = height
@@ -110,7 +120,13 @@ class NoteBlock(object):
         return note_block_string
 
 class PyGameKeyboardController(object):
-
+    """
+    This class controls any interactions the user has with the keyboard. Specifically,
+    this class plays notes based on what key is pressed. The notes are tied, in
+    order, to the top row of letter keys. This starts with "Q" and ends with the
+    "]" key. If any of these keys are pressed, play their respective note.
+    Otherwise, ignore key presses.
+    """
     def __init__(self,model):
         self.model = model
 
@@ -155,22 +171,27 @@ class PyGameKeyboardController(object):
             return
 
 class PyGameMouseController(object):
-
+    """
+    This class controls any interactions the user has with the mouse. This class
+    will detect when there is a left click. It will get the position of the mouse
+    at the time of a click, turn that position into a note index so it can detect
+    which note block is being clicked, and will then play the respective note.
+    """
     def __init__(self,model):
         self.model = model
 
     def handle_event(self,event):
         if event.type == MOUSEBUTTONDOWN and event.button == 1:
-            x = event.pos[0]
-            note_index = int(x//(size[0]/12))
-            note = model.note_blocks[note_index]
-            print(note)
-            play_note(note.value)
+            x = event.pos[0] # Gets x position of mouse
+            note_index = int(x//(size[0]/12)) # Turns position into note index
+            note = model.note_blocks[note_index] # Finds the note from that index
+            play_note(note.value) # Plays the note
+            return
+        else:
             return
 
-
 def play_note(val, beats=1, bpm=10000, amp=1):
-    """Play note for `beats` beats. Return when done."""
+    """This function references Sonic Pi to play the specified note."""
     # `note` is this many half-steps higher than the sampled note
     half_steps = val - SAMPLE_NOTE
     # An octave higher is twice the frequency. There are twelve half-steps per
@@ -180,27 +201,24 @@ def play_note(val, beats=1, bpm=10000, amp=1):
     # different working directory.
     sample(os.path.realpath(SAMPLE_FILE), rate=rate, amp=amp)
 
-
 if __name__ == '__main__':
     pygame.init()
 
     size = (1860,1020)
 
     model = NoteBoardModel(size)
-    print(model)
     view = PyGameWindowView(model, size)
-    mouse_con = PyGameMouseController(model)
-    keyboard_con = PyGameKeyboardController(model)
+    mouse_con = PyGameMouseController(model) # Initializes the mouse controller
+    keyboard_con = PyGameKeyboardController(model) # Initializes the keyboard controller
 
     running = True
     while running:
         for event in pygame.event.get():
             if event.type == QUIT:
                 running = False
-
-            mouse_con.handle_event(event)
-            keyboard_con.handle_event(event)
+            mouse_con.handle_event(event) # If mouse click, act as needed
+            keyboard_con.handle_event(event) # If key press, act as needed
         view.draw()
-        # time.sleep(.001)
+        time.sleep(.001)
 
     pygame.quit()

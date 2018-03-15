@@ -13,7 +13,10 @@ SAMPLE_FILE = os.path.join(SAMPLES_DIR, "bass_D2.wav")
 SAMPLE_NOTE = D2  # the sample file plays at this pitch
 
 class PyGameWindowView(object):
-
+    """
+    This class draws the graphics of the program, which only consists of a
+    static image of 12 rectangles, each with a note on them.
+    """
     def __init__(self, model, size):
         self.model = model
         self.screen = pygame.display.set_mode(size)
@@ -42,10 +45,14 @@ class PyGameWindowView(object):
         pygame.display.update()
 
 class NoteBoardModel(object):
-
+    """
+    This class houses the collection of notes on the noteboard. It initiallizes
+    What notes are contained, their Sonic Pi note values, the colors they
+    have on the graphical noteboard, and the positions they have on the noteboard.
+    """
     def __init__(self,size):
-        self.notes = ["Ab","A","Bb","B","C","Db","D","Eb","E","F","Gb","G"]
-        self.note_colors = {"Ab" : pygame.Color(255,0,0),
+        self.notes = ["Ab","A","Bb","B","C","Db","D","Eb","E","F","Gb","G"] #Note names
+        self.note_colors = {"Ab" : pygame.Color(255,0,0), #Colors for the graphics
                             "A" : pygame.Color(255,128,0),
                             "Bb" : pygame.Color(255,255,0),
                             "B" : pygame.Color(128,255,0),
@@ -57,7 +64,7 @@ class NoteBoardModel(object):
                             "F" : pygame.Color(128,0,255),
                             "Gb" : pygame.Color(255,0,255),
                             "G" : pygame.Color(255,0,128)}
-        self.note_values = {"Ab" : 56,
+        self.note_values = {"Ab" : 56, #Sonic Pi note values
                             "A" : 57,
                             "Bb" : 58,
                             "B" : 59,
@@ -94,7 +101,10 @@ class NoteBoardModel(object):
         return "\n".join(output_lines)
 
 class NoteBlock(object):
-
+    """
+    This class makes a Note Block which has its size, position, Sonic Pi note
+    value, and its color on the graphical note board.
+    """
     def __init__(self, note, height, width, x, y, color, value):
         self.note = note
         self.height = height
@@ -114,7 +124,7 @@ class NoteBlock(object):
 
 
 def play_note(val, beats=1, bpm=10000, amp=1):
-    """Play note for `beats` beats. Return when done."""
+    """This function references Sonic Pi to play the specified note."""
     # `note` is this many half-steps higher than the sampled note
     half_steps = val - SAMPLE_NOTE
     # An octave higher is twice the frequency. There are twelve half-steps per
@@ -181,21 +191,20 @@ def find_center(cap):
 
 if __name__ == '__main__':
     pygame.init()
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(0) # Initialize and start video capture camera
     size = (1860,1020)
-    video_width = 480
+    video_width = 480 #Width of the video camera window
     model = NoteBoardModel(size)
-    print(model)
     view = PyGameWindowView(model, size)
 
     running = True
-    while running and cap.isOpened():
+    while running and cap.isOpened(): # Window hasn't closed and camera still running
         for event in pygame.event.get():
             if event.type == QUIT:
                 running = False
-        cx = find_center(cap)
-        index = 12 - int(cx//(video_width/12))
-        play_note(model.note_values.get(model.notes[index]))
+        cx = find_center(cap) # Find the center of the object infront of the camera
+        index = 12 - int(cx//(video_width/12)) # Convert center to note index
+        play_note(model.note_values.get(model.notes[index])) # Play resulting note
         view.draw()
         time.sleep(.001)
 
