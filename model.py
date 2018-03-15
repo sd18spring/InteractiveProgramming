@@ -23,7 +23,8 @@ class Model:
         """
         if (not (event.type == KEYDOWN or event.type == KEYUP) or
            game_object.attacking or
-           game_object.damage_time > 0):
+           game_object.damage_time > 0 or
+           game_object.shielding):
            return
 
         #KEYDOWN events toggle movement on
@@ -64,13 +65,28 @@ class Model:
             if event.key == game_object.keys["up"] and game_object.jumps > 0:
                 game_object.vel_y = game_object.jump_vel
                 game_object.jumps -= 1
-                print("up", game_object.vel_y)
+
+    def shield(self,event, game_object):
+        """
+        Used to update the shield state of a character
+        """
+        if (game_object.attack_time > 0 or
+           game_object.damage_time > 0):
+           return
+        if event.type == KEYDOWN:
+            if event.key == game_object.keys["down"]:
+                game_object.shielding = True
+        if event.type == KEYUP:
+            if event.key == game_object.keys["down"]:
+                game_object.shielding = False
 
     def attack_command(self, event, game_object):
         """
         Used to toggle the attacking mode for a character object for a given
         amount of time.
         """
+        if game_object.shielding:
+            return
         if event.type == KEYDOWN:
             #NOTE: Change to custom/dynamic character attack button.
             if event.key == game_object.keys["attack"]:
@@ -91,10 +107,11 @@ class Model:
                 char.jumps = char.max_jumps
             for other_chars in self.characters:
                 if other_chars.left:
-                    char.detect_damage(other_chars.attack_rect, -1)
+                    char.detect_damage(other_chars, -1)
                 else:
-                    char.detect_damage(other_chars.attack_rect, 1)
+                    char.detect_damage(other_chars, 1)
             print(char.damage_time)
+
             char.move()
             char.attack_action()
 

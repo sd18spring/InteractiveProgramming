@@ -3,18 +3,19 @@ class Character:
     def __init__(self, pos_x = 300, pos_y = 0, label = "blank",
                      attack = 10,
                      defense = 10,
-                     weight = 10,
+                     weight = 1,
                      jump_vel = -80,
                      acceleration = 3,
                      speed = 15,
                      width = 75,
                      height = 150,
                      max_health = 100,
-                     max_jumps = 3, keys = {"left": pygame.K_LEFT, "right": pygame.K_RIGHT, "up" : pygame.K_UP, "down": pygame.K_DOWN, "attack": pygame.K_SLASH},
+                     max_jumps = 3, keys = {"left": pygame.K_a, "right": pygame.K_d, "up" : pygame.K_w, "down": pygame.K_s, "attack": pygame.K_e},
                      left_img = "left.png",
                      right_img = "right.png",
                      up_img = "up.png",
                      down_img = "down.png",
+                     shield_img = "shield.png",
                      lives = 3,
                      player = 1):
         self.keys = keys
@@ -48,8 +49,9 @@ class Character:
         self.right_img = pygame.transform.scale(pygame.image.load(right_img), (self.width, self.height))
         self.up_img = pygame.transform.scale(pygame.image.load(up_img), (self.width, self.height))
         self.down_img = pygame.transform.scale(pygame.image.load(down_img), (self.width, self.height))
+        self.shield_img = pygame.transform.scale(pygame.image.load(shield_img), (self.width, self.height))
         self.player = player
-
+        self.shielding = False
 
 
     def __str__(self):
@@ -107,6 +109,9 @@ class Character:
             self.vel_y = 0
         if self.damage_time > 0:
             self.damage_time -= 1
+        if self.shielding:
+            self.vel_x = 0
+
 
         self.pos_x += self.vel_x
         self.pos_y += self.vel_y
@@ -121,7 +126,6 @@ class Character:
         updates the hitbox of the character to reflect the action of an attack.
         """
         if self.damage_time > 0:
-
             self.attack_time = 0
         #If the attacking time is up, then toggle off attacking.
         if self.attack_time < 1:
@@ -153,14 +157,24 @@ class Character:
             #put the hitbox underground where it can't interfere wither others
             self.attack_rect = pygame.Rect(self.pos_x, 1000, 0, 0)
 
-    def detect_damage(self, attack_hitbox, direction):
+    def detect_damage(self, other_char, direction):
         """
         detects whether a character object is subjected to an attack or not, and
         then appropriately designates a knockback force.
         """
-        if self.rect.colliderect(attack_hitbox):
-            #add 10 to the damage timer
-            self.damage_time = 10
-            #set push directions
-            self.vel_x = direction * self.speed * 2.5 #I changed these from 1.5 to 2.5 to be more dramatic, feel free to change back
-            self.vel_y = -abs(self.vel_x * 2.5)
+        if self.rect.colliderect(other_char.attack_rect):
+            if not self.shielding:
+                #add 10 to the damage timer
+                self.damage_time = 5
+                #set push directions
+                self.vel_x = direction * self.speed * 0.75 * self.weight
+                self.vel_y = -abs(self.vel_x * 1.5) * self.weight
+                self.weight += 0.05
+                self.damage_time = int((2 * self.vel_y / -15)) + 3
+            else:
+
+                #add 10 to the damage timer
+                other_char.damage_time = 5
+                #set push directions
+                other_char.vel_x = -direction * other_char.speed * 0.75 * other_char.weight
+                other_char.vel_y = -abs(other_char.vel_x * 1.5) * other_char.weight
