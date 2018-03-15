@@ -22,17 +22,25 @@ class PyGameWindowView(object):
         self.size = size
         self.home = True
 
-        self.myfont = pygame.font.Font(None, 40)
+        self.myfont1 = pygame.font.Font(None, 40)
+        self.myfont2 = pygame.font.Font(None, 25)
 
     def draw(self):
         """ Draw the current game state to the screen """
-        self.screen.fill(pygame.Color(245,241,232))
+
         if self.home:
+            self.screen.fill(pygame.Color(245,241,232))
+            self.title = self.myfont1.render("Movie Ratings Data Visualization", True, (0, 0, 0))
+            self.screen.blit(self.title, (300, 30))
+
             for dot in self.model.dots:
                 pygame.draw.circle(self.screen,
                                  pygame.Color(int(dot.movie.newR),0, int(dot.movie.newB)),
                                  (dot.x, dot.y),
                                  dot.radius)
+
+
+
         else:
             dot = self.model.dots
             pygame.draw.circle(self.screen,
@@ -40,13 +48,21 @@ class PyGameWindowView(object):
                              (dot[0].x, dot[0].y),
                              dot[0].radius)
 
+
             pygame.draw.circle(self.screen,
                                  pygame.Color(int(dot[1].movie.MTcR),0, int(dot[1].movie.MTuB)),
                                  (dot[1].x, dot[1].y),
                                  dot[1].radius)
 
-            self.label = self.myfont.render("Movie: %s" % str(self.text), True, (0, 0, 0))
-            self.screen.blit(self.label, (self.size[0]//4, self.size[1]//4))
+
+            self.label = self.myfont2.render("Rotten Tomato", True, (255, 255, 255))
+            self.screen.blit(self.label, (dot[0].x - 55, dot[0].y))
+
+            self.label = self.myfont2.render("Metacritic", True, (255, 255, 255))
+            self.screen.blit(self.label, (dot[1].x - 30, dot[1].y))
+
+            self.label = self.myfont1.render("Movie: %s" % str(self.text), True, (0, 0, 0))
+            self.screen.blit(self.label, (350, 60))
         pygame.display.update()
 
     def zoom(self, target):
@@ -55,6 +71,7 @@ class PyGameWindowView(object):
         vx = 1
         vy = 1
         self.text = target.label
+        print(target)
 
         #copy dots so originals aren't modified and find the target to be zoomed in on
         dots = copy.deepcopy(self.model.dots)
@@ -93,7 +110,8 @@ class PyGameWindowView(object):
 
 
         self.screen.fill(pygame.Color(255,250,240))
-        self.model.dots = self.model.dot_to_child[dot.label]
+        self.model.dots = self.model.dot_to_child[target.label]
+        print(self.model.dots)
 
     def returnHome(self):
         """Returns to the screen with all of the movie dots when in a zoomed in state."""
@@ -109,9 +127,10 @@ class VisualizerModel(object):
         self.run()
 
 
-        for dot in self.dots:
-            self.dot_to_child[dot.label] = [MovieDot(50,0,0, copy.copy(dot.movie)), MovieDot(50,0,100, copy.copy(dot.movie))]
-            self.home_dots.append(dot)
+        for i in range(len(self.dots)):
+            self.dot_to_child[self.dots[i].label] = [MovieDot(140,-300,0, self.dots[i].movie),
+                                                    MovieDot(140,300,0, self.dots[i].movie)]
+            self.home_dots.append(self.dots[i])
 
     def __str__(self):
         output_lines = []
@@ -120,6 +139,8 @@ class VisualizerModel(object):
         return "\n".join(output_lines)
 
     def run(self):
+        """ Detects collision. Once each coordinates of dots are generated, it compares whether
+            it overlaps which other dots. If collide, does not append to the list"""
         rad = 400
         num = 146
 
@@ -134,6 +155,7 @@ class VisualizerModel(object):
             y = r * np.sin(t)
 
             overlapped = False
+
 
             for dot in self.dots:
                 dist = math.sqrt((x - dot.x) ** 2 + (y - dot.y) ** 2)
@@ -165,6 +187,8 @@ class Dot(object):
 
 class MovieDot(Dot):
     def __init__(self,radius,x,y,movie0):
+        """Inherit class of Dot that takes the class Movie, score data of movie, as a parameter
+            in order to store the movie's individual data to each circle"""
         Dot.__init__(self,radius,x,y)
 
         self.movie = movie0
@@ -179,6 +203,8 @@ class MovieDot(Dot):
 
 class Movie(object):
     def __init__(self,index) :
+        """ Extract individual movie's data to pass it to class MovieDot.
+            Rescales the score into rgb value """
         with open('fandango_score_comparison.csv') as f:
             reader = csv.DictReader(f)
             count = 0
@@ -212,10 +238,10 @@ class Movie(object):
         self.RTu = float(RT_users[index][0])
         self.MTc = float(Meta_cris[index][0])
         self.MTu = float(Meta_users[index][0])
-        self.RTcR = self.RTc * 25.5 + 20
-        self.RTuB = self.RTu * 25.5 + 20
-        self.MTcR = self.MTc* 25.5 + 20
-        self.MTuB = self.MTu * 25.5 + 20
+        self.RTcR = self.RTc * 51
+        self.RTuB = self.RTu * 51
+        self.MTcR = self.MTc* 51
+        self.MTuB = self.MTu * 51
 
 class PyGameMouseController(object):
     """ Uses the mouse to zoom in and out of a specific movie. """
