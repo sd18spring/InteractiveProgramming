@@ -9,12 +9,15 @@ from pygame.locals import*
 import time
 
 class PyGameWindowView(object):
+    """View object containing the visual elements of the game.
+    Takes a game model and renders its state onscreen"""
     def __init__(self,model,width,height):
         self.model = model
         size = (width,height)
         self.model.screen = pygame.display.set_mode(size)
 
     def _init_draw(self):
+        """Draws the grid on the screen and is only called at the beginning of a game."""
         self.model.screen.fill((105,105,105))
         self.model.cells = {}
         cell_size = (self.model.cell_length, self.model.cell_length)
@@ -27,10 +30,12 @@ class PyGameWindowView(object):
             cell.draw()
 
     def draw(self):
+        """Draws the player paths and is updated and redrawn constantly"""
         self.model._draw_players()
         pygame.display.update()
 
 class TronModelView(object):
+    """Contains the players, the game state, all cells, and the cells that have been hit."""
     def __init__(self,cell_length,width,height):
         pygame.init()
         size = (width,height)
@@ -42,17 +47,19 @@ class TronModelView(object):
         self.player_paths = []
         self.player1 = Player(self.screen,10,(self.width/2+100),(self.height/2),"r",(255,140,0))
         self.player2 = Player(self.screen,10,(self.width/2-100),(self.height/2),"l",(0,255,0))
-        self.cells_loc = {}
         for i in range(self.height//cell_length):
             for j in range(self.width//cell_length):
                 self.cell_lst.append(Cell((i*self.cell_length,j*self.cell_length),cell_length))
         self.game_over = False
 
     def _draw_players(self):
+        """Calls the player objects' draw functions"""
         self.player1.draw()
         self.player2.draw()
 
     def in_cell(self):
+        """Loops through cell_lst to find the cell whos xrange contains player.x
+        and whos yrange contains player.y, and sets the player location to within that cell."""
         for cell in self.cell_lst:
             if self.player1.x in cell.xrange and self.player1.y in cell.yrange:
                 self.player1.current_cell = cell
@@ -63,6 +70,7 @@ class TronModelView(object):
                 break
 
     def update(self):
+        """Checks for new input and updates the game model."""
         self.player1.update()
         self.player2.update()
         if self.player1.crash():
@@ -72,11 +80,15 @@ class TronModelView(object):
 
         last_seen_p1 = self.player1.current_cell
         last_seen_p2 = self.player2.current_cell
+        # Saving the player locations before updating in order to test to see if the players
+        #have entered a new cell.
         self.in_cell()
         if self.player1.current_cell != last_seen_p1:
             self.player_paths.append(last_seen_p1)
         if self.player2.current_cell != last_seen_p2:
             self.player_paths.append(last_seen_p2)
+        #If the player has left a cell and moved into another, the vacated cell is
+        #added to the list of cells that have been hit
 
         if self.player1.current_cell in self.player_paths:
             self.end_game("GREEN ")
@@ -84,17 +96,22 @@ class TronModelView(object):
             self.end_game("ORANGE ")
 
     def end_game(self,player):
+        """Contains end game protocall"""
         pygame.display.set_caption(player + "WINS!")
         self.game_over = True
         self.player1.dir = "None"
         self.player2.dir = "None"
 
 class Cell(object):
+    """Square object with area and location
+    Used as building block for game grid"""
     def __init__(self, coords, cell_length):
         self.xrange = range(coords[0],coords[0]+cell_length)
         self.yrange = range(coords[1],coords[1]+cell_length)
 
 class Cellview(object):
+    """Cell object defining the visualized form of a cell.
+    Not used structurally to define player locations, but used to visualize the game"""
     def __init__(self, draw_screen, coordinates, side_length):
         self.draw_screen = draw_screen
         self.coordinates = coordinates
@@ -107,6 +124,7 @@ class Cellview(object):
         pygame.draw.rect(self.draw_screen, self.color, rect, line_width)
 
 class Player(object):
+    """Contains players location, direcection and speed, as well as their color"""
     def __init__(self, draw_screen, dimension, start_posx, start_posy, direction, color=(255,255,255)):
         self.draw_screen = draw_screen
         self.width = dimension
@@ -124,6 +142,8 @@ class Player(object):
         pygame.draw.rect(self.draw_screen,self.color,pygame.Rect(self.x,self.y,self.width,self.height))
 
     def update(self):
+        """Checks if players have changed directions, and then
+        adds the amount given by vx to the relevant direction"""
         if self.dir == "r":
             self.vx = 10
             self.vy = 0
@@ -143,35 +163,23 @@ class Player(object):
         self.y += self.vy
 
     def crash(self):
+        """Determines what happens if a player runs of the screen.
+        Called by the end_game function contained in the game model."""
         if self.x == 640 or self.x == -10:
             return True
         if self.y == -10 or self.y == 480:
             return True
         return False
 
-class PlayerPath(object):
-    def __init__(self,model):
-        self.model = model
-        self.model.cells_loc = {}
-        for i in range(self.model.height):
-            for j in range(self.model.height):
-                cell_coords = (i*self.model.cell_length,j*self.model.cell_length)
-                self.model.cells_loc[(i,j)] = Cell(self.model.screen,cell_coords,cell_size)
-        self.model.hit_cells = [(self.model.player1.x,self.model.player1.y),(self.model.player2.x,self.model.player2.y)]
-
-    def update(self):
-        if (self.model.player1.x,self.model.player1,y) not in self.hit_cells:
-            self.hit_cells.append((self.model.player1.x, self.model.player1.y))
-        if (self.model.player2.x,self.model.player2.y) not in self.hit_cells:
-            self.hit_cells.append((self.model.player2.x,self.model.player2.y))
 
 class KeyControl(object):
+    """Assigns key strokes as actions and implements them in game model"""
     def __init__(self, model):
         self.model = model
 
     def handle_event(self, event):
         if event.type != KEYDOWN:
-            return
+            return #if no keys were pressed it quits
         if event.key == pygame.K_LEFT and self.model.game_over != True:
             if self.model.player1.dir != "r":
                 self.model.player1.dir = "l"
@@ -204,6 +212,8 @@ class KeyControl(object):
 if __name__ == '__main__':
 
     def main_loop():
+        """A loop which runs the game until the end came protocall is called.
+        Hit space bar to restart game once game is over"""
         pygame.init()
         running = True
         while running:
