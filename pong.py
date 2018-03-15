@@ -2,6 +2,8 @@ import pygame
 from pygame.locals import *
 import time
 
+
+
 class PyGameWindowView(object):
     """ A view of the Pong game rendered in a PyGame Window"""
     def __init__(self, model, size):
@@ -42,7 +44,7 @@ class PongModel(object):
         self.height = size[1]
         self.paddle1 = Paddle(100, 20, 10, self.height)
         self.paddle2 = Paddle(100, 20, self.width - 30, self.height / 2)
-        self.ball = Ball(self.width/2, self.height/2, 10)
+        self.ball = Ball(int(self.width/2), int(self.height/2), int(10), 10)
 
 
     def update(self):
@@ -59,23 +61,26 @@ class PongModel(object):
 
         return "\n".join(output_lines)
 
-class Ball(object):
+class Ball(pygame.sprite.Sprite):
 
-    def __init__(self, x, y, radius):
+    def __init__(self, x, y, radius, speed):
 
         self.x = x
         self.y = y
         self.radius = radius
+        self.speed = speed
         self.vy = 0.0
         self.vx = 0.0
 
 
-    def update(self):
+    def update(self, ball, paddle1, paddle2, vx, vy):
 
-        self.y += self.vy
-        self.x += self.vx
-
-
+        if self.ball.x == -1 and 10 == self.ball.x:
+            return -1
+        elif self.ball.x == 1 and self.paddle2.width == self.ball.x:
+            return -1
+        else:
+            return 1
 
 
     def __str__(self):
@@ -83,7 +88,7 @@ class Ball(object):
 
 
 
-class Paddle(object):
+class Paddle(pygame.sprite.Sprite):
     """Encodes the state of the paddle 1 in the game"""
 
     def __init__(self, height, width, x, y):
@@ -133,6 +138,8 @@ class PyGameKeyboardController(object):
 if __name__ == '__main__':
     pygame.init()
 
+    FPS = 200
+
     size = (1800, 800)
     model = PongModel(size)
 
@@ -141,6 +148,7 @@ if __name__ == '__main__':
     controller1 = PyGameMouseController(model)
     controller2 = PyGameKeyboardController(model)
 
+    fps_clock = pygame.time.Clock()
 
     running = True
     while running:
@@ -150,8 +158,10 @@ if __name__ == '__main__':
             controller1.handle_event(event)
             controller2.handle_event(event)
 
+
         model.update()
         view.draw()
         time.sleep(.001)
+        fps_clock.tick(FPS)
 
     pygame.quit()
