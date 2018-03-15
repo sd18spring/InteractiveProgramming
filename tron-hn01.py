@@ -75,14 +75,14 @@ class TronModelView(object):
             self.player1.dir = "None"
             self.player2.dir = "None"
 
-        last_seen_p1 = self.player1.current_cell
+        """last_seen_p1 = self.player1.current_cell
         last_seen_p2 = self.player2.current_cell
         self.in_cell()
         if self.player1.current_cell != last_seen_p1:
             self.player_paths.append(last_seen_p1)
 
         if self.player2.current_cell != last_seen_p2:
-            self.player_paths.append(last_seen_p2)
+            self.player_paths.append(last_seen_p2)"""
 
 
         if self.player1.current_cell in self.player_paths:
