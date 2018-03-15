@@ -14,7 +14,7 @@ class Model(object):
         self.nodes = [] #holds all of the nodes in the model
         self.n = 3 #1 + the number of new nodes produced with an expansion
         self.nodes.append(Node('title',size[0]/2,size[1]/2))
-        self.nodes.extend(self.nodes[0].init_expand(1,self.n))
+        #self.nodes.extend(self.nodes[0].init_expand(1,self.n))
         self.clines = [] #holds the connection lines of the model
         for i in range(1,len(self.nodes)):
             self.clines.append(ConnectionLine(self.nodes[0], self.nodes[-i]))
@@ -302,8 +302,12 @@ class Controler(object):
                     del self.model.inputboxes[:]
                     self.model.inputbox.string = ''
                 if event.key == pygame.K_RETURN:
-                    del self.model.inputboxes[:]
-                    self.model.inputbox.string = ''
+                        new_stuff = self.model.delete_branch(0)
+                        self.model.nodes = new_stuff[0] #give model a new list not containing the "deleted" nodes
+                        self.model.clines = new_stuff[1]
+                        self.model.nodes[0].title = self.model.inputbox.string
+                        self.model.inputbox.string = ''
+                        self.model.nodes[0].update()
                 if event.key == pygame.K_ESCAPE:
                     del self.model.inputboxes2[:]
                 if event.key == pygame.K_SPACE:
@@ -411,6 +415,10 @@ class Node(object):
 
     def __str__(self):
         return '%d,%d' % (self.x,self.y)
+
+    def update(self):
+        self.text_surface = Node.node_font.render(self.title, False, (0,0,0))
+
 
     def init_expand(self, scale  =1, n =3):
         """Produces n nodes surrouding self in a regular n-gon
