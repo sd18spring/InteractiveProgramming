@@ -13,7 +13,7 @@ class Model(object):
         self.height = size[1]
         self.nodes = [] #holds all of the nodes in the model
         self.n = 3 #1 + the number of new nodes produced with an expansion
-        self.nodes.append(Node('title',size[0]/2,size[1]/2))
+        self.nodes.append(Node('',size[0]/2,size[1]/2))
         #self.nodes.extend(self.nodes[0].init_expand(1,self.n))
         self.clines = [] #holds the connection lines of the model
         for i in range(1,len(self.nodes)):

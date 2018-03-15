@@ -1,6 +1,9 @@
 import wikipedia #need to run $ pip install wikipedia
 import string
 from collections import OrderedDict
+import requests
+from bs4 import BeautifulSoup
+import urllib.request
 
 
 def first_link(title):
@@ -48,46 +51,43 @@ def first_link(title):
     return ordered_list[0]
 
 def summary_links(title):
-    """Finds the first link of an article and returns it"""
-    links_in_summary = []
-    link_dict = {}
-
-
     page = wikipedia.page(title)
-    summary_string = page.summary.lower().replace('-',' ')
-    summary_string = ''.join(i for i in summary_string if i not in string.punctuation)
-    summary_list = summary_string.split()
+    url = page.url
+    response = urllib.request.urlopen(url)
+    soup = BeautifulSoup(response, 'lxml')
+    paragraphs = soup.find_all('p')
+    sanitized = BeautifulSoup('', 'lxml')
+    sanitized_html = ''
 
-    for i in range(len(summary_list)):
-        summary_list[i] = summary_list[i].lower()
+    for paragraph in paragraphs:
+        para_string = str(paragraph)
+        stack = []
+        new_pg = ''
+        for char in para_string:
+            if '(' in str(char):
+                stack.append('(')
+            if ')' in str(char):
+                if stack:
+                    stack.pop()
+            if not stack:
+                new_pg += char
 
-    links = page.links
+        sanitized_html += new_pg
 
-    for i in range(len(links)):
-        links[i] = links[i].lower()
+    sanitized = BeautifulSoup(sanitized_html, 'lxml')
+    sanitized_paragraphs = sanitized.find_all('p')
+    links = sanitized_paragraphs[0].find_all('a')
+    text_links = [x for x in links if x.text and '[' not in x.text]
 
+    for i in range(len(text_links)):
+        text_links[i] = text_links[i].title
+    linked_pages = []
 
     for link in links:
-        no_punct = ''.join(i for i in link if i not in string.punctuation)
-        if no_punct in summary_string and not no_punct in page.title.lower():
-            links_in_summary.append(no_punct)
+        if link.get('title'):
+            linked_pages.append(link['title'])
 
-    for link in links_in_summary:
-        if link.split()[0] in summary_list:
-            flag = True
-            position = summary_list.index(link.split()[0])
-            for i in range(len(link.split())):
-                if summary_list[position + i] != link.split()[i]:
-                    flag = False
-            if flag:
-                link_dict[link] = position
-
-        if  link.split()[0] + 's' in summary_list:
-            position = summary_list.index(link.split()[0] + 's')
-            link_dict[link] = position
-
-    ordered_list = sorted(link_dict,key = link_dict.get)
-    return ordered_list
+    return linked_pages
 
 def key_links(title):
     d = dict()
