@@ -8,7 +8,7 @@ Our project allows a user to play blackjack interactively with a computer. Using
 Software requirements can be found in the `requirements.txt` file and installed via `pip install -r requirements.txt`.
 
 This project does have a hardware component though and may be difficult to demo as a result. Steps to demo the project using the hardware:
-1. Grab and external usb webcam and plug into your computer (we used a Microsoft Lifecam).
+1. Grab an external usb webcam and plug into your computer (we used a Microsoft Lifecam).
 2. Grab a deck of cards
 3. A black surface is extremely helpful (but not required) for card matching.
 4. When identifying cards, hold the external webcam roughly a cubit directly above the card.
