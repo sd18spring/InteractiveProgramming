@@ -15,14 +15,14 @@ def mainloop():
     IM_WIDTH = 1280
     IM_HEIGHT = 720
     FRAME_RATE = 10
-    suit_name  = "Hearts"
-    rank_name = "Queen"
+    #suit_name  = "Hearts"
+    #rank_name = "Queen"
 
     ## Define font to use
     font = cv2.FONT_HERSHEY_DUPLEX
 
     # Initialize camera object and video feed from the camera. Change integer to reflect internal webcam versus usb webcam.
-    video_stream = cv2.VideoCapture(0)
+    video_stream = cv2.VideoCapture(1)
     time.sleep(1) # Give the camera time to warm up
 
     # Load the train rank and suit images
