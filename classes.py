@@ -55,7 +55,10 @@ class Ship():
         """
         Initliazes with where the ship is facing as the angle
         """
+        self.startingAngle = angle
         self.angle = angle
+        self.startingX = x
+        self.startingY = y
         self.x = x
         self.y = y
         self.oImage = img
@@ -112,7 +115,6 @@ class Ship():
             self.y = height
 
         self.rect.center = (self.x,self.y)
-
         self.gD.blit(self.nImage,self.rect)
         #pygame.draw.rect(self.gD,(255,0,255),self.rect) # display's the ship's hit box in purple (for testing)
     def shoot(self,AllThings):
@@ -121,7 +123,11 @@ class Ship():
         AllThings.Projectiles.addProjectile(x,y,radians(self.angle),"Ship")
     def destroy(self):
         self.lives = self.lives - 1 # right now just a test, need to put something else here
-        print(self.lives)
+        self.x = self.startingX
+        self.y = self.startingY
+        self.angle = self.startingAngle
+        self.x_speed = 0
+        self.y_speed = 0
 class Asteroid():
     """
     Asteroid Class:
