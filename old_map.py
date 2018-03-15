@@ -1,3 +1,8 @@
+"""old_map.py contains the code that was written while testing out python geoplotlib library. The map feature in
+bokeh was eventually used, but geoplotlib is another useful interactive map that could be useful in the future. Make
+sure to have geoplotlib, pandas, and numpy installed before running. The script can be run just by typing "python
+old_map.py in the terminal". If you have any questions feel free to email cassandra.overney@students.olin.edu."""
+
 import geoplotlib
 import pandas as pd
 from geoplotlib.core import BatchPainter
@@ -8,10 +13,18 @@ import numpy as np
 
 class LineLayer(layers.BaseLayer):
     """
-    draws line connecting points in hurricane path
+    Draws line connecting points in hurricane path
     """
     def __init__(self, data, num, color=None, point_size=2, linewidth=1, f_tooltip=None):
-
+        """
+        Creates a LineLayer for the python geoplotlib library
+        :param data: DataAccessObject of latitudes and longitudes
+        :param num: number of data points in dat
+        :param color: color of lines, just to red if none
+        :param point_size: size of points
+        :param linewidth: width of lines
+        :param f_tooltip: an attribute of geoplotlib's BaseLayer that is not used
+        """
         self.data = data
         self.indexlst = num
         self.color = color
@@ -43,12 +56,6 @@ class LineLayer(layers.BaseLayer):
                 x1, y1 = proj.lonlat_to_screen(x1, y1)
                 x2, y2 = proj.lonlat_to_screen(x2, y2)
                 self.painter.lines(x1, y1, x2, y2, width=self.linewidth)
-
-        # print(type(self.data['lon']))
-        # if self.data['lon'] < len(self.longlst) -1:
-        #     x2, y2 = proj.lonlat_to_screen(self.longlst[self.data['lon']+1], self.latlst[self.data['lat']+1])
-        #     self.painter.points(x2, y2, 2 * self.point_size, False)
-        #     self.painter.lines(x1, y1, x2, y2, width=self.linewidth)
 
         if self.f_tooltip:
             for i in range(0, len(x1)):
@@ -86,22 +93,19 @@ class LineLayer(layers.BaseLayer):
         """
         return False
 
-df = pd.read_csv("simpdata.csv", low_memory=False)
-names = df.dtypes.index
-# print(names)
-lat = df['Latitude_for_mapping'] #you can also use df['column_name']
-long = df['Longitude_for_mapping']
-# print("lat", (lat[0]))
-# print("long", long)
-numindex = np.arange(long.size)
-# print(numlong)
-# print(numlat)
-lst = DataAccessObject({'lon': long, 'lat': lat})
-# print(lst)
-# lst = list(zip(lat[1:], long[1:]))
-# geoplotlib.dot(lst)
-# geoplotlib.layers.DotDensityLayer(lst)
-# geoplotlib.add_layer(layers.DotDensityLayer(lst))
-geoplotlib.add_layer(LineLayer(lst, numindex))
-# geoplotlib.shapefiles('Allstorms.ibtracs_all_lines.v03r10.shp', color=[0,0,255])
-geoplotlib.show()
+if __name__ == '__main__':
+    # TESTING plots a few hurricane paths using the python geoplotlib library
+    df = pd.read_csv("simpdata.csv", low_memory=False)
+    # names = df.dtypes.index
+    # print(names)
+    lat = df['Latitude_for_mapping']
+    long = df['Longitude_for_mapping']
+    # print("lat", (lat[0]))
+    # print("long", long)
+    numindex = np.arange(long.size)
+    # print(numlong)
+    # print(numlat)
+    lst = DataAccessObject({'lon': long, 'lat': lat})
+    # print(lst)
+    geoplotlib.add_layer(LineLayer(lst, numindex))
+    geoplotlib.show()

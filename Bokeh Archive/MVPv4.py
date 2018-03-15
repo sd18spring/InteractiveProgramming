@@ -7,6 +7,7 @@ import pickle
 # run with: bokeh serve --show MVPv4.py
 
 hurricanes = []
+print("hello")
 with open('hurricane_data.pkl', 'rb') as f:
     for _ in range(pickle.load(f)):
         hurricanes.append(pickle.load(f))

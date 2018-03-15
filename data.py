@@ -1,13 +1,22 @@
-# Imports the necessary libraries and creates the arrays needed to store information from NOAA
-# You have to make sure that you have the splinter and BeautifulSoup libraries
+"""data.py uses data scrapping techniques to extract the links of the csv files for each hurricane in the NOAA
+database. The script was only intended to be run once to generate CSVFiles.csv, which is used in Model.py. Make sure
+to have the splinter, BeautifulSoup, time, and pandas libraries if you want to run/modify the script. To run the
+script, just type "python data.py" in the terminal. If you have any questions feel free to send an email to
+cassandra.overney@students.olin.edu """
+
 from splinter import Browser
 from bs4 import BeautifulSoup
 from time import sleep
 import pandas as pd
 
 def get_CSVFiles():
+    """
+    Opens up a Chrome browser, navigates to the FTP server in NOAA and uses BeautifulSoup to extract all of the URLs
+    from a table of hurricanes.
+    :return: list of urls, one for each hurricane
+    """
     urls = []
-    # Opens up a Chrome browser
+    # Opens up a Chrome browser, you may have to download a chrome driver and change the executable path accordingly
     executable_path = {'executable_path':'/bin/chromedriver'}
     browser = Browser('chrome', **executable_path)
     # vists the correct URL and extracts all the links from the HTML table file
@@ -23,6 +32,7 @@ def get_CSVFiles():
     return urls
 
 if __name__ == '__main__':
+    # calls get_CSVFiles and turns the array of URLs into a data frame and then writes that data frame to a csv file.
     urls = get_CSVFiles()
     print(urls[0:10])
     df = pd.DataFrame(urls)

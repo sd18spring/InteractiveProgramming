@@ -1,4 +1,4 @@
-"""Model.py contains the code for the Model class, which has Hurricane objects and is created in the View class.
+"""Model.py contains the code for the Model class, which has Hurricane objects and is created in Map.py.
 Make sure to have Hurricane.py, pandas, and pickle. Script can be run just by typing "python Model.py" in terminal. """
 from Hurricane import Hurricane
 import pandas as pd
