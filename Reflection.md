@@ -8,7 +8,7 @@ We created a game similar to Fruit Ninja where players could use their hands as 
 ## Results
 Our final product was a successful proof of concept game where basic game functions and the game controller were implemented, but did not have a completed UI. When players moved their hands, the cursor would move, and if the cursor overlapped the fruits they disappeared. Our game also featured basic physics where fruits were "tossed" onscreen, and fell out of the screen due to gravity. It also had basic sound effects for sliced fruits.
 
-(include game screenshots)
+![alt text](https://github.com/AmyPhung/InteractiveProgramming/blob/master/images/ninja_shot1.jpg "Screenshot")
 
 ## Implementation
 We used the model-view-controller construction to create this game
