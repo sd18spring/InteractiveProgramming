@@ -61,4 +61,4 @@ def record(record_time, a_format=pyaudio.paInt16, channels=2, rate=44100, chunk=
     waveFile.writeframes(b''.join(frames))
     waveFile.close()
 
-#def get_frequency(file):
+record(1)

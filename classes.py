@@ -21,7 +21,7 @@ class Block(pygame.sprite.Sprite):
         self.image.fill(color)
         self.screen = screen
         self.rect = self.image.get_rect()
-        self.speedx = 2
+        self.speedx = 10
 
     def update(self):
         self.rect.left -= self.speedx
@@ -168,8 +168,8 @@ class Game:
                     pygame.quit()
                     sys.exit()
                 self.player.on_event(event)
-            if self.player.is_recording == False:
-                self.player.record(0.2)
+            # if self.player.is_recording == False:
+            #     self.player.record(0.2)
             freq = self.player.analyze_freq()
             self.player.freq_movement(freq)
             self.mainSurface.fill((0, 0, 0))
