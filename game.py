@@ -4,8 +4,6 @@ from pygame.font import *
 import time
 import numpy
 import random
-pygame.init()
-pygame.font.init()
 
 class Model(object):
     """keeps track of the game state"""
@@ -40,6 +38,7 @@ class Model(object):
             obstacle.update()
             if obstacle.y>500:
                 obstacle.kill()
+                self.player.obstacles_avoided+=1
         for line in self.rd_lines:
             line.update()
             if line.y>520:
@@ -48,7 +47,6 @@ class Model(object):
         self.player.is_collided_with_gas(self.gastanks)
         self.player.is_collided_with_peds(self.pedestrians)
         self.player.is_collided_with_obst(self.obstacles)
-
 
     def add_obj(self):
         """Randomly adds objects for the player to interact with"""
@@ -86,15 +84,6 @@ class Model(object):
                 obst.add(self.all_objs)
                 obst.add(self.obstacles)
 
-    def detect_collisions(self):
-        """detect collisions between player and objs"""
-
-        objs=pygame.sprite.groupcollide(self.player_group, self.all_objs, False, False)
-        if objs:
-            for i in objs[self.player]:
-                i.kill()
-
-
 class RoadLines(pygame.sprite.Sprite):
     """road lines to simulate the road moving by"""
     def __init__(self, y=0):
@@ -105,7 +94,6 @@ class RoadLines(pygame.sprite.Sprite):
 
     def update(self):
         self.y += .50
-
 
 class EnvironmentObject(pygame.sprite.Sprite):
     """base class for objects"""
@@ -166,6 +154,8 @@ class Player(pygame.sprite.Sprite):
         self.alive = True
         self.vx = 0.0
         self.vy = 0.0
+        self.gas_collected = 0
+        self.obstacles_avoided = 0
 
     def update(self):
         if self.x < 1:
@@ -197,6 +187,7 @@ class Player(pygame.sprite.Sprite):
         for gas_sprite in gas_group:
             if self.rect.colliderect(gas_sprite.rect):
                 self.gas_level += 5
+                self.gas_collected += 1
                 if self.gas_level > 100:
                     self.gas_level = 100
                 gas_sprite.kill()
@@ -211,14 +202,11 @@ class Player(pygame.sprite.Sprite):
         for obst_sprite in obst_group:
             if self.rect.colliderect(obst_sprite.rect):
                 self.alive = False
-                
-
-
 
 class View():
     """drawing what is in the model"""
     def __init__(self, model):
-
+        """initialize model, screen, and HUD elements"""
         self.model = model
         self.screen = pygame.display.set_mode((640,480))
         self.gas_image = pygame.image.load('gas.png')
@@ -290,29 +278,77 @@ class Controller(object):
             if event.key == pygame.K_RIGHT:
                 self.model.player.vx += 1
 
+def main_menu():
+    """Main menu function"""
+    #screen
+    screen = pygame.display.set_mode((640,480))
+    screen.fill(pygame.Color(255,0,0))
+    #title
+    title_font = pygame.font.SysFont('Arial', 50)
+    title_surf = title_font.render('ROAD RAGE', True, (0,0,0))
+    #instructions
+    instruction_font = pygame.font.SysFont('Arial', 30)
+    instruction_surf1 = instruction_font.render('The game is simple:',True,(0,0,0))
+    instruction_surf2 = instruction_font.render('Avoid obstacles.',True,(0,0,0))
+    instruction_surf3 = instruction_font.render('Hit pedestrians.',True,(0,0,0))
+    instruction_surf4 = instruction_font.render('Dont run out of gas.',True,(0,0,0))
+    instruction_surf5 = instruction_font.render('Use the arrow keys to move.',True,(0,0,0))
+    instruction_surf6 = instruction_font.render('Press SPACE to start, or Esc to quit.',True,(0,0,0))
 
+    running = True
+    while running:
+        screen.blit(title_surf, (30,100))
+        screen.blit(instruction_surf1, (30,150))
+        screen.blit(instruction_surf2, (30,180))
+        screen.blit(instruction_surf3, (30,210))
+        screen.blit(instruction_surf4, (30,240))
+        screen.blit(instruction_surf5, (30,270))
+        screen.blit(instruction_surf6, (30,300))
+        for event in pygame.event.get():
+            if event.type == KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    pygame.quit()
+                if event.key == pygame.K_SPACE:
+                    running = False
+        pygame.display.update()
 
+def death_screen(model):
+    """screen that you see when you die"""
+    #screen
+    screen = pygame.display.set_mode((640,480))
+    screen.fill(pygame.Color(255,0,0))
+    #title
+    msg_font = pygame.font.SysFont('Arial', 50)
+    msg_surf = msg_font.render('YOU ARE DEAD', True, (0,0,0))
+    #instructions
+    stat_font = pygame.font.SysFont('Arial', 30)
+    stat_surf1 = stat_font.render('Pedestrians Hit: '+str(model.player.score),
+                                   True, (0,0,0))
+    stat_surf2 = stat_font.render('Gastanks Collected: '+str(model.player.gas_collected),
+                                   True, (0,0,0))
+    stat_surf3 = stat_font.render('Obstacles Avoided: '+str(model.player.obstacles_avoided),
+                                   True, (0,0,0))
+    #instructions
+    instruction_font = pygame.font.SysFont('Arial', 20)
+    instruction_surf = instruction_font.render('Press SPACE to restart, press ESC to quit.',
+                                   True, (0,0,0))
 
-class MainMenu():
-    """main menu"""
-    pass
+    running = True
+    while running:
+        screen.blit(msg_surf, (150,100))
+        screen.blit(stat_surf1, (150,150))
+        screen.blit(stat_surf2, (150,180))
+        screen.blit(stat_surf3, (150,210))
+        screen.blit(instruction_surf, (150,400))
+        for event in pygame.event.get():
+            if event.type == KEYDOWN:
+                if event.key == K_SPACE:
+                    return True
+                if event.key == K_ESCAPE:
+                    return pygame.quit()
+        pygame.display.update()
 
-class PauseMenu():
-    """pause menu"""
-    pass
-
-FPS = 30
-fpsClock = pygame.time.Clock()
-
-
-
-
-if __name__ == "__main__":
-
-    model = Model()
-    view = View(model)
-    controller = Controller(model)
-
+def main_game_loop(model,view,controller):
     running = True
     while running:
 
@@ -325,49 +361,17 @@ if __name__ == "__main__":
             running = False
         view.draw()
         time.sleep(.001)
-    pygame.quit()
 
-
-
-
-
-
-
-
-#MAIN GAME LOOP:
-    #size = (640, 480)
-    #screen = pygame.display.set_mode(size)
-    #pygame.display.set_caption('ROAD RAGE')
-    #running = True
-    #while running:
-        #for event in pygame.event.get():
-            #if event.type == QUIT:
-                #running = False
-        #time.sleep(.001)
-
-    #pygame.quit()
-
-
-#testing
-
-
-
-
-#if direction == 'right':
-#    carx += 5
-#
-#    if carx == 350:
-#        direction == 'down'
-#elif direction == 'down':
-#    cary += 5
-#    if cary == 480:
-#        direction == 'left'
-#if direction == 'left':
-#    carx += 5
-
-#    if carx == 20:
-#        direction == 'up'
-#elif direction == 'up':
-#    cary += 5
-#    if cary == 10:
-#        direction == 'right'
+if __name__ == "__main__":
+    pygame.init()
+    pygame.font.init()
+    FPS = 30
+    fpsClock = pygame.time.Clock()
+    running = True
+    while running:
+        model = Model()
+        view = View(model)
+        controller = Controller(model)
+        main_menu()
+        main_game_loop(model,view,controller)
+        running = death_screen(model)
