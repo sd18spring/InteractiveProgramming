@@ -25,9 +25,11 @@ In this interactive programming project, we created a program that uses OpenCV t
 The most basic function of our program is to draw a tailing line. Our program would first filter out the color red in the whole camera frame. After identifying the contour in the filtered red frame, the program records the coordinate of the center of contours as a point to draw lines with. In the end, we would have a list of such points. By drawing a line between every two consecutive points in the list, we would end up with the trajectory of the red object in the frame. The way we maintain the list is by appending new points to the list until the designated length has been reached and then just shifting out the first element in the list and appending the new point to the list.
 
 ![alt text](https://github.com/Tweir195/InteractiveProgramming/blob/master/drawing.jpg)
+
 At the same time, there's the option to make all the points stay on the canvas. To implement this, the only slight variation is that we would keep appending the coordinates to the list of all the points instead of shifting out the first one every time.
 
 ![alt text](https://github.com/Tweir195/InteractiveProgramming/blob/master/gaming.jpg)
+
 The gaming mode is just a step up from the simple trailing mode. When the gaming mode is enabled, the canvas class would place a randomly colored rectangle at a random location inside canvas. Upon a point falling inside the drawn rectangle, users will be given ten points, and the tail of the line will be made longer. The current rectangle disappears while a new one shows up at another randomly chosen location. At the start of the program, the current time of the program is also recorded. When a countdown from 30 finishes, the program will freeze gaming and display the scores that the user receives in this round.Whenever one second elapses, the countdown in the game mode will decrease by one.
 
 ## Implementation: still needs a UML
@@ -39,7 +41,8 @@ Whenever one second elapses, the countdown in the game mode will decrease by one
 In our beginning planning of the project, after we had decided on using OpenCV to make a drawing platform, we had a few options. We thought about trying to make a game similar to the snake game, but the snake was controlled by the web-cam on the computer. We also thought about just making a canvas on the screen that could be drawn on by the web-cam, and have the color be controlled by the speed of movement. We were unsure about how easily we would be able to make the snake game, and decided on making the drawing canvas. However, we finished this with plenty of time, and expanded into a game in addition to the drawing canvas.
 
 ## Reflection
-One thing that would have helped us a lot was having a more appropriately scoped project. We ended up doing a cool project.
+One thing that would have helped us a lot was having a more appropriately scoped project that takes better advantage of classes. We ended up doing a cool project, but because we started in an easier project, we had to keep finding ways to expand. This made us experiment with the code, without realizing we should have made a separate class for each mode.
 
+One of the good things about the experience is that we both pair programmed and divide-and-conquer in the process. Our approach in dividing and conquer were based on the next tasks that need to get done instead of which files or classes specifically so that both us have a good understanding of the program as a whole. We were able to move along in the project quite steadily, not feeling stressed about not feeling our project.
 
 ### Our initial project proposal can be found [here](https://github.com/QingmuDeng/InteractiveProgramming/blob/master/Project%20Proposal.md).
