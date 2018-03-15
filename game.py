@@ -170,7 +170,7 @@ class Player(pygame.sprite.Sprite):
         self.vy = 0.0
         self.gas_collected = 0
         self.obstacles_avoided = 0
-        self.level = 0
+        self.level = 1
 
     def update(self):
         if self.x < 1:
@@ -349,11 +349,14 @@ def death_screen(model):
     msg_surf = msg_font.render('YOU ARE DEAD', True, (0,0,0))
     #instructions
     stat_font = pygame.font.SysFont('Arial', 30)
+
     stat_surf1 = stat_font.render('Pedestrians Hit: '+str(model.player.score),
                                    True, (0,0,0))
     stat_surf2 = stat_font.render('Gastanks Collected: '+str(model.player.gas_collected),
                                    True, (0,0,0))
     stat_surf3 = stat_font.render('Obstacles Avoided: '+str(model.player.obstacles_avoided),
+                                   True, (0,0,0))
+    stat_surf4 = stat_font.render('Level Reached: '+str(model.player.level),
                                    True, (0,0,0))
     #instructions
     instruction_font = pygame.font.SysFont('Arial', 20)
@@ -366,6 +369,7 @@ def death_screen(model):
         screen.blit(stat_surf1, (150,150))
         screen.blit(stat_surf2, (150,180))
         screen.blit(stat_surf3, (150,210))
+        screen.blit(stat_surf4, (150,240))
         screen.blit(instruction_surf, (150,400))
         for event in pygame.event.get():
             if event.type == KEYDOWN:
