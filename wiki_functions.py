@@ -51,43 +51,46 @@ def first_link(title):
     return ordered_list[0]
 
 def summary_links(title):
-    page = wikipedia.page(title)
-    url = page.url
-    response = urllib.request.urlopen(url)
-    soup = BeautifulSoup(response, 'lxml')
-    paragraphs = soup.find_all('p')
-    sanitized = BeautifulSoup('', 'lxml')
-    sanitized_html = ''
+    try:
+        page = wikipedia.page(title)
+        url = page.url
+        response = urllib.request.urlopen(url)
+        soup = BeautifulSoup(response, 'lxml')
+        paragraphs = soup.find_all('p')
+        sanitized_html = ''
 
-    for paragraph in paragraphs:
-        para_string = str(paragraph)
-        stack = []
-        new_pg = ''
-        for char in para_string:
-            if '(' in str(char):
-                stack.append('(')
-            if ')' in str(char):
-                if stack:
-                    stack.pop()
-            if not stack:
-                new_pg += char
+        for paragraph in paragraphs:
+            para_string = str(paragraph)
+            stack = []
+            new_pg = ''
+            for char in para_string:
+                if '(' in str(char):
+                    stack.append('(')
+                if ')' in str(char):
+                    if stack:
+                        stack.pop()
+                if not stack and char != ')':
+                    new_pg += char
 
-        sanitized_html += new_pg
+            sanitized_html += new_pg
 
-    sanitized = BeautifulSoup(sanitized_html, 'lxml')
-    sanitized_paragraphs = sanitized.find_all('p')
-    links = sanitized_paragraphs[0].find_all('a')
-    text_links = [x for x in links if x.text and '[' not in x.text]
+        sanitized = BeautifulSoup(sanitized_html, 'lxml')
+        sanitized_paragraphs = sanitized.find_all('p')
+        links = sanitized.find_all('a')
+        text_links = [x for x in links if x.text and '[' not in x.text]
 
-    for i in range(len(text_links)):
-        text_links[i] = text_links[i].title
-    linked_pages = []
+        for i in range(len(text_links)):
+            text_links[i] = text_links[i].title
+        linked_pages = []
 
-    for link in links:
-        if link.get('title'):
-            linked_pages.append(link['title'])
+        for link in links:
+            if link.get('title'):
+                linked_pages.append(link['title'])
 
-    return linked_pages
+        return linked_pages
+    except:
+        return ['dissambiguation','dissambiguation','dissambiguation','dissambiguation','dissambiguation','dissambiguation',
+        'dissambiguation','dissambiguation','dissambiguation','dissambiguation','dissambiguation']
 
 def key_links(title):
     d = dict()

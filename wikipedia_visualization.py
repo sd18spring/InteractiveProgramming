@@ -1,6 +1,9 @@
 import pygame
 import time
 import math as m
+import wikipedia
+from wiki_functions import summary_links
+import webbrowser
 
 class Model(object):
     """Representation of all of the objects being displayed
@@ -166,19 +169,24 @@ class Controler(object):
                 m_pos = pygame.mouse.get_pos()
                 self.model.zoom_out(m_pos)
 
-            elif event.button == 3: #when right click is pressed, check if it is over a node
+            elif event.button == 3: #when right click is pressed, check if it is over a node and open in browser
                 m_pos = pygame.mouse.get_pos()
                 for node in self.model.nodes:
                     if ((m_pos[0]-node.x)**2+(m_pos[1]-node.y)**2)**.5 <= Node.node_size:
-                        new_stuff = self.model.delete_branch(self.model.nodes.index(node))
-                        self.model.nodes = new_stuff[0] #give model a new list not containing the "deleted" nodes
-                        self.model.clines = new_stuff[1]
+                        try:
+                            page = wikipedia.page(node.title)
+                            url = page.url
+                            print(url)
+                        except:
+                            url = 'https://en.wikipedia.org/wiki/Wikipedia:Disambiguation'
+                        webbrowser.open(url, new=0, autoraise=True)
+
 
 
             elif event.button == 1: #case for left click
                 m_pos = pygame.mouse.get_pos()
                 for node in self.model.nodes: #check if the click is over a non-expanded node, if so, expand it
-                    if ((m_pos[0]-node.x)**2+(m_pos[1]-node.y)**2)**.5 <= Node.node_size and not node.expanded:
+                    if ((m_pos[0]-node.x)**2+(m_pos[1]-node.y)**2)**.5 <= Node.node_size and not node.expanded and node.links:
                         if self.model.nodes.index(node) == 0:
                             self.model.nodes.extend(node.init_expand(self.model.scale, self.model.n))
                             for i in range(self.model.n):
@@ -309,11 +317,14 @@ class Controler(object):
                         self.model.nodes[0].x = self.model.size[0]/2
                         self.model.nodes[0].y = self.model.size[1]/2
                         self.model.inputbox.string = ''
+                        flag = summary_links(self.model.nodes[0].title)
+
+                        self.model.nodes[0].links = flag
                         self.model.nodes[0].update()
                 if event.key == pygame.K_ESCAPE:
                     del self.model.inputboxdisplay_list[:]
                 if event.key == pygame.K_SPACE:
-                    self.model.inputbox.string += ' '
+                    self.model.inputbox.string += ''
 
                 if event.key == pygame.K_EXCLAIM:
                     self.model.inputbox.string += '!'
@@ -357,26 +368,33 @@ class Controler(object):
                 if event.key == pygame.K_SLASH:
                     self.model.inputbox.string += '/'
                     self.model.inputboxes.append(self.model.inputbox)
-            if event.key == pygame.K_d: #if d is pressed, expand every unexpanded node
+            elif event.key == pygame.K_d: #if d is pressed, expand every unexpanded node
                 self.model.dive(1)
-            if event.key == pygame.K_1: #number keys set the model's n value
+            elif event.key == pygame.K_1: #number keys set the model's n value
                 self.model.n = 1
-            if event.key == pygame.K_2:
+            elif event.key == pygame.K_2:
                 self.model.n = 2
-            if event.key == pygame.K_3:
+            elif event.key == pygame.K_3:
                 self.model.n = 3
-            if event.key == pygame.K_4:
+            elif event.key == pygame.K_4:
                 self.model.n = 4
-            if event.key == pygame.K_5:
+            elif event.key == pygame.K_5:
                 self.model.n = 5
-            if event.key == pygame.K_6:
+            elif event.key == pygame.K_6:
                 self.model.n = 6
-            if event.key == pygame.K_7:
+            elif event.key == pygame.K_7:
                 self.model.n = 7
-            if event.key == pygame.K_8:
+            elif event.key == pygame.K_8:
                 self.model.n = 8
-            if event.key == pygame.K_9:
+            elif event.key == pygame.K_9:
                 self.model.n = 9
+            elif event.key == pygame.K_DELETE:
+                m_pos = pygame.mouse.get_pos()
+                for node in self.model.nodes:
+                    if ((m_pos[0]-node.x)**2+(m_pos[1]-node.y)**2)**.5 <= Node.node_size:
+                        new_stuff = self.model.delete_branch(self.model.nodes.index(node))
+                        self.model.nodes = new_stuff[0] #give model a new list not containing the "deleted" nodes
+                        self.model.clines = new_stuff[1]
 
 class Inputbox(object):
     def __init__(self,string=''):
@@ -412,7 +430,8 @@ class Node(object):
         self.angle = angle #angle from a horizontal line formed by the segemnt from this node's parent to it
         self.text_surface = Node.node_font.render(self.title, False, (0,0,0))
         self.deleted = False #flag for use in the removal of nodes from the model
-        self.times_refreshed = 0 #number of times the node has been expanded (after deletion of its children)
+        self.links_viewed = 0 #number of times the node has been expanded (after deletion of its children)
+        self.links = []
 
 
     def __str__(self):
@@ -432,13 +451,20 @@ class Node(object):
         thetas = [90]
         for i in range(n-1):
             thetas.append(thetas[-1]+segment_angle)
+        #for theta in thetas:
         for theta in thetas:
-            for theta in thetas:
-                temp = Node(str(theta),self.x + r*m.cos(m.radians(theta)), self.y - r*m.sin(m.radians(theta)), self.level + 1, theta)
-                new_nodes.append(temp)
-                self.children.append(temp)
+
+            link = self.links[thetas.index(theta) + self.links_viewed]
+            temp = Node(link,self.x + r*m.cos(m.radians(theta)), self.y - r*m.sin(m.radians(theta)), self.level + 1, theta)
+            flag = summary_links(temp.title)
+
+            temp.links = flag
+
+            new_nodes.append(temp)
+            self.children.append(temp)
 
         self.expanded = True
+        self.links_viewed += n
         return new_nodes
 
     def expand_n(self,scale, n = 3):
@@ -469,10 +495,16 @@ class Node(object):
                     thetas.append(angle + segment_angle)
 
         for theta in thetas: #produces new nodes
-            temp = Node(str(theta),self.x + r*m.cos(m.radians(theta)), self.y - r*m.sin(m.radians(theta)), self.level + 1, theta)
+
+            link = self.links[thetas.index(theta) + self.links_viewed % len(self.links) -1]
+            temp = Node(link,self.x + r*m.cos(m.radians(theta)), self.y - r*m.sin(m.radians(theta)), self.level + 1, theta)
+            print(link)
+            temp.links = summary_links(temp.title)
+            print(temp.links[:3])
             new_nodes.append(temp)
             self.children.append(temp)
 
+        self.links_viewed += n - 1
         return new_nodes
 
     def recursive_del(self, first = True):
@@ -481,7 +513,7 @@ class Node(object):
         if not first:
             self.deleted = True
         self.expanded = False
-        self.times_refreshed += 1
+        #self.times_refreshed += 1
         first = False
         if self.children == []:
             return
