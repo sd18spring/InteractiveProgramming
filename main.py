@@ -89,17 +89,13 @@ def main():
         if cv2.waitKey(1) & 0xFF == ord('s'):
             newCanvas.save_drawing()
             break
-
         if cv2.waitKey(1) & 0xFF == ord('d'):
             if disappr:
                 disappr = False
             else:
                 disappr = True
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
         if cv2.waitKey(1) & 0xFF == ord('d'):
             disappr = ~disappr
-
         if cv2.waitKey(1) & 0xFF == ord('c'):
             newCanvas.clear()
 
