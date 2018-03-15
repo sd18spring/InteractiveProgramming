@@ -15,28 +15,29 @@ class PyGameWindowView(object):
     static image of 12 rectangles, each with a note on them.
     """
     def __init__(self, model, size):
-        self.model = model
-        self.screen = pygame.display.set_mode(size)
+        self.model = model # Use note board model as the model
+        self.screen = pygame.display.set_mode(size) # Set size of screen
 
     def draw(self):
-        self.screen.fill(pygame.Color(0,0,0))
+        """Draws the entire note board"""
+        self.screen.fill(pygame.Color(0,0,0)) # Set background color to black
         for note in self.model.note_blocks:
-            pygame.draw.rect(self.screen,
+            pygame.draw.rect(self.screen, # Draw note block
                              note.color,
                              pygame.Rect(note.x,
                                          note.y,
                                          note.width,
                                          note.height))
-            pygame.draw.rect(self.screen,
+            pygame.draw.rect(self.screen, # Draw a black border around note block
                              (0,0,0),
                              pygame.Rect(note.x,
                                          note.y,
                                          note.width,
                                          note.height),
                              1)
-            text_font = pygame.font.Font("freesansbold.ttf",30)
-            text = text_font.render(note.note,True,(0,0,0))
-            self.screen.blit(text,
+            text_font = pygame.font.Font("freesansbold.ttf",30) # Make a font
+            text = text_font.render(note.note,True,(0,0,0)) # Make the note's name into a text box
+            self.screen.blit(text, # Create text box at center of note block
                              (note.x+(note.width-text.get_width())//2,
                              (note.height-text.get_height())//2))
         pygame.display.update()
@@ -73,13 +74,12 @@ class NoteBoardModel(object):
                             "F" : 65,
                             "Gb" : 66,
                             "G" : 67}
-        self.note_blocks = []
+        self.note_blocks = [] # List containing NoteBlock objects
+        self.width = size[0] # Width of screen
+        self.height = size[1] # Height of screen
+        self.note_block_width = self.width/len(self.notes) # Width of note blocks
 
-        self.width = size[0]
-        self.height = size[1]
-        self.note_block_width = self.width/len(self.notes)
-
-        for i in range(len(self.notes)):
+        for i in range(len(self.notes)): # Create and insert the note blocks
             note = NoteBlock(self.notes[i],
                              self.height,
                              self.note_block_width,
