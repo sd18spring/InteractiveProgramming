@@ -189,8 +189,8 @@ if __name__ == '__main__':
     model = NoteBoardModel(size)
     print(model)
     view = PyGameWindowView(model, size)
-    controller = PyGameMouseController(model)
-    controller = PyGameKeyboardController(model)
+    mouse_con = PyGameMouseController(model)
+    keyboard_con = PyGameKeyboardController(model)
 
     running = True
     while running:
@@ -198,7 +198,8 @@ if __name__ == '__main__':
             if event.type == QUIT:
                 running = False
 
-            controller.handle_event(event)
+            mouse_con.handle_event(event)
+            keyboard_con.handle_event(event)
         view.draw()
         # time.sleep(.001)
 
