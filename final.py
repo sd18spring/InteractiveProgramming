@@ -27,12 +27,24 @@ class PyGameWindowView(object):
     def draw(self):
         """ Draw the current game state to the screen """
         self.screen.fill(pygame.Color(245,241,232))
-        for dot in self.model.dots:
+        if self.home:
+            for dot in self.model.dots:
+                pygame.draw.circle(self.screen,
+                                 pygame.Color(int(dot.movie.newR),0, int(dot.movie.newB)),
+                                 (dot.x, dot.y),
+                                 dot.radius)
+        else:
+            dot = self.model.dots
             pygame.draw.circle(self.screen,
-                             pygame.Color(int(dot.movie.newR),0, int(dot.movie.newB)),
-                             (dot.x, dot.y),
-                             dot.radius)
-        if not self.home:
+                             pygame.Color(int(dot[0].movie.RTcR),0, int(dot[0].movie.RTuB)),
+                             (dot[0].x, dot[0].y),
+                             dot[0].radius)
+
+            pygame.draw.circle(self.screen,
+                                 pygame.Color(int(dot[1].movie.MTcR),0, int(dot[1].movie.MTuB)),
+                                 (dot[1].x, dot[1].y),
+                                 dot[1].radius)
+
             self.label = self.myfont.render("Movie: %s" % str(self.text), True, (0, 0, 0))
             self.screen.blit(self.label, (self.size[0]//4, self.size[1]//4))
         pygame.display.update()
@@ -96,8 +108,9 @@ class VisualizerModel(object):
         self.dot_to_child = {}
         self.run()
 
+
         for dot in self.dots:
-            self.dot_to_child[dot.label] = []
+            self.dot_to_child[dot.label] = [MovieDot(50,0,0, copy.copy(dot.movie)), MovieDot(50,0,100, copy.copy(dot.movie))]
             self.home_dots.append(dot)
 
     def __str__(self):
@@ -153,8 +166,15 @@ class Dot(object):
 class MovieDot(Dot):
     def __init__(self,radius,x,y,movie0):
         Dot.__init__(self,radius,x,y)
+
         self.movie = movie0
         self.label = self.movie.name
+
+    def __str__(self):
+        return "MovieDot radius=%f, x=%f, y=%f, movie=%s" % (self.radius,
+                                              self.x,
+                                              self.y,
+                                              self.movie)
 
 
 class Movie(object):
@@ -186,6 +206,16 @@ class Movie(object):
         self.user = float(RT_users[index][0]) + float(Meta_users[index][0])
         self.newR = self.critic* 25.5 + 20
         self.newB = self.user * 25.5 + 20
+
+        #data for child dots
+        self.RTc = float(RT_cris[index][0])
+        self.RTu = float(RT_users[index][0])
+        self.MTc = float(Meta_cris[index][0])
+        self.MTu = float(Meta_users[index][0])
+        self.RTcR = self.RTc * 25.5 + 20
+        self.RTuB = self.RTu * 25.5 + 20
+        self.MTcR = self.MTc* 25.5 + 20
+        self.MTuB = self.MTu * 25.5 + 20
 
 class PyGameMouseController(object):
     """ Uses the mouse to zoom in and out of a specific movie. """
