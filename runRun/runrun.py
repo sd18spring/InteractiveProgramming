@@ -122,7 +122,7 @@ def main(SCREEN_WIDTH, SCREEN_HEIGHT):
 
         """Add new bird"""
         bird_time_past += frame_time
-        if bird_time_past > 2000 and ground_height_right < SCREEN_HEIGHT:
+        if bird_time_past > 3000 and ground_height_right < SCREEN_HEIGHT:
             bird_time_past = 0
             bird_list.add(Bird())
 
@@ -271,7 +271,7 @@ class Ground():
     def __init__(self):
         self.speed = .7
         self.ground_min = .9 * SCREEN_HEIGHT
-        self.ground_max = .4 * SCREEN_HEIGHT
+        self.ground_max = .45 * SCREEN_HEIGHT
         self.ground_height = [.75 * SCREEN_HEIGHT] * (2 * SCREEN_WIDTH)
 
     def advance(self, t, player, coin_list, rock_list, bird_list):
@@ -336,9 +336,16 @@ class Bird(pygame.sprite.Sprite):
         self.rect.y = 100
         self.bounce = -1
         self.change_height = 20
+        self.change_y = -2
 
     def update(self, distance):
-        self.rect.x -= distance +  10
+        self.rect.x -= distance + 5
+
+        self.rect.y += self.change_y
+        if self.rect.y <= 0.1 * SCREEN_HEIGHT:
+            self.change_y = 2
+        elif self.rect.y >= 0.2 * SCREEN_HEIGHT:
+            self.change_y = -2
 
 if __name__ == "__main__":
     # MainWindow = RunRunMain()
