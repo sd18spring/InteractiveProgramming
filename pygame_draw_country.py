@@ -17,7 +17,7 @@ import wold_map
 import csv
 
 #year that the data will be plotted for
-year = '2016'
+year = '2001'
 # Colors
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -115,7 +115,7 @@ for i in range(len(countries)):
         if number > 0:
             color = (0,0,number)
         else:
-            color = RED
+            color = WHITE
         pygame.draw.polygon(screen,color, points)
         # Draw the boundary
         pygame.draw.polygon(screen, BLACK, points, 1)
