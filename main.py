@@ -77,7 +77,7 @@ def main():
                 newCanvas.clear()
                 newCanvas.show_rect()
             newCanvas.show_rect()
-        cv2.putText(newCanvas.new_canvas, 'Time left: '+str(game_time-current_time), (0, 15), font, .5, (255, 255, 255), 1)
+            cv2.putText(newCanvas.new_canvas, 'Time left: '+str(game_time-current_time), (0, 15), font, .5, (255, 255, 255), 1)
         newCanvas.show_canvas()
 
 
