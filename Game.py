@@ -25,7 +25,7 @@ class PyGameWindowView(object):
     def draw(self):
         """ Draw the current game state to the screen """
         # Draw the background color
-        self.screen.fill(pygame.Color(255, 255, 255))
+        self.screen.fill(pygame.Color(123, 221, 15))
 
         # Draw two bombs and make a short animation by changing between two picture
         self.bomb1 = pygame.transform.scale(
@@ -211,7 +211,7 @@ class User(object):
 
         # Recognize player's face from computer's camera
         for (x, y, w, h) in self.faces:
-            cv2.circle(frame, (w / 2 + x, h / 2 + y), 10, (255, 255, 255), -1)
+            cv2.circle(frame, (int(w / 2 + x),int( h / 2 + y)), 10, (255, 255, 255), -1)
 
             # Transform coordinates from OpenCV to screen
             temp = (float)(x) / (400) * self.display_width
