@@ -16,6 +16,8 @@ def mainloop():
     IM_WIDTH = 1280
     IM_HEIGHT = 720
     FRAME_RATE = 10
+    #suit_name  = "Hearts"
+    #rank_name = "Queen"
 
     ## Define font to use
     font = cv2.FONT_HERSHEY_DUPLEX
