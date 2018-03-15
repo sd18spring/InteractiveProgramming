@@ -63,6 +63,8 @@ class Ship():
         self.w,self.h = img.get_size()
         self.gD = gD
         self.rect = img.get_rect()
+        self.score = 0
+        self.lives = 3
     def move(self):
         """FORWARD!!!
         Moves the ship forward in the direction it's heading (its angle)
@@ -118,7 +120,8 @@ class Ship():
         y = self.y + int(5 * sin(self.angle))
         AllThings.Projectiles.addProjectile(x,y,radians(self.angle),"Ship")
     def destroy(self):
-        print("destroyed") # right now just a test, need to put something else here
+        self.lives = self.lives - 1 # right now just a test, need to put something else here
+        print(self.lives)
 class Asteroid():
     """
     Asteroid Class:
@@ -172,6 +175,7 @@ class LargeAsteroid(Asteroid):
         self.w,self.h = self.image.get_size()
         self.shrinkage = 50
         self.rect = pygame.Rect((self.x + self.shrinkage / 2,self.y + self.shrinkage / 2),(self.w - self.shrinkage,self.h - self.shrinkage)) # lessening the hitbox so the corners don't stick out
+        self.type = "Large"
     def destroy(self):
         """
         destroys the asteroid and returns the asteroids that should take it's place.
@@ -195,6 +199,7 @@ class MediumAsteroid(Asteroid):
         self.w,self.h = self.image.get_size()
         self.shrinkage = 25
         self.rect = pygame.Rect((self.x + self.shrinkage / 2,self.y + self.shrinkage / 2),(self.w - self.shrinkage,self.h - self.shrinkage))
+        self.type = "Medium"
     def destroy(self):
         """
         destroys the asteroid and returns the asteroids that should take it's place.
@@ -218,6 +223,7 @@ class SmallAsteroid(Asteroid):
         self.w,self.h = self.image.get_size()
         self.shrinkage = 12
         self.rect = pygame.Rect((self.x + self.shrinkage / 2,self.y + self.shrinkage / 2),(self.w - self.shrinkage,self.h - self.shrinkage))
+        self.type = "Small"
     def destroy(self):
         """
         destroys the asteroid and returns nothing because it is the smallest asteroid
@@ -452,12 +458,20 @@ class listOfObjects():
         for i in self.Projectiles.listOfProjectiles: # runs through each projectile
             collisionsAster = i.rect.collidelist(self.Asteroids.listOfRects) # detects if any of the asteroids are in contact with the projectile
             if (collisionsAster != -1): # if there is a collision
+                if(i.alliance == "Ship"):
+                    if(self.Asteroids.listOfAsteroids[collisionsAster].type == "Large"):
+                        self.ship.score += 20
+                    elif(self.Asteroids.listOfAsteroids[collisionsAster].type == "Medium"):
+                        self.ship.score += 50
+                    elif(self.Asteroids.listOfAsteroids[collisionsAster].type == "Small"):
+                        self.ship.score += 100
                 self.Asteroids.listOfAsteroids += self.Asteroids.listOfAsteroids[collisionsAster].destroy() #destroy both the asteroid and the projectile.
                 i.destroy()
             collisionsUFO = i.rect.collidelist(self.UFOs.listOfRects)
             if (collisionsUFO != -1 and i.alliance != "UFO"): # if there is a collision
                 self.UFOs.listOfUFOs[collisionsUFO].destroy() #destroy both the asteroid and the projectile.
                 i.destroy()
+                self.ship.score += 500
         for i in self.UFOs.listOfUFOs:
             collisionsAster = i.rect.collidelist(self.Asteroids.listOfRects) # detects if any of the asteroids are in contact with the projectile
             if (collisionsAster != -1): # if there is a collision
