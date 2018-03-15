@@ -12,18 +12,17 @@ if not pygame.mixer: print('Warning, sound disabled')
 BLUE = (0,0,255)
 GREEN = (0, 255, 0)
 
-SCREEN_WIDTH = 640
-SCREEN_HEIGHT = 480
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 600
 
 def main(SCREEN_WIDTH, SCREEN_HEIGHT):
-
     """Initialize PyGame"""
     pygame.init()
     time = pygame.time.Clock()
+    coin_time_past = 0
 
     pygame.font.init()
-
-    """Set the window Size"""
+    font = pygame.font.Font(None, 36)
 
     """Create the Screen"""
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -33,36 +32,25 @@ def main(SCREEN_WIDTH, SCREEN_HEIGHT):
     background = background.convert()
     background.fill((0,0,0))
 
-    player = Player()
+    """Initialize Ground, Player, and Items """
     ground = Ground()
-    # items = Items(ground)
+
+    player = Player()
+    player_list = pygame.sprite.Group()
+    player_list.add(player)
+
+    coins_group = pygame.sprite.Group()
     coin = Coin()
+    coins_group.add(coin)
 
-    active_sprite_list = pygame.sprite.Group()
-
-    player.rect.x = 0
-    player.rect.y = .5 * SCREEN_HEIGHT - player.rect.height
-    active_sprite_list.add(player)
-
-    spritesgroups = pygame.sprite.Group()
-    coin.rect.x =  SCREEN_WIDTH
-    coin.rect.y = .3 * SCREEN_HEIGHT
-    spritesgroups.add(coin)
+    rocks_group = pygame.sprite.Group()
 
 
     """This is the Main Loop of the Game"""
-
-    # """Load All of our Sprites"""
-    # self.LoadSprites()
-
-    # """Create the background"""
-    #     self.background = pygame.Surface(self.screen.get_size())
-    #     self.background = self.background.convert()
-    #     self.background.fill((0,0,0))
-
     #pygame.key.set_repeat(0, 30)
 
-    while True:
+    Running = True
+    while Running:
         """Keep track of time"""
         time.tick(60)
         frame_time = time.get_time()
@@ -84,33 +72,61 @@ def main(SCREEN_WIDTH, SCREEN_HEIGHT):
                 player.stop(frame_time)
 
         """Check for collisions with rocks and end game """
+        lstCols = pygame.sprite.spritecollide(player, rocks_group, False)
+        if len(lstCols) > 0:
+            Running = False
 
         """Check for collision with coins and update score"""
-        lstCols = pygame.sprite.spritecollide(player, spritesgroups, True)
+        lstCols = pygame.sprite.spritecollide(player, coins_group, True)
         player.coins = player.coins + len(lstCols)
 
-        """Advance the ground"""
-        ground_height = ground.advance(frame_time, player.rect.x, player.rect.width) #items
-        ground.build() #items
+        """Advance the game"""
+        ground_height = ground.advance(frame_time, player, coins_group, rocks_group)
+        ground_height_right = ground.ground_height[SCREEN_WIDTH]
+        ground.build()
 
+        """Add new coins"""
+        coin_time_past += frame_time
+        if coin_time_past > 2000 and ground_height_right < SCREEN_HEIGHT:
+            coin_time_past = 0
+            coins_group.add(Coin(ground_height_right))
+
+        """Add new rock """
+
+
+        """Update the player """
         player.update(frame_time, ground_height)
-        coin.update(ground_height)
 
         """Draw the game"""
-        #
-        # screen.blit(background, (0, 0))
-        # if pygame.font:
-        #     font = pygame.font.Font(None, 36)
-        #     text = font.render("Coins: %s" % player.coins, 1, (255, 0, 0))
-        #     textpos = text.get_rect(centerx= SCREEN_WIDTH/2, centery = 50)
-        #     screen.blit(text, textpos)
-
-
         screen.blit(background, (0, 0))
-        active_sprite_list.draw(screen)
-        spritesgroups.draw(screen)
+        text = font.render("Score: %s" % player.coins, 1, (255, 0, 0))
+        textpos = text.get_rect(centerx= SCREEN_WIDTH/2, centery = 50)
+        screen.blit(text, textpos)
+        fps = font.render("FPS: %.2f" % time.get_fps(), 1, (255, 0, 0))
+        fpspos = fps.get_rect(centerx= 80, centery = 50)
+        screen.blit(fps, fpspos)
+        player_list.draw(screen)
+        coins_group.draw(screen)
         ground.draw(screen, GREEN)
         pygame.display.flip()
+
+    score = 0
+    screen.blit(background, (0, 0))
+    text1 = font.render("GAME OVER", 2, (255, 0, 0))
+    text2 = font.render("Score: %s" % player.coins, 2, (255, 0, 0))
+    text1pos = text1.get_rect(centerx= SCREEN_WIDTH/2, centery = SCREEN_HEIGHT/2)
+    text2pos = text2.get_rect(centerx= SCREEN_WIDTH/2, centery = SCREEN_HEIGHT/2 + 50)
+    screen.blit(text1, text1pos)
+    screen.blit(text2, text2pos)
+    pygame.display.flip()
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_q:
+                    sys.exit()
+
 
 
 class Player(pygame.sprite.Sprite):
@@ -120,7 +136,7 @@ class Player(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.image = (pygame.image.load('data/images/snake.png'))
         self.rect = self.image.get_rect()
-        self.acceleration_y = .01
+        self.acceleration_y = .007
         self.acceleration_x = .02
         self.jump_power = 1.5
         self.speed_limit = 4
@@ -170,44 +186,55 @@ class Player(pygame.sprite.Sprite):
         self.change_x = 0
 
 
-# class Item(pygame.sprite.Sprite):
-#     """ Class representing an item the player can interact with"""
-#     def __init__(self):
-#         super().__init__()
-
-
-class Coin(pygame.sprite.Sprite): #Item
+class Coin(pygame.sprite.Sprite):
     """ Class representing a coin"""
-    def __init__(self):
+    def __init__(self, height = .75 * SCREEN_HEIGHT):
         pygame.sprite.Sprite.__init__(self)
-        # Item.__init__()
         super().__init__()
         self.image = (pygame.image.load('data/images/coin.png'))
         self.rect = self.image.get_rect()
-        self.change_x = -5
-        self.change_y = 6
+        self.ground = height
+        self.rect.y = self.ground - self.rect.height
+        self.rect.x = SCREEN_WIDTH - self.rect.width
+        self.change_y = 0
+        self.y_speed = .2 * (random.random() + 1)
 
-    def update(self, ground_height):
-        self.rect.x += self.change_x
-        self.rect.y += self.change_y
-        if self.rect.y + self.rect.height >= ground_height:
-            self.change_y = -6
-        elif self.rect.y <= 0:
-            self.change_y = 6
+    def update(self, t, distance):
+        self.rect.x -= distance
+        self.rect.y += self.change_y * t
+        if self.rect.y + self.rect.height >= self.ground:
+            self.change_y = -self.y_speed
+        elif self.rect.y <= self.ground - self.rect.height - .25 * SCREEN_HEIGHT:
+            self.change_y = self.y_speed
+
+class Rock(pygame.sprite.Sprite):
+    """ Class representing a rock"""
+    def __init__(self, height = .75 * SCREEN_HEIGHT):
+        pygame.sprite.Sprite.__init__(self)
+        super().__init__()
+        self.image = (pygame.image.load('data/images/rock.png'))
+        self.rect = self.image.get_rect()
+        self.rect.y = height- self.rect.height
+        self.rect.x = SCREEN_WIDTH - self.rect.width
+
+    def update(self, t, distance):
+        self.rect.x -= distance
 
 class Ground():
     """ Class representing the ground """
     def __init__(self):
-        self.speed = 1
+        self.speed = .7
         self.ground_min = .9 * SCREEN_HEIGHT
         self.ground_max = .4 * SCREEN_HEIGHT
         self.ground_height = [.75 * SCREEN_HEIGHT] * (2 * SCREEN_WIDTH)
 
-    def advance(self, t, start, end): #items
-        height = min(self.ground_height[start:start+end])
-        distance = t * self.speed
+    def advance(self, t, player, coin_list, rock_list):
+        start = player.rect.x
+        end = start + player.rect.width
+        height = min(self.ground_height[start:end])
+        distance = int(t * self.speed)
         del self.ground_height[:distance]
-        # items.advance(distance)
+        [coin.update(t, distance) for coin in coin_list]
         return height
 
     def draw(self, screen, color):
@@ -215,17 +242,19 @@ class Ground():
             y = int(self.ground_height[x-1])
             pygame.draw.line(screen, color, (x, y), (x, y+5))
 
-    def build(self, score = 0): #items
+    def build(self, score = 0):
         if len(self.ground_height) > 1.1 * SCREEN_WIDTH:
             return
 
-        pick = random.randint(1,10)
-        if pick > 7:
-            self.slope() #items
+        pick = random.random()
+        if pick > .9:
+            self.gap()
+        elif pick > .6:
+            self.slope()
         else:
-            self.flat() #items
+            self.flat()
 
-    def slope(self): #items
+    def slope(self):
         start = self.ground_height[-1]
         space_below = self.ground_min - start
         space_above = self.ground_max - start
@@ -238,36 +267,16 @@ class Ground():
             y = int(slope * x) + start
             self.ground_height.append(y)
 
-        # items.add(run)
-
-    def flat(self): #items
-        length = random.randint(20, SCREEN_WIDTH)
+    def flat(self):
+        length = random.randint(20, SCREEN_WIDTH/2)
         height = self.ground_height[-1]
         self.ground_height.extend([height] * length)
 
-        # items.add(length)
-
-# class Items():
-#     """ Class representing a list all the items in the game"""
-#
-#     def __init__(self, ground):
-#         self.item_list = ['None'] * len(ground.ground_height)
-#         self.chance_coin = .01
-#
-#     def advance(self, distance):
-#         for item in self.item_list[:distance]:
-#             if item != 'None':
-#                 item.kill
-#         del self.item_list[:distance]
-#         for item in self.item_list:
-#             if item != 'None':
-#                 item.location -= distance
-#
-#     def add(self, amount):
-#         self.item_list.extend(['None'] * amount)
-
-
-
+    def gap(self):
+        length = 300
+        height = self.ground_height[-1]
+        self.ground_height.extend([SCREEN_HEIGHT] * length)
+        self.ground_height.extend([height] * 100)
 
 
 if __name__ == "__main__":
