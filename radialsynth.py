@@ -59,7 +59,21 @@ class Grid():
     def _init_buttons(self):
         # TODO: draw buttons to the right of the grid to let the user
         # control the game without keyboard input.
-        pass
+        self.buttons = {}
+        button_size = (96,36)
+        coord0 = (self.width*self.cell_size + 32, 0 + 36)
+        self.buttons['R'] = Button(RED, self.screen, button_size, coordinates=coord0)
+        self.buttons['G'] = Button(GREEN, self.screen, button_size, coordinates=tuple(map(sum, zip(coord0, (0,72)))))
+        self.buttons['B'] = Button(BLUE, self.screen, button_size, coordinates=tuple(map(sum, zip(coord0, (0,144)))))
+        self.buttons['Y'] = Button(YELLOW, self.screen, button_size, coordinates=tuple(map(sum, zip(coord0, (0,216)))))
+        self.buttons['L'] = Button(LTGRAY, self.screen, button_size, coordinates=tuple(map(sum, zip(coord0, (0,288)))))
+        self.buttons['S'] = Button(GRAY, self.screen, (72,72), coordinates=(self.width*self.cell_size + 44, 17*self.cell_size))
+        self.buttons['C'] = Button(GRAY, self.screen, 36, pos=(self.width*self.cell_size + 80, 21*self.cell_size))
+
+    def _draw_buttons(self):
+        all_buttons = self.buttons.values()
+        for button in all_buttons:
+            button.draw()
 
     def _draw_cells(self):
         all_cells = self.cells.values()
@@ -75,6 +89,7 @@ class Grid():
         self._draw_background()
         self._draw_blocks()
         self._draw_cells()
+        self._draw_buttons()
         pygame.display.update()
 
     def _add_block(self, mouse_pos, shape, color, d):
@@ -182,6 +197,23 @@ class Cell():
         line_width = 1
         rect = pygame.Rect(self.coordinates, self.dimensions)
         pygame.draw.rect(self.draw_screen, self.color, rect, line_width)
+
+class Button():
+    """ Creates a Button. """
+    def __init__(self, color, draw_screen, dimensions, coordinates=None, pos=None):
+        self.draw_screen = draw_screen
+        self.coordinates = coordinates
+        self.dimensions = dimensions
+        self.color = color
+        self.pos = pos
+
+    def draw(self):
+        line_width = 0
+        if self.pos == None:
+            rect = pygame.Rect(self.coordinates, self.dimensions)
+            pygame.draw.rect(self.draw_screen, self.color, rect, line_width)
+        else:
+            pygame.draw.circle(self.draw_screen, self.color, self.pos, self.dimensions, line_width)
 
 class Sweeper():
     """ Sweeps through the grid from an origin point, playing all the blocks
