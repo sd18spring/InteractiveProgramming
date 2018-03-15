@@ -16,7 +16,7 @@ class PyGameWindowView(object):
         for i in range(self.model.height):
             for j in range(self.model.width):
                 cell_coord = (i*self.model.cell_length,j*self.model.cell_length)
-                self.model.cells[(i,j)] = Cell(self.model.screen,cell_coord,cell_size)
+                self.model.cells[(i,j)] = Cellview(self.model.screen,cell_coord,cell_size)
         all_cells = self.model.cells.values()
         for cell in all_cells:
             cell.draw()
@@ -33,13 +33,29 @@ class TronModelView(object):
         self.width = width
         self.height = height
         self.cell_length = cell_length
+        self.cell_lst = []
+        self.player_paths = []
         self.player1 = Player(self.screen,10,(self.width/2+100),(self.height/2),"r",(255,140,0))
         self.player2 = Player(self.screen,10,(self.width/2-100),(self.height/2),"l",(0,255,0))
+        self.cells_loc = {}
+        for i in range(self.height//cell_length):
+            for j in range(self.width//cell_length):
+                self.cell_lst.append(Cell((i*self.cell_length,j*self.cell_length),cell_length))
         self.game_over = False
 
     def _draw_players(self):
         self.player1.draw()
         self.player2.draw()
+
+    def in_cell(self):
+        for cell in self.cell_lst:
+            if self.player1.x in cell.xrange and self.player1.y in cell.yrange:
+                self.player1.current_cell = cell
+                break
+        for cell in self.cell_lst:
+            if self.player2.x in cell.xrange and self.player2.y in cell.yrange:
+                self.player2.current_cell = cell
+                break
 
     def update(self):
         self.player1.update()
@@ -49,6 +65,19 @@ class TronModelView(object):
         if self.player2.crash():
             self.end_game("ORANGE ")
 
+        last_seen_p1 = self.player1.current_cell
+        last_seen_p2 = self.player2.current_cell
+        self.in_cell()
+        if self.player1.current_cell != last_seen_p1:
+            self.player_paths.append(last_seen_p1)
+        if self.player2.current_cell != last_seen_p2:
+            self.player_paths.append(last_seen_p2)
+
+        if self.player1.current_cell in self.player_paths:
+            self.end_game("GREEN ")
+        if self.player2.current_cell in self.player_paths:
+            self.end_game("ORANGE ")
+
     def end_game(self,player):
         pygame.display.set_caption(player + "WINS!")
         self.game_over = True
@@ -56,6 +85,11 @@ class TronModelView(object):
         self.player2.dir = "None"
 
 class Cell(object):
+    def __init__(self, coords, cell_length):
+        self.xrange = range(coords[0],coords[0]+cell_length)
+        self.yrange = range(coords[1],coords[1]+cell_length)
+
+class Cellview(object):
     def __init__(self, draw_screen, coordinates, side_length):
         self.draw_screen = draw_screen
         self.coordinates = coordinates
@@ -78,6 +112,7 @@ class Player(object):
         self.vy = 0
         self.dir = direction
         self.color = color
+        self.current_cell = None
 
     def draw(self):
         line_width = .5
