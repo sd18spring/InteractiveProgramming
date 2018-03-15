@@ -72,7 +72,6 @@ class Ship():
         self.rect = img.get_rect()
         self.score = 0
         self.lives = 3
-        self.destroyed = False
     def move(self):
         """FORWARD!!!
         Moves the ship forward in the direction it's heading (its angle)
@@ -92,10 +91,6 @@ class Ship():
         Does magic and makes the ship work.
         Updates position
         """
-        if(self.destroyed):
-            self.counter += 1
-            if(self.counter > 120):
-                self.destroyed = False
         width,height = self.gD.get_size()
         speed = sqrt(self.x_speed**2+self.y_speed**2)
         # print(speed)
@@ -131,15 +126,12 @@ class Ship():
         y = self.y + int(5 * sin(self.angle))
         AllThings.Projectiles.addProjectile(x,y,radians(self.angle),"Ship")
     def destroy(self):
-        if(self.destroyed == False):
-            self.lives = self.lives - 1 # right now just a test, need to put something else here
-            self.x = self.startingX
-            self.y = self.startingY
-            self.angle = self.startingAngle
-            self.x_speed = 0
-            self.y_speed = 0
-            self.destroyed = True
-            self.counter = 0
+        self.lives = self.lives - 1 # right now just a test, need to put something else here
+        self.x = self.startingX
+        self.y = self.startingY
+        self.angle = self.startingAngle
+        self.x_speed = 0
+        self.y_speed = 0
 class Asteroid():
     """
     Asteroid Class:
@@ -462,7 +454,7 @@ class listOfObjects():
         self.UFOs.update()
         self.Projectiles.update()
         collisionsAster = self.ship.rect.collidelist(self.Asteroids.listOfRects) # detects if any of the asteroids are in contact with the projectile
-        if (collisionsAster != -1): # if there is a collision
+        if (collisionsAster != -1 and self.ship.destroyed == False): # if there is a collision
             self.Asteroids.listOfAsteroids += self.Asteroids.listOfAsteroids[collisionsAster].destroy() #destroy both the asteroid and the projectile.
             self.ship.destroy()
         collisionsUFO = self.ship.rect.collidelist(self.UFOs.listOfRects)
@@ -492,6 +484,6 @@ class listOfObjects():
                 self.ship.score += 500
         for i in self.UFOs.listOfUFOs:
             collisionsAster = i.rect.collidelist(self.Asteroids.listOfRects) # detects if any of the asteroids are in contact with the projectile
-            if (collisionsAster != -1 and self.destroyed == False): # if there is a collision
+            if (collisionsAster != -1): # if there is a collision
                 self.Asteroids.listOfAsteroids += self.Asteroids.listOfAsteroids[collisionsAster].destroy() #destroy both the asteroid and the projectile.
                 i.destroy()
