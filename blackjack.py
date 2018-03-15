@@ -45,6 +45,7 @@ class Card:
 
 
 
+
 class Deck:
     """Represents a deck of cards.
 
@@ -141,6 +142,14 @@ class Game():
         # Call mainloop function from card_detect.py and print resulting rank and suit
         rank_name, suit_name = card_detect.mainloop()
         print("Player has:" + str(rank_name),'of', str(suit_name))
+        suitInt, rankInt = convert_card_to_int(suit_name, rank_name)
+
+        #TODO how to input multiple cards? (if card is in deck, then add card to hand and remove from deck)
+
+        self.deck.remove_card(p1)
+        self.player.add_card(p1)
+        print("Player" + str(self.player))
+
 
     def play(self):
         """Simulates the player's turn in a game of blackjack"""
@@ -221,13 +230,53 @@ class Game():
             return self.player.total
 
 
-
 def convert_to_unicard(suit=0, rank=2):
     unicard_suit = ['s','h','d', 'c']
     unicard_rank = [None, 'A','2','3','4','5','6','7','8','9','T','J','Q','K']
     card = str(unicard_rank[rank])+str(unicard_suit[suit])
     return unicard(card)
 
+def convert_card_to_int(suit,rank):
+    """Converts the OpenCV card detected into integers so it is readable by
+    the program"""
+
+    if(suit == "Spades"):
+        suitInt = 0
+    elif(suit == "Hearts"):
+        suitInt = 1
+    elif(suit == "Diamonds"):
+        suitInt = 2
+    elif(suit == "Clubs"):
+        suitInt = 3
+
+    if(rank == "Ace"):
+        rankInt = 1
+    elif(rank == "Two"):
+        rankInt = 2
+    elif(rank == "Three"):
+        rankInt = 3
+    elif(rank == "Four"):
+        rankInt = 4
+    elif(rank == "Five"):
+        rankInt = 5
+    elif(rank == "Six"):
+        rankInt = 6
+    elif(rank == "Seven"):
+        rankInt = 7
+    elif(rank == "Eight"):
+        rankInt = 8
+    elif(rank == "Nine"):
+        rankInt = 9
+    elif(rank == "Ten"):
+        rankInt = 10
+    elif(rank == "Jack"):
+        rankInt = 11
+    elif(rank == "Queen"):
+        rankInt = 12
+    elif(rank == "King"):
+        rankInt = 13
+
+    return(suitInt,rankInt)
 
 if __name__ == '__main__':
     round1 = Game()
