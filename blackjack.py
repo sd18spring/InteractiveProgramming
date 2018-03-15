@@ -140,19 +140,32 @@ class Game():
         #print("Player" + str(self.player))
 
         # Call mainloop function from card_detect.py and print resulting rank and suit
-        rank_name, suit_name = card_detect.mainloop()
-        print("Player has:" + str(rank_name),'of', str(suit_name))
-        suitInt, rankInt = convert_card_to_int(suit_name, rank_name)
+        #rank_name, suit_name = card_detect.mainloop()
+        #print("Player has:" + str(rank_name),'of', str(suit_name))
+        #suitInt, rankInt = convert_card_to_int(suit_name, rank_name)
 
         #TODO how to input multiple cards? (if card is in deck, then add card to hand and remove from deck)
+        #p1 = Card(suitInt, rankInt)
+        #self.deck.remove_card(p1)
+        #self.player.add_card(p1)
+        self.deck.move_cards(self.player,2) #TODO change back to 1 and uncomment code
+        print("Player" + str(self.player))
+
+
+
+    def play(self):
+        """Simulates the player's turn in a game of blackjack"""
+
+        rank_name, suit_name = card_detect.mainloop()
+        print("Hit is:" + str(rank_name),'of', str(suit_name))
+        suitInt, rankInt = convert_card_to_int(suit_name, rank_name)
+
         p1 = Card(suitInt, rankInt)
         self.deck.remove_card(p1)
         self.player.add_card(p1)
         print("Player" + str(self.player))
 
 
-    def play(self):
-        """Simulates the player's turn in a game of blackjack"""
         ans = input("Would you like to hit or stay?\n")
         if (ans == "hit"):
             self.deck.move_cards(self.player,1)
@@ -233,6 +246,8 @@ class Game():
 def convert_to_unicard(suit=0, rank=2):
     unicard_suit = ['s','h','d', 'c']
     unicard_rank = [None, 'A','2','3','4','5','6','7','8','9','T','J','Q','K']
+    if (suit == -1 or rank == -1):
+        return "NaN"
     card = str(unicard_rank[rank])+str(unicard_suit[suit])
     return unicard(card)
 
@@ -248,6 +263,8 @@ def convert_card_to_int(suit,rank):
         suitInt = 2
     elif(suit == "Clubs"):
         suitInt = 3
+    else:
+        suitInt = -1
 
     if(rank == "Ace"):
         rankInt = 1
@@ -275,6 +292,8 @@ def convert_card_to_int(suit,rank):
         rankInt = 12
     elif(rank == "King"):
         rankInt = 13
+    else:
+        rankInt = -1
 
     return(suitInt,rankInt)
 
