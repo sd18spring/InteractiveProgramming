@@ -69,9 +69,12 @@ class Ship():
         self.nImage = img
         self.w,self.h = img.get_size()
         self.gD = gD
-        self.rect = img.get_rect()
+        self.rect = img.get_rect().inflate(-30,-30)
+        self.rect.center = (self.x,self.y)
         self.score = 0
         self.lives = 3
+        self.destroyed = False
+        self.extraLives = 1
     def move(self):
         """FORWARD!!!
         Moves the ship forward in the direction it's heading (its angle)
@@ -84,6 +87,9 @@ class Ship():
     def rotate(self,posNeg):
         """Rotates ship"""
         self.nImage,self.rect = rot_center(self.oImage,posNeg*3+(270-self.angle))
+        w,h = self.nImage.get_size()
+        self.rect.inflate_ip(-30,-30)
+        self.rect.center = (self.x,self.y)
         self.angle -= posNeg*3
 
     def update(self):
@@ -91,6 +97,13 @@ class Ship():
         Does magic and makes the ship work.
         Updates position
         """
+        if(self.score > 10000 * self.extraLives):
+            self.lives += 1
+            self.extraLives += 1
+        if(self.destroyed):
+            self.counter += 1
+            if(self.counter == 120):
+                self.destroyed = False
         width,height = self.gD.get_size()
         speed = sqrt(self.x_speed**2+self.y_speed**2)
         # print(speed)
@@ -119,6 +132,7 @@ class Ship():
             self.y = height
 
         self.rect.center = (self.x,self.y)
+        pygame.draw.rect(self.gD,(255,0,255),self.rect) # display's the ship's hit box in purple (for testing
         self.gD.blit(self.nImage,self.rect)
         #pygame.draw.rect(self.gD,(255,0,255),self.rect) # display's the ship's hit box in purple (for testing)
     def shoot(self,AllThings):
@@ -126,12 +140,15 @@ class Ship():
         y = self.y + int(5 * sin(self.angle))
         AllThings.Projectiles.addProjectile(x,y,radians(self.angle),"Ship")
     def destroy(self):
+        self.destroyed = True
         self.lives = self.lives - 1 # right now just a test, need to put something else here
         self.x = self.startingX
         self.y = self.startingY
         self.angle = self.startingAngle
+        self.rotate(0)
         self.x_speed = 0
         self.y_speed = 0
+        self.counter = 0
 class Asteroid():
     """
     Asteroid Class:
@@ -342,13 +359,16 @@ class CollectionOfProjectiles():
                                             # with the x,y and directions of the ship (with an offset bc of the front of the ship and that the origin is top left)
     def update(self):
         ListToDelete = [] # initializes the indices of what to delete
+        ListOfRects = []
         for i in range(len(self.listOfProjectiles)):
             if(self.listOfProjectiles[i].destroyed):
                 ListToDelete.append(i) # adding the index of destroyed particles to delete
             else:
                 self.listOfProjectiles[i].update()
+                ListOfRects.append(self.listOfProjectiles[i].rect)
         for j in reversed(ListToDelete):
             del self.listOfProjectiles[j]
+        self.listOfRects = ListOfRects
 class UFO():
     def __init__(self,y,FacingRight,gameDisplay,listOfProjectiles):
         self.y = y
@@ -462,7 +482,7 @@ class listOfObjects():
             #self.UFOs.listOfUFOs[collisionsUFO].destroy() #destroy both the asteroid and the projectile.
             self.ship.destroy()
         collisionsProj = self.ship.rect.collidelist(self.Projectiles.listOfRects)
-        if (collisionsProj != -1):
+        if (collisionsProj != -1 and self.Projectiles.listOfProjectiles[collisionsProj].alliance != "Ship"):
             self.Projectiles.listOfProjectiles[collisionsProj].destroy()
             self.ship.destroy()
         for i in self.Projectiles.listOfProjectiles: # runs through each projectile
