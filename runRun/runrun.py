@@ -217,7 +217,7 @@ class Rock(pygame.sprite.Sprite):
         self.rect.y = height- self.rect.height
         self.rect.x = SCREEN_WIDTH - self.rect.width
 
-    def update(self, t, distance):
+    def update(self, distance):
         self.rect.x -= distance
 
 class Ground():
@@ -235,6 +235,7 @@ class Ground():
         distance = int(t * self.speed)
         del self.ground_height[:distance]
         [coin.update(t, distance) for coin in coin_list]
+        [rock.update(distance) for rock in rock_list]
         return height
 
     def draw(self, screen, color):
