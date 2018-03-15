@@ -54,7 +54,7 @@ class finger_track():
     def shift(self, myList, myElement):
         return myList[1:] + [myElement]
 
-    def find_center(self, mask, target, disappr=True):
+    def find_center(self, mask, target, canvas, disappr=True):
         """This function takes in a cv2 mask, find the center of the
         contours in the mask, and draw a green dot at the center location
         on the target frame
@@ -65,8 +65,8 @@ class finger_track():
                 cnt = contours[0]
                 M = cv2.moments(cnt)
                 #print(M['m10'] / M['m00'])
-                self.cx = int(M['m10'] / M['m00'])
-                self.cy = int(M['m01'] / M['m00'])
+                self.cx = int(M['m10'] / M['m00']) * canvas.screen_scaler
+                self.cy = int(M['m01'] / M['m00']) * canvas.screen_scaler
                 self.frame_num = 0
                 if len(self.path) <= 1:
                     self.path.append((self.cx, self.cy))
