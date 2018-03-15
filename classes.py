@@ -12,15 +12,19 @@ class GUI():
     def __init__(self,gD):
         self.gD = gD
 
-    def update(self,score):
+    def update(self,ship):
         box = pygame.surface.Surface((self.bx, self.by))
-        # txt_surf = self.font.render("score", True, self.WHITE)  # headline
-        # txt_rect = txt_surf.get_rect(center=(self.bx//2, 30))
-        # box.blit(txt_surf, txt_rect)
-        txt_surf = self.font.render(str(score), True, self.WHITE)  # bottom line
+        txt_surf = self.font.render(str(ship.score), True, self.WHITE)  # bottom line
         txt_rect = txt_surf.get_rect(center=(self.bx//2, 40))
         box.blit(txt_surf, txt_rect)
+        w,h = ship.oImage.get_size()
+        txt_surf = pygame.transform.scale(ship.oImage,(int(w*.5),int(h*.5)))
+        for x in range(ship.lives):
+            spacing = x*45
+            txt_rect = txt_surf.get_rect(center=(self.bx//2-45+spacing, 90))
+            box.blit(txt_surf, txt_rect)
         self.gD.blit(box,(0,0))
+        # self.bx//2, 70)
 
 
 def rot_center(image, angle):

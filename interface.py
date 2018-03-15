@@ -93,7 +93,7 @@ while running:
 
 
     gameDisplay.fill(black)
-    gui.update(150000)
+    gui.update(ship)
     ship.update()
     AllThings.update()
 
