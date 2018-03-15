@@ -71,7 +71,6 @@ class PyGameWindowView(object):
         vx = 1
         vy = 1
         self.text = target.label
-        print(target)
 
         #copy dots so originals aren't modified and find the target to be zoomed in on
         dots = copy.deepcopy(self.model.dots)
@@ -111,7 +110,6 @@ class PyGameWindowView(object):
 
         self.screen.fill(pygame.Color(255,250,240))
         self.model.dots = self.model.dot_to_child[target.label]
-        print(self.model.dots)
 
     def returnHome(self):
         """Returns to the screen with all of the movie dots when in a zoomed in state."""
@@ -162,7 +160,6 @@ class VisualizerModel(object):
                 dif = dist - dot.radius * 2
 
                 if dif < 50  :
-                    #print("true")
                     overlapped = True
 
 
