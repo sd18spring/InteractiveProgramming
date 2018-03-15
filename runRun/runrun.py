@@ -20,6 +20,8 @@ def main(SCREEN_WIDTH, SCREEN_HEIGHT):
     pygame.init()
     time = pygame.time.Clock()
     coin_time_past = 0
+    rock_time_past = 0
+    bird_time_past = 0
 
     pygame.font.init()
     font = pygame.font.Font(None, 36)
@@ -44,7 +46,14 @@ def main(SCREEN_WIDTH, SCREEN_HEIGHT):
     coins_group.add(coin)
 
     rocks_group = pygame.sprite.Group()
+    rock = Rock()
+    rocks_group.add(rock)
 
+    bird_list = pygame.sprite.Group()
+    bird = Bird()
+    bird_list.add(bird)
+
+    health = 10
 
     """This is the Main Loop of the Game"""
     #pygame.key.set_repeat(0, 30)
@@ -71,19 +80,33 @@ def main(SCREEN_WIDTH, SCREEN_HEIGHT):
             elif player.change_x != 0:
                 player.stop(frame_time)
 
-        """Check for collisions with rocks and end game """
-        lstCols = pygame.sprite.spritecollide(player, rocks_group, False)
-        if len(lstCols) > 0:
+
+        """Check for collisions with rocks and update health"""
+        lstCols2 = pygame.sprite.spritecollide(player, rocks_group, False)
+        if len(lstCols2) > 0:
+            player.deflect(frame_time)
+            player.health = player.health - 1
+
+        if player.health < 0:
             Running = False
 
         """Check for collision with coins and update score"""
         lstCols = pygame.sprite.spritecollide(player, coins_group, True)
         player.coins = player.coins + len(lstCols)
 
+        """Check for collision with birds and update health"""
+        lstCols3 = pygame.sprite.spritecollide(player, bird_list, False)
+        if len(lstCols3) > 0:
+            player.deflect(frame_time)
+            player.health = player.health - 1
+
         """Advance the game"""
-        ground_height = ground.advance(frame_time, player, coins_group, rocks_group)
+        ground_height = ground.advance(frame_time, player, coins_group, rocks_group, bird_list)
         ground_height_right = ground.ground_height[SCREEN_WIDTH]
         ground.build()
+
+        if player.rect.y > ground_height:
+            Running = False
 
         """Add new coins"""
         coin_time_past += frame_time
@@ -91,8 +114,17 @@ def main(SCREEN_WIDTH, SCREEN_HEIGHT):
             coin_time_past = 0
             coins_group.add(Coin(ground_height_right))
 
-        """Add new rock """
+        """Add new rock (s) """
+        num = random.randint(0, 400)
+        if num == 2:
+            rock_time_past = 0
+            rocks_group.add(Rock(ground_height_right))
 
+        """Add new bird"""
+        bird_time_past += frame_time
+        if bird_time_past > 2000 and ground_height_right < SCREEN_HEIGHT:
+            bird_time_past = 0
+            bird_list.add(Bird())
 
         """Update the player """
         player.update(frame_time, ground_height)
@@ -104,9 +136,14 @@ def main(SCREEN_WIDTH, SCREEN_HEIGHT):
         screen.blit(text, textpos)
         fps = font.render("FPS: %.2f" % time.get_fps(), 1, (255, 0, 0))
         fpspos = fps.get_rect(centerx= 80, centery = 50)
+        htext = font.render("Health: %s" % player.health, 1, (255, 0, 0))
+        hpos = htext.get_rect(centerx = 700, centery = 50)
+        screen.blit(htext, hpos)
         screen.blit(fps, fpspos)
         player_list.draw(screen)
         coins_group.draw(screen)
+        rocks_group.draw(screen)
+        bird_list.draw(screen)
         ground.draw(screen, GREEN)
         pygame.display.flip()
 
@@ -134,7 +171,7 @@ class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
         pygame.sprite.Sprite.__init__(self)
-        self.image = (pygame.image.load('data/images/snake.png'))
+        self.image = (pygame.image.load('data/images/runningman.png'))
         self.rect = self.image.get_rect()
         self.acceleration_y = .007
         self.acceleration_x = .02
@@ -143,6 +180,8 @@ class Player(pygame.sprite.Sprite):
         self.change_x = 0
         self.change_y = 0
         self.coins = 0
+        self.jumping =  0
+        self.health = 10
 
     def update(self, t, ground_height):
         self.calc_grav(t, ground_height)
@@ -156,6 +195,7 @@ class Player(pygame.sprite.Sprite):
         elif self.rect.x + self.rect.width > SCREEN_WIDTH/1.2:
             self.rect.x = SCREEN_WIDTH/1.2 - self.rect.width
             self.change_x = 0
+
 
     def calc_grav(self, t, ground_height):
         bottom = self.rect.y + self.rect.height
@@ -172,6 +212,7 @@ class Player(pygame.sprite.Sprite):
         if bottom > threshold:
             self.change_y = -self.jump_power
 
+
     def move_right(self, t):
         self.change_x += self.acceleration_x * t
         if self.change_x > self.speed_limit:
@@ -185,10 +226,14 @@ class Player(pygame.sprite.Sprite):
     def stop(self, t):
         self.change_x = 0
 
+    def deflect(self, t):
+        self.rect.x += 25
+        self.rect.y += 50
+
 
 class Coin(pygame.sprite.Sprite):
     """ Class representing a coin"""
-    def __init__(self, height = .75 * SCREEN_HEIGHT):
+    def __init__(self, height = 0.75 * SCREEN_HEIGHT):
         pygame.sprite.Sprite.__init__(self)
         super().__init__()
         self.image = (pygame.image.load('data/images/coin.png'))
@@ -197,7 +242,7 @@ class Coin(pygame.sprite.Sprite):
         self.rect.y = self.ground - self.rect.height
         self.rect.x = SCREEN_WIDTH - self.rect.width
         self.change_y = 0
-        self.y_speed = .2 * (random.random() + 1)
+        self.y_speed = .1* (random.random() + 1)
 
     def update(self, t, distance):
         self.rect.x -= distance
@@ -212,10 +257,11 @@ class Rock(pygame.sprite.Sprite):
     def __init__(self, height = .75 * SCREEN_HEIGHT):
         pygame.sprite.Sprite.__init__(self)
         super().__init__()
-        self.image = (pygame.image.load('data/images/rock.png'))
+        self.image = (pygame.image.load('data/images/boulder.png'))
         self.rect = self.image.get_rect()
         self.rect.y = height- self.rect.height
-        self.rect.x = SCREEN_WIDTH - self.rect.width
+        self.rect.x = SCREEN_WIDTH + self.rect.width
+        self.ground = height
 
     def update(self, distance):
         self.rect.x -= distance
@@ -228,7 +274,7 @@ class Ground():
         self.ground_max = .4 * SCREEN_HEIGHT
         self.ground_height = [.75 * SCREEN_HEIGHT] * (2 * SCREEN_WIDTH)
 
-    def advance(self, t, player, coin_list, rock_list):
+    def advance(self, t, player, coin_list, rock_list, bird_list):
         start = player.rect.x
         end = start + player.rect.width
         height = min(self.ground_height[start:end])
@@ -236,6 +282,7 @@ class Ground():
         del self.ground_height[:distance]
         [coin.update(t, distance) for coin in coin_list]
         [rock.update(distance) for rock in rock_list]
+        [bird.update(distance) for bird in bird_list]
         return height
 
     def draw(self, screen, color):
@@ -279,6 +326,19 @@ class Ground():
         self.ground_height.extend([SCREEN_HEIGHT] * length)
         self.ground_height.extend([height] * 100)
 
+class Bird(pygame.sprite.Sprite):
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
+        super().__init__()
+        self.image = (pygame.image.load('data/images/bird.png'))
+        self.rect = self.image.get_rect()
+        self.rect.x = SCREEN_WIDTH - self.rect.width
+        self.rect.y = 100
+        self.bounce = -1
+        self.change_height = 20
+
+    def update(self, distance):
+        self.rect.x -= distance
 
 if __name__ == "__main__":
     # MainWindow = RunRunMain()
