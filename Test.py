@@ -20,8 +20,8 @@ BLACK = (0, 0, 0)
 # Call this function so the Pygame library can initialize itself
 pygame.init()
 
-# Create an 800x600 sized screen
-screen = pygame.display.set_mode([600, 361])
+# Create an 1024x768 sized screen
+screen = pygame.display.set_mode([1024, 768])
 
 # This sets the name of the window
 # pygame.display.set_caption('CMSC 150 is cool')
@@ -35,7 +35,7 @@ class Player(object):
 
         self.x = 0
         self.y = 0
-        self.player_image = pygame.image.load("top_down_tank-8hkMRt.png").convert()
+        self.player_image = pygame.image.load("RedTank.png").convert()
         self.player_image.set_colorkey(BLACK)
     def update(self):
         """ update the state of the paddle """
@@ -73,7 +73,7 @@ class PyGameKeyboardController(object):
 background_position = [0, 0]
 
 # Load and set up graphics.
-background_image = pygame.image.load("GrassBackground.jpg").convert()
+background_image = pygame.image.load("NewBackground.jpg").convert()
 # player_image = pygame.image.load("top_down_tank-8hkMRt.png").convert()
 # player_image.set_colorkey(BLACK)
 
