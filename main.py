@@ -1,3 +1,7 @@
+"""
+@author Ashley Swanson & Jonah Spicher
+"""
+
 from classes import Player, Block, Game
 
 if __name__ == "__main__":

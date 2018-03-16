@@ -1,3 +1,9 @@
+"""Running this in a separate file was necessary because that is the only way
+to keep it from interrupting the game. While the main file was recording, it
+would record every frame, which obviously caused problems. In order to communicate
+with main, it writes to two files. file.wav is the data that record is getting,
+stop.txt tells record when to stop.
+"""
 import pyaudio
 from pyaudio import *
 import wave
@@ -9,6 +15,9 @@ from pickle import dump, load
 
 
 def record(record_time, a_format=pyaudio.paInt16, channels=2, rate=44100, chunk=1024, file_name='file.wav'):
+    """Records for a given amount of time, and stores the recording in file.wav
+    by default. Don't change that, though, because classes reads file.wav.
+    """
     audio = pyaudio.PyAudio()
     stream = audio.open(format=a_format, channels=channels,
                     rate=rate, input=True,
@@ -32,20 +41,21 @@ def record(record_time, a_format=pyaudio.paInt16, channels=2, rate=44100, chunk=
 
 
 
+#First, stop.txt has to say something other that stop. Otherwise, record stops
+#immediately.
 f = open('stop.txt', 'wb')
 insert = pickle.dumps('go')
 f.write(insert)
 f.close()
 
 while True:
+    #Then it repeatedly checks to see if stop.txt says stop, and if not, it records
     f = open('stop.txt', 'rb+')
     curr = f.read()
-    #print("curr = ", curr)
     f.seek(0, 0)
     update = pickle.loads(curr)
-    #print("update = ", update)
 
     if update=='stop':
-        #print(update)
         break
+
     record(0.2)
