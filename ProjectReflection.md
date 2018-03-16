@@ -15,8 +15,7 @@ We created a Pygame version of the classic arcade game, Asteroids.
 ## Implementation [~2-3 paragraphs + UML diagram]
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Our implementation for the non-controllable objects consisted of making a class for each object. Each class had an update function that handled the movement of the object and a destroy function, for when the object was destroyed. The asteroid and UFO had subclasses that inherited them, one for each size of asteroid, and one for each type of asteroid (We had initially planned to add a second type of UFO, but ran out of time). Each of these classes had an overarching class that contained all of the instances of the lower class. This made collision detection much easier and allowed us to simply update the greater class, which in turn updated all of the instances. There was one class that contained all of the objects in the game, holding the overarching classes for each object. This class handled collision detection and updated all of the objects.
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;On the decision decisions. For the Ship class we decided to go with Pygame's rotation function which was tricky since each time it rotates an image it loses overall quality. Another route we could have gone is making a folder with every angle of the ship inside of it so that all it had to do was pull from the folder when we called for a rotation instead of modifying an image each time.
-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;On the design choices. For the Ship class we decided to go with Pygame's rotation function which was tricky since each time it rotates an image it loses overall quality. Another route we could have gone is making a folder with every angle of the ship inside of it so that all it had to do was pull from the folder when we called for a rotation instead of modifying an image each time. Another design choice we made was to connect surfaces to rectangles that approximately represented their shape. We could have made many smaller rectangles to more accurately represent the shape of the object, but we decided that it wasn't worth the additional time spent. The estimated hit boxes are close enough, and the additional accuracy would have made an insignificant improvement.
 
 Class Diagram
 * listOfObjects - contains and keeps track of all objects
@@ -32,7 +31,7 @@ Class Diagram
   * CollectionOfProjectiles - contains and keeps track of all Projectiles
     * Projectile - Base Projectile class
   * Ship - kept all data for the player
-  * GUI - in charge of all user interface realated things 
+  * GUI - in charge of all user interface realated things
 
 ## Reflection [~2 paragraphs]
 <!-- The thing below is to indent. It's HTML basically -->
