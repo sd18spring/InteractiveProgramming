@@ -4,20 +4,7 @@ from pygame.locals import *
 import time
 from random import *
 clock = pygame.time.Clock()
-"""
-THINGS TO DO:
-1. figure out how to generalize obstacle class w/ images #done
-    a. add slow down and speed up functions #done
-    b. figure out how logs will work
-2. figure out how to generate more Obstacles
-    a. create random tracks... if possible #yes!
-3. Collisions
-    a. somehow display that penguino has crashed #done
-4. Extensions
-    a. 2 player
-    b. easy, medium, hard mode (single player)
-    x. rotate screen
-"""
+
 class Penguin(pygame.sprite.Sprite):
     def __init__(self):
         # Call the parent class (Sprite) constructor
@@ -29,7 +16,6 @@ class Penguin(pygame.sprite.Sprite):
             self.rect.y = 0
         else:
             self.rect.y -= pixels
-
     def moveDown(self, pixels):
         if self.rect.y >= 340:
             self.rect.y = 340
@@ -58,6 +44,10 @@ class Powerups(Obstacles):
 class FinishLine(Obstacles):
     pass
 
+class Bump(Obstacles):
+    def slowDown(self, pixels = 3):
+        self.rect.x -= pixels
+
 class KeyController(object):
     def __init__(self, model):
         self.model = model
@@ -85,6 +75,7 @@ class CPSledView(object):
         self.model.screen.blit(timer, (425, 20))
         self.model.boulders.draw(self.model.screen)
         self.model.ice_patches.draw(self.model.screen)
+        self.model.bumps.draw(self.model.screen)
         self.model.all_penguins.draw(self.model.screen)
         self.model.finish_line_group.draw(self.model.screen)
         pygame.display.update()
@@ -105,6 +96,8 @@ class CPSledModel(object):
         self.boulders = pygame.sprite.RenderPlain()
         self.ice_patches = pygame.sprite.RenderPlain()
         self.finish_line_group = pygame.sprite.RenderPlain()
+        self.bumps = pygame.sprite.RenderPlain()
+
         for num_boulders in range(20):
             x_position = (num_boulders+1) * 400 #randint(260, 360)
             y_boulders = randint(1,3)
@@ -120,6 +113,12 @@ class CPSledModel(object):
             self.ice_patch = Powerups("ice_patch_flat.png", pygame.Rect(x_position, y_position, 280, 70))
             self.ice_patches.add(self.ice_patch)
 
+        for num_bumps in range(7):
+            x_position = (num_bumps + 1) * 630
+            y_position = randint(0, 400)
+            self.bump = Obstacles("bump.png", pygame.Rect(x_position, y_position, 132, 98))
+            self.bumps.add(self.bump)
+
         self.finish_line = FinishLine("finish_line.png", pygame.Rect(6000, -2, 144, 404))
         self.finish_line_group.add(self.finish_line)
 
@@ -127,6 +126,7 @@ class CPSledModel(object):
         self.all_penguins.update()
         self.boulders.update()
         self.ice_patches.update()
+        self.bumps.update()
         self.screen.fill(self.WHITE)
 
 if __name__ == '__main__':
@@ -140,6 +140,7 @@ if __name__ == '__main__':
         list_of_obstacles = model.boulders.sprites()
         list_of_obstacles.extend(model.ice_patches.sprites())
         list_of_obstacles.append(model.finish_line)
+        list_of_obstacles.extend(model.bumps.sprites())
 
         font = pygame.font.Font(None, 32)
         pygame.display.set_caption("Club Penguin Sledding Game")
@@ -157,6 +158,7 @@ if __name__ == '__main__':
             hit = False
             ice = False
             finish = False
+            bump = False
             for obstacle in list_of_obstacles:
                 if model.penguin.rect.colliderect(obstacle.rect):
                     hit = True
