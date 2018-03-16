@@ -1,6 +1,13 @@
 # Virtual Keyboard
 Software Design Mini-Project 4 (Spring 2018) code and documentation.
 
+## Overview
+In this project, we aimed to make a “note board” that the user can play in a variety of different ways.
+This “note board” is essentially a musical keyboard with twelve notes (Ab to G). We wanted the user to
+be able to operate the note board with a mouse, with their computer keyboard, or with their body.
+Mouse and keyboard operation would be through event detection and body operation would be using
+computer vision to detect body location.
+
 ## Getting Started
 To get the keyboard up and running, please update your Linux dependecies:
 
