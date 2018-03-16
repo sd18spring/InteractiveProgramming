@@ -1,7 +1,6 @@
 import pygame
 import time
 import math as m
-from wiki_functions import summary_links
 
 class Model(object):
     """Representation of all of the objects being displayed
@@ -14,8 +13,8 @@ class Model(object):
         self.height = size[1]
         self.nodes = [] #holds all of the nodes in the model
         self.n = 3 #1 + the number of new nodes produced with an expansion
-        self.nodes.append(Node('Philosophy',size[0]/2,size[1]/2))
-        self.nodes.extend(self.nodes[0].init_expand(1,self.n))
+        self.nodes.append(Node('',size[0]/2,size[1]/2))
+        #self.nodes.extend(self.nodes[0].init_expand(1,self.n))
         self.clines = [] #holds the connection lines of the model
         for i in range(1,len(self.nodes)):
             self.clines.append(ConnectionLine(self.nodes[0], self.nodes[-i]))
@@ -23,10 +22,13 @@ class Model(object):
         self.mouse_pos = None
         self.boxes = [] #contians all the boxes in the model
         self.boxes.append(Box('Main Box'))
-        self.rectangle = pygame.Rect(((size[0]/2)-(size[0]/4),(size[1]*.33)-(size[1]/30),(size[0]/2),(size[1]/10)))
+        self.rectangle = pygame.Rect(((size[0]/10),(size[1]/10),(size[0]/2),(size[1]/10)))
         self.scale = 1 #the current scale of the model, keeps track of zooming
-
-
+        self.inputbox = Inputbox()
+        self.inputboxes = []
+        self.inputboxdisplay_list = []
+        self.click_flag = False
+        self.type_flag = False
 
     def zoom_in(self,center,scale = 1.05):
         """Zooms in around the center by a factor of scale
@@ -120,9 +122,22 @@ class Viewer(object):
                     self.screen.blit(cline.end.text_surface, (cline.end.x-15, cline.end.y-20))
         first_node = self.model.nodes[0]
         self.screen.blit(first_node.text_surface, (first_node.x-15, first_node.y+20))
-        """for box in self.model.boxes:
-            pygame.draw.rect(self.screen,pygame.Color(255,255,255),pygame.Rect(((self.model.width/2)-(self.model.width/4),(self.model.height*.33)-(self.model.height/30),(self.model.width/2),(self.model.height/10))))
-"""
+
+        for box in self.model.boxes:
+            pygame.draw.rect(self.screen,pygame.Color(225,225,225),pygame.Rect(((((self.model.width/2)-(self.model.width/4)),self.model.height/10,(self.model.width/2),(self.model.height/25)))))
+
+        for lox in self.model.inputboxdisplay_list:
+            pygame.draw.rect(self.screen,pygame.Color(200,200,200),pygame.Rect(((((self.model.width/2)-(self.model.width/4)),self.model.height/10,(self.model.width/2),(self.model.height/25)))))
+            font1 = pygame.font.SysFont('Arial',32)
+            text1 = font1.render('Search wikipedia...', True, (100,100,100))
+            if len(self.model.inputbox.string) == 0:
+                self.screen.blit(text1,(((self.model.width/2)-(self.model.width/4)),self.model.height/10))
+            pass
+        for zebox in self.model.inputboxes:
+            font = pygame.font.SysFont('Arial',32)
+            my_string = str(zebox.string)
+            text = font.render(my_string, True, (50,50,50))
+            self.screen.blit(text,(((self.model.width/2)-(self.model.width/4)),self.model.height/10))
         pygame.display.update()
 
 class Controler(object):
@@ -180,8 +195,11 @@ class Controler(object):
                 rect = self.model.rectangle
 
                 if rect[0] < m_pos[0] < rect[0]+rect[2] and rect[1] < m_pos[1] < rect[1]+rect[3]:
-                    print('yay!')
-                print(self.model.mouse_pos)
+                    self.model.click_flag = True
+                    self.model.inputboxdisplay_list.append('yes')
+                else:
+                    self.model.click_flag = False
+                    del self.model.inputboxdisplay_list[:]
 
         if pygame.mouse.get_pressed()[0]: #if the mouse is held down and not in the seach bar, turn on panning
             rect = self.model.rectangle
@@ -195,6 +213,150 @@ class Controler(object):
 
 
         if event.type == pygame.KEYDOWN:
+            if self.model.click_flag == True:
+                if event.key == pygame.K_a:
+                    self.model.inputbox.string += 'a'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_b:
+                    self.model.inputbox.string += 'b'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_c:
+                    self.model.inputbox.string += 'c'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_d:
+                    self.model.inputbox.string += 'd'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_e:
+                    self.model.inputbox.string += 'e'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_f:
+                    self.model.inputbox.string += 'f'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_g:
+                    self.model.inputbox.string += 'g'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_h:
+                    self.model.inputbox.string += 'h'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_i:
+                    self.model.inputbox.string += 'i'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_j:
+                    self.model.inputbox.string += 'j'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_k:
+                    self.model.inputbox.string += 'k'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_l:
+                    self.model.inputbox.string += 'l'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_m:
+                    self.model.inputbox.string += 'm'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_n:
+                    self.model.inputbox.string += 'n'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_o:
+                    self.model.inputbox.string += 'o'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_p:
+                    self.model.inputbox.string += 'p'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_q:
+                    self.model.inputbox.string += 'q'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_r:
+                    self.model.inputbox.string += 'r'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_s:
+                    self.model.inputbox.string += 's'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_t:
+                    self.model.inputbox.string += 't'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_u:
+                    self.model.inputbox.string += 'u'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_v:
+                    self.model.inputbox.string += 'v'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_w:
+                    self.model.inputbox.string += 'w'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_x:
+                    self.model.inputbox.string += 'x'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_y:
+                    self.model.inputbox.string += 'y'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_z:
+                    self.model.inputbox.string += 'z'
+                    self.model.inputboxes.append(self.model.inputbox)
+
+                if event.key == pygame.K_BACKSPACE:
+                    self.model.inputbox.string = self.model.inputbox.string[:len(self.model.inputbox.string)-1]
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_TAB:
+                    del self.model.inputboxdisplay_list[:]
+                if event.key == pygame.K_CLEAR:
+                    del self.model.inputboxes[:]
+                    self.model.inputbox.string = ''
+                if event.key == pygame.K_RETURN:
+                        new_stuff = self.model.delete_branch(0)
+                        self.model.nodes = new_stuff[0] #give model a new list not containing the "deleted" nodes
+                        self.model.clines = new_stuff[1]
+                        self.model.nodes[0].title = self.model.inputbox.string
+                        self.model.nodes[0].x = self.model.size[0]/2
+                        self.model.nodes[0].y = self.model.size[1]/2
+                        self.model.inputbox.string = ''
+                        self.model.nodes[0].update()
+                if event.key == pygame.K_ESCAPE:
+                    del self.model.inputboxdisplay_list[:]
+                if event.key == pygame.K_SPACE:
+                    self.model.inputbox.string += ' '
+
+                if event.key == pygame.K_EXCLAIM:
+                    self.model.inputbox.string += '!'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_QUOTEDBL:
+                    self.model.inputbox.string += '"'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_HASH:
+                    self.model.inputbox.string += '#'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_DOLLAR:
+                    self.model.inputbox.string += '$'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_AMPERSAND:
+                    self.model.inputbox.string += '&'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_QUOTE:
+                    self.model.inputbox.string += "'"
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_LEFTPAREN:
+                    self.model.inputbox.string += '('
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_RIGHTPAREN:
+                    self.model.inputbox.string += ')'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_ASTERISK:
+                    self.model.inputbox.string += '*'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_PLUS:
+                    self.model.inputbox.string += '+'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_COMMA:
+                    self.model.inputbox.string += ','
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_MINUS:
+                    self.model.inputbox.string += '-'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_PERIOD:
+                    self.model.inputbox.string += '.'
+                    self.model.inputboxes.append(self.model.inputbox)
+                if event.key == pygame.K_SLASH:
+                    self.model.inputbox.string += '/'
+                    self.model.inputboxes.append(self.model.inputbox)
             if event.key == pygame.K_d: #if d is pressed, expand every unexpanded node
                 self.model.dive(1)
             if event.key == pygame.K_1: #number keys set the model's n value
@@ -216,6 +378,10 @@ class Controler(object):
             if event.key == pygame.K_9:
                 self.model.n = 9
 
+class Inputbox(object):
+    def __init__(self,string=''):
+        self.string = string
+
 class Box(object):
     """A clickable box where the user enters the title of the page she/he is
     interested in"""
@@ -230,7 +396,7 @@ class Node(object):
     """A clickable node appearing in a web, which produces more nodes (children)
     when clicked
     Attributes: x, y, title, size, level, expanded, angle, text_surface,
-    children, deleted, links_viewed"""
+    children, deleted, times_refreshed"""
     pygame.font.init()
     node_size = 10
     node_font = pygame.font.SysFont('Arial', 13)
@@ -246,12 +412,15 @@ class Node(object):
         self.angle = angle #angle from a horizontal line formed by the segemnt from this node's parent to it
         self.text_surface = Node.node_font.render(self.title, False, (0,0,0))
         self.deleted = False #flag for use in the removal of nodes from the model
-        self.links_viewed = 0 #number of times the node has been expanded (after deletion of its children)
-        self.links = summary_links(self.title)
+        self.times_refreshed = 0 #number of times the node has been expanded (after deletion of its children)
 
 
     def __str__(self):
         return '%d,%d' % (self.x,self.y)
+
+    def update(self):
+        self.text_surface = Node.node_font.render(self.title, False, (0,0,0))
+
 
     def init_expand(self, scale  =1, n =3):
         """Produces n nodes surrouding self in a regular n-gon
@@ -262,16 +431,14 @@ class Node(object):
         new_nodes = []
         thetas = [90]
         for i in range(n-1):
-            thetas.append(thetas[-1]+segment_angle + self.links_viewed)
+            thetas.append(thetas[-1]+segment_angle)
         for theta in thetas:
             for theta in thetas:
-                link = self.links[thetas.index(theta)]
-                temp = Node(link,self.x + r*m.cos(m.radians(theta)), self.y - r*m.sin(m.radians(theta)), self.level + 1, theta)
+                temp = Node(str(theta),self.x + r*m.cos(m.radians(theta)), self.y - r*m.sin(m.radians(theta)), self.level + 1, theta)
                 new_nodes.append(temp)
                 self.children.append(temp)
 
         self.expanded = True
-        self.links_viewed += n
         return new_nodes
 
     def expand_n(self,scale, n = 3):
@@ -302,12 +469,10 @@ class Node(object):
                     thetas.append(angle + segment_angle)
 
         for theta in thetas: #produces new nodes
-            link = self.links[thetas.index(theta) + self.links_viewed]
-            temp = Node(link,self.x + r*m.cos(m.radians(theta)), self.y - r*m.sin(m.radians(theta)), self.level + 1, theta)
+            temp = Node(str(theta),self.x + r*m.cos(m.radians(theta)), self.y - r*m.sin(m.radians(theta)), self.level + 1, theta)
             new_nodes.append(temp)
             self.children.append(temp)
 
-        self.links_viewed += n-1
         return new_nodes
 
     def recursive_del(self, first = True):
@@ -316,14 +481,12 @@ class Node(object):
         if not first:
             self.deleted = True
         self.expanded = False
-
+        self.times_refreshed += 1
         first = False
         if self.children == []:
             return
         for child in self.children:
             child.recursive_del(first)
-
-
 
 class ConnectionLine(object):
     """A line connecting a node to each of it's children, the length being determined
@@ -359,13 +522,20 @@ if __name__ == '__main__':
     pygame.init()
     pygame.font.init()
 
+    node1 = Node('Node1',1,2)
+    node2 = Node('Node2',3,4)
+
+
+
     running = True
 
     model = Model((1000,1000))
 
+
     view = Viewer(model)
     controler = Controler(model)
-
+    #view.draw()
+    k=0
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
