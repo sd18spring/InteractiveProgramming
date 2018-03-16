@@ -1,0 +1,15 @@
+Project Overview
+In this project, we created a pygame-based Wikipedia visualization tool that takes text input from a user in a search box, searches all of Wikipedia, and displays a single node to the client labeled with the name of the article they searched for. This node is clickable, and when clicked sprout two other nodes——which represent the first two links in the original article. These nodes are themselves clickable, and when clicked sprout two more children nodes of their own. The tree can be pruned by clicking on a parent node, or by searching for a new article in the search box.
+
+Results
+We created a highly functional program, one that does everything that we laid out, both in the Project Overview and in our Project Proposal. It’s a little slow, but fairly resilient and very user-friendly. It’s interactive and thoughtful, and makes it nearly impossible for the user to wind up in a corner and have to restart. The latency is not a major problem, but probably poses the greatest area for user experience improvement. 
+
+Fig1a
+Fig1b
+Fig1c
+
+Implementation
+We used the Model-view-controller architecture in order to implement our code. We used the time, math, and wikipedia modules, along with Python’s built in webbrowser module and an original module named wiki_functions. We created boxes, nodes, and connection lines using classes and implemented the overall aesthetic so that as the tree of nodes expanded it did so in a fractal-like way, avoiding overlap and displaying information to the user in a unique way.
+
+Reflection
+We started the project with the intention of first meeting to sort out objectives, and thereafter programming individually. In reality, we met several times throughout the project, each time to overcome some small barrier or shoot a new implementation bearing. The project was appropriately scoped, though the difficulty in getting up to speed on some of the more basic aspects of Pygame made the appropriate goal seem like a stretch one at times. However, through strong communication and flexibility, we were able to combine our capabilities and push through to deliver the program we had promised.
