@@ -91,7 +91,7 @@ with open('Hospitals.csv', newline='') as csvfile:
             hospitals[str(name)] = (get_x(4000, float(lng)), get_y(4000, 2300, float(lat)))
 
 '''
-Gets the median and mean adjusted growth income for each state and stores the values in a dictionary of tuples.
+Gets the median and mean adjusted gross income for each state and stores the values in a dictionary of tuples.
 '''
 #https://www.census.gov/data/datasets/time-series/demo/saipe/model-tables.html
 irs_agi = {} #key = state, value = (median AGI, mean AGI)
@@ -277,15 +277,15 @@ if __name__ == '__main__':
                        myfont = pygame.font.SysFont("monospace", 20, bold=True)
                        title_font = pygame.font.SysFont("notosansmonocjksc", 50)
                        label = title_font.render(state, 1, blue)
-                       label2 = myfont.render('Median Adjusted Growth Income: $' + irs_agi[state][0], 1, darkBlue)
-                       label3 = myfont.render('Mean Adjusted Growth Income: $' + irs_agi[state][1], 1, darkBlue)
+                       label2 = myfont.render('Median Adjusted Gross Income: $' + irs_agi[state][0], 1, darkBlue)
+                       label3 = myfont.render('Mean Adjusted Gross Income: $' + irs_agi[state][1], 1, darkBlue)
                        label4 = myfont.render('Average Medicare Payment: $' + str(charge_data[state]), 1, darkBlue)
                        screen.blit(label, (((500 - label.get_rect().width)/2)+1000, 10))
                        screen.blit(label2, (((500 - label2.get_rect().width)/2)+1000, 120))
                        screen.blit(label3, (((500 - label3.get_rect().width)/2)+1000, 160))
                        screen.blit(label4, (((500 - label4.get_rect().width)/2)+1000,200))
                        pygame.display.update()
-                       pygame.time.wait(3000)
+                       pygame.time.wait(10000)
                '''
                If the controller clicks the mouse while over the Hospital Locations button, the locations of all of the hospitals in the United States are displayed on the map.
                '''
