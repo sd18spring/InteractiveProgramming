@@ -63,6 +63,12 @@ class Powerups(Obstacles):
 class FinishLine(Obstacles):
     pass
 
+class Log(Obstacles):
+    pass
+
+class Ramp(Obstacles):
+    pass
+
 class Sled_Main:
     def __init__(self):
         pygame.init()
@@ -78,15 +84,15 @@ class Sled_Main:
         self.boulders = pygame.sprite.RenderPlain()
         self.ice_patches = pygame.sprite.RenderPlain()
         self.finish_line_group = pygame.sprite.RenderPlain()
+        self.logs = pygame.sprite.RenderPlain()
+        self.ramps = pygame.sprite.RenderPlain()
+
         for num_boulders in range(20):
             x_position = (num_boulders+1) * 400 #randint(260, 360)
             y_boulders = randint(1,3)
             for i in range(y_boulders):
                 y_position = randrange(0, 340, 70)
                 self.boulder = Obstacles("croproc.png", pygame.Rect(x_position, y_position, 50, 50))
-                #self.boulder.rect = self.boulder.rect.move(35,105)
-                #self.boulder.rect.inflate_ip(0, -10)
-                #self.boulder.rect.inflate_ip(-20, -10)
                 self.boulders.add(self.boulder)
 
         for num_ice_patches in range(8):
@@ -95,7 +101,15 @@ class Sled_Main:
             self.ice_patch = Powerups("ice_patch_flat.png", pygame.Rect(x_position, y_position, 280, 70))
             self.ice_patches.add(self.ice_patch)
 
-        self.finish_line = FinishLine("finish_line.png", pygame.Rect(1000, -2, 144, 404))
+        for num_logs in range(4):
+            x_position = (num_logs+1) * 1200 #randint(260, 360)
+            y_position = 0
+            self.log = Log("log.png", pygame.Rect(x_position, y_position, 170, 400))
+            self.logs.add(self.log)
+            self.ramp = Ramp("log_jump.png", pygame.Rect(x_position,110,  98, 167))
+            self.ramps.add(self.ramp)
+
+        self.finish_line = FinishLine("finish_line.png", pygame.Rect(8000, -2, 144, 404))
         self.finish_line_group.add(self.finish_line)
 
     def main_loop(self):
@@ -103,11 +117,13 @@ class Sled_Main:
         list_of_obstacles = self.boulders.sprites()
         list_of_obstacles.extend(self.ice_patches.sprites())
         list_of_obstacles.append(self.finish_line)
+        list_of_obstacles.extend(self.logs.sprites())
+        list_of_obstacles.extend(self.ramps.sprites())
         #pygame.font()
         font = pygame.font.Font(None, 32)
 
         running = True
-        pygame.display.set_caption("Club Penguing Sledding Game")
+        pygame.display.set_caption("Club Penguin Sledding Game")
         while running:
 
             current_time = str(pygame.time.get_ticks()/1000)
@@ -115,26 +131,35 @@ class Sled_Main:
 
             for event in pygame.event.get():
                 if event.type is pygame.QUIT:
-                    running = False
+                    pygame.quit()
             keys = pygame.key.get_pressed()
 
             if self.penguin.rect.left > self.finish_line.rect.left+120:
-                break
+                while True:
+                    for event in pygame.event.get():
+                        if event.type is pygame.QUIT:
+                            pygame.quit()
+                        running = False
 
             hit = False
             ice = False
             finish = False
+            ramp = False
             for obstacle in list_of_obstacles:
                 if self.penguin.rect.colliderect(obstacle.rect):
                     #print(self.penguin.rect.left)
                     #print(obstacle.rect.left)
                     hit = True
+                    if type(obstacle) == Ramp:
+                        ramp = True
                     if type(obstacle) == Powerups:
                         ice = True
                     elif type(obstacle) == FinishLine:
                         finish = True
             for obstacle in list_of_obstacles:
-                if ice or finish:
+                if ramp:
+                    obstacle.moveLeft()
+                elif ice or finish:
                     obstacle.speedUp()
                 elif hit:
                     obstacle.slowDown()
@@ -160,11 +185,16 @@ class Sled_Main:
             self.screen.blit(timer, (350, 30))
             self.boulders.draw(self.screen)
             self.ice_patches.draw(self.screen)
+            self.logs.draw(self.screen)
+            self.ramps.draw(self.screen)
             self.all_penguins.draw(self.screen)
             self.finish_line_group.draw(self.screen)
             pygame.display.update()
             clock.tick_busy_loop(60)
-        pygame.quit()
+        # for event in pygame.event.get():
+        #     if event.type is pygame.QUIT:
+        #         pygame.quit()
+        # pygame.time.wait(20000)
 
 
 if __name__ == '__main__':
