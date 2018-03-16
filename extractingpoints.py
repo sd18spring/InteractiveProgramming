@@ -160,8 +160,12 @@ with open('result.csv', newline='') as csvfile:
             #charge_amount
 
 
-    print(charge_data)
-
+    #print(charge_data)
+key_max = max(charge_data)
+val_min = min(charge_data)
+print(key_max)
+print(charge_data[key_max])
+print(charge_data[val_min])
 #credit for following function to: http://www.ariel.com.au/a/python-point-int-poly.html
 def is_in_polygon(x, y, points):
     n = len(points)
@@ -193,6 +197,11 @@ darkBlue = (0,0,128)
 white = (255,255,255)
 black = (0,0,0)
 pink = (255,200,200)
+pale_blue = (199, 219, 249)
+light_blue = (148, 187, 247)
+blue = (48, 129, 255)
+dark_blue = (0, 90, 232)
+darker_blue = (0, 55, 142)
 
 colors = {(255,0,0): 'red', (0,255,0): 'green', (0,0,255): 'blue', (0,0,128): 'darkBlue', (255,255,255): 'white', (0,0,0): 'black', (255,200,200): 'pink'}
 
@@ -207,21 +216,43 @@ colors = {(255,0,0): 'red', (0,255,0): 'green', (0,0,255): 'blue', (0,0,128): 'd
 #         if event.button == 1:
 #             for object in clickableObjectsList:
 #                 object.clickCheck(event.pos)
+charge_list = list(zip(charge_data.keys(), charge_data.values()))
+# for x,y in charge_list:
+#     charge_list[x,y] = (x, round(y, 2))
+# print(charge_list)
+
 the_image = pygame.Surface([500,500], pygame.SRCALPHA, 32)
 the_image = the_image.convert_alpha()
 the_image_size = the_image.get_rect()
+
+#white, pale blue, light blue, blue, dark blue, darker blue
+colors2 = [(255,255,255), (199, 219, 249), (148, 187, 247), (48, 129, 255), (0, 90, 232), (0, 55, 142)]
+
+# print(charge_list)
+# charge_list.sort(key=lambda x: x[1])
+# print(charge_list)
 
 #screen.blit(image, (1000, 0))
 #blank_rect = pygame.Rect(0, 0, 500, 500)
 #pygame.draw.rect(image, green, blank_rect)
 #pygame.draw.polygon(image, green, state_borders['Michigan'])
 
+def set_color(charge_list, colors2, i):
+    bin_size = int(len(charge_list)/6)
+    #for i in range(len(charge_list)):
+    if i in range(0,bin_size):
+        return white
+    elif i in range(bin_size,2*bin_size):
+        return pale_blue
+    elif i in range(2*bin_size,3*bin_size):
+        return light_blue
+    elif i in range(3*bin_size,4*bin_size):
+        return blue
+    elif i in range(4*bin_size,5*bin_size):
+        return dark_blue
+    else: #i in range(5*bin_size+1,6*bin_size):
+        return darker_blue
 
-#im = Image.new("RGB", (500, 500))
-#the_image = #
-#im.save('Michigan.png')
-# image_size = image_size.inflate(1, 1)
-# pygame.transform.smoothscale(image, image_size.size)
 
 for state in state_borders:
     lats = []
@@ -237,7 +268,8 @@ for state in state_borders:
         lng = element[1]
         updated_borders_list.append((lat - min(lats), lng - min(lngs)))
     updated_borders[state] = updated_borders_list
-    pygame.draw.polygon(the_image, white, updated_borders[state])
+    #pygame.draw.polygon(the_image, set_color(charge_list, colors2,i), updated_borders[state])
+    #set_color(charge_list, colors2)
     pygame.draw.polygon(the_image, black, updated_borders[state], 2)
     pygame.image.save(the_image, state + '.png')
     #updated_borders.clear()
@@ -247,11 +279,14 @@ for state in state_borders:
     the_image = pygame.Surface([500, 500], pygame.SRCALPHA, 32)
     the_image = the_image.convert_alpha()
 
+
+
 #import numpy
 # blueval = 0
 # bluedir  = 1
 LEFT = 1
 x = y = 0
+i = 0
 while (True):
 
    # check for quit events
@@ -309,10 +344,14 @@ while (True):
    # draw the updated picture
 
    #updatePoints(points)  # changes the location of the points
+
    for state in state_borders:
+       i = i
+       color = set_color(charge_list, colors2, i)
        #subscreen = pygame.display.set_mode((100, 100))
-       pygame.draw.polygon(screen,white,state_borders[state])
+       pygame.draw.polygon(screen,color,state_borders[state])
        pygame.draw.polygon(screen,black,state_borders[state], 1)
+       i += 1
        #print(state_borders[state])
        # redraw the points
        #subscreen.fill(red)
@@ -341,8 +380,8 @@ while (True):
    #print(updated_borders)
    #print(min(lats))
    #print(min(lngs))
-
    for hospital in hospitals:
        pygame.draw.circle(screen, green, hospitals[hospital], 1)
    # update the screen
    pygame.display.update()
+   i = 0
