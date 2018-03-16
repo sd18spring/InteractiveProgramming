@@ -6,7 +6,7 @@ pygame.init()
 class GUI():
     WHITE = (255,255,255)
     font = pygame.font.SysFont("couriernew",32)
-    bx = 150
+    bx = 700
     by = 100
 
     def __init__(self,gD):
@@ -15,16 +15,26 @@ class GUI():
     def update(self,ship):
         box = pygame.surface.Surface((self.bx, self.by))
         txt_surf = self.font.render(str(ship.score), True, self.WHITE)  # bottom line
-        txt_rect = txt_surf.get_rect(center=(self.bx//2, 40))
+        txt_rect = txt_surf.get_rect(center=(75, 40))
         box.blit(txt_surf, txt_rect)
         w,h = ship.oImage.get_size()
         txt_surf = pygame.transform.scale(ship.oImage,(int(w*.5),int(h*.5)))
         for x in range(ship.lives):
             spacing = x*45
-            txt_rect = txt_surf.get_rect(center=(self.bx//2-45+spacing, 90))
+            txt_rect = txt_surf.get_rect(center=(75-45+spacing, 90))
             box.blit(txt_surf, txt_rect)
         self.gD.blit(box,(0,0))
-        # self.bx//2, 70)
+
+    def gameOver(self,ship):
+        box = pygame.surface.Surface((300,500))
+        gO = self.font.render("GAME OVER", True,self.WHITE)
+        gO_rect = gO.get_rect(center=(90,90))
+        box.blit(gO,gO_rect)
+        txt_surf = self.font.render(str(ship.score), True, self.WHITE)  # bottom line
+        txt_rect = txt_surf.get_rect(center=(90, 200))
+        box.blit(txt_surf,txt_rect)
+        w,h = self.gD.get_size()
+        self.gD.blit(box,(int(w/2)-90,int(h/2)-90-40))
 
 
 def rot_center(image, angle):

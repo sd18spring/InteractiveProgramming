@@ -48,6 +48,7 @@ gui = GUI(gameDisplay)
 
 """ initialize the ship to be able to shoot"""
 canShoot = True
+shoot_count = 20
 
 while running:
 
@@ -59,6 +60,13 @@ while running:
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_q:
                 running = False
+            if event.key == pygame.K_t:
+                ship.lives += 1
+            if event.key == pygame.K_r:
+                if shoot_count == 20:
+                    shoot_count = 2
+                elif shoot_count == 2:
+                    shoot_count = 20
     """ player interface """
     keys_pressed = pygame.key.get_pressed()
     if keys_pressed[pygame.K_UP]:
@@ -73,7 +81,7 @@ while running:
         counter = 0
     else:
         counter += 1
-        if(counter >= 20):
+        if(counter >= shoot_count):
             canShoot = True
     if keys_pressed[pygame.K_SPACE]:
         if(canShoot):
@@ -93,9 +101,14 @@ while running:
 
 
     gameDisplay.fill(black)
+
     gui.update(ship)
-    ship.update()
+    if ship.lives > 0:
+        ship.update()
     AllThings.update()
+
+    if ship.lives == 0:
+        gui.gameOver(ship)
 
     pygame.display.update()
     clock.tick(60)
