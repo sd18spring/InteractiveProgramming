@@ -13,7 +13,7 @@ Use `pip` to install these packages:
 World map:world map SVG with a dictionary of country names and two letter country codes mapped to their matching polygon
 https://simplemaps.com/resources/svg-world
 
-GDP per capita:Renamed as GDP_PC.csv and unnecessary data removed. Country codes edited to match the format from svg
+GDP per capita:Renamed as GDP_PC.csv and unnecessary datd. Country codes edited to match the format from svg
 https://data.worldbank.org/indicator/NY.GDP.PCAP.CD
 
 Internet Users:Renamed as Internet_Users_percentofpop_2000_2016.csv
