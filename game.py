@@ -235,17 +235,17 @@ class Player(pygame.sprite.Sprite):
         #setting bounds on edge of screen
         if self.x < 1:
             if self.score > 9:
-                self.x += 1.2*self.vx
+                self.x += 1.05*self.vx
             if self.score >19:
-                self.x += 1.4*self.vx
+                self.x += 1.1*self.vx
             if self.score >34:
-                self.x += 1.6*self.vx
+                self.x += 1.15*self.vx
             if self.score > 49:
-                self.x += 1.8*self.vx
+                self.x += 1.2*self.vx
             if self.score >74:
-                self.x += 1.9*self.vx
+                self.x += 1.25*self.vx
             if self.score > 99:
-                self.x += 2*self.vx
+                self.x += 1.3*self.vx
             else:
 
                 self.x = 1
@@ -253,95 +253,95 @@ class Player(pygame.sprite.Sprite):
         elif self.x > 589:
             if self.score > 9:
                 self.x = 589
-                self.x += 1.2*self.vx
+                self.x += 1.05*self.vx
             if self.score >19:
                 self.x = 589
-                self.x += 1.4*self.vx
+                self.x += 1.1*self.vx
             if self.score >34:
                 self.x = 589
-                self.x += 1.6*self.vx
+                self.x += 1.15*self.vx
             if self.score > 49:
                 self.x = 589
-                self.x += 1.8*self.vx
+                self.x += 1.2*self.vx
             if self.score >74:
                 self.x = 589
-                self.x += 1.9*self.vx
+                self.x += 1.25*self.vx
             if self.score > 99:
                 self.x = 589
-                self.x += 2*self.vx
+                self.x += 1.3*self.vx
             else:
                 self.x = 589
                 self.x += self.vx
         #update position
         else:
             if self.score > 9:
-                self.x += 1.2*self.vx
+                self.x += 1.05*self.vx
             if self.score >19:
-                self.x += 1.4*self.vx
+                self.x += 1.1*self.vx
             if self.score >34:
-                self.x += 1.6*self.vx
+                self.x += 1.15*self.vx
             if self.score > 49:
-                self.x += 1.8*self.vx
+                self.x += 1.2*self.vx
             if self.score >74:
-                self.x += 1.9*self.vx
+                self.x += 1.25*self.vx
             if self.score > 99:
-                self.x += 2*self.vx
+                self.x += 1.3*self.vx
             else:
                 self.x += self.vx
 
         #setting bounds on edge of screen
         if self.y < 1:
             if self.score > 9:
-                self.y += 1.2*self.vy
+                self.y += 1.05*self.vy
             if self.score >19:
-                self.y += 1.4*self.vy
+                self.y += 1.1*self.vy
             if self.score >34:
-                self.y += 1.6*self.vy
+                self.y += 1.15*self.vy
             if self.score > 49:
-                self.y += 1.8*self.vy
+                self.y += 1.2*self.vy
             if self.score >74:
-                self.y += 1.9*self.vy
+                self.y += 1.25*self.vy
             if self.score > 99:
-                self.y += 2*self.vy
+                self.y += 1.3*self.vy
             else:
                 self.y = 1
                 self.y += self.vy
         elif self.y > 399:
             if self.score > 9:
                 self.y = 399
-                self.y += 1.2*self.vy
+                self.y += 1.05*self.vy
             if self.score >19:
                 self.y = 399
-                self.y += 1.4*self.vy
+                self.y += 1.1*self.vy
             if self.score >34:
                 self.y = 399
-                self.y += 1.6*self.vy
+                self.y += 1.15*self.vy
             if self.score > 49:
                 self.y = 399
-                self.y += 1.8*self.vy
+                self.y += 1.2*self.vy
             if self.score >74:
                 self.y = 399
-                self.y += 1.9*self.vy
+                self.y += 1.25*self.vy
             if self.score > 99:
                 self.y = 399
-                self.y += 2*self.vy
+                self.y += 1.3*self.vy
             else:
                 self.y = 399
                 self.y += self.vy
         #update position
         else:
             if self.score > 9:
-                self.y += 1.2*self.vy
+                self.y += 1.05*self.vy
             if self.score >19:
-                self.y += 1.4*self.vy
+                self.y += 1.1*self.vy
             if self.score >34:
-                self.y += 1.6*self.vy
+                self.y += 1.15*self.vy
             if self.score > 49:
-                self.y += 1.8*self.vy
+                self.y += 1.2*self.vy
             if self.score >74:
-                self.y += 1.9*self.vy
+                self.y += 1.25*self.vy
             if self.score > 99:
-                self.y += 2*self.vy
+                self.y += 1.3*self.vy
             else:
                 self.y += self.vy
 
