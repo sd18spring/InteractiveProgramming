@@ -7,8 +7,6 @@ To do so, type the following code in the command window:
 
 $ pip install pygame
 
-Link to project reflection: /home/junwonlee/GameProject/Link to Interactive Programming Reflection.pdf
-
 To run the code, type the following to the command window:
 
 $ python SnakeWithBoundary.py
@@ -22,3 +20,6 @@ To play the game:
 3. Catch the "mouse." (the red block). Once you catch the mouse, your length will increase and the mouse will be placed in random location.
 
 4. To restart the game, close the window and type the given command again.
+
+
+Link to project reflection: /home/junwonlee/GameProject/Link to Interactive Programming Reflection.pdf
