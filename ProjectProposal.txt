@@ -1,0 +1,17 @@
+What is the main idea of your project? What topics will you explore and what will you generate? What is your minimum viable product? What is a stretch goal?
+	- We will make a tank game based on wii tanks.  Our MVP will be a 2 player PVP.  A stretch goal is to add an AI.
+What are your learning goals for this project (for each member)?
+
+	- Alex: getting better at using class and object, also make readable code
+
+	- Ricky: Get better at debugging, making more readable and modular code, and getting better with classes and objects.
+
+What libraries are you planning to use? (if you don’t know enough yet, please outline how you will decide this question during the beginning phase of the project).
+	- Pygame and whatever else we need.
+What do you plan to accomplish by the mid-project check-in? (See below for some generic goals; edit to suit your particular project)
+
+	- We plan to have a tank that can move (stretch: shooting projectiles?)
+
+What do you view as the biggest risks to you being successful on this project?
+	
+	- Ususlly time is the biggest factor in completing projects like this. 
