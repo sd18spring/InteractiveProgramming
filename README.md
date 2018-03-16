@@ -13,3 +13,7 @@
 ### Run Code
 
 Make sure sound_files folder is downloaded to same directory as radialsynth.py, then run `python radialsynth.py`
+
+### View Webpage
+
+View project webpage [here](https://draconian9908.github.io/RadialSynth/)
