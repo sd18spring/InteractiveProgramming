@@ -346,7 +346,7 @@ class Bird(pygame.sprite.Sprite):
         self.rect.x = SCREEN_WIDTH - self.rect.width
         self.rect.y = .2 * SCREEN_HEIGHT
         self.change_y = .2
-        self.speed = (random.random() + .5) * .3
+        self.speed = (random.random() + .5) * 0.6
 
     def update(self, t, distance):
         self.rect.x -= t * self.speed
