@@ -1,0 +1,13 @@
+Abstract: 
+	Alex and I made a collaborative tank game in which two players work to clear a map of blue squares.  We got our idea from a mini-game within Wii Play called “tanks” and many other areal view tank games. 
+Results:
+	We mad the game as modular as possible so we could go from our “MVP” to as advanced as we want.  Our “MVP” was one tank that was able to move around a screen.  We then made a larger background and a second tank and also added rotation.  After this, we added the capability for the tanks to fire.  Finally we added randomized dots that the tanks were able to clear from the map.  This is far from our MVP, but still short of our stretch goal, as the program is not always able to handle two people pressing keys at once.
+Implementation:
+	We began by creating a window and bliting an image of equal size on to it.  We next made a “Player” class that creates a sprite from an image and blits it on to the background.  Within the player function is an update function that updates the position and rotation of the tank/sprite.  
+	Our next class is “Bullet”, which creates another sprite (this time with a small rectangle), references the player’s position and current angle of rotation and sends the sprite along that angle from that position.
+	Next, we created a class called “Block” which generates squares at random locations around the field.  We later reference this in a separate definition to create sprites that are deleted when they come into contact with our “Bullets”
+	Finally, we have a class called “Controller” which adds values to the player class, thus moving the player.
+	
+Reflection:
+	In terms of process, we did a good job at organizing the project from the very beginning.  We created a Trello and distributed tasks to ourselves.  We used a Scrum-like system to show to-do, doing, and done tasks, as well as a backlog for ideas that we could ad if we had time.
+	Overall this worked well and we scoped our project well.  it was very doable and had a lot of room to scale upward, which we did to some degree.  Alex and I had some time to pair program but not as much as we anticipated.  We also had a lot of work outside of class with QEA and P&M.  This made it difficult to balance, especially when some assignments (usually QEA) took longer than anticipated.  This gave us less time to work on the project, thus we were not able to implement all of the features that we wanted to.
