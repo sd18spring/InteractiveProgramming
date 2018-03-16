@@ -1,3 +1,5 @@
+[[file:sample.png]]
+
 * How to play
 1. install [[https://www.python.org/][python]] and [[https://www.pygame.org/news][pygame]].
 2. =$ git clone https://github.com/concavegit/interactiveprogramming=
