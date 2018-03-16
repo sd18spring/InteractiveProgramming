@@ -63,7 +63,7 @@ class PongModel(object):
 
         return "\n".join(output_lines)
 
-class Ball(pygame.sprite.Sprite):
+class Ball(object):
 
     def __init__(self, x, y, radius, speed):
 
@@ -90,7 +90,7 @@ class Ball(pygame.sprite.Sprite):
 
 
 
-class Paddle(pygame.sprite.Sprite):
+class Paddle(object):
     """Encodes the state of the paddle 1 in the game"""
 
     def __init__(self, height, width, x, y):
@@ -157,7 +157,7 @@ if __name__ == '__main__':
 
     FPS = 200
 
-    size = (1800, 1000)
+    size = (1800, 800)
     model = PongModel(size)
 
     view = PyGameWindowView(model, size)
@@ -169,12 +169,15 @@ if __name__ == '__main__':
     blue_lower = [110,50,50]
     blue_upper = [130,255,255]
 
-    green_lower = [85,100,100]
-    green_upper = [95,255,255]
+    green_lower = [160,100,100]
+    green_upper = [179,255,255]
 
 
     running = True
     while running:
+
+
+
 
         try:
             coordinate1 = get_coordinates(cap, blue_lower, blue_upper)[0] * 2
