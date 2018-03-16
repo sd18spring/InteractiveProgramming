@@ -51,20 +51,23 @@ class PyGameKeyboardController(object):
        #self.model = model
        self.x = 0
        self.y = 0
-
+       self.l = self.l
+       self.d = self.d
+       self.u = self.u
+       self.r = self.r
     def handle_event(self,event):
         """ Left and right presses modify the x velocity of the tank """
         #link for event.key https://www.pygame.org/docs/ref/key.html
 
         if event.type != KEYDOWN:
             return
-        if event.key == pygame.l:
+        if event.key == self.l:
             self.x += -10
-        if event.key == pygame.r:
+        if event.key == self.r:
             self.x += 10
-        if event.key == pygame.u:
+        if event.key == self.u:
             self.y += -10
-        if event.key == pygame.d:
+        if event.key == self.d:
             self.y += 10
 # Before the loop, load the sounds:
 #click_sound = pygame.mixer.Sound("laser5.ogg")
@@ -78,8 +81,8 @@ background_image = pygame.image.load("NewBackground.jpg").convert()
 # player_image.set_colorkey(BLACK)
 
 clock = pygame.time.Clock()
-controller1 = PyGameKeyboardController(K_UP, K_DOWN, K_LEFT, K_RIGHT)
-controller2 = PyGameKeyboardController(K_w, K_s, K_a, K_d)
+controller1 = PyGameKeyboardController(pygame.K_UP, pygame.K_DOWN, pygame.K_LEFT, pygame.K_RIGHT)
+controller2 = PyGameKeyboardController('K_w', 'K_s', 'K_a', 'K_d')
 
 player1 = Player("BlueTank.png", 0, 0)
 player2 = Player("RedTank.png", 100, 100)
