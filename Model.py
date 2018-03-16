@@ -67,6 +67,6 @@ class Model(object):
 
 if __name__ == '__main__':
     # TESTING, makes model object using first 100 hurricanes and then puts the data into a pickle file
-    test = Model(0, 100)
+    test = Model(0, 10000)
     test.pickle()
     # print(test)
