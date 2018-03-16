@@ -2,6 +2,8 @@ This is the repo for the Live Wallpaper Program. Created for the fourth Mini-Pro
 
 All art is under copyright by Hwei-Shin Harriman and is not for distribution except with express permission from the artist.
 
+Link to Project Reflection: https://github.com/hsharriman/InteractiveProgramming/tree/master/Writeup
+
 Before running make sure to install PyGame using your terminal:
 $ apt-get build-dep python-pygame
 $ apt-get install mercurial python-dev python-numpy ffmpeg libsdl-image1.2-dev libsdl-mixer1.2-dev libsdl-ttf2.0-dev libsmpeg-dev libsdl1.2-dev libportmidi-dev libswscale-dev libavformat-dev libavcodec-dev

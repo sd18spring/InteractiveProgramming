@@ -58,6 +58,7 @@ class Balloon(Sprite):
         self.age = 0
         self.rate = random.randint(10,20)
 
+    #makes the balloon bob up and down and travel to the left until it despawns off-screen
     def update(self, shift_x):
         self.age += 1
 
@@ -71,9 +72,13 @@ class Balloon(Sprite):
         return self.rect.x >= -200
 
 class BlackCloud(Sprite):
+    """Takes two arguments and generates a cloud from the blackcloud sprite sheet
+    sprite_sheet_data: an array of 4 numbers (xpos, ypos, width, height) of a sprite from the sprite sheet
+    sheet_name: a string of the filename that the sprite is being pulled from"""
     def __init__(self, sprite_sheet_data, sheet_name):
         super().__init__(sprite_sheet_data, sheet_name)
 
+    #moves the cloud to the left at a constant rate. Once off-screen, repositions itself to the right of the screen.
     def update(self, shift_x):
         #move left/right
         self.rect.x += shift_x - 1
@@ -82,9 +87,13 @@ class BlackCloud(Sprite):
         return True
 
 class PurpleCloud(Sprite):
+    """Takes two arguments and generates a cloud from the purple cloud sprite sheet
+    sprite_sheet_data: an array of 4 numbers (xpos, ypos, width, height) of a sprite from the sprite sheet
+    sheet_name: a string of the filename that the sprite is being pulled from"""
     def __init__(self, sprite_sheet_data, sheet_name):
         super().__init__(sprite_sheet_data, sheet_name)
 
+    #moves the cloud to the left at a constant rate. Once off-screen, repositions itself to the right of the screen.
     def update(self, shift_x):
         #move left/right
         self.rect.x += shift_x - 2
@@ -93,9 +102,13 @@ class PurpleCloud(Sprite):
         return True
 
 class SmallCloud(Sprite):
+    """Takes two arguments and generates a cloud from the small cloud sprite sheet
+    sprite_sheet_data: an array of 4 numbers (xpos, ypos, width, height) of a sprite from the sprite sheet
+    sheet_name: a string of the filename that the sprite is being pulled from"""
     def __init__(self, sprite_sheet_data, sheet_name):
         super().__init__(sprite_sheet_data, sheet_name)
 
+    #moves the cloud to the left at a constant rate. Once off-screen, repositions itself to the right of the screen.
     def update(self, shift_x):
         #move left/right
         self.rect.x += shift_x - 3
@@ -104,8 +117,13 @@ class SmallCloud(Sprite):
         return True
 
 class Cactus(Sprite):
+    """Takes two arguments and generates a cactus.
+    sprite_sheet_data: an array of 4 numbers (xpos, ypos, width, height) of a sprite from the sprite sheet
+    sheet_name: a string of the filename that the sprite is being pulled from"""
     def __init__(self, sprite_sheet_data, sheet_name):
         super().__init__(sprite_sheet_data, sheet_name)
+
+    #moves the cactus to the left at the same rate as the background. Once off-screen, repositions itself back to its original place on the right side of the screen.
     def update(self, shift_x):
         #move left/right
         self.rect.x += shift_x
@@ -114,9 +132,13 @@ class Cactus(Sprite):
         return True
 
 class Flower(Sprite):
+    """Takes two arguments and generates a flower.
+    sprite_sheet_data: an array of 4 numbers (xpos, ypos, width, height) of a sprite from the sprite sheet
+    sheet_name: a string of the filename that the sprite is being pulled from"""
     def __init__(self, sprite_sheet_data, sheet_name):
         super().__init__(sprite_sheet_data, sheet_name)
 
+    #moves the flower to the left. Once off-screen, despawns.
     def update(self, shift_x):
         #move left/right
         self.rect.x += shift_x
@@ -131,7 +153,6 @@ class Scene():
         self.background.set_colorkey(constants.WHITE)
         self.background_size = self.background.get_size()
         self.background_rect = self.background.get_rect()
-
         self.w, self.h = self.background_size
         self.x = 0
         self.x1 = self.w
@@ -139,13 +160,11 @@ class Scene():
         #How far this world has been scrolled left/right
         self.world_shift = 0
 
-        #marker rectangle object for flower
-        self.flox = 2971
+        #list containing all sprites that need to be drawn
         self.active_sprites = []
 
-    #Update everything on this level
+    #Update all of the sprites based on their individual update functions
     def update(self, shift_x):
-
         sprites = self.active_sprites
         self.active_sprites = []
         for s in sprites:
@@ -177,6 +196,7 @@ class Scene():
         if self.flox < -self.w+2971:
             self.flox = 2971
 
+    #adds a random hot air balloon from the pool of possible balloons to the active sprites list
     def spawnballoon(self, xpos, ypos):
         currentballoon = constants.balloons[random.randint(0,10)]
 
@@ -185,6 +205,7 @@ class Scene():
         block.rect.y = ypos
         self.active_sprites.append(block)
 
+    #adds a flower sprite to the active sprite list
     def spawnflower(self, xpos, ypos):
         block = Flower(constants.FLOWER, "flower.png")
         block.rect.x = xpos
@@ -192,7 +213,7 @@ class Scene():
         self.active_sprites.append(block)
 
 class Summer(Scene):
-    """Defintion for Summer live background"""
+    """Defintion for Summer live background."""
 
     def __init__(self):
         #Call parent constructor
