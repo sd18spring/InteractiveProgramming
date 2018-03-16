@@ -27,7 +27,7 @@ PURP4 = (877, 540, 977, 413)
 BLK1 = (0, 0, 1197, 345)
 BLK2 = (1197, 0, 1992, 248)
 BLK3 = (0, 345, 908, 359)
-BLK4 = (0, 419, 582, 168)
+BLK4 = (908, 245, 971, 363)
 
 #Hot-air balloons
 BIG1 = (0, 0, 127, 180)
@@ -60,13 +60,16 @@ FLOWER = (0, 0, 82, 105)
 summer = [[BLK1, 1739, 18],
          [BLK2, 45, 46],
          [BLK3, 2538, 32],
-         [BLK4, 1046, 0],
-         [PURP1, 862, 49],
-         [PURP2, 196, 285],
-         [PURP3, 1188, 317],
+         [BLK4, 1046, -30],
+         [PURP1, 862, -15],
+         [PURP2, 196, 260],
+         [PURP3, 1188, 300],
          [PURP4, 2773, 139],
-         [SMALL1, 429, 420],
-         [SMALL2, 3488, 403],
-         [SMALL3, 1911, 444],
-         [SMALL4, 1301, 450]]
-summersheets = ["smallclouds.png", "blackclouds.png", "purpleclouds.png"]
+         [SMALL1, 429, 390],
+         [SMALL2, 3488, 375],
+         [SMALL3, 1911, 400],
+         [SMALL4, 1301, 420],
+         [CACTUS, 2958, 497],
+         [FLOWER, 2971, 728]]
+
+balloons = [BIG1, BIG2, BIG3, BIG4, BIG5, SMOL1, SMOL2, SMOL3, SMOL4, SMOL5, SMOL6]

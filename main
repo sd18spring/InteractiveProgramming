@@ -1,7 +1,11 @@
-import pygame
+"""Interactive Programming Mini-Project 4: Live Wallpaper
 
+Authors: Hwei-Shin Harriman and Jessie Potter
+References: http://programarcadegames.com/python_examples/en/sprite_sheets/"""
+import pygame
 import constants
 import livebackground
+import random
 
 def main():
     """Main Program"""
@@ -13,19 +17,17 @@ def main():
 
     pygame.display.set_caption("Southwest")
 
-    #Begin tracking player mouse movement
-    player = livebackground.Player()
-
     #Create the scenery
     level_list = []
-    level_list.append(livebackground.Summer(player))
+    level_list.append(livebackground.Summer())
 
     #Set level
     current_level_no = 0
     current_level = level_list[current_level_no]
 
     active_sprite_list = pygame.sprite.Group()
-    player.level = current_level
+    shift = 0
+    count = 0
 
     #active_sprite_list.add(player)
 
@@ -40,23 +42,32 @@ def main():
         for event in pygame.event.get():  #user did something
             if event.type == pygame.QUIT:       #If user clicked close
                 done = True #Flag that we are done so we exit the Loop
-            if event.type == pygame.KEYDOWN:
-                player.update()
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                xpos, ypos = event.pos
+                if 0 <= ypos <= 500:
+                    current_level.spawnballoon(xpos, ypos)
+                if (3020+shift) <= xpos <= (3200+shift) and 497 <= ypos <= 985:
+                    if count<=2:
+                        current_level.spawnflower(xpos, ypos)
+                        count+=1
 
         #update items in the level
-        current_level.update()
+        current_level.update(-5)
 
         #shift the world left (-x)
         current_level.shift_world(-5, screen)
+        shift += -5
+        if shift == -3900:
+            shift = 0
+            count = 0
 
-        #TODO: If the scroll gets to the end of the first background, reset the spawnable sprite
         #ALL CODE TO DRAW SHOULD GO BELOW THIS COMMENT
         current_level.draw(screen)
 
         #ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
 
         #Limit to 60 fps
-        clock.tick(60)
+        clock.tick(30)
 
         #Update screen with what we've drawn
         pygame.display.flip()
