@@ -190,7 +190,7 @@ class PyGameMouseController(object):
         else:
             return
 
-def play_note(val, beats=1, bpm=10000, amp=1):
+def play_note(val, beats=1, bpm=600, amp=1):
     """This function references Sonic Pi to play the specified note."""
     # `note` is this many half-steps higher than the sampled note
     half_steps = val - SAMPLE_NOTE

@@ -122,7 +122,7 @@ class NoteBlock(object):
                                                                   self.y)
         return note_block_string
 
-def play_note(val, beats=1, bpm=10000, amp=1):
+def play_note(val, beats=1, bpm=600, amp=1):
     """This function references Sonic Pi to play the specified note."""
     # `note` is this many half-steps higher than the sampled note
     half_steps = val - SAMPLE_NOTE
@@ -171,6 +171,7 @@ def find_center(cap):
                maxd=0
                shape = 0
                NoneType = type(None)
+               shape = 0
                if defects is not NoneType:
                    shape = defects.shape[0]
                for i in range(shape):
