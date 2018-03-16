@@ -14,7 +14,7 @@ FPS = 50
 
 
 class PyGameWindowView(object):
-    """ A view of brick breaker rendered in a Pygame window """
+    """ A view of pong rendered in a Pygame window """
     def __init__(self, model, size):
         """ Initialize the view with a reference to the model and the
             specified game screen dimensions (represented as a tuple
@@ -26,7 +26,7 @@ class PyGameWindowView(object):
     def draw(self):
         """ Draw the current game state to the screen """
         self.screen.fill(pygame.Color(0,0,0))
-
+        #Draws the paddles and the puck
         pygame.draw.rect(self.screen,
                          pygame.Color(255, 0, 0),
                          pygame.Rect(self.model.paddle.x,
@@ -46,6 +46,7 @@ class PyGameWindowView(object):
                                     self.model.puck.height,
                                     self.model.puck.width,
                                     ))
+        #Prints the scoring
         font = pygame.font.Font(None, 36)
         scoretext1=font.render("Score:"+str(self.model.puck.score1), 1,(255,255,255))
         self.screen.blit(scoretext1, (440, 50))
@@ -60,9 +61,10 @@ class Model(object):
         self.paddle2=Paddle(50,10,630,240)
         self.puck=Puck(10,10,10,10)
     def update(self):
-        """ Update the game state (currently only tracking the paddle) """
+        """ Update the game state tracking the paddle and running collision code """
         self.paddle.update()
         self.paddle2.update()
+        #Controls collisions between puck and paddle
         if int(self.puck.x)==int(self.paddle.x)+10 and (int(self.paddle.y)-50)<=int(self.puck.y)<=(int(self.paddle.y)+50):
             self.puck.vx=-self.puck.vx
             self.puckvy=-self.puck.vy
@@ -93,6 +95,7 @@ class Paddle(object):
         """ update the state of the paddle & stops it from running off the screen"""
         self.x += self.vx
         self.y += self.vy
+        #Keeps paddle on screen
         if self.y > 480 - self.height:
             self.y = 480 - self.height
         if 0 > self.y:
@@ -120,10 +123,11 @@ class Puck(object):
         self.vy=random.choice([-.8,-.6,.6,.8])
         self.rect = pygame.Rect(self.x, self.y, self.height, self.width)
     def update(self):
-        """ update the state of the puck """
+        """ update the state of the puck and counts scoring """
         if self.y>=480 or self.y<=0:
             self.vy=-self.vy
         if self.x>640:
+            #resets position of puck after it runs off screen
             self.x,self.y=320,240
             self.score2=self.score2+1
         if self.x<=0:
@@ -133,6 +137,7 @@ class Puck(object):
         self.x += self.vx
         self.y+=self.vy
     def draw(self, surface):
+        """Draws the actual paddles"""
         self.screen.fill(pygame.Color(0,0,0))
         pygame.draw.rect(screen, (55,150,55), self.rect)
         self.x = self.rect.left
@@ -145,7 +150,7 @@ class Puck(object):
                                                           self.w)
 
 class PyGameKeyboardController(object):
-    """ Handles keyboard input for brick breaker """
+    """ Handles keyboard input for pong """
     def __init__(self,model):
         self.model = model
 
