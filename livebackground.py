@@ -186,15 +186,14 @@ class Scene():
         #Keep track of background loop shift
         self.x += shift_x
         self.x1 += shift_x
-        self.flox += shift_x
+
         screen.blit(self.background, (self.x,0))
         screen.blit(self.background, (self.x1,0))
         if self.x < -self.w:
             self.x = self.w
         if self.x1 < -self.w:
             self.x1 = self.w
-        if self.flox < -self.w+2971:
-            self.flox = 2971
+
 
     #adds a random hot air balloon from the pool of possible balloons to the active sprites list
     def spawnballoon(self, xpos, ypos):
