@@ -9,6 +9,7 @@ import copy
 MOVEDOWNFREQ = 0.1
 MOVESIDEWAYSFREQ = 0.15
 
+#Colors for reference
 
 WHITE       = (255, 255, 255)
 GRAY        = (185, 185, 185)
@@ -32,6 +33,7 @@ NUM64 = (255,10,10)
 NUM128 = (237,207,114)
 NUM2048 = (237,194,46)
 
+#List of colors so that we can randomly choose one:
 Colors = [NUM2,NUM4,NUM8,NUM16,NUM32,NUM64,NUM128,NUM2048]
 
 BORDERCOLOR = BLUE
@@ -39,6 +41,7 @@ BGCOLOR = BLACK
 TEXTCOLOR = WHITE
 TEXTSHADOWCOLOR = GRAY
 
+# Global variables for creating the board
 FPS = 25
 WindowWidth = 450 #used to be 415
 WindowHeight = 900 #used to be 815
@@ -70,7 +73,7 @@ L_Shape = [[[180,45],[225,45],[270,45],[270,0]],[[180,0],[180,45],[180,90],[225,
 T_Shape = [[[180,0],[135,45],[180,45],[225,45]],[[180,0],[180,45],[180,90],[225,45]], [[180,45],[225,45],[270,45],[225,90]],[[225,0],[225,45],[225,90],[180,45]]]
 
 
-
+#Dictionary of Pieces to choose randomly from
 Pieces = {'S': S_Shape,
           'Z': Z_Shape,
           'J': J_Shape,
@@ -79,8 +82,7 @@ Pieces = {'S': S_Shape,
           'O': O_Shape,
           'T': T_Shape}
 
-
-class Block():
+class Block(): #Defines attributes of singular block
     def __init__(self,width,height,x1,y1,val):
         self.width = width
         self.height = height
@@ -93,6 +95,7 @@ class Block():
         return (XMargin + (self.x1 * BoxSize),(TopMargin +(self.y1 * BoxSize)))
 
     def drawBlock(self, pixelx = None, pixely = None):
+        """ Draws a block on the board """
         if self.val == 0:
             return
         if pixelx == None and pixely == None:
@@ -101,15 +104,15 @@ class Block():
         pygame.draw.rect(DisplaySurf, self.color, (pixelx + 1, pixely + 1, BoxSize - 4, BoxSize - 4))
 
     def __str__(self):
+        """print statement for debugging purposes"""
         return 'Coords are: (%.d, %.d) with val %.d' %(self.x1,self.y1,self.val)
 
 class Piece():
+    # Piece is a list of block objects
     def __init__(self):
         self.shape = random.choice(list(Pieces.keys()))
         self.rotation = 0
-
-        self.coordinates = []
-
+        # Defining blocks of shape
         b1 = Block(20,20,Pieces[self.shape][self.rotation][0][0],Pieces[self.shape][self.rotation][0][1],1)
         b2 = Block(20,20,Pieces[self.shape][self.rotation][1][0],Pieces[self.shape][self.rotation][1][1],1)
         b3 = Block(20,20,Pieces[self.shape][self.rotation][2][0],Pieces[self.shape][self.rotation][2][1],1)
@@ -117,48 +120,47 @@ class Piece():
 
         self.blocks = [b1,b2,b3,b4]
 
-
-    def convertToShapeCoords(self):
-
-        for i in self.shape[self.rotation]:
-            self.coordinates = self.coordinates.append(Coordinates[Shapes[self.rotation][i]])
-
-
     def rotatePiece(self):
+        """Redefines piece according to next rotation, and adds back distance from start"""
         xdiff = self.blocks[0].x1 - Pieces[self.shape][self.rotation][0][0]
         ydiff = self.blocks[0].y1 - Pieces[self.shape][self.rotation][0][1]
 
-
+        # Increasing index of rotation (To switch to rotated template), looping back to first when reached the end
         if self.rotation < len(Pieces[self.shape]) - 1:
             self.rotation += 1
-
         else:
             self.rotation = 0
-
+        # Redefining piece based on new rotation. Also has fun side effect of making piece change color
         self.blocks[0] = Block(20,20,Pieces[self.shape][self.rotation][0][0]+xdiff ,Pieces[self.shape][self.rotation][0][1]+ydiff,1)
         self.blocks[1] = Block(20,20,Pieces[self.shape][self.rotation][1][0]+xdiff ,Pieces[self.shape][self.rotation][1][1]+ydiff,1)
         self.blocks[2] = Block(20,20,Pieces[self.shape][self.rotation][2][0]+xdiff ,Pieces[self.shape][self.rotation][2][1]+ydiff,1)
         self.blocks[3] = Block(20,20,Pieces[self.shape][self.rotation][3][0]+xdiff ,Pieces[self.shape][self.rotation][3][1]+ydiff,1)
 
     def down(self):
+        """Moving block down one block"""
         for block in self.blocks:
             block.y1 += 45
 
     def left(self):
+        """ Moving block left one block """
         for block in self.blocks:
             block.x1 -= 45
 
     def right(self):
+        """ Moving block right one block"""
         for block in self.blocks:
             block.x1 += 45
 
-    def reachedBottom(self):
+    def gameover(self):
+        """ Tells you when block has stacked to top """
         for block in self.blocks:
-            if block.y1 >= 850:
+            if block.y1 <= 0:
                 return True
         return False
 
 class Grid():
+    """ Grid is an array spanning the size of the board, and you can store markers
+    inside it to tell you where the pieces are."""
     def __init__(self, width, height):
         self.width = width
         self.height = height
@@ -180,6 +182,7 @@ class Grid():
                     pygame.draw.rect(DisplaySurf, self.grid[x][y], (x + 1, y + 1, 45 - 4, 45 - 4))
 
     def addToBoard(self, piece):
+        """ Makes piece permanently part of the board when it's reached its final position"""
         for block in piece.blocks:
             for x in range(450):
                 for y in range(900):
@@ -187,6 +190,7 @@ class Grid():
                         self.grid[x][y] = block.color
 
     def addShape(self,piece):
+        """ draws a piece on the board """
         for block in piece.blocks:
             for x in range(TemplateWidth):
                 for y in range(TemplateHeight):
@@ -194,6 +198,7 @@ class Grid():
                         block.drawBlock(x + block.x1, y + block.y1)
 
 def checkForQuit():
+    """ Quits the game """
     for event in pygame.event.get(QUIT): # get all the QUIT events
         terminate() # terminate if any QUIT events are present
     for event in pygame.event.get(KEYUP): # get all the KEYUP events
@@ -217,9 +222,9 @@ def makeTextObjs(text, font, color):
     return surf, surf.get_rect()
 
 def showTextScreen(text):
-    # This function displays large text in the
-    # center of the screen until a key is pressed.
-    # Draw the text drop shadow
+    """large text in the center of the screen until a key is pressed and
+    draws the text drop shadow """
+
     titleSurf, titleRect = makeTextObjs(text, BIGFONT, TEXTSHADOWCOLOR)
     titleRect.center = (int(WindowWidth / 2), int(WindowHeight / 2))
     DisplaySurf.blit(titleSurf, titleRect)
@@ -265,12 +270,11 @@ def main():
         showTextScreen('Game Over')
 
 def runGame():
-
+    # Initializing variables
     board = Grid(20,40)
     movingDown = False # note: there is no movingUp variable
     movingLeft = False
     movingRight = False
-    fallFreq = .25
 
     fallingPiece = Piece()
 
@@ -280,15 +284,7 @@ def runGame():
         movingRight = False
         rotate = False
 
-        if fallingPiece == None:
-            # No falling piece in play, so start a new piece at the top
-            fallingPiece = nextPiece
-            nextPiece = Piece()
-
-
-            #lastFallTime = time.time() # reset lastFallTime
-
-            if not isValidPosition(board, fallingPiece):
+        if not isValidPosition(board, fallingPiece) and fallingPiece.gameover() == True:
                 return # can't fit a new piece on the board, so game over
 
         checkForQuit()
@@ -323,6 +319,7 @@ def runGame():
         board.draw_grid()
         board.addShape(fallingPiece)
 
+        """ Actually moving the piece """
         if movingLeft == True and isValidPosition(board,fallingPiece,adjx=-1):
             fallingPiece.left()
         if movingRight == True and isValidPosition(board,fallingPiece,adjx=1):
