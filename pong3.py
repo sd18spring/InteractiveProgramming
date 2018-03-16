@@ -121,20 +121,21 @@ class Ball(pygame.sprite.Sprite):
         self.y = y
         self.radius = radius
         self.speed = speed
-        self.vy = random.choice([-1, 1])
+        self.vy = random.choice([-1,1])
         self.vx = random.choice([-1,1])
 
 
-    def update(self, ball, paddle1, paddle2, vx, vy):
+    # def update(self, ball, paddle1, paddle2, vx, vy):
+    #
+    #     if self.ball.x == -1 and self.ball.x == 10:
+    #         return -1
+    #     elif self.ball.x == 1 and self.paddle2.width == self.ball.x:
+    #         return -1
+    #     else:
+    #         return 1
+    #     self.x += self.vx
+    #     self.y += self.vy
 
-        if self.ball.x == -1 and self.ball.x == 10:
-            return -1
-        elif self.ball.x == 1 and self.paddle2.width == self.ball.x:
-            return -1
-        else:
-            return 1
-        self.x += self.vx
-        self.y += self.vy
     def __str__(self):
         return "Ball x=%f, y=%f, radius=%f" % (self.x, self.y, self.radius)
 
@@ -156,9 +157,11 @@ class Paddle(pygame.sprite.Sprite):
 
         self.y += self.vy
 
+    def update_position(self, coordinate):
+        self.y = coordinate
+
     def __str__(self):
         return "Paddle height=%f, width=%f, x=%f, y=%f" % (self.height, self.width, self.x, self.y)
-
 
 class PyGameMouseController(object):
 
@@ -187,75 +190,31 @@ class PyGameKeyboardController(object):
             self.model.paddle2.vy += 2.0
 
 
-def get_coordinates(cap, lower_threshold, upper_threshold):
-
-
-    ret, frame = cap.read()
-
-    hsv_scale = cv2.cvtColor(frame.copy(), cv2.COLOR_BGR2HSV)
-
-
-    lower_threshold_array = np.array(lower_threshold)
-    upper_threshold_array = np.array(upper_threshold)
-
-    # creating the threshold
-    # binary
-    mask = cv2.inRange(hsv_scale, lower_threshold_array, upper_threshold_array)
-    mask = cv2.erode(mask, None, iterations=2)
-    mask = cv2.dilate(mask, None, iterations=2)
-
-
-    # blue moment tracking
-    contours = cv2.findContours(mask.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[-2]
-    center = None
-    coordinates = []
-
-    if len(contours) > 0:
-
-        c = max(contours, key=cv2.contourArea)
-        ((x,y), radius) = cv2.minEnclosingCircle(c)
-        M = cv2.moments(c)
-        center = (int(M["m10"] / M["m00"]), int(M["m01"] / M["m00"]))
-        cv2.circle(frame, (int(x), int(y)), int(radius), (0,255,255), 2)
-        cv2.circle(frame, center, 5, (0, 0, 255), -1)
-        coordinates.append(center[1])
-
-    return coordinates
-
-
 if __name__ == '__main__':
     pygame.init()
 
     FPS = 200
-
-    size = (1800, 1000)
+    size = (1800, 800)
     model = PongModel(size)
-
     view = PyGameWindowView(model, size)
+
+    controller1 = PyGameMouseController(model)
+    controller2 = PyGameKeyboardController(model)
 
     fps_clock = pygame.time.Clock()
 
-    cap = cv2.VideoCapture(0)
-
-    blue_lower = [110,50,50]
-    blue_upper = [130,255,255]
-
-    green_lower = [85,100,100]
-    green_upper = [95,255,255]
-
-
     running = True
     while running:
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                 running = False
+            controller1.handle_event(event)
+            controller2.handle_event(event)
+        # ball = pygame.draw.circle
+        # # ball = Ball(int((size[0])/2), int(size[1]/2), int(10), 10)
+        # # view.screen.blit(ball, (0, 0))
 
-        try:
-            coordinate1 = get_coordinates(cap, blue_lower, blue_upper)[0] * 2
-            coordinate2 = get_coordinates(cap, green_lower, green_upper)[0] * 2
-            model.paddle1.update_position(coordinate1)
-            model.paddle2.update_position(coordinate2)
-        except IndexError:
-            pass
-
-
+        model.update()
         view.draw()
         time.sleep(.001)
         fps_clock.tick(FPS)
