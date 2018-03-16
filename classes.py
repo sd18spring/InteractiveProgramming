@@ -69,7 +69,10 @@ class Ship():
         self.nImage = img
         self.w,self.h = img.get_size()
         self.gD = gD
-        self.rect = img.get_rect().inflate(-30,-30)
+        self.rect = img.get_rect()
+        self.changex = self.rect.w / 2
+        self.changey = self.rect.h / 2
+        self.rect.inflate_ip(-self.changex,-self.changey)
         self.rect.center = (self.x,self.y)
         self.score = 0
         self.lives = 3
@@ -87,8 +90,9 @@ class Ship():
     def rotate(self,posNeg):
         """Rotates ship"""
         self.nImage,self.rect = rot_center(self.oImage,posNeg*3+(270-self.angle))
-        w,h = self.nImage.get_size()
-        self.rect.inflate_ip(-30,-30)
+        self.changex = self.rect.w / 2
+        self.changey = self.rect.h / 2
+        self.rect.inflate_ip(-self.changex,-self.changey)
         self.rect.center = (self.x,self.y)
         self.angle -= posNeg*3
 
@@ -130,10 +134,10 @@ class Ship():
             self.y = 0 - self.h
         elif(self.y <= 0 - self.h):
             self.y = height
-
         self.rect.center = (self.x,self.y)
-        pygame.draw.rect(self.gD,(255,0,255),self.rect) # display's the ship's hit box in purple (for testing
-        self.gD.blit(self.nImage,self.rect)
+        #self.nImage.center = (self.x,self.y)
+        #pygame.draw.rect(self.gD,(255,0,255),self.rect) # display's the ship's hit box in purple (for testing
+        self.gD.blit(self.nImage,(self.rect.x - self.changex / 2, self.rect.y - self.changey / 2))
         #pygame.draw.rect(self.gD,(255,0,255),self.rect) # display's the ship's hit box in purple (for testing)
     def shoot(self,AllThings):
         x = self.x + int(5 * cos(self.angle))
@@ -478,11 +482,11 @@ class listOfObjects():
             self.Asteroids.listOfAsteroids += self.Asteroids.listOfAsteroids[collisionsAster].destroy() #destroy both the asteroid and the projectile.
             self.ship.destroy()
         collisionsUFO = self.ship.rect.collidelist(self.UFOs.listOfRects)
-        if (collisionsUFO != -1): # if there is a collision
+        if (collisionsUFO != -1 and self.ship.destroyed == False): # if there is a collision
             #self.UFOs.listOfUFOs[collisionsUFO].destroy() #destroy both the asteroid and the projectile.
             self.ship.destroy()
         collisionsProj = self.ship.rect.collidelist(self.Projectiles.listOfRects)
-        if (collisionsProj != -1 and self.Projectiles.listOfProjectiles[collisionsProj].alliance != "Ship"):
+        if (collisionsProj != -1 and self.Projectiles.listOfProjectiles[collisionsProj].alliance != "Ship" and self.ship.destroyed == False):
             self.Projectiles.listOfProjectiles[collisionsProj].destroy()
             self.ship.destroy()
         for i in self.Projectiles.listOfProjectiles: # runs through each projectile
