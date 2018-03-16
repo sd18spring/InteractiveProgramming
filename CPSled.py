@@ -18,7 +18,7 @@ THINGS TO DO:
     b. easy, medium, hard mode (single player)
     x. rotate screen
 """
-class Penguin(pygame.sprite.Sprite): # code is from pygame documenta
+class Penguin(pygame.sprite.Sprite): # code is from pygame documentation
     # Constructor. Pass in the color of the block,
     # and its x and y position
     def __init__(self):
@@ -60,10 +60,7 @@ class Obstacles(pygame.sprite.Sprite):
 class Powerups(Obstacles):
     def speedUp(self, pixels = 7):
         self.rect.x -= pixels
-# class Model:
-#     def __init__(self):
-#         self.all_penguins = pygame.sprite.Group()
-#         penguin = Penguin()
+
 
 class Sled_Main:
     def __init__(self):
@@ -84,8 +81,10 @@ class Sled_Main:
             y_boulders = randint(1,3)
             for i in range(y_boulders):
                 y_position = randrange(0, 340, 70)
-                self.boulder = Obstacles("rock.png", pygame.Rect(x_position, y_position, 60, 60))
-                self.boulder.rect.inflate(0, -10)
+                self.boulder = Obstacles("croproc.png", pygame.Rect(x_position, y_position, 60, 60))
+                #self.boulder.rect = self.boulder.rect.move(35,105)
+                #self.boulder.rect.inflate_ip(0, -10)
+                #self.boulder.rect.inflate_ip(-20, -10)
                 self.boulders.add(self.boulder)
 
         for num_ice_patches in range(8):
@@ -99,10 +98,16 @@ class Sled_Main:
         list_of_obstacles = self.boulders.sprites()
         list_of_obstacles.extend(self.ice_patches.sprites())
 
+        #pygame.font()
+        font = pygame.font.Font(None, 32)
+
         running = True
         pygame.display.set_caption("Club Penguing Sledding Game")
         while running:
-            #self._redraw()
+
+            current_time = str(pygame.time.get_ticks()/1000)
+            timer = font.render(current_time, True, (0,0,0))
+
             for event in pygame.event.get():
                 if event.type is pygame.QUIT:
                     running = False
@@ -112,6 +117,8 @@ class Sled_Main:
             ice = False
             for obstacle in list_of_obstacles:
                 if self.penguin.rect.colliderect(obstacle.rect):
+                    #print(self.penguin.rect.left)
+                    #print(obstacle.rect.left)
                     hit = True
                     if type(obstacle) == Powerups:
                         ice = True
@@ -134,30 +141,20 @@ class Sled_Main:
                     self.penguin.moveUp(5)
                 if keys[pygame.K_RIGHT]:
                     self.penguin.moveDown(5)
+
             self.all_penguins.update()
             self.boulders.update()
             self.ice_patches.update()
             self.screen.fill(self.WHITE)
+            self.screen.blit(timer, (350, 30))
             self.boulders.draw(self.screen)
             self.ice_patches.draw(self.screen)
             self.all_penguins.draw(self.screen)
             pygame.display.update()
-            clock.tick(60)
+            clock.tick_busy_loop(60)
         pygame.quit()
-
-
 
 
 if __name__ == '__main__':
     game = Sled_Main()
     game.main_loop()
-
-
-    # running = True
-    # while running:
-    #     for event in pygame.event.get():
-    #         if event.type == QUIT:
-    #             running = False
-    #     time.sleep(.001)
-    #
-    # pygame.quit()
