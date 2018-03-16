@@ -22,11 +22,11 @@ class Model(object):
         self.mouse_pos = None
         self.boxes = [] #contians all the boxes in the model
         self.boxes.append(Box('Main Box'))
-        self.rectangle = pygame.Rect(((size[0]/2)-(size[0]/4),(size[1]*.33)-(size[1]/30),(size[0]/2),(size[1]/10)))
+        self.rectangle = pygame.Rect(((size[0]/10),(size[1]/10),(size[0]/2),(size[1]/10)))
         self.scale = 1 #the current scale of the model, keeps track of zooming
         self.inputbox = Inputbox()
         self.inputboxes = []
-        self.inputboxes2 = []
+        self.inputboxdisplay_list = []
         self.click_flag = False
         self.type_flag = False
 
@@ -124,20 +124,20 @@ class Viewer(object):
         self.screen.blit(first_node.text_surface, (first_node.x-15, first_node.y+20))
 
         for box in self.model.boxes:
-            pygame.draw.rect(self.screen,pygame.Color(225,225,225),pygame.Rect(((self.model.width/2)-(self.model.width/4),(self.model.height*.33)-(self.model.height/30),(self.model.width/2),(self.model.height/10))))
+            pygame.draw.rect(self.screen,pygame.Color(225,225,225),pygame.Rect(((((self.model.width/2)-(self.model.width/4)),self.model.height/10,(self.model.width/2),(self.model.height/25)))))
 
-        for lox in self.model.inputboxes2:
-            pygame.draw.rect(self.screen,pygame.Color(200,200,200),pygame.Rect(((self.model.width/2)-(self.model.width/4)+5,(self.model.height*.33)-(self.model.height/30)+5,(self.model.width/2)-10,(self.model.height/10)-10)))
-            font1 = pygame.font.SysFont('Cambria',50)
-            text1 = font1.render('Search wikipedia...', True, (50,50,50))
+        for lox in self.model.inputboxdisplay_list:
+            pygame.draw.rect(self.screen,pygame.Color(200,200,200),pygame.Rect(((((self.model.width/2)-(self.model.width/4)),self.model.height/10,(self.model.width/2),(self.model.height/25)))))
+            font1 = pygame.font.SysFont('Arial',32)
+            text1 = font1.render('Search wikipedia...', True, (100,100,100))
             if len(self.model.inputbox.string) == 0:
-                self.screen.blit(text1,(((self.model.width/2)-(self.model.width/4))+5,((self.model.height*.33)-(self.model.height/30))+5))
+                self.screen.blit(text1,(((self.model.width/2)-(self.model.width/4)),self.model.height/10))
             pass
         for zebox in self.model.inputboxes:
-            font = pygame.font.SysFont('Cambria',150)
+            font = pygame.font.SysFont('Arial',32)
             my_string = str(zebox.string)
-            text = font.render(my_string, True, (150,150,150))
-            self.screen.blit(text,(((self.model.width/2)-(self.model.width/4))+5,((self.model.height*.33)-(self.model.height/30))+5))
+            text = font.render(my_string, True, (50,50,50))
+            self.screen.blit(text,(((self.model.width/2)-(self.model.width/4)),self.model.height/10))
         pygame.display.update()
 
 class Controler(object):
@@ -196,10 +196,10 @@ class Controler(object):
 
                 if rect[0] < m_pos[0] < rect[0]+rect[2] and rect[1] < m_pos[1] < rect[1]+rect[3]:
                     self.model.click_flag = True
-                    self.model.inputboxes2.append('yes')
+                    self.model.inputboxdisplay_list.append('yes')
                 else:
                     self.model.click_flag = False
-                    del self.model.inputboxes2[:]
+                    del self.model.inputboxdisplay_list[:]
 
         if pygame.mouse.get_pressed()[0]: #if the mouse is held down and not in the seach bar, turn on panning
             rect = self.model.rectangle
@@ -297,7 +297,7 @@ class Controler(object):
                     self.model.inputbox.string = self.model.inputbox.string[:len(self.model.inputbox.string)-1]
                     self.model.inputboxes.append(self.model.inputbox)
                 if event.key == pygame.K_TAB:
-                    del self.model.inputboxes2[:]
+                    del self.model.inputboxdisplay_list[:]
                 if event.key == pygame.K_CLEAR:
                     del self.model.inputboxes[:]
                     self.model.inputbox.string = ''
@@ -306,10 +306,12 @@ class Controler(object):
                         self.model.nodes = new_stuff[0] #give model a new list not containing the "deleted" nodes
                         self.model.clines = new_stuff[1]
                         self.model.nodes[0].title = self.model.inputbox.string
+                        self.model.nodes[0].x = self.model.size[0]/2
+                        self.model.nodes[0].y = self.model.size[1]/2
                         self.model.inputbox.string = ''
                         self.model.nodes[0].update()
                 if event.key == pygame.K_ESCAPE:
-                    del self.model.inputboxes2[:]
+                    del self.model.inputboxdisplay_list[:]
                 if event.key == pygame.K_SPACE:
                     self.model.inputbox.string += ' '
 
