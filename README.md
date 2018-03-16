@@ -49,9 +49,7 @@ Next, choose the file you want to run. [computer_vision_note_board.py](https://g
 * To exit out of the program, you'll first need to close the Sonic-Pi program window and then close the PyGame keyboard layout window. 
 
 ## Authors
-[Utsav Gupta](https://github.com/utsav22g)
-
-[Julian Stone](https://github.com/JulianStone5)
+[Utsav Gupta](https://github.com/utsav22g) and [Julian Stone](https://github.com/JulianStone5)
 
 ## Acknowledgement
 Thanks to the awesome NINJAs Matt, Vicky and Nina, and the amazing teaching team for their guidance and support!
