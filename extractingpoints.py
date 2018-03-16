@@ -5,6 +5,7 @@ import math
 import random
 import csv
 from PIL import Image
+from collections import defaultdict
 
 '''Takes the latitude and longitudes of the state borders and stores them in point objects.'''
 
@@ -163,9 +164,9 @@ with open('result.csv', newline='') as csvfile:
     #print(charge_data)
 key_max = max(charge_data)
 val_min = min(charge_data)
-print(key_max)
-print(charge_data[key_max])
-print(charge_data[val_min])
+# print(key_max)
+# print(charge_data[key_max])
+# print(charge_data[val_min])
 #credit for following function to: http://www.ariel.com.au/a/python-point-int-poly.html
 def is_in_polygon(x, y, points):
     n = len(points)
@@ -215,7 +216,15 @@ colors = {(255,0,0): 'red', (0,255,0): 'green', (0,0,255): 'blue', (0,0,128): 'd
 #     if event.type == MOUSEBUTTONDOWN:  #Better to seperate to a new if statement aswell, since there's more buttons that can be clicked and makes for cleaner code.
 #         if event.button == 1:
 #             for object in clickableObjectsList:
-#                 object.clickCheck(event.pos)
+#                 object.clickCheck(event.pos
+charge_data['Washington'] = 0.00
+charge_data['West Virginia'] = 0.00
+charge_data['Wisconsin'] = 0.00
+charge_data['Wyoming'] = 0.00
+
+for charge in charge_data:
+    charge_data[charge] = round(charge_data[charge], 2)
+
 charge_list = list(zip(charge_data.keys(), charge_data.values()))
 # for x,y in charge_list:
 #     charge_list[x,y] = (x, round(y, 2))
@@ -279,62 +288,68 @@ for state in state_borders:
     the_image = pygame.Surface([500, 500], pygame.SRCALPHA, 32)
     the_image = the_image.convert_alpha()
 
+legend = pygame.Surface((1100, 100))
+legend.fill((218, 112, 214))
 
-
+#print(hospitals)
+# hospitals_by_state = {}
+# #print(hospitals_by_state.items())
+# for state in state_borders:
+#     for hospital in hospitals:
+#         if is_in_polygon(hospitals[hospital][0], hospitals[hospital][1], state_borders[state]):
+#             if state not in hospitals_by_state.keys():
+#                 hospitals_by_state[state] = [hospitals[hospital]]
+#             else:
+#                 hospitals_by_state[state] = hospitals_by_state[state].append(hospitals[hospital])
+            # except:
+            #     hospitals_by_state[state] = [hospitals[hospital]]
+#print(hospitals_by_state)
 #import numpy
 # blueval = 0
 # bluedir  = 1
+button = pygame.Rect(250, 700, 90, 75)
 LEFT = 1
 x = y = 0
 i = 0
 while (True):
 
-   # check for quit events
-   for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-             pygame.quit(); sys.exit();
-        elif event.type == pygame.MOUSEMOTION:
-            # print("mouse at (%d, %d)" % event.pos)
-            x, y = event.pos
-        elif event.type == pygame.MOUSEBUTTONDOWN and event.button == LEFT:
-            x, y = event.pos
-            for state in state_borders:
-                if is_in_polygon(x, y, state_borders[state]):
-                    # print("You pressed the left mouse button at (%d, %d)" % event.pos)
-                    myfont = pygame.font.SysFont("monospace", 50)
-                    pygame.draw.polygon(screen, red, state_borders[state], 2)
-                    #pygame.transform.scale2x(state_borders[state])
-                    label = myfont.render(state, 1, blue)
-                    screen.blit(label, random.choice(state_borders[state]))
-                    individual_state = pygame.image.load(state + '.png')
-                    if state != 'Alaska':
-                        individual_state = pygame.transform.scale(individual_state, (1500, 1500))
-                    screen.blit(individual_state, (1000, 0))
-                    myfont = pygame.font.SysFont("monospace", 20)
-                    label = myfont.render(state, 1, blue)
-                    label2 = myfont.render('Median AGI: $' + irs_agi[state][0], 1, blue)
-                    label3 = myfont.render('Mean AGI: $' + irs_agi[state][1], 1, blue)
-                    label4 = myfont.render('Average Charge Data: $' + str(charge_data[state]), 1, blue)
-                    screen.blit(label, (1000, 10))
-                    screen.blit(label2, (1000, 30))
-                    screen.blit(label3, (1000, 50))
-                    screen.blit(label4, (1000,70))
-                    #screen.blit(individual_state, (1000, 0))
-                    #screen.blit(pygame.draw.polygon(scree))
-                    #print(random.choice(state_borders[state]))
-                    #print("You pressed the left mouse button in " + state)
-                    pygame.display.update()
-                    pygame.time.wait(5000)
-        elif event.type == pygame.MOUSEBUTTONUP and event.button == LEFT:
-            x, y = event.pos
-            #for state in state_borders:
-            #    if is_in_polygon(x, y, state_borders[state]):
-                    # print("You released the left mouse button at (%d, %d)" % event.pos)
-                    #print("You released the left mouse button in " + state)
-
    # erase the screen
    #screen.fill(white)
    screen.blit(background, (0, 0))
+   screen.blit(legend, (350, 900))
+   legend_font = pygame.font.SysFont("notosansmonocjksc", 20)
+   label1 = legend_font.render('$0.00 -', 1, darkBlue)
+   label2 = legend_font.render('$6151.38', 1, darkBlue)
+   label3 = legend_font.render('6163.50 -', 1, darkBlue)
+   label4 = legend_font.render('$6417.63', 1, darkBlue)
+   label5 = legend_font.render('$6431.03 -', 1, darkBlue)
+   label6 = legend_font.render('$6721.25', 1, darkBlue)
+   label7 = legend_font.render('$6733.80 -', 1, darkBlue)
+   label8 = legend_font.render('$7054.44', 1, darkBlue)
+   label9 = legend_font.render('$7061.26 -', 1, darkBlue)
+   label10 = legend_font.render('$7376.79', 1, darkBlue)
+   label11 = legend_font.render('$7696.40 -', 1, darkBlue)
+   # label12 = legend_font.render('$9081.86', 1, blue)
+   # label13 = legend_font.render('$9290.80', 1, blue)
+   label12 = legend_font.render('$10982.04', 1, darkBlue)
+   pygame.draw.rect(screen, white, (370, 910, 20, 20))
+   screen.blit(label1, (355, 925))
+   screen.blit(label2, (355, 955))
+   pygame.draw.rect(screen, pale_blue, (570, 910, 20, 20))
+   screen.blit(label3, (555, 925))
+   screen.blit(label4, (555, 955))
+   pygame.draw.rect(screen, light_blue, (770, 910, 20, 20))
+   screen.blit(label5, (755, 925))
+   screen.blit(label6, (755, 955))
+   pygame.draw.rect(screen, blue, (970, 910, 20, 20))
+   screen.blit(label7, (955, 925))
+   screen.blit(label8, (955, 955))
+   pygame.draw.rect(screen, dark_blue, (1170, 910, 20, 20))
+   screen.blit(label9, (1155, 925))
+   screen.blit(label10, (1155, 955))
+   pygame.draw.rect(screen, darker_blue, (1370, 910, 20, 20))
+   screen.blit(label11, (1355, 925))
+   screen.blit(label12, (1355, 955))
    #pygame.draw.line(screen, red, (x, 0), (x, 1499))
    #pygame.draw.line(screen, red, (0, y), (1499, y))
    # blueval += bluedir
@@ -350,11 +365,70 @@ while (True):
        color = set_color(charge_list, colors2, i)
        #subscreen = pygame.display.set_mode((100, 100))
        pygame.draw.polygon(screen,color,state_borders[state])
+       # for hospital in hospitals_by_state[state]:
+       #     pygame.draw.circle(screen, green, hospital, 1)
        pygame.draw.polygon(screen,black,state_borders[state], 1)
        i += 1
        #print(state_borders[state])
        # redraw the points
        #subscreen.fill(red)
+   pygame.draw.rect(screen, green, button)
+   button_label1 = legend_font.render('Hospital', 1, darkBlue)
+   button_label2 = legend_font.render('Locations', 1, darkBlue)
+   screen.blit(button_label1, (250, 710))
+   screen.blit(button_label2, (250, 730))
+  # check for quit events
+   for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+          pygame.quit(); sys.exit();
+      elif event.type == pygame.MOUSEMOTION:
+           # print("mouse at (%d, %d)" % event.pos)
+           x, y = event.pos
+      elif event.type == pygame.MOUSEBUTTONDOWN and event.button == LEFT:
+           x, y = event.pos
+           for state in state_borders:
+               if is_in_polygon(x, y, state_borders[state]):
+                   # print("You pressed the left mouse button at (%d, %d)" % event.pos)
+                   myfont = pygame.font.SysFont("monospace", 50)
+                   pygame.draw.polygon(screen, red, state_borders[state], 2)
+                   #pygame.transform.scale2x(state_borders[state])
+                   label = myfont.render(state, 1, red)
+                   screen.blit(label, random.choice(state_borders[state]))
+                   red_cross = pygame.image.load('red_cross.jpg')
+                   pygame.draw.rect(screen, black, (998, 0, 501, 501), 2)
+                   red_cross = pygame.transform.scale(red_cross, (500, 500))
+                   # individual_state = pygame.image.load(state + '.png')
+                   # if state != 'Alaska':
+                   #     individual_state = pygame.transform.scale(individual_state, (1500, 1500))
+                   # screen.blit(individual_state, (1000, 0))
+                   screen.blit(red_cross, (999, 1))
+                   myfont = pygame.font.SysFont("monospace", 20, bold=True)
+                   title_font = pygame.font.SysFont("notosansmonocjksc", 50)
+                   label = title_font.render(state, 1, blue)
+                   label2 = myfont.render('Median AGI: $' + irs_agi[state][0], 1, darkBlue)
+                   label3 = myfont.render('Mean AGI: $' + irs_agi[state][1], 1, darkBlue)
+                   label4 = myfont.render('Average Medicare Payment: $' + str(charge_data[state]), 1, darkBlue)
+                   screen.blit(label, (((500 - label.get_rect().width)/2)+1000, 10))
+                   screen.blit(label2, (((500 - label2.get_rect().width)/2)+1000, 90))
+                   screen.blit(label3, (((500 - label3.get_rect().width)/2)+1000, 110))
+                   screen.blit(label4, (((500 - label4.get_rect().width)/2)+1000,130))
+                   #screen.blit(individual_state, (1000, 0))
+                   #screen.blit(pygame.draw.polygon(scree))
+                   #print(random.choice(state_borders[state]))
+                   #print("You pressed the left mouse button in " + state)
+                   pygame.display.update()
+                   pygame.time.wait(3000)
+           if button.collidepoint(event.pos):
+               for hospital in hospitals:
+                   pygame.draw.circle(screen, green, hospitals[hospital], 1)
+               pygame.display.update()
+               pygame.time.wait(3000)
+           #for state in state_borders:
+           #    if is_in_polygon(x, y, state_borders[state]):
+                   # print("You released the left mouse button at (%d, %d)" % event.pos)
+                   #print("You released the left mouse button in " + state)
+   # for hospital in hospitals:
+   #     pygame.draw.circle(screen, green, hospitals[hospital], 1)
    # screen.blit(image, (1000, 0))
    # blank_rect = pygame.Rect(0, 0, 500, 500)
    # pygame.draw.rect(image, green, blank_rect)
@@ -380,8 +454,7 @@ while (True):
    #print(updated_borders)
    #print(min(lats))
    #print(min(lngs))
-   for hospital in hospitals:
-       pygame.draw.circle(screen, green, hospitals[hospital], 1)
+
    # update the screen
    pygame.display.update()
    i = 0
