@@ -71,7 +71,7 @@ while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
-
+        
 
     # Copy image to screen:
     screen.blit(background_image, background_position)
