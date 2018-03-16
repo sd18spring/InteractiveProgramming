@@ -29,3 +29,5 @@ To load a file, type the name ending in '.txt', and the code will parse it. If t
 doesn't exist, it just won't load anything. I've included the examples 'philosophy.txt',
 'metal.txt','box.txt', and 'eigen vector.txt' so you can load them and take a look.
 Note that deletion is not fully supported in files generated from saves.
+
+Screenshots of use can be found in /screenshots
