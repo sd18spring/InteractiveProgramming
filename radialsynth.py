@@ -57,8 +57,7 @@ class Grid():
         return (x, y)
 
     def _init_buttons(self):
-        # TODO: draw buttons to the right of the grid to let the user
-        # control the game without keyboard input.
+        """ Draws buttons to the right of the grid. """
         self.buttons = {}
         button_size = (96,36)
         coord0 = (self.width*self.cell_size + 32, 0 + 36)
@@ -122,6 +121,7 @@ class Grid():
                     running = 0
                 elif event.type is pygame.MOUSEBUTTONDOWN:
                     if mode > 0:
+                        # TODO: add functionality to butons when they're clicked on
                         if event.button == 1 or event.button == 4:
                             self._add_block(event.pos, shape, self.color, self.d)
                         elif event.button == 3 or event.button == 5:
@@ -145,6 +145,10 @@ class Grid():
                         self.color_name = GREEN
                     elif event.key == pygame.K_b:
                         self.color_name = BLUE
+                    elif event.key == pygame.K_y:
+                        self.color_name = YELLOW
+                    elif event.key == pygame.K_l:
+                        self.color_name = LTGRAY
                     elif event.key == pygame.K_c:
                         shape = 'circle'
                     elif event.key == pygame.K_s:
