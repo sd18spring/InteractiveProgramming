@@ -4,6 +4,7 @@ import math as m
 import wikipedia
 from wiki_functions import summary_links
 import webbrowser
+import ast
 
 class Model(object):
     """Representation of all of the objects being displayed
@@ -17,7 +18,6 @@ class Model(object):
         self.nodes = [] #holds all of the nodes in the model
         self.n = 3 #1 + the number of new nodes produced with an expansion
         self.nodes.append(Node('',size[0]/2,size[1]/2))
-        #self.nodes.extend(self.nodes[0].init_expand(1,self.n))
         self.clines = [] #holds the connection lines of the model
         for i in range(1,len(self.nodes)):
             self.clines.append(ConnectionLine(self.nodes[0], self.nodes[-i]))
@@ -32,6 +32,60 @@ class Model(object):
         self.inputboxdisplay_list = []
         self.click_flag = False
         self.type_flag = False
+
+    def __str__(self):
+        node_list = []
+        family_tree = {}
+        cline_list = []
+
+        for node in self.nodes:
+            temp = []
+            family_tree[node.title] = []
+            temp.append(node.title)
+            temp.append(node.x)
+            temp.append(node.y)
+            temp.append(node.level)
+            temp.append(node.angle)
+            temp.append(node.expanded)
+            temp.append(node.links_viewed)
+            temp.append(node.links)
+            for child in node.children:
+                i = self.nodes.index(child)
+                family_tree[node.title].append(i)
+            node_list.append(temp)
+
+        for cline in self.clines:
+            i_start = self.nodes.index(cline.start)
+            i_end = self.nodes.index(cline.end)
+            cline_list.append((i_start, i_end))
+        return str(node_list) + '\n' + str(family_tree) + '\n' + str(cline_list)
+        family_tree[node.title] = []
+
+    def read_file(self,save_file):
+        node_list = ast.literal_eval(save_file.readline())
+        family_tree = ast.literal_eval(save_file.readline())
+        cline_list = ast.literal_eval(save_file.readline())
+
+        self.nodes = []
+        self.clines = []
+
+        for node in node_list:
+            temp = Node(title = node[0], x = float(node[1]), y = float(node[2]), level = int(node[3]), angle = float(node[4]))
+            temp.expanded = node[5]
+            temp.links_viewed = node[6]
+            temp.links = node[7]
+            self.nodes.append(temp)
+
+        for node in self.nodes:
+            for child in family_tree[node.title]:
+                node.children.append(self.nodes[child])
+
+        for cline in cline_list:
+
+            temp = ConnectionLine(self.nodes[cline[0]], self.nodes[cline[1]])
+            self.clines.append(temp)
+
+
 
     def zoom_in(self,center,scale = 1.05):
         """Zooms in around the center by a factor of scale
@@ -115,6 +169,7 @@ class Viewer(object):
                             ConnectionLine.line_width)
 
         for node in self.model.nodes: #draw all of the nodes, but only if they are on screen
+            node.update()
             if 0 <= node.x <= self.model.size[0]  and 0<= node.y <= self.model.size[1]:
                 pygame.draw.circle(self.screen, pygame.Color(175,175,175),
                                 (int(node.x),int(node.y)), node.size,0)
@@ -176,10 +231,10 @@ class Controler(object):
                         try:
                             page = wikipedia.page(node.title)
                             url = page.url
-                            print(url)
                         except:
                             url = 'https://en.wikipedia.org/wiki/Wikipedia:Disambiguation'
                         webbrowser.open(url, new=0, autoraise=True)
+                        break
 
 
 
@@ -310,6 +365,13 @@ class Controler(object):
                     del self.model.inputboxes[:]
                     self.model.inputbox.string = ''
                 if event.key == pygame.K_RETURN:
+                    if '.txt' in self.model.inputbox.string:
+                        try:
+                            input_file = open('saved_trees/'+self.model.inputbox.string)
+                            self.model.read_file(input_file)
+                        except:
+                            self.model.inputbox.string = ''
+                    else:
                         new_stuff = self.model.delete_branch(0)
                         self.model.nodes = new_stuff[0] #give model a new list not containing the "deleted" nodes
                         self.model.clines = new_stuff[1]
@@ -324,7 +386,7 @@ class Controler(object):
                 if event.key == pygame.K_ESCAPE:
                     del self.model.inputboxdisplay_list[:]
                 if event.key == pygame.K_SPACE:
-                    self.model.inputbox.string += ''
+                    self.model.inputbox.string += ' '
 
                 if event.key == pygame.K_EXCLAIM:
                     self.model.inputbox.string += '!'
@@ -395,7 +457,9 @@ class Controler(object):
                         new_stuff = self.model.delete_branch(self.model.nodes.index(node))
                         self.model.nodes = new_stuff[0] #give model a new list not containing the "deleted" nodes
                         self.model.clines = new_stuff[1]
-
+            elif event.key == pygame.K_s:
+                save_file = open('saved_trees/' + self.model.nodes[0].title + '.txt', 'w')
+                save_file.write(str(model))
 class Inputbox(object):
     def __init__(self,string=''):
         self.string = string
@@ -417,7 +481,7 @@ class Node(object):
     children, deleted, times_refreshed"""
     pygame.font.init()
     node_size = 10
-    node_font = pygame.font.SysFont('Arial', 13)
+    node_font = pygame.font.SysFont('Arial', 16)
 
     def __init__(self,title,x,y, level = 1, angle = 0):
         self.children = [] #nodes created from the expansion of this node
@@ -478,32 +542,32 @@ class Node(object):
         segment_angle = 360/n
         if n%2 == 0: #case for even n values
             thetas.append(self.angle)
-            for i in range(n-1): #produces the angles of the new nodes
+            for i in range(n-2): #produces the angles of the new nodes
                 angle = thetas[-1] + segment_angle
-                if not(179 < abs(angle-self.angle) < 181):
+                if not(179 < abs(angle-self.angle) < 181): #exact comparison breaks down at some point, so I used an inequality
                     thetas.append(angle)
                 else:
                     thetas.append(angle + segment_angle)
 
         else: #case for odd n values
             thetas.append(self.angle + segment_angle/2)
-            for i in range(n-1): #produces the angles of the new nodes
+            for i in range(n-2): #produces the angles of the new nodes
                 angle = thetas[-1] + segment_angle
                 if not(179 < abs(angle-self.angle) < 181):
                     thetas.append(angle)
                 else:
                     thetas.append(angle + segment_angle)
 
+        count = 0
         for theta in thetas: #produces new nodes
-
-            link = self.links[thetas.index(theta) + self.links_viewed % len(self.links) -1]
+            count += 1
+            link = self.links[thetas.index(theta) + self.links_viewed % len(self.links)]
             temp = Node(link,self.x + r*m.cos(m.radians(theta)), self.y - r*m.sin(m.radians(theta)), self.level + 1, theta)
-            print(link)
             temp.links = summary_links(temp.title)
-            print(temp.links[:3])
             new_nodes.append(temp)
             self.children.append(temp)
 
+        self.expanded = True
         self.links_viewed += n - 1
         return new_nodes
 
@@ -513,7 +577,6 @@ class Node(object):
         if not first:
             self.deleted = True
         self.expanded = False
-        #self.times_refreshed += 1
         first = False
         if self.children == []:
             return
@@ -527,7 +590,7 @@ class ConnectionLine(object):
     line_width = 3
 
     def __init__(self,start,end):
-        """Start and end are nodes"""
+        """Makes a line connecting (and acting as a pointer towards) two node objects"""
         self.start = start
         self.end = end
         self.x0 = start.x
@@ -550,24 +613,15 @@ class ConnectionLine(object):
         self.points = [(self.x0,self.y0), (self.x1, self.y1)]
 
 if __name__ == '__main__':
-
     pygame.init()
     pygame.font.init()
-
     node1 = Node('Node1',1,2)
     node2 = Node('Node2',3,4)
-
-
-
     running = True
-
     model = Model((1000,1000))
-
-
     view = Viewer(model)
     controler = Controler(model)
-    #view.draw()
-    k=0
+
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
