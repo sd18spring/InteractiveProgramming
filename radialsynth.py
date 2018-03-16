@@ -42,19 +42,19 @@ class Grid():
         self.height = height
         self.dim = (width*cell_size, height*cell_size)
         self.cell_size = cell_size
-        self._init_cells()
-        self._init_buttons()
+        self.init_cells()
+        self.init_buttons()
         self.shape = 'grid'
 
-    def _draw_background(self):
+    def draw_background(self):
         self.screen.fill(DKGRAY)
 
-    def _add_coords(self, a, b):
+    def add_coords(self, a, b):
         x = (a[0]+b[0])
         y = (a[1]+b[1])
         return (x, y)
 
-    def _init_cells(self):
+    def init_cells(self):
         """ Creates a grid of Cell objects."""
         self.cells = {}
         for i in range(self.height):
@@ -62,7 +62,7 @@ class Grid():
                 cell_coord = (i*self.cell_size, j*self.cell_size)
                 self.cells[(i, j)] = Cell(self.screen, cell_coord, self.cell_size)
 
-    def _init_buttons(self):
+    def init_buttons(self):
         """ Creates the buttons for user control of blocks and music playback."""
         self.buttons = {}
         button_size = (96, 36)
@@ -78,30 +78,30 @@ class Grid():
         self.buttons['S'] = Button(self, LTGRAY, (72,72), (self.dim[0] + 44, 612))
         self.buttons['C'] = Button(self, LTGRAY, 36, (self.dim[0] + 80, 756), 'circle')
 
-    def _draw_buttons(self):
+    def draw_buttons(self):
         all_buttons = self.buttons.values()
         for button in all_buttons:
             button.draw()
 
-    def _draw_cells(self):
+    def draw_cells(self):
         all_cells = self.cells.values()
         for cell in all_cells:
             cell.draw()
 
-    def _draw_blocks(self):
+    def draw_blocks(self):
         all_blocks = self.blocks.values()
         for block in all_blocks:
             block.draw()
 
-    def _redraw(self):
+    def redraw(self):
         """ Updates the screen by redrawing al objects."""
-        self._draw_background()
-        self._draw_blocks()
-        self._draw_cells()
-        self._draw_buttons()
+        self.draw_background()
+        self.draw_blocks()
+        self.draw_cells()
+        self.draw_buttons()
         pygame.display.update()
 
-    def _add_block(self, mouse_pos, shape, color, instr, d):
+    def add_block(self, mouse_pos, shape, color, instr, d):
         """ Adds a note block to the grid, with attributes controlled by the
         user clicking buttons."""
         coord = (mouse_pos[0]//36, mouse_pos[1]//36)
@@ -109,7 +109,7 @@ class Grid():
         block = Block(coord, self, shape, color, instr, d)
         self.blocks[coord] = block
 
-    def _remove_block(self, mouse_pos):
+    def remove_block(self, mouse_pos):
         """ Deletes a note block from the screen."""
         coord = (mouse_pos[0]//36, mouse_pos[1]//36)
         self.blocks.pop(coord, None)
@@ -151,7 +151,7 @@ class Grid():
     def main_loop(self):
         """ Updates graphics and checks for pygame events. """
         running = True
-        shape = 'square'
+        shape = 'circle'
         self.color_name = BLUE
         self.color = BLUE
         self.instr = 0
@@ -159,7 +159,7 @@ class Grid():
         self.mode = 1
 
         while running:
-            self._redraw()
+            self.redraw()
             for event in pygame.event.get():
                 if event.type is pygame.QUIT:
                     running = 0
@@ -167,9 +167,9 @@ class Grid():
                     if self.is_touching(event.pos, self): # Touching the grid
                         if self.mode > 0: # When paused
                             if event.button == 1 or event.button == 4:
-                                self._add_block(event.pos, shape, self.color, self.instr, self.d)
+                                self.add_block(event.pos, shape, self.color, self.instr, self.d)
                             elif event.button == 3 or event.button == 5:
-                                self._remove_block(event.pos)
+                                self.remove_block(event.pos)
                         else: # During playback
                             s.make_rings(event.pos)
                             s.draw_rings()
@@ -203,13 +203,13 @@ class Grid():
                     self.color_update()
             time.sleep(.01)
 
-class Block(object):
+class Block():
     """ A note block whose attributes shape, instr and d determine the type of
     sound created when it is reached by the sweeper."""
 
-    def __init__(self, cell_coordinates, world, shape, color, instr, d):
+    def __init__(self, cell_coords, world, shape, color, instr, d):
         """ Creates a block. """
-        self.cell_coordinates = cell_coordinates
+        self.cell_coords = cell_coords
         self.world = world
         self.shape = shape
         self.color = color
@@ -219,43 +219,43 @@ class Block(object):
     def draw(self):
         """ Draws the block to the screen. """
         cells = self.world.cells
-        cell = cells[self.cell_coordinates]
+        cell = cells[self.cell_coords]
         screen = self.world.screen
         if self.shape == 'square':
-            coords = self.world._add_coords(cell.coordinates, (3, 3))
+            coords = self.world.add_coords(cell.coords, (3, 3))
             rect_dim = (30, 30)
-            self.image_rect = pygame.Rect(coords, rect_dim)
-            pygame.draw.rect(screen, self.color, self.image_rect, 0)
+            image_rect = pygame.Rect(coords, rect_dim)
+            pygame.draw.rect(screen, self.color, image_rect, 0)
         elif self.shape == 'circle':
-            coords = self.world._add_coords(cell.coordinates, (18, 18))
+            coords = self.world.add_coords(cell.coords, (18, 18))
             pygame.draw.circle(screen, self.color, coords, 16, 0)
 
 class Cell():
     """ Spots in the grid where blocks can be drawn. """
 
-    def __init__(self, draw_screen, coordinates, size):
+    def __init__(self, draw_screen, coords, size):
         """ Creates a single cell. """
         self.draw_screen = draw_screen
-        self.coordinates = coordinates
-        self.dimensions = (size, size)
+        self.coords = coords
+        self.dim = (size, size)
         self.color = GRAY
 
     def draw(self):
         """ Draws cells to create the grid. """
         line_width = 1
-        rect = pygame.Rect(self.coordinates, self.dimensions)
+        rect = pygame.Rect(self.coords, self.dim)
         pygame.draw.rect(self.draw_screen, self.color, rect, line_width)
 
 class Button():
     """ Buttons which respond to user input to change the attributes of note
     blocks and control music playback."""
-    def __init__(self, world, color, dimensions, coordinates, shape = 'rect'):
+    def __init__(self, world, color, dim, coords, shape = 'rect'):
         """ Creates a Button. """
         self.world = world
         self.shape = shape
         self.color = color
-        self.coords = coordinates
-        self.dim = dimensions
+        self.coords = coords
+        self.dim = dim
 
     def draw(self):
         """ Draws a Button to the screen, depending on what shape the button is. """
@@ -300,8 +300,8 @@ class Sweeper():
         return (x, y)
 
     def plan_rings(self, number):
-        """ Plans a 2d list with the coordinates for each cell in each of
-        'number' rings. The rings are centered around (0, 0)."""
+        """ Plans a dictionary with lists of the coordinates for each cell in
+        each of 'number' rings. The rings are centered around (0, 0)."""
         rings = {}
         for n in range(number):
             cells = []
@@ -378,7 +378,7 @@ class Sweeper():
             # represented by note blocks to lists to be played
             for coord in ring:
                 cell = cells[coord]
-                coords = self.world._add_coords(cell.coordinates, (2, 2))
+                coords = self.world.add_coords(cell.coords, (2, 2))
                 rect_dim = (32, 32)
                 image_rect = pygame.Rect(coords, rect_dim)
                 pygame.draw.rect(screen, GRAY, image_rect, 0)
@@ -406,7 +406,7 @@ class Sweeper():
                 fs.noteoff(0, note[0])
             short = []
             # Clears the gray rings by redrawing everything else
-            self.world._redraw()
+            self.world.redraw()
         # At the end, stops any held notes, sets the mode to paused, and stops the Synth
         for note in held:
             fs.noteoff(0, note[0])
