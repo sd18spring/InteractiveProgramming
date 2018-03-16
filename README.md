@@ -1,2 +1,11 @@
 # InteractiveProgramming
-This is the base repo for the interactive programming project for Software Design, Spring 2018 at Olin College.
+run python3 interface.py
+How to play:
+Up key: Move the ship forward
+Left/Right Key: rotates the ship
+Space Bar: Shoot (can be held down)
+Q: quits the game
+
+Cheat Codes:
+R: Rapid Fire Mode (Toggle)
+L: Add life
