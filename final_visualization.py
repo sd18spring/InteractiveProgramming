@@ -285,7 +285,7 @@ if __name__ == '__main__':
                        screen.blit(label3, (((500 - label3.get_rect().width)/2)+1000, 160))
                        screen.blit(label4, (((500 - label4.get_rect().width)/2)+1000,200))
                        pygame.display.update()
-                       pygame.time.wait(10000)
+                       pygame.time.wait(3000)
                '''
                If the controller clicks the mouse while over the Hospital Locations button, the locations of all of the hospitals in the United States are displayed on the map.
                '''
