@@ -20,8 +20,8 @@ BLACK = (0, 0, 0)
 # Call this function so the Pygame library can initialize itself
 pygame.init()
 
-# Create an 800x600 sized screen
-screen = pygame.display.set_mode([600, 361])
+# Create an 1024x768 sized screen
+screen = pygame.display.set_mode([1024, 768])
 
 # This sets the name of the window
 # pygame.display.set_caption('CMSC 150 is cool')
@@ -30,12 +30,12 @@ clock = pygame.time.Clock()
 
 class Player(object):
     """ Encodes the state of the paddle in the game """
-    def __init__(self):
+    def __init__(self, filename, x, y):
         """ Initialize the player and position (x,y) """
 
-        self.x = 0
-        self.y = 0
-        self.player_image = pygame.image.load("top_down_tank-8hkMRt.png").convert()
+        self.x = x
+        self.y = y
+        self.player_image = pygame.image.load(filename).convert()
         self.player_image.set_colorkey(BLACK)
     def update(self):
         """ update the state of the paddle """
@@ -46,25 +46,25 @@ class Player(object):
         return "Player, x=%f, y=%f" % (self.x, self.y)
 
 class PyGameKeyboardController(object):
-    """ Handles keyboard input for brick breaker """
-    def __init__(self):
+    """ Handles keyboard input tanks """
+    def __init__(self, u, d, l, r):
        #self.model = model
        self.x = 0
        self.y = 0
 
     def handle_event(self,event):
-        """ Left and right presses modify the x velocity of the paddle """
+        """ Left and right presses modify the x velocity of the tank """
         #link for event.key https://www.pygame.org/docs/ref/key.html
 
         if event.type != KEYDOWN:
             return
-        if event.key == pygame.K_LEFT:
+        if event.key == pygame.l:
             self.x += -10
-        if event.key == pygame.K_RIGHT:
+        if event.key == pygame.r:
             self.x += 10
-        if event.key == pygame.K_UP:
+        if event.key == pygame.u:
             self.y += -10
-        if event.key == pygame.K_DOWN:
+        if event.key == pygame.d:
             self.y += 10
 # Before the loop, load the sounds:
 #click_sound = pygame.mixer.Sound("laser5.ogg")
@@ -73,13 +73,16 @@ class PyGameKeyboardController(object):
 background_position = [0, 0]
 
 # Load and set up graphics.
-background_image = pygame.image.load("GrassBackground.jpg").convert()
+background_image = pygame.image.load("NewBackground.jpg").convert()
 # player_image = pygame.image.load("top_down_tank-8hkMRt.png").convert()
 # player_image.set_colorkey(BLACK)
 
 clock = pygame.time.Clock()
-controller = PyGameKeyboardController()
-player = Player()
+controller1 = PyGameKeyboardController(K_UP, K_DOWN, K_LEFT, K_RIGHT)
+controller2 = PyGameKeyboardController(K_w, K_s, K_a, K_d)
+
+player1 = Player("BlueTank.png", 0, 0)
+player2 = Player("RedTank.png", 100, 100)
 done = False
 while not done:
     for event in pygame.event.get():
@@ -93,13 +96,16 @@ while not done:
     screen.blit(background_image, background_position)
 
 
-    controller.handle_event(event)
-    player.update()
+    controller1.handle_event(event)
+    controller2.handle_event(event)
+    player1.update()
+    player2.update()
 
 
 
     # Copy image to screen:
-    screen.blit(player.player_image, [controller.x, controller.y])
+    screen.blit(player1.player_image, [controller1.x, controller1.y])
+    screen.blit(player2.player_image, [controller2.x, controller2.y])
 
     pygame.display.flip()
 
