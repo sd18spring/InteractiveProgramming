@@ -16,6 +16,6 @@ To initiate the Cat Map, type __"bokeh serve --show Map.py"__ into the terminal.
   - [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/#installing-beautiful-soup) 
   - time (comes with Python)
 
-A more detailed description of our project can be found [here](https://www.goodreads.com).
+A more detailed description of our project can be found [here](https://github.com/coverney/InteractiveProgramming/blob/master/Cat%20Map%20Project%20Write-up%20and%20Reflection.pdf).
 
 If you have any questions, please contact us at cassandra.overney@students.olin.edu and elizabeth.tawes@students.olin.edu.
