@@ -16,8 +16,7 @@ import matplotlib.path
 import wold_map
 import csv
 
-#year that the data will be plotted for
-year = '2001'
+#year that the data will be plotted forss
 # Colors
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -34,7 +33,6 @@ countries=['AF','AL','DZ','AD','AO','AI','AG','AR','AM','AW','AU','AT','AZ','BS'
 'PK','PS','PA','PG','PY','PE','PH','PN','PL','PT','PR','QA','RE','RO','RU','RW','KN','LC','VC','ST','SA','SN','RS','SC','SL','SG','SK',
 'SI','SB','SO','ZA','SS','ES','LK','SD','SR','SZ','SE','CH','SY','TW','TJ','TZ','TH','TL','TG','TO','TT','TN','TR','TM','TC','UG','UA','AE','GB','US',
 'UY','UZ','VU','VE','VN','VI','EH','YE','ZM','ZW']
-COUNTRY = 'AF'
 width, height = 2000,2000
 
 pygame.init()
@@ -48,7 +46,7 @@ def point_in_polygon(pt, polygon):
 
     return matplotlib.path.Path(polygon).contains_point(pt)
 
-def find_magic(countries):
+def find_magic(countries,year):
 #for i in range(len(countries)):
     magic_numbers = []
     for i in range(len(countries)):
@@ -101,31 +99,32 @@ def color_map(val,minimum, maximum):
     color_code = remap_interval(val,minimum ,maximum, 0, 255)
     return int(color_code)
 
-color_coefficients = find_magic(countries)
-max_coeff = max(color_coefficients)
-min_coeff = min(color_coefficients)
-
-for i in range(len(countries)):
-    # Draw the polygons for the state.
-    for polygon in wold_map.countries[countries[i]]:
-        # `polygon` points are tuples `(float, float)`. PyGame requires `(int, int)`.
-        points = [(int(x), int(y)) for x, y in polygon]
-        # Draw the interior
-        number = color_map(color_coefficients[i],min_coeff,max_coeff)
-        if number > 0:
-            color = (0,0,number)
-        else:
-            color = WHITE
-        pygame.draw.polygon(screen,color, points)
-        # Draw the boundary
-        pygame.draw.polygon(screen, BLACK, points, 1)
-    pygame.display.flip()
+def draw_map(screen,year):
+    color_coefficients = find_magic(countries,year)
+    max_coeff = max(color_coefficients)
+    min_coeff = min(color_coefficients)
 
 
+    for i in range(len(countries)):
+        # Draw the polygons for the state.
+        for polygon in wold_map.countries[countries[i]]:
+            # `polygon` points are tuples `(float, float)`. PyGame requires `(int, int)`.
+            points = [(int(x), int(y)) for x, y in polygon]
+            # Draw the interior
+            number = color_map(color_coefficients[i],min_coeff,max_coeff)
+            if number > 0:
+                color = (0,0,number)
+            else:
+                color = WHITE
+            pygame.draw.polygon(screen,color, points)
+            # Draw the boundary
+            pygame.draw.polygon(screen, BLACK, points, 1)
 
-last_mouse_in_state = False
 
-while True:
+
+"""last_mouse_in_state = False"""
+
+"""while True:
     if any(event.type == pygame.QUIT for event in pygame.event.get()):
         sys.exit()
 
@@ -136,4 +135,4 @@ while True:
         if mouse_in_state != last_mouse_in_state:
             last_mouse_in_state = mouse_in_state
             if mouse_in_state:
-                print ('mouse in',country)
+                print ('mouse in',country)"""

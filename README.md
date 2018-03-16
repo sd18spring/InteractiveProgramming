@@ -1,2 +1,10 @@
-# InteractiveProgramming
-This is the base repo for the interactive programming project for Software Design, Spring 2018 at Olin College.
+# World Internet Usage and GDP Per Capita Mapping
+Run slider.py to visualize 
+
+## Requirements
+Use `pip` to install these packages:
+
+* BeautifulSoup
+* svg.path
+* matplotlib
+* pygame
