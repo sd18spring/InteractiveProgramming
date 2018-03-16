@@ -8,7 +8,7 @@ clock = pygame.time.Clock()
 class Penguin(pygame.sprite.Sprite):
     """
     Penguin is the sprite that the user controls using the left and right arrows
-    It moves up and down the screen
+    It moves up and down (respectively) the screen
     """
     def __init__(self):
         # Call the parent class (Sprite) constructor
