@@ -13,7 +13,22 @@ The asteroids spawn in random places around the map and break up when hit with a
 ![A screen shot of the game working](FullGame.png)
 
 ## Implementation [~2-3 paragraphs + UML diagram]
+Our implementation for the non-controllable objects consisted of making a class for each object. Each class had an update function that handled the movement of the object and a destroy function, for when the object was destroyed. The asteroid and UFO had subclasses that inherited them, one for each size of asteroid, and one for each type of asteroid (We had initially planned to add a second type of UFO, but ran out of time). Each of these classes had an overarching class that contained all of the instances of the lower class. This made collision detection much easier and allowed us to simply update the greater class, which in turn updated all of the instances. There was one class that contained all of the objects in the game, holding the overarching classes for each object. This class handled collision detection and updated all of the objects.
 
+Class Diagram
+* listOfObjects - contains and keeps track of all objects
+  * listOfAsteroids - contains and keeps track of all asteroids
+    * Asteroid - Base Asteroid class
+      * Small Asteroid - Inherits from Asteroid
+      * Medium Asteroid - Inherits from Asteroid
+      * Large Asteroid - Inherits from Asteroid
+  * listOfUFOs - contains and keeps track of all UFOs
+    * UFO - Base UFO class
+      * BigUFO - Inherits from UFO
+      * SmallUFO (not implemented) - Inherits from UFO
+  * listOfProjectiles - contains and keeps track of all Projectiles
+    * Projectile - Base Projectile class
+  * Ship
 ## Reflection [~2 paragraphs]
 
 

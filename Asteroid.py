@@ -195,7 +195,7 @@ class Projectile():
         self.direction = direction
         self.rect = ((self.x,self.y),(size,size))
         self.image = pygame.Surface((size,size))
-        self.image.fill((255,255,255))
+        self.image.fill((255,165,0))
         self.gameDisplay = gameDisplay
         self.destroyed = False
         self.distanceTravelled = 0 # asteroids
