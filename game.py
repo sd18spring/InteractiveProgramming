@@ -133,6 +133,10 @@ class RoadLines(pygame.sprite.Sprite):
             self.y += .2
         if model.player.score > 50:
             self.y += .25
+        if model.player.score > 75:
+            self.y += .3
+        if model.player.score > 100:
+            self.y += .35
 
 class EnvironmentObject(pygame.sprite.Sprite):
     """base class for objects"""
@@ -157,6 +161,10 @@ class EnvironmentObject(pygame.sprite.Sprite):
             self.y += .2
         if model.player.score > 50:
             self.y += .25
+        if model.player.score > 75:
+            self.y += .3
+        if model.player.score > 100:
+            self.y += .35
 
 class Gastank(EnvironmentObject):
     """describing type of EnvironmentObject"""
@@ -226,25 +234,116 @@ class Player(pygame.sprite.Sprite):
         """updating player position by velocities given by controller"""
         #setting bounds on edge of screen
         if self.x < 1:
-            self.x = 1
-            self.x += self.vx
+            if self.score > 9:
+                self.x += 1.2*self.vx
+            if self.score >19:
+                self.x += 1.4*self.vx
+            if self.score >34:
+                self.x += 1.6*self.vx
+            if self.score > 49:
+                self.x += 1.8*self.vx
+            if self.score >74:
+                self.x += 1.9*self.vx
+            if self.score > 99:
+                self.x += 2*self.vx
+            else:
+
+                self.x = 1
+                self.x += self.vx
         elif self.x > 589:
-            self.x = 589
-            self.x += self.vx
+            if self.score > 9:
+                self.x = 589
+                self.x += 1.2*self.vx
+            if self.score >19:
+                self.x = 589
+                self.x += 1.4*self.vx
+            if self.score >34:
+                self.x = 589
+                self.x += 1.6*self.vx
+            if self.score > 49:
+                self.x = 589
+                self.x += 1.8*self.vx
+            if self.score >74:
+                self.x = 589
+                self.x += 1.9*self.vx
+            if self.score > 99:
+                self.x = 589
+                self.x += 2*self.vx
+            else:
+                self.x = 589
+                self.x += self.vx
         #update position
         else:
-            self.x += self.vx
+            if self.score > 9:
+                self.x += 1.2*self.vx
+            if self.score >19:
+                self.x += 1.4*self.vx
+            if self.score >34:
+                self.x += 1.6*self.vx
+            if self.score > 49:
+                self.x += 1.8*self.vx
+            if self.score >74:
+                self.x += 1.9*self.vx
+            if self.score > 99:
+                self.x += 2*self.vx
+            else:
+                self.x += self.vx
 
         #setting bounds on edge of screen
         if self.y < 1:
-            self.y = 1
-            self.y += self.vy
+            if self.score > 9:
+                self.y += 1.2*self.vy
+            if self.score >19:
+                self.y += 1.4*self.vy
+            if self.score >34:
+                self.y += 1.6*self.vy
+            if self.score > 49:
+                self.y += 1.8*self.vy
+            if self.score >74:
+                self.y += 1.9*self.vy
+            if self.score > 99:
+                self.y += 2*self.vy
+            else:
+                self.y = 1
+                self.y += self.vy
         elif self.y > 399:
-            self.y = 399
-            self.y += self.vy
+            if self.score > 9:
+                self.y = 399
+                self.y += 1.2*self.vy
+            if self.score >19:
+                self.y = 399
+                self.y += 1.4*self.vy
+            if self.score >34:
+                self.y = 399
+                self.y += 1.6*self.vy
+            if self.score > 49:
+                self.y = 399
+                self.y += 1.8*self.vy
+            if self.score >74:
+                self.y = 399
+                self.y += 1.9*self.vy
+            if self.score > 99:
+                self.y = 399
+                self.y += 2*self.vy
+            else:
+                self.y = 399
+                self.y += self.vy
         #update position
         else:
-            self.y += self.vy
+            if self.score > 9:
+                self.y += 1.2*self.vy
+            if self.score >19:
+                self.y += 1.4*self.vy
+            if self.score >34:
+                self.y += 1.6*self.vy
+            if self.score > 49:
+                self.y += 1.8*self.vy
+            if self.score >74:
+                self.y += 1.9*self.vy
+            if self.score > 99:
+                self.y += 2*self.vy
+            else:
+                self.y += self.vy
 
         #reduce gas slightly every cycle and kill player if it reaches 0
         self.gas_level -= .005
