@@ -234,43 +234,45 @@ class Player(pygame.sprite.Sprite):
         """updating player position by velocities given by controller"""
         #setting bounds on edge of screen
         if self.x < 1:
+            self.x =1
             #updating speed based on level
             if self.score > 10:
-                self.x += 1.05*self.vx
+                self.x += 1.01*self.vx
             if self.score > 20:
-                self.x += 1.1*self.vx
+                self.x += 1.02*self.vx
             if self.score > 35:
-                self.x += 1.15*self.vx
+                self.x += 1.03*self.vx
             if self.score > 50:
-                self.x += 1.2*self.vx
+                self.x += 1.04*self.vx
             if self.score > 75:
-                self.x += 1.25*self.vx
+                self.x += 1.05*self.vx
             if self.score > 100:
-                self.x += 1.3*self.vx
+                self.x += 1.06*self.vx
             else:
                 self.x = 1
                 self.x += self.vx
 
         elif self.x > 589:
+            self.x = 589
             #updating speed based on level
             if self.score > 10:
                 self.x = 589
-                self.x += 1.05*self.vx
+                self.x += 1.01*self.vx
             if self.score >20:
                 self.x = 589
-                self.x += 1.1*self.vx
+                self.x += 1.02*self.vx
             if self.score >35:
                 self.x = 589
-                self.x += 1.15*self.vx
+                self.x += 1.03*self.vx
             if self.score > 50:
                 self.x = 589
-                self.x += 1.2*self.vx
+                self.x += 1.04*self.vx
             if self.score >75:
                 self.x = 589
-                self.x += 1.25*self.vx
+                self.x += 1.05*self.vx
             if self.score > 100:
                 self.x = 589
-                self.x += 1.3*self.vx
+                self.x += 1.06*self.vx
             else:
                 self.x = 589
                 self.x += self.vx
@@ -296,56 +298,58 @@ class Player(pygame.sprite.Sprite):
         if self.y < 1:
             self.y = 1
             if self.score > 10:
-                self.y += 1.05*self.vy
+                self.y += 1.01*self.vy
             if self.score > 20:
-                self.y += 1.1*self.vy
+                self.y += 1.02*self.vy
             if self.score > 35:
-                self.y += 1.15*self.vy
+                self.y += 1.03*self.vy
             if self.score > 50:
-                self.y += 1.2*self.vy
+                self.y += 1.04*self.vy
             if self.score > 75:
-                self.y += 1.25*self.vy
+                self.y += 1.05*self.vy
             if self.score > 100:
-                self.y += 1.3*self.vy
+                self.y += 1.06*self.vy
             else:
                 self.y = 1
                 self.y += self.vy
+
         elif self.y > 399:
+            self.y = 399
             if self.score > 10:
                 self.y = 399
-                self.y += 1.05*self.vy
+                self.y += 1.01*self.vy
             if self.score > 20:
                 self.y = 399
-                self.y += 1.1*self.vy
+                self.y += 1.02*self.vy
             if self.score > 35:
                 self.y = 399
-                self.y += 1.15*self.vy
+                self.y += 1.03*self.vy
             if self.score > 50:
                 self.y = 399
-                self.y += 1.2*self.vy
+                self.y += 1.04*self.vy
             if self.score >75:
                 self.y = 399
-                self.y += 1.25*self.vy
+                self.y += 1.05*self.vy
             if self.score > 100:
                 self.y = 399
-                self.y += 1.3*self.vy
+                self.y += 1.06*self.vy
             else:
                 self.y = 399
                 self.y += self.vy
         #update position
         else:
             if self.score > 10:
-                self.y += 1.05*self.vy
+                self.y += 1.01*self.vy
             if self.score > 20:
-                self.y += 1.1*self.vy
+                self.y += 1.02*self.vy
             if self.score > 35:
-                self.y += 1.15*self.vy
+                self.y += 1.03*self.vy
             if self.score > 50:
-                self.y += 1.2*self.vy
+                self.y += 1.04*self.vy
             if self.score > 75:
-                self.y += 1.25*self.vy
+                self.y += 1.05*self.vy
             if self.score > 100:
-                self.y += 1.3*self.vy
+                self.y += 1.06*self.vy
             else:
                 self.y += self.vy
 
