@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a62df23a-6508-44fc-a64c-ed68e67dffab" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Main4.py" afterPath="$PROJECT_DIR$/Main4.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Game.py" afterPath="$PROJECT_DIR$/Game.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -13,25 +13,15 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main4.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Main4.py">
+    <leaf>
+      <file leaf-file-name="Game.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Game.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1116">
-              <caret line="62" column="0" lean-forward="true" selection-start-line="62" selection-start-column="0" selection-end-line="63" selection-end-column="51" />
+            <state relative-caret-position="364">
+              <caret line="255" column="21" lean-forward="true" selection-start-line="255" selection-start-column="21" selection-end-line="255" selection-end-column="21" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pixel_dancer.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/InteractiveProgramming3/InteractiveProgramming/pixel_dancer.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="241">
-              <caret line="656" column="45" lean-forward="true" selection-start-line="656" selection-start-column="45" selection-end-line="656" selection-end-column="45" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -78,14 +68,15 @@
         <option value="$PROJECT_DIR$/Main3.py" />
         <option value="$USER_HOME$/BrickBreakerMVC/brick_breaker.py" />
         <option value="$PROJECT_DIR$/Main4.py" />
+        <option value="$PROJECT_DIR$/Game.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="67" />
-    <option name="y" value="45" />
-    <option name="width" value="1853" />
-    <option name="height" value="1048" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="113" />
+    <option name="y" value="68" />
+    <option name="width" value="1851" />
+    <option name="height" value="1012" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -116,8 +107,8 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -135,7 +126,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.Main4">
+  <component name="RunManager" selected="Python.Game">
     <configuration name="DodgyGame2" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -149,6 +140,23 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="InteractiveProgramming" />
       <option name="SCRIPT_NAME" value="$USER_HOME$/InteractiveProgramming2/DodgyGame2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
+    <configuration name="Game" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="InteractiveProgramming" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Game.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -187,23 +195,6 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
-    <configuration name="brick_breaker" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$USER_HOME$/BrickBreakerMVC" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="InteractiveProgramming" />
-      <option name="SCRIPT_NAME" value="$USER_HOME$/BrickBreakerMVC/brick_breaker.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-    </configuration>
     <configuration name="pixel_dancer" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -224,17 +215,17 @@
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.Main3" />
       <item index="1" class="java.lang.String" itemvalue="Python.DodgyGame2" />
-      <item index="2" class="java.lang.String" itemvalue="Python.brick_breaker" />
-      <item index="3" class="java.lang.String" itemvalue="Python.Main4" />
-      <item index="4" class="java.lang.String" itemvalue="Python.pixel_dancer" />
+      <item index="2" class="java.lang.String" itemvalue="Python.Main4" />
+      <item index="3" class="java.lang.String" itemvalue="Python.pixel_dancer" />
+      <item index="4" class="java.lang.String" itemvalue="Python.Game" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.Main4" />
-        <item index="1" class="java.lang.String" itemvalue="Python.pixel_dancer" />
-        <item index="2" class="java.lang.String" itemvalue="Python.DodgyGame2" />
-        <item index="3" class="java.lang.String" itemvalue="Python.Main3" />
-        <item index="4" class="java.lang.String" itemvalue="Python.brick_breaker" />
+        <item index="0" class="java.lang.String" itemvalue="Python.Game" />
+        <item index="1" class="java.lang.String" itemvalue="Python.Main4" />
+        <item index="2" class="java.lang.String" itemvalue="Python.pixel_dancer" />
+        <item index="3" class="java.lang.String" itemvalue="Python.DodgyGame2" />
+        <item index="4" class="java.lang.String" itemvalue="Python.Main3" />
       </list>
     </recent_temporary>
   </component>
@@ -252,14 +243,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
+    <frame x="113" y="68" width="1851" height="1012" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15795149" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15829282" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1605317" sideWeight="0.54285717" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16004415" sideWeight="0.54511076" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1605317" sideWeight="0.45714286" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16004415" sideWeight="0.45488924" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -284,13 +276,31 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Game.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1098">
+          <caret line="61" column="26" lean-forward="false" selection-start-line="61" selection-start-column="26" selection-end-line="61" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Game.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Main4.py" />
     <entry file="file://$USER_HOME$/InteractiveProgramming2/DodgyGame2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2304">
           <caret line="133" column="0" lean-forward="false" selection-start-line="133" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#13#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -298,12 +308,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2736">
           <caret line="192" column="34" lean-forward="false" selection-start-line="192" selection-start-column="34" selection-end-line="192" selection-end-column="34" />
-          <folding>
-            <element signature="e#365#378#0" expanded="false" />
-            <element signature="e#4286#4631#0" expanded="false" />
-            <element signature="e#4677#5105#0" expanded="false" />
-            <element signature="e#5147#5931#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -311,38 +315,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="612">
           <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Main3.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1314">
-          <caret line="86" column="30" lean-forward="false" selection-start-line="86" selection-start-column="30" selection-end-line="86" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#13#0" expanded="false" />
-            <element signature="e#1072#1106#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Main4.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2412">
-          <caret line="138" column="44" lean-forward="true" selection-start-line="138" selection-start-column="44" selection-end-line="138" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Main3.py" />
+    <entry file="file://$PROJECT_DIR$/Main4.py" />
     <entry file="file://$USER_HOME$/InteractiveProgramming2/DodgyGame2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2304">
           <caret line="133" column="0" lean-forward="false" selection-start-line="133" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#13#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -350,43 +331,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2736">
           <caret line="192" column="34" lean-forward="false" selection-start-line="192" selection-start-column="34" selection-end-line="192" selection-end-column="34" />
-          <folding>
-            <element signature="e#365#378#0" expanded="false" />
-            <element signature="e#4286#4631#0" expanded="false" />
-            <element signature="e#4677#5105#0" expanded="false" />
-            <element signature="e#5147#5931#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Main3.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1314">
-          <caret line="86" column="30" lean-forward="false" selection-start-line="86" selection-start-column="30" selection-end-line="86" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#13#0" expanded="false" />
-            <element signature="e#1072#1106#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Main4.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1494">
-          <caret line="83" column="44" lean-forward="true" selection-start-line="83" selection-start-column="44" selection-end-line="83" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Main3.py" />
+    <entry file="file://$PROJECT_DIR$/Main4.py" />
     <entry file="file://$USER_HOME$/InteractiveProgramming2/DodgyGame2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#13#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -394,12 +347,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2736">
           <caret line="192" column="34" lean-forward="false" selection-start-line="192" selection-start-column="34" selection-end-line="192" selection-end-column="34" />
-          <folding>
-            <element signature="e#365#378#0" expanded="false" />
-            <element signature="e#4286#4631#0" expanded="false" />
-            <element signature="e#4677#5105#0" expanded="false" />
-            <element signature="e#5147#5931#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -407,9 +354,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2304">
           <caret line="133" column="0" lean-forward="false" selection-start-line="133" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#13#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -417,43 +361,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2736">
           <caret line="192" column="34" lean-forward="false" selection-start-line="192" selection-start-column="34" selection-end-line="192" selection-end-column="34" />
-          <folding>
-            <element signature="e#365#378#0" expanded="false" />
-            <element signature="e#4286#4631#0" expanded="false" />
-            <element signature="e#4677#5105#0" expanded="false" />
-            <element signature="e#5147#5931#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Main3.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1314">
-          <caret line="86" column="30" lean-forward="false" selection-start-line="86" selection-start-column="30" selection-end-line="86" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#13#0" expanded="false" />
-            <element signature="e#1072#1106#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Main4.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2556">
-          <caret line="146" column="30" lean-forward="true" selection-start-line="146" selection-start-column="30" selection-end-line="146" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Main3.py" />
+    <entry file="file://$PROJECT_DIR$/Main4.py" />
     <entry file="file://$USER_HOME$/InteractiveProgramming2/DodgyGame2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3924">
           <caret line="248" column="27" lean-forward="false" selection-start-line="248" selection-start-column="27" selection-end-line="248" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#13#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -461,43 +377,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2736">
           <caret line="192" column="34" lean-forward="true" selection-start-line="192" selection-start-column="34" selection-end-line="192" selection-end-column="34" />
-          <folding>
-            <element signature="e#365#378#0" expanded="false" />
-            <element signature="e#4286#4631#0" expanded="false" />
-            <element signature="e#4677#5105#0" expanded="false" />
-            <element signature="e#5147#5931#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Main3.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1314">
-          <caret line="86" column="30" lean-forward="false" selection-start-line="86" selection-start-column="30" selection-end-line="86" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#13#0" expanded="false" />
-            <element signature="e#1072#1106#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Main4.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2934">
-          <caret line="167" column="34" lean-forward="false" selection-start-line="167" selection-start-column="34" selection-end-line="167" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Main3.py" />
+    <entry file="file://$PROJECT_DIR$/Main4.py" />
     <entry file="file://$USER_HOME$/InteractiveProgramming2/DodgyGame2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3960">
           <caret line="250" column="21" lean-forward="false" selection-start-line="250" selection-start-column="21" selection-end-line="250" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#13#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -505,43 +393,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2988">
           <caret line="206" column="12" lean-forward="false" selection-start-line="206" selection-start-column="12" selection-end-line="206" selection-end-column="12" />
-          <folding>
-            <element signature="e#365#378#0" expanded="false" />
-            <element signature="e#4286#4631#0" expanded="false" />
-            <element signature="e#4677#5105#0" expanded="false" />
-            <element signature="e#5147#5931#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Main3.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1314">
-          <caret line="86" column="30" lean-forward="false" selection-start-line="86" selection-start-column="30" selection-end-line="86" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#13#0" expanded="false" />
-            <element signature="e#1072#1106#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Main4.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1188">
-          <caret line="70" column="9" lean-forward="true" selection-start-line="70" selection-start-column="9" selection-end-line="70" selection-end-column="9" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Main3.py" />
+    <entry file="file://$PROJECT_DIR$/Main4.py" />
     <entry file="file://$USER_HOME$/InteractiveProgramming2/DodgyGame2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="20" column="8" lean-forward="true" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#13#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -549,43 +409,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1440">
           <caret line="92" column="65" lean-forward="false" selection-start-line="92" selection-start-column="65" selection-end-line="92" selection-end-column="65" />
-          <folding>
-            <element signature="e#365#378#0" expanded="false" />
-            <element signature="e#4286#4631#0" expanded="false" />
-            <element signature="e#4677#5105#0" expanded="false" />
-            <element signature="e#5147#5931#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Main3.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1314">
-          <caret line="86" column="30" lean-forward="false" selection-start-line="86" selection-start-column="30" selection-end-line="86" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#13#0" expanded="false" />
-            <element signature="e#1072#1106#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Main4.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1476">
-          <caret line="86" column="0" lean-forward="false" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Main3.py" />
+    <entry file="file://$PROJECT_DIR$/Main4.py" />
     <entry file="file://$USER_HOME$/InteractiveProgramming2/DodgyGame2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#13#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -593,43 +425,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1440">
           <caret line="92" column="65" lean-forward="true" selection-start-line="92" selection-start-column="65" selection-end-line="92" selection-end-column="65" />
-          <folding>
-            <element signature="e#365#378#0" expanded="false" />
-            <element signature="e#4286#4631#0" expanded="false" />
-            <element signature="e#4677#5105#0" expanded="false" />
-            <element signature="e#5147#5931#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Main4.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1170">
-          <caret line="69" column="27" lean-forward="true" selection-start-line="69" selection-start-column="27" selection-end-line="69" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Main3.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1314">
-          <caret line="86" column="30" lean-forward="true" selection-start-line="86" selection-start-column="30" selection-end-line="86" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#13#0" expanded="false" />
-            <element signature="e#1072#1106#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Main4.py" />
+    <entry file="file://$PROJECT_DIR$/Main3.py" />
     <entry file="file://$USER_HOME$/InteractiveProgramming2/DodgyGame2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2826">
           <caret line="162" column="29" lean-forward="false" selection-start-line="162" selection-start-column="29" selection-end-line="162" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#13#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -640,17 +444,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Main3.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="774">
-          <caret line="47" column="40" lean-forward="false" selection-start-line="47" selection-start-column="40" selection-end-line="47" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#13#0" expanded="false" />
-            <element signature="e#1072#1106#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Main3.py" />
     <entry file="file://$USER_HOME$/InteractiveProgramming2/Main4.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="642">
@@ -658,36 +452,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="12">
-          <caret line="47" column="33" lean-forward="true" selection-start-line="47" selection-start-column="33" selection-end-line="47" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Main.py" />
     <entry file="file://$PROJECT_DIR$/smiley.png">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Main3.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="721">
-          <caret line="86" column="30" lean-forward="false" selection-start-line="86" selection-start-column="30" selection-end-line="86" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#13#0" expanded="false" />
-            <element signature="e#1072#1106#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Main3.py" />
     <entry file="file://$USER_HOME$/InteractiveProgramming2/DodgyGame2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1566">
           <caret line="133" column="0" lean-forward="false" selection-start-line="133" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#13#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -695,27 +470,21 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="721">
           <caret line="192" column="34" lean-forward="false" selection-start-line="192" selection-start-column="34" selection-end-line="192" selection-end-column="34" />
-          <folding>
-            <element signature="e#365#378#0" expanded="false" />
-            <element signature="e#4286#4631#0" expanded="false" />
-            <element signature="e#4677#5105#0" expanded="false" />
-            <element signature="e#5147#5931#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Main4.py" />
     <entry file="file://$USER_HOME$/InteractiveProgramming3/InteractiveProgramming/pixel_dancer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="656" column="45" lean-forward="true" selection-start-line="656" selection-start-column="45" selection-end-line="656" selection-end-column="45" />
-          <folding />
+        <state relative-caret-position="-8">
+          <caret line="656" column="45" lean-forward="false" selection-start-line="656" selection-start-column="45" selection-end-line="656" selection-end-column="45" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Main4.py">
+    <entry file="file://$PROJECT_DIR$/Game.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1116">
-          <caret line="62" column="0" lean-forward="true" selection-start-line="62" selection-start-column="0" selection-end-line="63" selection-end-column="51" />
+        <state relative-caret-position="364">
+          <caret line="255" column="21" lean-forward="true" selection-start-line="255" selection-start-column="21" selection-end-line="255" selection-end-column="21" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>

@@ -252,7 +252,7 @@ if __name__ == '__main__':
 
     # Initialize PyGame display
     pygame.init()
-    pygame.display.set_caption('Game')
+    pygame.display.set_caption('Dodge Ball')
     size = (800, 600)
 
     # Initialize model
