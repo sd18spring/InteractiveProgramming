@@ -18,6 +18,7 @@ Libraries used:
 Installing the libraries:
 
 ```
+apt search opencv
 sudo apt-get install libopencv
 pip install opencv-python
 
@@ -41,10 +42,10 @@ set_sched_ahead_time! 0ou should hear another beep this time.
 
 These commands will make sure that there is no delay while playing the notes on the keyboard.
 
-Next, choose the file you want to run. [computer_vision_note_board.py](insert link here) uses OpenCV to track the movement of your head and play the notes accordingly. [mouse_keyboard_note_board.py](insert link here) uses the _QWERTY_ row of your keyboard and the your mouse buttons to play the notes.
+Next, choose the file you want to run. [computer_vision_note_board.py](https://github.com/Utsav22G/InteractiveProgramming/blob/master/computer_vision_note_board.py) uses OpenCV to track the movement of your head and play the notes accordingly. [mouse_keyboard_note_board.py](https://github.com/Utsav22G/InteractiveProgramming/blob/master/mouse_keyboard_note_board.py) uses the _QWERTY_ row of your keyboard and the your mouse buttons to play the notes.
 
 ### NOTES
-* You will need a working webcam to run _computer_vision_note_board.py_. Optimum distance for _computer_vision_note_board.py_ is about 1.5 to 2 feet. PLease don't come too close or move too far away from your webcam.
+* You will need a working webcam to run _computer_vision_note_board.py_. Optimum distance for _computer_vision_note_board.py_ is about 1.5 to 2 feet. Please don't come too close or move too far away from your webcam.
 * To exit out of the program, you'll first need to close the Sonic-Pi program window and then close the PyGame keyboard layout window. 
 
 ## Authors
