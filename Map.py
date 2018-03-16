@@ -9,6 +9,7 @@ import pandas as pd
 from bokeh.plotting import figure, curdoc
 from bokeh.models import WMTSTileSource, HoverTool, Slider, ColumnDataSource
 from bokeh.layouts import widgetbox, layout
+import bokeh.colors
 import pickle
 
 # reads in the pickle file from the Model class and stores the hurricane objects into a simple array
@@ -31,8 +32,11 @@ cat_array = []  # an array with each element being the category of a hurricane (
 color_array = []  # an array with each element being the color of a hurricane point (used for multi line and circle)
 
 # a dictionary of colors with keys being the possible category names and the values being their corresponding colors
-colors = {"5": "firebrick", "4": "gold", "3": "lime", "2": "olive", "1": "aqua", "TS": "blue", "TD": "purple",
-          "NA": "whitesmoke"}
+# colors = {"5": "darkturquoise", "4": "mediumturquoise", "3": "turquoise", "2": "aquamarine", "1": "paleturquoise", "TS": "lightblue", "TD": "lightcyan",
+          # "NA": 'mintcream'}
+
+colors = {"5": "darkred", "4": "maroon", "3": "firebrick", "2": "crimson", "1": "indianred", "TS": "mediumvioletred", "TD": "hotpink",
+          "NA": 'mistyrose'}
 
 # iterate through each hurricane and add its data to the arrays declared above
 for elm in hurricanes:
@@ -66,7 +70,7 @@ p = figure(tools=['hover', 'pan', 'wheel_zoom'], x_range=(-bound, bound), y_rang
 p.axis.visible = False
 
 # WMTSTileSource borrowed from online
-url = 'http://a.basemaps.cartocdn.com/dark_all/{Z}/{X}/{Y}.png'
+url = 'http://a.basemaps.cartocdn.com/dark_nolabels/{Z}/{X}/{Y}.png'
 attribution = "Tiles by Carto, under CC BY 3.0. Data by OSM, under ODbL"
 p.add_tile(WMTSTileSource(url=url, attribution=attribution))
 
@@ -103,3 +107,7 @@ hover.mode = 'mouse'
 # creates the layout and outputs it to the bokeh server
 l = layout([widgetbox(slider), p])
 curdoc().add_root(l)
+
+
+
+# http://a.basemaps.cartocdn.com/dark_all/
