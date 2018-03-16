@@ -1,8 +1,10 @@
 import pygame
 from pygame.locals import *
 import time
-import random
-
+import os
+from random import *
+import math
+import sys
 
 
 class PyGameWindowView(object):
@@ -47,18 +49,82 @@ class PongModel(object):
         self.paddle2 = Paddle(100, 20, self.width - 30, self.height / 2)
         self.ball = Ball(int(self.width/2), int(self.height/2), int(10), 10)
 
-
     def update(self):
-
+        """Left Paddle"""
         self.paddle1.update()
+        """Right Paddle"""
         self.paddle2.update()
 
+        """Movement of ball when it touches screen boundaries"""
+        if self.ball.x < 500 or self.ball.x > 0:
+            self.ball.x = self.ball.x + int(self.ball.vx)
+        else:
+            self.ball.x = self.ball.y - int(self.ball.vx)
+        if self.ball.y < 500 or self.ball.y > 0:
+            self.ball.y = self.ball.y + int(self.ball.vy)
+        else:
+            self.ball.y = self.ball.y  - int(self.ball.vy)
+
+        """Movement of the ball when it touches paddles"""
+        ballmin = self.ball.y - 5
+        balltop = self.ball.y + 5
+        paddle1_min = self.paddle1.y - self.paddle1.height
+        paddle2_min = self.paddle2.y - self.paddle2.height
+        paddle1_x_min = self.paddle1.x - self.paddle2.width
+        paddle2_x_min = self.paddle2.x - self.paddle2.width
+        if int(self.paddle1.x + 20) == self.ball.x:
+            if self.paddle1.y < balltop < paddle1_min:
+                self.ball.x = self.ball.x - int(self.ball.vx)
+                self.ball.y = self.ball.y - int(self.ball.vy)
+                print('she')
+            elif self.paddle1.y< ballmin < paddle1_min:
+                self.ball.x = self.ball.x - int(self.ball.vx)
+                self.ball.y = self.ball.y - int(self.ball.vy)
+                print('he')
+        if int(self.paddle2.x + 20) == self.ball.x:
+            if self.paddle2.y < ballmin < paddle2_min:
+                self.ball.x = self.ball.x - int(self.ball.vx)
+                self.ball.y = self.ball.y - int(self.ball.vy)
+                print('him')
+            elif self.paddle2.y< balltop < paddle2_min:
+                self.ball.x = self.ball.x - int(self.ball.vx)
+                self.ball.y = self.ball.y - int(self.ball.vy)
+                print('hers')
+        # if (self.paddle1.y == self.ball.y) and  self.paddle1.x == self.ball.x:
+        # if ballmin == paddle1_min and self.ball.y == self.paddle1.y and self.paddle1.x == self.ball.x:
+        #     self.ball.x = self.ball.x - int(self.ball.vx)
+        #     self.ball.y = self.ball.y - int(self.ball.vy)
+        #     print('HIT')
+        # # if self.paddle2.x == self.ball.y:
+        # if ballmin == paddle2_min and self.ball.y == self.paddle2.y and self.paddle2.x == self.ball.x:
+        #     self.ball.x = self.ball.x + int(self.ball.vx)
+        #     self.ball.y = self.ball.y + int(self.ball.vy)
+        #     print('shs')
+
+        """Boundaries for the ball and paddles"""
+        if self.paddle1.y > 700:
+            self.paddle1.y = 700
+        if self.paddle1.y < 0:
+            self.paddle1.y = 0
+        if self.paddle2.y > 700:
+            self.paddle2.y = 700
+        if self.paddle2.y < 0:
+            self.paddle2.y = 0
+        if self.ball.y >= 800:
+            self.ball.vy = -self.ball.vy
+        if self.ball.y <= 0:
+            self.ball.vy = -self.ball.vy
+        if self.ball.x < self.paddle1.x:
+            pygame.display.quit()
+        if self.ball.x > self.paddle2.x:
+            pygame.display.quit()
+        # if self.ball.
     def __str__(self):
         output_lines = []
 
         output_lines.append(str(self.paddle1))
         output_lines.append(str(self.paddle2))
-
+        output_lines.append(str(self.ball))
 
         return "\n".join(output_lines)
 
@@ -70,68 +136,22 @@ class Ball(pygame.sprite.Sprite):
         self.y = y
         self.radius = radius
         self.speed = speed
-        self.vy = 0.0
-        self.vx = 0.0
+        self.vy = randint(-1, 1)
+        self.vx = randint(-1, 1)
 
 
     def update(self, ball, paddle1, paddle2, vx, vy):
 
-        if self.ball.x == -1 and 10 == self.ball.x:
+        if self.ball.x == -1 and self.ball.x == 10:
             return -1
         elif self.ball.x == 1 and self.paddle2.width == self.ball.x:
             return -1
         else:
             return 1
-
+        self.x += self.vx
+        self.y += self.vy
     def __str__(self):
         return "Ball x=%f, y=%f, radius=%f" % (self.x, self.y, self.radius)
-
-class Ball(object):
-    def init(self, SCREEN_WIDTH, SCREEN_HEIGHT):
-        self.radius = 20
-        self.centerx = SCREEN_WIDTH*0.5
-        self.centery = SCREEN_HEIGHT*0.5
-
-        self.rect = pygame.Rect(self.centerx - self.radius,
-                               self.centery - self.radius,
-                               self.radius * 2,
-                               self.radius * 2)
-
-    # x , y
-        self.direction = [random.choice([1, -1]), random.choice([1, -1])]
-        self.speed = [5, 8] # x, y
-
-    # left, right, top, bottom
-        self.hit_edge = [False, False, False, False]
-
-    def update(self, paddle1, paddle2, SCREEN_WIDTH,
-            SCREEN_HEIGHT):
-        self.centerx += self.direction[0] * self.speed[0]
-        self.centery += self.direction[1] * self.speed[1]
-
-        self.rect.center = (self.centerx, self.centery)
-
-        #detects if someone losses
-        if self.rect.left <= 0:
-            self.hit_edge[0] = True
-        elif self.rect.right >= SCREEN_WIDTH-1:
-            self.hit_edge[1] = True
-        elif self.rect.top <= 0:
-            self.hit_edge[2] = True
-        elif self.rect.bottom >= SCREEN_HEIGHT-1:
-            self.hit_edge[3] = True
-
-        #detects collision between players & the ball
-        if self.rect.colliderect(self.paddle1):
-            self.direction[0] = 1
-            self.up_speed()
-        elif self.rect.colliderect(self.paddle2):
-            self.direction[0] = -1
-            self.up_speed()
-
-    def up_speed(self):
-        self.speed[0] += random.uniform(0, 0.25)
-        self.speed[1] += random.uniform(0, 0.25)
 
 
 class Paddle(pygame.sprite.Sprite):
@@ -175,9 +195,13 @@ class PyGameKeyboardController(object):
         if event.type != KEYDOWN:
             return
         if event.key == pygame.K_UP:
-            self.model.paddle2.vy += -1.0
+            self.model.paddle2.vy += -2.0
+        else:
+            self.model.paddle2.vy = 0.0
         if event.key == pygame.K_DOWN:
-            self.model.paddle2.vy += 1.0
+            self.model.paddle2.vy += 2.0
+
+
 
 
 
@@ -185,11 +209,8 @@ if __name__ == '__main__':
     pygame.init()
 
     FPS = 200
-    width = 1800
-    height = 800
-    size = (width, height)
+    size = (1800, 800)
     model = PongModel(size)
-
     view = PyGameWindowView(model, size)
 
     controller1 = PyGameMouseController(model)
@@ -204,7 +225,9 @@ if __name__ == '__main__':
                  running = False
             controller1.handle_event(event)
             controller2.handle_event(event)
-
+        # ball = pygame.draw.circle
+        # # ball = Ball(int((size[0])/2), int(size[1]/2), int(10), 10)
+        # # view.screen.blit(ball, (0, 0))
 
         model.update()
         view.draw()
