@@ -107,7 +107,3 @@ hover.mode = 'mouse'
 # creates the layout and outputs it to the bokeh server
 l = layout([widgetbox(slider), p])
 curdoc().add_root(l)
-
-
-
-# http://a.basemaps.cartocdn.com/dark_all/

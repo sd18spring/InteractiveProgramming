@@ -8,7 +8,7 @@ import pickle
 # from bokeh.models.widgets import TextInput
 
 hurricanes = []
-with open('hurricane_data.pkl', 'rb') as f:
+with open('hurricane_data_old.pkl', 'rb') as f:
     for _ in range(pickle.load(f)):
         hurricanes.append(pickle.load(f))
 

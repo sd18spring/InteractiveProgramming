@@ -12,7 +12,7 @@ class Model(object):
     objects are also stored in a pickle file, so objects do not need to be created each time the map is run.
     """
     # MAXNUM is the total number of hurricanes in the NOAA database
-    MAXNUM = 12861
+    MAXNUM = 12860
 
     def __init__(self, start=None, end=None):
         """
@@ -66,7 +66,7 @@ class Model(object):
 
 
 if __name__ == '__main__':
-    # TESTING, makes model object using first 100 hurricanes and then puts the data into a pickle file
-    test = Model(0, 10000)
+    # TESTING, makes model object ALL hurricanes and then puts the data into a pickle file
+    test = Model(0, Model.MAXNUM)
     test.pickle()
     # print(test)

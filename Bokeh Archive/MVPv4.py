@@ -8,7 +8,7 @@ import pickle
 
 hurricanes = []
 print("hello")
-with open('hurricane_data.pkl', 'rb') as f:
+with open('hurricane_data_old.pkl', 'rb') as f:
     for _ in range(pickle.load(f)):
         hurricanes.append(pickle.load(f))
 
