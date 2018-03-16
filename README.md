@@ -35,14 +35,16 @@ The gaming mode is just a step up from the simple trailing mode. When the gaming
 ## Implementation: still needs a UML
 Our program includes two classes: `canvas` and `fingerTrack`.  The `canvas` class creates a canvas to be drawn on. The initialization of `canvas` involves three input parameters: the width of the canvas, the height, and the scaler to enlarge the canvas by. The width and the height are based off the size of the camera frame. The scaler is always 2 except in the gaming mode where a scaler of 1 is applied to allow for better accuracy when playing the game. The `fingerTrack` class performs color tracking and actual drawing on the canvas. Each location of the points to be drawn are also scaled with the scaler in the `canvas` class. It also takes the `canvas` class as an input parameter when drawing new points and lines.
 
-The number of coordinates that a list is allowed to have before shifting out the first element is increased by 1.
-Whenever one second elapses, the countdown in the game mode will decrease by one.
+One of our most important data structures is a list. We use lists to store such data as the coordinates of the center of the contours and the colors we are using for the lines between two consecutive points. We chose lists because they are mutable and have built-in operations like `append`. As a result, instead of using a data type to store a large number of points that have existed in the past, we used lists so that every time a point comes in, we can simply shift out the first one and append the new element to the end of the list, thus making a big save on memory.
 
 In our beginning planning of the project, after we had decided on using OpenCV to make a drawing platform, we had a few options. We thought about trying to make a game similar to the snake game, but the snake was controlled by the web-cam on the computer. We also thought about just making a canvas on the screen that could be drawn on by the web-cam, and have the color be controlled by the speed of movement. We were unsure about how easily we would be able to make the snake game, and decided on making the drawing canvas. However, we finished this with plenty of time, and expanded into a game in addition to the drawing canvas.
 
-## Reflection
-One thing that would have helped us a lot was having a more appropriately scoped project that takes better advantage of classes. We ended up doing a cool project, but because we started in an easier project, we had to keep finding ways to expand. This made us experiment with the code, without realizing we should have made a separate class for each mode.
+UML diagram:
+![alt text](https://github.com/Tweir195/InteractiveProgramming/blob/master/UML_Project_4.jpg)
 
-One of the good things about the experience is that we both pair programmed and divide-and-conquer in the process. Our approach in dividing and conquer were based on the next tasks that need to get done instead of which files or classes specifically so that both us have a good understanding of the program as a whole. We were able to move along in the project quite steadily, not feeling stressed about not feeling our project.
+## Reflection
+One thing that would have helped us a lot was having a more appropriately scoped project that takes better advantage of classes. We ended up doing a cool project, but because we started in an easier project, we had to keep finding ways to expand. This made us experiment with the code, without realizing we should have made a separate class for each mode. We could improve it by optimizing it so that there is less lag time and also so that it is better at picking up only the item that we want (this will avoid the jagged lines that can happen when there is interference).
+
+One of the good things about the experience is that we used both pair programming and divide-and-conquer in the process. Our approach in dividing and conquer was based on the next tasks that need to get done instead of which files or classes specifically so that both us have a good understanding of the program as a whole. We were able to move along in the project quite steadily, not feeling stressed about not finishing our project.
 
 ### Our initial project proposal can be found [here](https://github.com/QingmuDeng/InteractiveProgramming/blob/master/Project%20Proposal.md).
