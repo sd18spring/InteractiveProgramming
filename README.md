@@ -14,6 +14,8 @@ Libraries used:
 * [OpenCV](https://docs.opencv.org/2.4.9/modules/refman.html) for computer-vision based controls
 * [Sonic-Pi](http://sonic-pi.net/) for music notes
 * [PyGame](http://www.pygame.org/docs/) for creating the keyboard layout
+* [NumPy](https://docs.scipy.org/doc/numpy/reference/index.html) to create a matrix of zeroes
+* [OS](https://github.com/python/cpython/blob/3.6/Lib/os.py) for reading the .wav files
 
 Installing the libraries:
 
@@ -31,6 +33,8 @@ sudo apt-get build-dep python-pygame
 sudo apt-get install mercurial python-dev python-numpy ffmpeg libsdl-image1.2-dev libsdl-mixer1.2-dev libsdl-ttf2.0-dev libsmpeg-dev libsdl1.2-dev libportmidi-dev libswscale-dev libavformat-dev libavcodec-dev
 pip install pygame
 ```
+_NumPy_ and _OS_ are standard Python libraries which should be pre-installed on computers running Linux.  
+
 ## Deployment
 To run the code, we first need to run Sonic-Pi program on our machines. Test if Sonic-Pi is working properly by typing the following command in the Sonic-Pi terminal:`play 60`.
 
