@@ -4,6 +4,7 @@ import numpy
 import random
 import sys
 import time
+import copy
 
 MOVEDOWNFREQ = 0.1
 MOVESIDEWAYSFREQ = 0.15
@@ -21,15 +22,22 @@ LIGHTBLUE   = ( 20,  20, 175)
 YELLOW      = (155, 155,   0)
 LIGHTYELLOW = (175, 175,  20)
 
-Colors = [RED,GREEN,BLUE,YELLOW]
+#2048 Colors:
+NUM2 = (255,177,120)
+NUM4 = (237, 224, 200)
+NUM8 = (242, 177, 121)
+NUM16 = (245,149,99)
+NUM32 = (255, 83, 13)
+NUM64 = (255,10,10)
+NUM128 = (237,207,114)
+NUM2048 = (237,194,46)
+
+Colors = [NUM2,NUM4,NUM8,NUM16,NUM32,NUM64,NUM128,NUM2048]
 
 BORDERCOLOR = BLUE
 BGCOLOR = BLACK
 TEXTCOLOR = WHITE
 TEXTSHADOWCOLOR = GRAY
-COLORS      = (     BLUE,      GREEN,      RED,      YELLOW)
-LIGHTCOLORS = (LIGHTBLUE, LIGHTGREEN, LIGHTRED, LIGHTYELLOW)
-assert len(COLORS) == len(LIGHTCOLORS) # each color must have light color
 
 FPS = 25
 WindowWidth = 450 #used to be 415
@@ -71,25 +79,6 @@ Pieces = {'S': S_Shape,
           'O': O_Shape,
           'T': T_Shape}
 
-Coordinates = {'1': [135,0],
-               '2': [180,0],
-               '3': [225,0],
-               '4': [270,0],
-               '5': [135,45],
-               '6': [180,45],
-               '7': [225,45],
-               '8': [270,45],
-               '9': [135,90],
-               '10': [180,90],
-               '11': [225,90],
-               '12': [270,90],
-               '13': [135,135],
-               '14': [180,135],
-               '15': [225,135],
-               '16': [270,135]}
-
-
-
 
 class Block():
     def __init__(self,width,height,x1,y1,val):
@@ -125,7 +114,7 @@ class Piece():
         b2 = Block(20,20,Pieces[self.shape][self.rotation][1][0],Pieces[self.shape][self.rotation][1][1],1)
         b3 = Block(20,20,Pieces[self.shape][self.rotation][2][0],Pieces[self.shape][self.rotation][2][1],1)
         b4 = Block(20,20,Pieces[self.shape][self.rotation][3][0],Pieces[self.shape][self.rotation][3][1],1)
-        
+
         self.blocks = [b1,b2,b3,b4]
 
 
@@ -134,56 +123,48 @@ class Piece():
         for i in self.shape[self.rotation]:
             self.coordinates = self.coordinates.append(Coordinates[Shapes[self.rotation][i]])
 
-    def drawPiece(self,pixelx=None,pixely=None):
-        """
-        if b.val == 0:
-            return
-        if pixelx == None and pixely == None:
-            pixelx = b.x1
-            pixely = b.y1
-
-        pygame.draw.rect(DisplaySurf, (0,0,0), (pixelx + 1, pixely + 1, BoxSize - 1, BoxSize - 1))
-        pygame.draw.rect(DisplaySurf, (34,89,233), (pixelx + 1, pixely + 1, BoxSize - 4, BoxSize - 4))
-        """
-        pass
 
     def rotatePiece(self):
-        xdiff = self.x1 - Pieces[self.shape][self.rotation][0][0]
-        ydiff = self.y1 - Pieces[self.shape][self.rotation][0][1]
+        xdiff = self.blocks[0].x1 - Pieces[self.shape][self.rotation][0][0]
+        ydiff = self.blocks[0].y1 - Pieces[self.shape][self.rotation][0][1]
 
 
         if self.rotation < len(Pieces[self.shape]) - 1:
             self.rotation += 1
 
         else:
-            self.rotation = self.rotation[0]
+            self.rotation = 0
 
-        self.x1 = Pieces[self.shape][self.rotation][0][0] + xdiff
-        self.y1 = Pieces[self.shape][self.rotation][0][1] + ydiff
+        self.blocks[0] = Block(20,20,Pieces[self.shape][self.rotation][0][0]+xdiff ,Pieces[self.shape][self.rotation][0][1]+ydiff,1)
+        self.blocks[1] = Block(20,20,Pieces[self.shape][self.rotation][1][0]+xdiff ,Pieces[self.shape][self.rotation][1][1]+ydiff,1)
+        self.blocks[2] = Block(20,20,Pieces[self.shape][self.rotation][2][0]+xdiff ,Pieces[self.shape][self.rotation][2][1]+ydiff,1)
+        self.blocks[3] = Block(20,20,Pieces[self.shape][self.rotation][3][0]+xdiff ,Pieces[self.shape][self.rotation][3][1]+ydiff,1)
 
-    def translate():
-        #Loop through blocks and change x y coords
-        #localize block to its own coordinate system, so that it can be defined by one point
-        #Need a get-block positions () function to get block x and y coords
-        pass
+    def down(self):
+        for block in self.blocks:
+            block.y1 += 45
 
+    def left(self):
+        for block in self.blocks:
+            block.x1 -= 45
 
+    def right(self):
+        for block in self.blocks:
+            block.x1 += 45
 
-
-
+    def reachedBottom(self):
+        for block in self.blocks:
+            if block.y1 >= 850:
+                return True
+        return False
 
 class Grid():
     def __init__(self, width, height):
         self.width = width
         self.height = height
         self.grid = []
-    def append(self, thing):
-        self.grid.append(thing)
-    def make_grid(self):
-        self.grid = []
-        for i in range(self.width):
-            self.append([0] * self.height)
-        return self.grid
+        for i in range(450):
+            self.grid.append([0] * 900)
 
     def draw_grid(self):
         #Draws the grid
@@ -192,17 +173,18 @@ class Grid():
         #Fill Background of board
         pygame.draw.rect(DisplaySurf, BGColor, (XMargin, TopMargin, BoxSize * BoardWidth, BoxSize * BoardHeight))
 
-        #Draw individual boxes
-       #or x in range (BoardWidth):
-            #or y in range(BoardHeight):
-                #elf.block.drawBlock(x,y)
+        #Draw already placed pieces
+        for x in range (450):
+            for y in range(900):
+                if self.grid[x][y] != 0:
+                    pygame.draw.rect(DisplaySurf, self.grid[x][y], (x + 1, y + 1, 45 - 4, 45 - 4))
 
-    """def addToBoard(self, piece):
+    def addToBoard(self, piece):
         for block in piece.blocks:
-            for x in range(TemplateWidth):
-                for y in range(TemplateHeight):
-                    if block.val == 1:
-                        self.grid[block.x1][block.y1] = block.color"""
+            for x in range(450):
+                for y in range(900):
+                    if x == block.x1 and y == block.y1:
+                        self.grid[x][y] = block.color
 
     def addShape(self,piece):
         for block in piece.blocks:
@@ -254,25 +236,18 @@ def showTextScreen(text):
 
     while checkForKeyPress() == None:
         pygame.display.update()
-        FPSCLOCK.tick()
 
-def isOnBoard(x,y):
-    return x >= 0 and x < BoardWidth and y < BoardHeight
-
-
-def isValidPosition(board, piece, adjX=0, adjY=0):
+def isValidPosition(board, piece, adjx = 0, adjy = 0):
     # Return True if the piece is within the board and not colliding
     for block in piece.blocks:
-        for x in range(TemplateWidth):
-            for y in range(TemplateHeight):
-                isAboveBoard =  y + block.y1 + adjY < 0
-                if isAboveBoard or block.val == 0:
-                    continue
-                if not isOnBoard(x + block.x1 + adjX, y + block.y1 + adjY):
-                    return False
-                if board[x + block.x1 + adjX][y + block.y1 + adjY] != 0:
-                    return False
-
+        if block.x1 + (adjx*45) >= 405:
+            return False
+        if block.x1 + (adjx*45) <= 0:
+            return False
+        if block.y1 + (adjy*45) > 855:
+            return False
+        if board.grid[block.x1 + (adjx * 45)][block.y1 + (adjy * 45)] != 0:
+            return False
     return True
 
 def main():
@@ -292,128 +267,83 @@ def main():
 def runGame():
 
     board = Grid(20,40)
-    lastMoveDownTime = time.time()
-    lastMoveSidewaysTime = time.time()
-    lastFallTime = time.time()
     movingDown = False # note: there is no movingUp variable
     movingLeft = False
     movingRight = False
     fallFreq = .25
 
     fallingPiece = Piece()
-    nextPiece = Piece()
-
-
 
     while True: # game loop
+        movingDown = False # note: there is no movingUp variable
+        movingLeft = False
+        movingRight = False
+        rotate = False
+
         if fallingPiece == None:
             # No falling piece in play, so start a new piece at the top
             fallingPiece = nextPiece
             nextPiece = Piece()
-            print(nextPiece)
 
-            lastFallTime = time.time() # reset lastFallTime
+
+            #lastFallTime = time.time() # reset lastFallTime
 
             if not isValidPosition(board, fallingPiece):
                 return # can't fit a new piece on the board, so game over
 
         checkForQuit()
         for event in pygame.event.get(): # event handling loop
-            if event.type == KEYUP:
+            if event.type == KEYUP: #Lifting the hand from the key
                 if (event.key == K_p):
                     # Pausing the game (Press P)
                     DisplaySurf.fill(BGCOLOR)
 
                     showTextScreen('Paused') # pause until a key press
 
-                    lastFallTime = time.time()
-                    lastMoveDownTime = time.time()
-                    lastMoveSidewaysTime = time.time()
-                    #move left press a
-                elif (event.key == K_LEFT or event.key == K_a):
-                    movingLeft = False
-                    #move right press d
-                elif (event.key == K_RIGHT or event.key == K_d):
-                    movingRight = False
-                    #move down press s
-                elif (event.key == K_DOWN or event.key == K_s):
-                    movingDown = False
-
-            elif event.type == KEYDOWN:
+            elif event.type == KEYDOWN: #Pressing a key
                 # moving the piece sideways
-                if (event.key == K_LEFT or event.key == K_a) and isValidPosition(board, fallingPiece, adjX=-1):
-                    fallingPiece.x1 -= 25
+                if (event.key == K_LEFT or event.key == K_a) :
                     movingLeft = True
                     movingRight = False
-                    lastMoveSidewaysTime = time.time()
 
-                elif (event.key == K_RIGHT or event.key == K_d) and isValidPosition(board, fallingPiece, adjX=1):
-                    fallingPiece.x1 += 25
+                elif (event.key == K_RIGHT or event.key == K_d):
                     movingRight = True
                     movingLeft = False
-                    lastMoveSidewaysTime = time.time()
 
                 # rotating the piece (if there is room to rotate)
                 elif (event.key == K_UP or event.key == K_w):
-                    if isValidPosition(board, fallingPiece):
-                        fallingPiece.rotatePiece()
-
-
+                    rotate = True
 
                 # making the piece fall faster with the down key
                 elif (event.key == K_DOWN or event.key == K_s):
                     movingDown = True
-                    if isValidPosition(board, fallingPiece, adjY=1):
-                        fallingPiece.y1 += 1
-                    lastMoveDownTime = time.time()
-
-                # move the current piece all the way down
-                elif event.key == K_SPACE:
-                    movingDown = False
-                    movingLeft = False
-                    movingRight = False
-                    for i in range(1, BOARDHEIGHT):
-                        if not isValidPosition(board, fallingPiece, adjY=i):
-                            break
-                    fallingPiece.y1 += i - 1
-
-        # handle moving the piece because of user input
-        if (movingLeft or movingRight) and time.time() - lastMoveSidewaysTime > MOVESIDEWAYSFREQ:
-            if movingLeft and isValidPosition(board, fallingPiece, adjX=-1):
-                fallingPiece.x1 -= 1
-            elif movingRight and isValidPosition(board, fallingPiece, adjX=1):
-                fallingPiece.x1 += 1
-            lastMoveSidewaysTime = time.time()
-
-        if movingDown and time.time() - lastMoveDownTime > MOVEDOWNFREQ and isValidPosition(board, fallingPiece, adjY=1):
-            fallingPiece.y1 += 1
-            lastMoveDownTime = time.time()
-
-        # let the piece fall if it is time to fall
-        if time.time() - lastFallTime > fallFreq:
-            # see if the piece has landed
-            if not isValidPosition(board, fallingPiece, adjY=1):
-                # falling piece has landed, set it on the board
-                board.addShape(fallingPiece)
-                fallingPiece = None
-            else:
-                # piece did not land, just move the piece down
-                fallingPiece.y1 += 45
-                lastFallTime = time.time()
 
         # drawing everything on the screen
         DisplaySurf.fill(BGCOLOR)
-        board.make_grid()
         board.draw_grid()
+        board.addShape(fallingPiece)
 
-        if fallingPiece == None:
-            nextPiece = Piece()
-            board.addShape(nextPiece)
+        if movingLeft == True and isValidPosition(board,fallingPiece,adjx=-1):
+            fallingPiece.left()
+        if movingRight == True and isValidPosition(board,fallingPiece,adjx=1):
+            fallingPiece.right()
+        if movingDown == True and isValidPosition(board,fallingPiece,adjy=1):
+            fallingPiece.down()
+        if rotate == True:
+            temp = copy.deepcopy(fallingPiece)
+            temp.rotatePiece()
+            if isValidPosition(board,temp):
+                fallingPiece.rotatePiece()
 
-
+        if isValidPosition(board,fallingPiece,adjy=1):
+            fallingPiece.down()
+        else: #if piece has reached the bottom
+            board.addToBoard(fallingPiece) # Makes fallingPiece a part of the board drawn every step
+            fallingPiece = Piece()
 
         pygame.display.update()
-        FPSCLOCK.tick(FPS)
+        FPSCLOCK.tick(20)
+        pygame.time.delay(250)
 
 def terminate():
     pygame.quit()
