@@ -122,7 +122,7 @@ class NoteBlock(object):
                                                                   self.y)
         return note_block_string
 
-def play_note(val, beats=1, bpm=600, amp=1):
+def play_note(val, beats=1, bpm=10, amp=1):
     """This function references Sonic Pi to play the specified note."""
     # `note` is this many half-steps higher than the sampled note
     half_steps = val - SAMPLE_NOTE
@@ -134,12 +134,16 @@ def play_note(val, beats=1, bpm=600, amp=1):
     sample(os.path.realpath(SAMPLE_FILE), rate=rate, amp=amp)
 
 def find_center(cap):
+    """Captures the image from the webcam, converts it to grayscale, performs inverse
+    binary threshold using Otsu's algorithm, maps the countours in the image, creates
+    a convex boundary around the main object detected and then returns the x-coordinate
+    of the center of the image."""
     ret,img = cap.read()
-    gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+    gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)     # Convert to grayscale
     blur = cv2.GaussianBlur(gray,(5,5),0)
-    ret,thresh1 = cv2.threshold(blur,70,255,cv2.THRESH_BINARY_INV+cv2.THRESH_OTSU)
+    ret,thresh1 = cv2.threshold(blur,70,255,cv2.THRESH_BINARY_INV+cv2.THRESH_OTSU)      # Thresholds the image
 
-    _, contours, hierarchy = cv2.findContours(thresh1,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
+    _, contours, hierarchy = cv2.findContours(thresh1,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)        # Create the contours
     drawing = np.zeros(img.shape,np.uint8)
 
     max_area=0
@@ -151,13 +155,13 @@ def find_center(cap):
                 max_area=area
                 ci=i
     cnt=contours[ci]
-    hull = cv2.convexHull(cnt)
+    hull = cv2.convexHull(cnt)      # Creates the convex boundary
     moments = cv2.moments(cnt)
     if moments['m00']!=0:
                 cx = int(moments['m10']/moments['m00']) # cx = M10/M00
                 cy = int(moments['m01']/moments['m00']) # cy = M01/M00
 
-    centr=(cx,cy)
+    centr=(cx,cy)       # Find the center
     cv2.circle(img,centr,5,[0,0,255],2)
     cv2.drawContours(drawing,[cnt],0,(0,255,0),2)
     cv2.drawContours(drawing,[hull],0,(0,0,255),2)
@@ -166,7 +170,7 @@ def find_center(cap):
     hull = cv2.convexHull(cnt,returnPoints = False)
 
     if(1):
-               defects = cv2.convexityDefects(cnt,hull)
+               defects = cv2.convexityDefects(cnt,hull)  # Looks for convexity defects like the area between the fingers
                mind=0
                maxd=0
                shape = 0
@@ -187,7 +191,7 @@ def find_center(cap):
                i=0
     cv2.imshow('output',drawing)
     cv2.imshow('input',img)
-    return cx
+    return cx   # Returns the x-coordinate of the center
 
 if __name__ == '__main__':
     pygame.init()
