@@ -230,9 +230,10 @@ class AstroidBelt:
         """ move astroids over with constant speed, wrapping around
         the screen.
         """
+        point = False
         for astroid in self.astroids:
             if self.x < -astroid.rect.width:
-                self.score += 1 / 4
+                self.score = point or True
                 self.difficulty += 1/4
                 self.prob.new_prob()
                 self.gen_astroids()
@@ -241,6 +242,7 @@ class AstroidBelt:
             else:
                 self.x -= self.vx / 4
                 astroid.rect.left = self.x
+        self.score += point
 
 
 if __name__ == '__main__':
