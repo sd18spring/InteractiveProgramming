@@ -15,13 +15,13 @@ the same qualities as the dots on the "home screen" excpet now the color gradien
 to the home screen, and the user can, again, click on any dot to repeat the experience.
 
 ## Home
-![home](https://user-images.githubusercontent.com/15020544/37495712-fcb5c190-2884-11e8-9644-623bcb7e13d5.png)
+![home](https://user-images.githubusercontent.com/15020544/37497110-aec42848-288c-11e8-9bd2-096873b12995.PNG)
 
 ## Animation
-![animation](https://user-images.githubusercontent.com/15020544/37495738-1f115362-2885-11e8-9f7d-ce6d230a3471.png)
+![animation](https://user-images.githubusercontent.com/15020544/37497121-bf7559dc-288c-11e8-93aa-7c48c82ae842.PNG)
 
 ## Subdots
-![subdots](https://user-images.githubusercontent.com/15020544/37495757-37c9350a-2885-11e8-8527-00b01451b1e2.png)
+![zoom](https://user-images.githubusercontent.com/15020544/37497129-c91acf1c-288c-11e8-9163-3cdb12222d98.PNG)
 
 # Implementation
 First we creted a MovieDot class which inherits from the Dot class and stores a label (movie name) and movie (data about that
