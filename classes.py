@@ -262,11 +262,20 @@ class SmallAsteroid(Asteroid):
         self.destroyed = True
         return []
 class CollectionOfAsteroids():
+    """
+    A collection of the Asteroids in the game
+    listOfAsteroids - a list of the asteroids in the game
+    listOfRects - a list of the hitboxes of the asteroids
+    gameDisplay - the display
+    """
     def __init__(self,gameDisplay):
         self.listOfAsteroids = []
         self.gameDisplay = gameDisplay
         self.speed = 1
     def spawnAsteroids(self,numberOfAsteroids):
+        """
+        spawns a set number of asteroids in the sides of the game
+        """
         width, height = self.gameDisplay.get_size()
         listOfAsteroids = [] # initializes a list of asteroids to update
         listOfRects = [] # initializes a list of hitboxes
@@ -292,6 +301,9 @@ class CollectionOfAsteroids():
         self.listOfAsteroids = listOfAsteroids
         self.listOfRects = listOfRects
     def update(self):
+        """
+        updates all the asteroids, deleting them from the list if they are destroyed.
+        """
         listOfRects = [] # asteroid
         ListToDelete = [] # a list that incluedes the indicies of what to delete
         for i in range(len(self.listOfAsteroids)):
@@ -303,7 +315,10 @@ class CollectionOfAsteroids():
         for j in reversed(ListToDelete): # reversed so that it doesn't delete one and shift mid for loop.
             del self.listOfAsteroids[j]
         self.listOfRects = listOfRects
-    def destroyAll(self): # function for testingasteroid, not for the real game
+    def destroyAll(self):
+        """
+        function for testingasteroid, not for the real game
+        """
         sizeOfAsteroids = range(len(self.listOfAsteroids))
         for i in sizeOfAsteroids:
             newAsteroid = self.listOfAsteroids[i].destroy()
@@ -312,6 +327,18 @@ class CollectionOfAsteroids():
         for i in sizeOfAsteroids:
             self.listOfAsteroids.pop(0)
 class Projectile():
+    """
+    projectiles that fire and destroy asteroids, ufos and players.
+    x - position x
+    y - position y
+    w, h - size of the projectiles
+    speed - speed of the projectile
+    direction- direction given to the projectiles
+    rect - the hitbox of the projectile
+    gameDisplay - the display
+    destroyed - senses whether the projectile is destroyed or not
+    distanceTravelled - detects how far the projectile has travelled
+    """
     def __init__(self,x,y,direction,alliance,gameDisplay):
         size = 3
         self.x = x
@@ -333,6 +360,9 @@ class Projectile():
             self.distanceWanted = 3/8 * height
         self.alliance = alliance
     def update(self):
+        """
+        updates the position of the particle
+        """
         if(self.distanceTravelled < self.distanceWanted): # if the projectile has travelled farther than the wanted distance, it destroys itself
             width, height = self.gameDisplay.get_size() # gets the display's width and length
             self.x = self.x + (self.speed * cos(self.direction))  # Sets the speed to a small change in space
@@ -354,14 +384,26 @@ class Projectile():
     def destroy(self):
         self.destroyed = True
 class CollectionOfProjectiles():
+    """
+    A collection of the Projectiles in the game
+    listOfProjectiles - a list of the asteroids in the game
+    listOfRects - a list of the hitboxes
+    gameDisplay - the display
+    """
     def __init__(self,gameDisplay):
         self.listOfProjectiles = [] #initializes the asteroidprojectiles
         self.listOfRects = [] # initializes their hitboxes
         self.gameDisplay = gameDisplay
     def addProjectile(self,x,y,direction,alliance):
+        """
+        Adds a projectile to the game at the given x y and direction with an alliance of either "UFO" or "Ship"
+        """
         self.listOfProjectiles.append(Projectile(x,y,direction,alliance,self.gameDisplay)) # The spacebar command should call this
                                             # with the x,y and directions of the ship (with an offset bc of the front of the ship and that the origin is top left)
     def update(self):
+        """
+        Updates all of the projectiles
+        """
         ListToDelete = [] # initializes the indices of what to delete
         ListOfRects = []
         for i in range(len(self.listOfProjectiles)):
@@ -374,6 +416,20 @@ class CollectionOfProjectiles():
             del self.listOfProjectiles[j]
         self.listOfRects = ListOfRects
 class UFO():
+    """
+    A class of the general UFO, that moves autonomously and shoots
+    (we didn't have enough time to implement a second UFO, so there is only one type of UFO)
+    x - x position
+    y - y position
+    speed - speed of the ufo, constant
+    destroyed - whether the UFO is destroyed or not
+    image - the UFO image
+    w,h - the height and width of the image
+    FacingRight - the direction the UFO is facing(UFO goes either right to left or left to right)(also determines x position)
+    counter - for recording the refractory period of the shooting
+    listOfProjectiles - to allow it to call the add projectile function
+    straight - whether the UFO goes straight across the screen or down then up
+    """
     def __init__(self,y,FacingRight,gameDisplay,listOfProjectiles):
         self.y = y
         self.speed = 2
@@ -392,17 +448,20 @@ class UFO():
         else:
             self.x = width
     def update(self):
+        """
+        updates the position of the UFO, as well as deciding when to shoot
+        """
         if(self.counter % self.fireRate == 0):
             self.shoot()
         self.counter += 1
         width, height = self.gameDisplay.get_size()
-        if(self.straight == True):
+        if(self.straight == True): # sometimes it goes straight accross, sometimes down then up
             if(self.FacingRight):
                 self.direction = 0
             else:
                 self.direction = pi
         else:
-            if(self.FacingRight):
+            if(self.FacingRight): # algorithm for going down then up
                 if((self.x + self.w / 2) < width * 1 / 4):
                     self.direction = 0
                 elif(self.x + self.w / 2 < width / 2):
@@ -427,11 +486,19 @@ class UFO():
         elif(self.y <= 0 - self.h): # same as above (makes it so that the whole image has to leave the screen for it to go to the other side)
             self.y = height
         self.rect = pygame.Rect((self.x + self.shrinkage / 2,self.y + self.shrinkage / 2),(self.w - self.shrinkage,self.h - self.shrinkage))
-        #pygame.draw.rect(self.gameDisplay,(0,0,255),self.rect) # display's the asteroid's hit box in red (for testing)
+        #pygame.draw.rect(self.gameDisplay,(0,0,255),self.rect) # display's the UFO's hit box in blue (for testing)
         self.gameDisplay.blit(self.image,(self.x,self.y))
     def destroy(self):
+        """
+        destroys the UFO
+        """
         self.destroyed = True
 class BigUFO(UFO):
+    """
+    A subclass of UFO that shoots in a random direction and moves either straight or down then up
+    shrinkage - how much to shrink the UFO image
+    fireRate - cooldown for how often the UFO fires
+    """
     def __init__(self,y,FacingRight,gameDisplay,listOfProjectiles):
         super().__init__(y,FacingRight,gameDisplay,listOfProjectiles)
         self.image = pygame.transform.scale(self.image,(self.w // 2,self.h // 2))
@@ -440,21 +507,37 @@ class BigUFO(UFO):
         self.rect = pygame.Rect((self.x + self.shrinkage / 2,self.y + self.shrinkage / 2),(self.w - self.shrinkage,self.h - self.shrinkage))
         self.fireRate = 60
     def shoot(self):
+        """
+        shoots a projectile
+        """
         if(not self.destroyed):
             self.listOfProjectiles.addProjectile(self.x + self.w / 2,self.y + self.h / 2,random.uniform(0,2*pi),"UFO")
 class CollectionOfUFOs():
+    """
+    A collection of the UFOs on the screen(there can only be one UFO, but this allows for an opportunity to add more if the game is too easy)
+    listOfUFOs - the list of the UFOs on screen
+    listOfRects - the list of the hitboxes of UFOs
+    gameDisplay - display
+    listOfProjectiles - the list of projectiles on screen so UFOs can shoot
+    """
     def __init__(self,gameDisplay,listOfProjectiles):
         self.listOfUFOs = [] #initializes the projectiles
         self.listOfRects = [] # initializes their hitboxes
         self.gameDisplay = gameDisplay
         self.listOfProjectiles = listOfProjectiles
     def spawnBigUFO(self):
+        """
+        Spawns a big UFO in the game (would have been complemented by a spawnSmallUFO if time alloted)
+        """
         width, height = self.gameDisplay.get_size()
         sampleUFO = BigUFO(0,True,self.gameDisplay,self.listOfProjectiles)
         y = random.randint(-sampleUFO.h // 2,height - sampleUFO.h // 2)
         facingRight = bool(random.getrandbits(1))
         self.listOfUFOs.append(BigUFO(y,facingRight,self.gameDisplay,self.listOfProjectiles))
     def update(self):
+        """
+        updates the list of UFOs
+        """
         listOfRects = []
         ListToDelete = [] # initializes the indices of what to delete
         for i in range(len(self.listOfUFOs)):
@@ -467,6 +550,14 @@ class CollectionOfUFOs():
             del self.listOfUFOs[j]
         self.listOfRects = listOfRects
 class listOfObjects():
+    """
+    List of all objects in the game:
+    gameDisplay - display
+    Asteroids - the collection of Asteroids
+    Projectiles - the collection of Projectiles
+    UFOs - the collection of UFOs
+    ship - the ship in the game
+    """
     def __init__(self,gameDisplay, ship):
         self.gameDisplay = gameDisplay
         self.Asteroids = CollectionOfAsteroids(gameDisplay)
@@ -474,6 +565,9 @@ class listOfObjects():
         self.UFOs = CollectionOfUFOs(gameDisplay,self.Projectiles)
         self.ship = ship
     def update(self):
+        """
+        updates all objects and handles any collinion detection between objects
+        """
         self.Asteroids.update()
         self.UFOs.update()
         self.Projectiles.update()
