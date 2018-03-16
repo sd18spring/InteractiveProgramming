@@ -37,10 +37,10 @@ To run the code, we first need to run Sonic-Pi program on our machines. Test if 
 Please hit _Run_ after this. If you hear a beep then you're all set. If not, then please try to re-install Sonic-Pi. After this, please type the following command into the Sonic-Pi terminal and _Run_ the terminal again: 
 ```
 play 60
-set_sched_ahead_time! 0ou should hear another beep this time.
+set_sched_ahead_time! 0
 ```
 
-These commands will make sure that there is no delay while playing the notes on the keyboard.
+You should hear another beep this time. These commands will make sure that there is no delay while playing the notes on the keyboard.
 
 Next, choose the file you want to run. [computer_vision_note_board.py](https://github.com/Utsav22G/InteractiveProgramming/blob/master/computer_vision_note_board.py) uses OpenCV to track the movement of your head and play the notes accordingly. [mouse_keyboard_note_board.py](https://github.com/Utsav22G/InteractiveProgramming/blob/master/mouse_keyboard_note_board.py) uses the _QWERTY_ row of your keyboard and the your mouse buttons to play the notes.
 
