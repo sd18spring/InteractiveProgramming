@@ -5,6 +5,10 @@ from optparse import OptionParser
 import time
 
 def init_opts():
+    """
+    This function  runs the different modes of our program with input in the
+    command line
+    """
     parser = OptionParser()
     parser.add_option("-d", action="store_false",
                       dest="disappr", default=True,
@@ -23,13 +27,16 @@ def init_opts():
 
 
 def main():
-    """
+    """ This function puts together the methods from classes in other files to
+    run the program
     """
 
     font = cv2.FONT_HERSHEY_SIMPLEX
     options, args = init_opts()
     track = finger_track()
     cap = cv2.VideoCapture(0)
+    # this makes the canvas larger for all modes except for the game because the
+    # game needs a smaller canvas to be less frustrating to play
     scaler = 2
     if options.game:
         scaler = 1
@@ -43,7 +50,8 @@ def main():
         if time.time() - start > 1 and options.game:
             current_time += 1
             start = time.time()
-
+        # Display the page that shows your score when the time is up until you
+        # press the q key
         if current_time == game_time+1:
             while True:
                 cv2.putText(newCanvas.new_canvas, 'Yay!!!', (int(newCanvas.width/2-100), int(newCanvas.height/2)), font, 3, (255, 0, 0), 2)
@@ -56,6 +64,7 @@ def main():
         ret, frame = cap.read()
         frame = cv2.flip(frame, 1)
 
+        # This section tracks the color red that is in the frame
         hsv = track.BGR2HSV(frame)
         redMask = track.red_mask(hsv)
         mask = cv2.bilateralFilter(redMask, 10, 40, 40)
@@ -64,12 +73,10 @@ def main():
         cv2.imshow('original', res)
         mask = cv2.blur(mask, (20, 20))
         track.find_center(mask, frame, newCanvas, disappr=disappr)
-        # track.refine_path()
         track.draw(newCanvas)
 
-        # newCanvas.rectangle()
+        # This section runs the game option if it was selected
         if options.game:
-            # print(newCanvas.points, newCanvas.run)
             if newCanvas.points == 0:
                 if newCanvas.run == False:
                     newCanvas.make_rect()
@@ -94,8 +101,6 @@ def main():
                 disappr = False
             else:
                 disappr = True
-        if cv2.waitKey(1) & 0xFF == ord('d'):
-            disappr = ~disappr
         if cv2.waitKey(1) & 0xFF == ord('c'):
             newCanvas.clear()
 
@@ -103,5 +108,4 @@ def main():
     cv2.destroyAllWindows()
 
 if __name__ == "__main__":
-
     main()
