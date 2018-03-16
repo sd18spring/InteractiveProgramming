@@ -35,7 +35,7 @@ class PyGameWindowView(object):
         pygame.display.update()
 
 class TronModelView(object):
-    """Contains the players, the game state, all cells, and the cells that have been hit."""
+    """Model object containing the players, the game state, all cells, and the cells that have been hit."""
     def __init__(self,cell_length,width,height):
         pygame.init()
         size = (width,height)
@@ -58,8 +58,8 @@ class TronModelView(object):
         self.player2.draw()
 
     def in_cell(self):
-        """Loops through cell_lst to find the cell whos xrange contains player.x
-        and whos yrange contains player.y, and sets the player location to within that cell."""
+        """Loops through cell_lst to find the cell whose xrange contains player.x
+        and whose yrange contains player.y, and sets the player location to be within that cell."""
         for cell in self.cell_lst:
             if self.player1.x in cell.xrange and self.player1.y in cell.yrange:
                 self.player1.current_cell = cell
@@ -70,7 +70,7 @@ class TronModelView(object):
                 break
 
     def update(self):
-        """Checks for new input and updates the game model."""
+        """Checks for new inputs and updates the game model."""
         self.player1.update()
         self.player2.update()
         if self.player1.crash():
@@ -96,7 +96,7 @@ class TronModelView(object):
             self.end_game("ORANGE ")
 
     def end_game(self,player):
-        """Contains end game protocall"""
+        """Contains end game protocol"""
         pygame.display.set_caption(player + "WINS!")
         self.game_over = True
         self.player1.dir = "None"
@@ -124,7 +124,7 @@ class Cellview(object):
         pygame.draw.rect(self.draw_screen, self.color, rect, line_width)
 
 class Player(object):
-    """Contains players location, direcection and speed, as well as their color"""
+    """Contains player's location, direction and speed, as well as their color"""
     def __init__(self, draw_screen, dimension, start_posx, start_posy, direction, color=(255,255,255)):
         self.draw_screen = draw_screen
         self.width = dimension
@@ -143,7 +143,7 @@ class Player(object):
 
     def update(self):
         """Checks if players have changed directions, and then
-        adds the amount given by vx to the relevant direction"""
+        adds the correct number of pixels to the player's position in the relevant direction"""
         if self.dir == "r":
             self.vx = 10
             self.vy = 0
@@ -164,7 +164,7 @@ class Player(object):
 
     def crash(self):
         """Determines what happens if a player runs of the screen.
-        Called by the end_game function contained in the game model."""
+        Used by the model to check if a player has lost."""
         if self.x == 640 or self.x == -10:
             return True
         if self.y == -10 or self.y == 480:
@@ -212,8 +212,8 @@ class KeyControl(object):
 if __name__ == '__main__':
 
     def main_loop():
-        """A loop which runs the game until the end came protocall is called.
-        Hit space bar to restart game once game is over"""
+        """A nested loop which initializes the game and runs the model until the end game protocol is called.
+        Hitting the space bar after a game ends reinitializes the loop which allows for a new match"""
         pygame.init()
         running = True
         while running:
@@ -225,12 +225,12 @@ if __name__ == '__main__':
             game_over = False
             while not game_over:
                 for event in pygame.event.get():
-                    if event.type == QUIT:
+                    if event.type == QUIT: #if the window is closed, break out of the two while loops and go to pygame.quit()
                         running = False
                         game_over = True
-                    if controller.handle_event(event):
+                    if controller.handle_event(event): #checks to see if the game has ended and the spacebar was pressed, if yes then the inner loop is broken and the game is reinitialized
                         game_over = True
-                    controller.handle_event(event)
+                    controller.handle_event(event) #handles regular keypress events
                 model.update()
                 view.draw()
                 time.sleep(.1)
