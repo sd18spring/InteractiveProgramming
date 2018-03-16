@@ -6,7 +6,7 @@ import math
 class finger_track():
 
     def __init__(self):
-        """
+        """Initiates the finger tracking class
         """
         self.frame_num = 0
         self.cx = 0
@@ -28,6 +28,12 @@ class finger_track():
         oldH: the upper limit of the old range of values
         newL: the lower limit of the new range of values
         newH: the upper limit of the new range of values
+
+        doctest:
+        >>> map(1, 0, 10, 0, 200)
+        20
+        >>> map(50, 0, 150, 0, 255)
+        85
         """
         return int(((x - oldL)/(oldH-oldL))*(newH-newL)+newL)
 
@@ -52,6 +58,11 @@ class finger_track():
         return (mask1 | mask2)
 
     def shift(self, myList, myElement):
+        """Shift out the first element in this list and append the new element to the end
+
+        >>> shift([1, 2, 3], 5)
+        [2, 3, 5]
+        """
         return myList[1:] + [myElement]
 
     def find_center(self, mask, target, canvas, disappr=True):
