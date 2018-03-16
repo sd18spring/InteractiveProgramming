@@ -2,48 +2,70 @@ import pygame
 from pygame.locals import *
 import time
 import random
+import sys
 
 
 class SnakeGameWindowView(object):
-
+    """
+    This class creates a window for the game.
+    """
     def __init__(self, model, width, height):
+        """
+        This creates necessary model, screen and its width and height, and font.
+        """
         self.model = model
         self.screen = pygame.display.set_mode((width, height))
         self.font = pygame.font.SysFont("arial", 50)
         self.width = width
         self.height = height
-    def draw1(self):
+    def draw(self):
         """
         This function in the class will draw necessary materials
         and update every change in the window.
         """
-        if run:
-            self.screen.fill(pygame.Color(0, 0, 0))
-            for material in self.model.Mouse:
-                pygame.draw.rect(self.screen,
-                                pygame.Color(255, 0, 0),
-                                pygame.Rect(material.x, material.y, material.height, material.width))
-            for material in self.model.Snake:
-                pygame.draw.rect(self.screen,
-                                pygame.Color(0, 255, 0),
-                                pygame.Rect(material.x, material.y, material.height, material.width), not material.head)
-            for material in self.model.Arena:
-                pygame.draw.rect(self.screen,
-                                pygame.Color(0, 0, 255),
-                                pygame.Rect(material.x, material.y, material.width, material.height),
-                                material.padding)
-            play_score = self.font.render(str(self.model.Score.score), 1, (125, 125, 0))
-            self.screen.blit(play_score,(self.width - 100 , 50))
-            pygame.display.update()
-
-    def draw2(self):
         self.screen.fill(pygame.Color(0, 0, 0))
-        welcome = self.font.render("Press Enter to Start", 1, (125, 125, 0))
-        self.screen.blit(welcome,(100 , self.height // 2))
+        for material in self.model.Mouse:
+            pygame.draw.rect(self.screen,
+                            pygame.Color(255, 0, 0),
+                            pygame.Rect(material.x, material.y, material.height, material.width))
+        for material in self.model.Snake:
+            pygame.draw.rect(self.screen,
+                            pygame.Color(0, 255, 0),
+                            pygame.Rect(material.x, material.y, material.height, material.width), not material.head)
+        for material in self.model.Arena:
+            pygame.draw.rect(self.screen,
+                            pygame.Color(0, 0, 255),
+                            pygame.Rect(material.x, material.y, material.width, material.height),
+                            material.padding)
+        play_score = self.font.render(str(self.model.Score.score), 1, (125, 125, 0))
+        text_rect = play_score.get_rect(center=(self.width/2, self.height/2))
+        if self.model.Score.score == 'Game Over':
+            self.screen.blit(play_score,text_rect)
+            restart = self.font.render("Try again next time!", 1, (125, 125, 0))
+            text_rect2 = restart.get_rect(center = (self.width/2, self.height*3/4))
+            self.screen.blit(restart, text_rect2)
+        else:
+            self.screen.blit(play_score,(self.width - 100 , 50))
         pygame.display.update()
 
-class SnakeGameModel(object):
+    def draw2(self):
+        """
+        This function draws the start screen of the game.
+        """
+        self.screen.fill(pygame.Color(0, 0, 0))
+        welcome2 = self.font.render("Welcome to Snake Game!", 1, (125, 125, 0))
+        welcome = self.font.render("Press Enter to Start", 1, (125, 125, 0))
+        text_rect = welcome.get_rect(center=(self.width/2, self.height/2))
+        text_rect2 = welcome2.get_rect(center = (self.width/2, self.height/4))
+        self.screen.blit(welcome,text_rect)
+        self.screen.blit(welcome2, text_rect2)
+        pygame.display.update()
 
+
+class SnakeGameModel(object):
+    """
+    This creates a model for this game.
+    """
     def __init__(self):
         """This funciton will create dimensions for
         the blocks for the snake and the mouse."""
@@ -68,8 +90,8 @@ class SnakeGameModel(object):
         self.Snake[-1].update()
 
         if self.Snake[-1].x == self.Mouse[0].x and self.Snake[-1].y == self.Mouse[0].y:
-            self.Mouse[0].x = random.randint(2,60) * 10
-            self.Mouse[0].y = random.randint(2, 70) * 10
+            self.Mouse[0].x = random.randint(2,58) * 10
+            self.Mouse[0].y = random.randint(2, 58) * 10
             self.Score.update()
 
             #Below is the snake growth logic
@@ -87,12 +109,21 @@ class SnakeGameModel(object):
 
         #Below is the snake collision logic
         if abs(self.Snake[-1].x - Arena().width) < Arena().padding or abs(self.Snake[-1].y - Arena().height) < Arena().padding:
-            pygame.quit()
+            self.Snake[-1].vx = 0
+            self.Snake[-1].vy = 0
+            self.Score.update2()
+
         if self.Snake[-1].x < Arena().padding - 10 or self.Snake[-1].y < Arena().padding - 10:
-            pygame.quit()
+            self.Snake[-1].vx = 0
+            self.Snake[-1].vy = 0
+            self.Score.update2()
+
         for i in range(len(self.Snake)-1):
             if self.Snake[i].x - self.Snake[-1].x == 0 and self.Snake[i].y - self.Snake[-1].y == 0:
-                pygame.quit()
+                self.Snake[-1].vx = 0
+                self.Snake[-1].vy = 0
+                self.Score.update2()
+
 
     def __str__(self):
         output_lines = []
@@ -112,7 +143,7 @@ class Arena(object):
     padding refers to wall thickness
     """
 
-    def __init__(self, width=640, height=800, padding = 20):
+    def __init__(self, width=600, height=600, padding = 20):
         self.height = height
         self.width = width
         self.x = 0
@@ -171,6 +202,12 @@ class Score(object):
         self.score = score
     def update(self):
         self.score  += 1
+    def update2(self):
+        """
+        This specific update will happen when the snake collides with itself or
+        the boundary.
+        """
+        self.score = 'Game Over'
     def __str__(self):
         return str(self.score)
 
@@ -185,7 +222,8 @@ class SnakeController(object):
         """
         if event.type != KEYDOWN:
             return
-
+        if self.model.Snake[-1].vy == 0 and self.model.Snake[-1].vx == 0:
+            return
         if event.key == pygame.K_DOWN:
             if abs(self.model.Snake[-1].vy) != 0:
                 return
@@ -215,35 +253,40 @@ class SnakeController(object):
             self.model.Snake[-1].vy = -10
             self.model.Snake[-1].vx = 0
 
+
+    def handle_event2(self, event):
+        """
+        This creates keyboard operation specifically for the start screen.
+        """
+        if event.type != KEYDOWN:
+            return
+
 if __name__ == '__main__':
-    pygame.init()
-    model = SnakeGameModel()
-    window = SnakeGameWindowView(model, 640, 800)
-    run = False
-    control = SnakeController(model)
-
-    while not run:
-        for event in pygame.event.get():
-            if event.type == KEYDOWN:
-                if event.key == pygame.K_RETURN or event.key == pygame.K_SPACE:
-                    run = True
-                    break
-        model.update()
-        window.draw2()
-        time.sleep(0.1)
-
-
-    while run:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                #run = False
-                break
-            if event.type == KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    #run = False
-                    break
-            control.handle_event(event)
-        model.update()
-        window.draw1()
-        time.sleep(0.1)
-    pygame.quit()
+    def mainloop():
+        pygame.init()
+        pygame.display.set_caption('Snake Game')
+        model = SnakeGameModel()
+        window = SnakeGameWindowView(model, 600, 600)
+        start = True
+        run = False
+        control = SnakeController(model)
+        while start:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    start = False
+                if event.type == KEYDOWN:
+                    if event.key == pygame.K_RETURN:
+                        run = True
+                        start = False
+                control.handle_event2(event)
+            window.draw2()
+            time.sleep(0.1)
+        while run:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    run = False
+                control.handle_event(event)
+            model.update()
+            window.draw()
+            time.sleep(0.1)
+    mainloop()
