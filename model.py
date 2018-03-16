@@ -7,6 +7,7 @@ from pygame.locals import *
 class Model:
     def __init__(self, *args):
         self.game_running = True
+        self.game_over = False
         self.g = 15
         self.terrains = []
         self.characters = []
@@ -14,7 +15,7 @@ class Model:
         for char in args:
             self.characters.append(char)
 
-        self.terrains.append(terrain.Terrain((200,600), (1100,400)))
+        self.terrains.append(terrain.Terrain((200,600), (1100,50)))
 
     def x_movement(self, event, game_object):
         """
@@ -114,6 +115,14 @@ class Model:
 
             char.move()
             char.attack_action()
+
+    def check_lives(self):
+        """
+        Checks to see a player has lost
+        """
+        for char in self.characters:
+            if char.lives < 1:
+                self.game_over = True
 
     def quit(self, event):
         if event.type == QUIT:

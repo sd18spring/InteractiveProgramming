@@ -8,8 +8,9 @@ class GameView:
         self.model = model
         self.size = size
         self.screen = pygame.display.set_mode(size)
-
-
+        pygame.font.init()
+        self.font = pygame.font.SysFont('Arial', 120)
+        self.textsurface = self.font.render('GAME OVER', False, (0, 0, 0))
     def draw(self):
         """
         Updates graphics to game screen
@@ -18,6 +19,9 @@ class GameView:
         for t in self.model.terrains:
             pygame.draw.rect(self.screen, pygame.Color(150,120,10), t.rect)
         for char in self.model.characters:
+            if char.attacking:
+
+                self.screen.blit(char.attack_img, char.attack_rect)
             if char.shielding:
                 self.screen.blit(char.shield_img, char.rect)
             elif(char.left):
@@ -30,15 +34,16 @@ class GameView:
                 self.screen.blit(char.up_img, char.rect)
             for i in range (char.lives):
                 self.screen.blit(char.up_img, (570 + 120 * i, 950 - char.player * 150))
-            pygame.draw.rect(self.screen, pygame.Color(100,100,100), char.attack_rect)
+        if model.game_over:
+            self.screen.blit(self.textsurface,(400,100))
         pygame.display.update()
 
 if __name__ == "__main__":
     clock = pygame.time.Clock()
     FPS = 30
 
-    char1 = Character(pos_x = 1200, label = 'char1')
-    char2 = Character(label = 'char2', keys = {"left": pygame.K_j, "right": pygame.K_l, "up" : pygame.K_i, "down":
+    char1 = Character(label = 'char1')
+    char2 = Character(pos_x = 1200, label = 'char2', keys = {"left": pygame.K_j, "right": pygame.K_l, "up" : pygame.K_i, "down":
                                                 pygame.K_k, "attack" : pygame.K_o},
                                                 left_img = "left2.png",
                                                 right_img = "right2.png",
@@ -51,11 +56,13 @@ if __name__ == "__main__":
     while model.game_running:
         for event in pygame.event.get():
             model.quit(event)
-            for char in model.characters:
-                model.x_movement(event, char)
-                model.y_movement(event, char)
-                model.attack_command(event, char)
-                model.shield(event, char)
+            if not model.game_over:
+                for char in model.characters:
+                    model.x_movement(event, char)
+                    model.y_movement(event, char)
+                    model.attack_command(event, char)
+                    model.shield(event, char)
+        model.check_lives()
         model.update_motion()
         view.draw()
         clock.tick(FPS)

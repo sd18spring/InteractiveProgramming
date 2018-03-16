@@ -16,6 +16,7 @@ class Character:
                      up_img = "up.png",
                      down_img = "down.png",
                      shield_img = "shield.png",
+                     attack_img = "fire.png",
                      lives = 3,
                      player = 1):
         self.keys = keys
@@ -50,6 +51,7 @@ class Character:
         self.up_img = pygame.transform.scale(pygame.image.load(up_img), (self.width, self.height))
         self.down_img = pygame.transform.scale(pygame.image.load(down_img), (self.width, self.height))
         self.shield_img = pygame.transform.scale(pygame.image.load(shield_img), (self.width, self.height))
+        self.attack_img = pygame.transform.scale(pygame.image.load(attack_img), (int(self.width * 0.7), int(self.height * 0.5)))
         self.player = player
         self.shielding = False
 
@@ -118,8 +120,9 @@ class Character:
         self.rect = pygame.Rect(self.pos_x, self.pos_y, self.width, self.height)
         if(self.pos_y > 1000):
             self.pos_y = 0
-            self.pos_x = 500
+            self.pos_x = 700
             self.lives -= 1
+            self.weight = 1
 
     def attack_action(self):
         """
