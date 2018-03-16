@@ -263,6 +263,9 @@ class SnakeController(object):
 
 if __name__ == '__main__':
     def mainloop():
+        """
+        This is the main loop that runs the function.
+        """
         pygame.init()
         pygame.display.set_caption('Snake Game')
         model = SnakeGameModel()
