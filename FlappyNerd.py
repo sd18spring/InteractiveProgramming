@@ -105,11 +105,11 @@ class Model:
             self.astroidBelt.sound.play(loops=0)
             self.astroidBelt.astroids.remove(astroid)
 
-
+        #Crux of game, without this, game won't run
         if self.in_progress:
-            self.spaceship.update()
-            self.astroidBelt.update()
-            self.jupiter.update()
+            self.spaceship.update() #Moves the spaceship
+            self.astroidBelt.update() #Calls the astroid belt and actions associated
+            self.jupiter.update()  #Calls backdroup
 
 
     def reset(self):
@@ -244,7 +244,7 @@ class AstroidBelt:
         for astroid in self.astroids:
             if self.x < -astroid.rect.width:
                 self.score += 1 #Score increases by 1 per astroid
-                self.difficulty += 1/4
+                self.difficulty += 1/4 #difficulty increases by a fraction
                 self.prob.new_prob()
                 self.gen_astroids()
                 self.vx += 0.01
