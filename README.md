@@ -5,5 +5,6 @@ You can do this by running:
 	sudo easy_install3 pip
 	sudo pip3.5 install pygame
 
-The project write-up is called reflection
-The final documents multiple_levels.py
+The project write-up is called reflection.
+
+The final documents final_game.py. You play by using your mouse to navigate back to the anemone while trying to avoid the trash. 
