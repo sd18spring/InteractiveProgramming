@@ -1,4 +1,4 @@
-# Virtual Keyboard
+# Virtual Music Board
 Software Design Mini-Project 4 (Spring 2018) code and documentation.
 
 ## Overview
