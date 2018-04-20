@@ -1,0 +1,79 @@
+[[file:sample.png]]
+
+* How to play
+1. install [[https://www.python.org/][python]] and [[https://www.pygame.org/news][pygame]].
+2. =$ git clone https://github.com/concavegit/interactiveprogramming=
+3. =$ cd InteractiveProgramming=
+4. =$ python SpaceShip.py=
+5. Bang your head on your desk wondering why you are playing such an evil game. 
+
+* FlappyNerd
+Educational Flappy Bird
+
+* UML Diagram
+#+BEGIN_SRC plantuml :file class_diagram.png :exports results :results file
+  SpaceShip <|-- Sprite
+  Astroid <|-- Sprite
+  AstroidBelt <|-- Astroid
+  AstroidBelt <|-- MultProb
+
+  Model *-- AstroidBelt
+  Model *-- SpaceShip
+  Model *-- Jupiter
+  KeyboardController *--Model
+
+  WindowView *-- Model
+
+  class WindowView {
+  size
+  model
+  font
+  screen
+  draw()
+  }
+
+  class Astroid {
+  num
+  size
+  rect
+  update()
+  }
+
+  class Model {
+  inProgress
+  spaceShip
+  astroidBelt
+  jupiter
+  update()
+  }
+
+  class SpaceShip {
+  size
+  vx
+  x
+  rect
+  update()
+  }
+
+  class AstroidBelt {
+  size
+  prob
+  vx
+  }
+
+  class KeyboardController {
+  model
+  handleEvent()
+  }
+
+  class MultProb {
+  a
+  b
+  choices
+  new_prob()
+  gen_choices()
+  }
+#+END_SRC
+
+#+RESULTS:
+[[file:class_diagram.png]]
