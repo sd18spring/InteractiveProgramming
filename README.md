@@ -4,16 +4,16 @@ All art is under copyright by Hwei-Shin Harriman and is not for distribution exc
 
 Link to Project Reflection: https://github.com/hsharriman/InteractiveProgramming/tree/master/Writeup
 
-Before running make sure to install PyGame using your terminal:
-$ apt-get build-dep python-pygame
-$ apt-get install mercurial python-dev python-numpy ffmpeg libsdl-image1.2-dev libsdl-mixer1.2-dev libsdl-ttf2.0-dev libsmpeg-dev libsdl1.2-dev libportmidi-dev libswscale-dev libavformat-dev libavcodec-dev
-$ pip install pygame
+Before running, install PyGame from terminal:  
+$ apt-get build-dep python-pygame  
+$ apt-get install mercurial python-dev python-numpy ffmpeg libsdl-image1.2-dev libsdl-mixer1.2-dev libsdl-ttf2.0-dev libsmpeg-dev libsdl1.2-dev libportmidi-dev libswscale-dev libavformat-dev libavcodec-dev  
+$ pip install pygame  
 
-To run the program:
-navigate to the InteractiveProgramming folder on your computer and type:
-$ python main
-into the command line
+To run the program:  
+navigate to the InteractiveProgramming folder on your computer and type:  
+$ python main  
+into the command line  
 
-To spawn hot-air balloons, click anywhere in the sky.
-To spawn a cactus flower, click on the big cactus.
-To exit the program, click the 'x' in the upper left-hand corner.
+To spawn hot-air balloons, click anywhere in the sky.  
+To spawn a cactus flower, click on the big cactus.  
+To exit the program, click the 'x' in the upper left-hand corner.  
